@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, StatusBar } from 'react-native';
+import { Theme } from '../Common/Theme'
+import { Colors } from '../Common/Colors'
 
 export class RegistrationView extends Component {
+  static navigationOptions = { title: 'Registration', header: null };
   render() {
     return (
       <View style={styles.container}>
-        <Text>Registration!</Text>
+        <StatusBar barStyle="dark-content"/>
+        <Text style={{color: Colors.white}}>Registration!</Text>
       </View>
     );
   }
@@ -14,7 +18,7 @@ export class RegistrationView extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: Theme.primaryColor,
     alignItems: 'center',
     justifyContent: 'center',
   },

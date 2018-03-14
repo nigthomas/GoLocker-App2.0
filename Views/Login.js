@@ -26,17 +26,28 @@ export class LoginView extends Component {
    };
   }
 
-  onButtonPress = () => {
+  onLoginPress = () => {
     const username = this.state.username
     const password = this.state.password
+
+    if(!username || !password) {
+      Alert.alert('Hi there,', "Please enter username and password",[{text: 'OK', onPress: () => {}}],{ cancelable: false })
+      return;
+    }
+
     LoginService.login(username, password)
     .then(data => {
       const { navigate } = this.props.navigation;
       navigate('DashboardView', {navigation: navigate})
     })
     .catch(err => {
-      Alert.alert('', "Whoops! This email address and password combination doesn't exist",[{text: 'OK', onPress: () => {}}],{ cancelable: false })
+      Alert.alert('', "Whoops! This username and password combination doesn't exist",[{text: 'OK', onPress: () => {}}],{ cancelable: false })
     })
+  }
+
+  onRegisterPress = () => {
+    const { navigate } = this.props.navigation;
+    navigate('RegistrationView', {navigation: navigate})
   }
 
   render() {
@@ -56,8 +67,8 @@ export class LoginView extends Component {
           <TextInput style={styles.emailTextInput} underlineColorAndroid={'transparent'} placeholder="Email Address or Mobile Phone" onChangeText={(username) => this.setState({username})} value={this.state.username}/>
           <TextInput style={styles.passwordTextInput} underlineColorAndroid={'transparent'} placeholder="Enter Password" secureTextEntry={true} onChangeText={(password) => this.setState({password})} value={this.state.password}/>
 
-          <FlatButton onPress={this.onButtonPress} backgroundColor={Theme.primaryColor} title={"Login"}/>
-
+          <FlatButton onPress={this.onLoginPress} backgroundColor={Theme.primaryColor} title={"Login"}/>
+          <FlatButton marginTop={10} onPress={this.onRegisterPress} backgroundColor={Theme.primaryColor} title={"Register"}/>
         </View>
       </View>
     );
@@ -82,12 +93,14 @@ const styles = StyleSheet.create({
   emailTextInput: {
     height: 50,
     fontSize: 18,
+    color: Theme.secondaryColor,
     borderBottomWidth: 1,
     borderColor: Colors.white
   },
   passwordTextInput: {
     height: 50,
     fontSize: 18,
+    color: Theme.secondaryColor,
     borderBottomWidth: 1,
     borderColor: Colors.white,
     marginBottom: 15

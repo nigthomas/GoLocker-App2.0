@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation';
 import { LoginView } from './Views/Login'
+import { RegistrationView } from './Views/Registration'
 import { DashboardView } from './Views/Dashboard'
 import { SplashView } from './Views/Splash'
 import { Storage } from './Common/Storage'
@@ -9,13 +10,13 @@ import { LoginService } from './Services/LoginService'
 
 const LoginNavigationController = StackNavigator({
   LoginView: { screen: LoginView },
-  DashboardView: {screen: DashboardView}
+  DashboardView: {screen: DashboardView},
+  RegistrationView: {screen: RegistrationView}
 });
 
 const NavigationController = StackNavigator({
   DashboardView: {screen: DashboardView}
 });
-
 
 class App extends Component {
   constructor(props) {
@@ -27,6 +28,7 @@ class App extends Component {
     }
 
     componentDidMount() {
+      LoginService.logOut() //Remove me
       LoginService.isLoggedIn()
       .then(isLoggedIn => {
         this.setState({isLoggedIn: isLoggedIn, loading: false})

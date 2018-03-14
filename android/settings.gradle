@@ -1,0 +1,3 @@
+rootProject.name = 'GoLocker'
+
+include ':app'

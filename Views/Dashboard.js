@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, StatusBar } from 'react-native';
 
 export class DashboardView extends Component {
-  static navigationOptions = {
-    title: 'More',
-  };
+  static navigationOptions = { title: 'Dashboard', header: null };
   render() {
     return (
       <View style={styles.container}>
+        <StatusBar barStyle="dark-content"/>
         <Text>Dashboard</Text>
       </View>
     );

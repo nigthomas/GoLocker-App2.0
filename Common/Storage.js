@@ -1,4 +1,6 @@
-export default Storage = {
+import {AsyncStorage} from 'react-native'
+
+export const Storage = {
   get: (key) => {
     return AsyncStorage.getItem(key)
   },

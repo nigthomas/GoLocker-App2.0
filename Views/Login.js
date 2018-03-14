@@ -3,13 +3,14 @@ import { StyleSheet, Text, View, Button, FlatList, Dimensions, StatusBar, Image,
 import { Theme } from '../Common/Theme'
 import { Colors } from '../Common/Colors'
 import { Storage } from '../Common/Storage'
+import { LoginService } from '../Services/LoginService'
 
 const Label = (props) => {
     return (
-        <Text
-            style={props.styles && props.styles.textLabel ? props.styles.textLabel : styles.textLabel}>
-            {props.text}
-        </Text>
+      <Text
+        style={props.styles && props.styles.textLabel ? props.styles.textLabel : styles.textLabel}>
+        {props.text}
+      </Text>
     );
 }
 
@@ -27,8 +28,9 @@ export class LoginView extends Component {
   onButtonPress = () => {
     const username = this.state.username
     const password = this.state.password
-    Authentication.login(username, password)
+    LoginService.login(username, password)
     .then(data => {
+      
     })
     .catch(err => {
       Alert.alert('', "Whoops! This email address and password combination doesn't exist",[{text: 'OK', onPress: () => {}}],{ cancelable: false })

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, FlatList, Dimensions, StatusBar, Image, TextInput, Alert} from 'react-native';
+import { StyleSheet, Text, View, Button, FlatList, Dimensions, StatusBar, Image, TextInput, Alert, TouchableHighlight} from 'react-native';
 import { Theme } from '../Common/Theme'
 import { Colors } from '../Common/Colors'
 import { Storage } from '../Common/Storage'
 import { LoginService } from '../Services/LoginService'
+import { FlatButton } from '../Elements/FlatButton'
 
 const Label = (props) => {
     return (
@@ -30,7 +31,7 @@ export class LoginView extends Component {
     const password = this.state.password
     LoginService.login(username, password)
     .then(data => {
-      
+
     })
     .catch(err => {
       Alert.alert('', "Whoops! This email address and password combination doesn't exist",[{text: 'OK', onPress: () => {}}],{ cancelable: false })
@@ -51,9 +52,11 @@ export class LoginView extends Component {
        </View>
 
         <View style={styles.container}>
-          <TextInput style={styles.emailTextInput} placeholder="Email Address or Mobile Phone" onChangeText={(username) => this.setState({username})} value={this.state.username}/>
-          <TextInput style={styles.passwordTextInput} placeholder="Enter Password" secureTextEntry={true} onChangeText={(password) => this.setState({password})} value={this.state.password}/>
-          <Button style={styles.loginButton} color={Colors.white} title="Login" onPress={this.onButtonPress}/>
+          <TextInput style={styles.emailTextInput} underlineColorAndroid={'transparent'} placeholder="Email Address or Mobile Phone" onChangeText={(username) => this.setState({username})} value={this.state.username}/>
+          <TextInput style={styles.passwordTextInput} underlineColorAndroid={'transparent'} placeholder="Enter Password" secureTextEntry={true} onChangeText={(password) => this.setState({password})} value={this.state.password}/>
+
+          <FlatButton onPress={this.onButtonPress} backgroundColor={Theme.primaryColor} title={"Login"}/>
+
         </View>
       </View>
     );
@@ -96,6 +99,5 @@ const styles = StyleSheet.create({
       color: '#595856'
   },
   loginButton: {
-    height: 100
   }
 });

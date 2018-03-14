@@ -31,6 +31,9 @@ export const LoginService = {
       })
     })
   },
+  logOut: () => {
+    Storage.remove(ACCOUNT_KEY, null)
+  },
   isLoggedIn: () => {
     return new Promise((resolve, reject) => {
       Storage.get(ACCOUNT_KEY)

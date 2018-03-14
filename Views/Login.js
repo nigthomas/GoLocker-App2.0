@@ -31,7 +31,8 @@ export class LoginView extends Component {
     const password = this.state.password
     LoginService.login(username, password)
     .then(data => {
-
+      const { navigate } = this.props.navigation;
+      navigate('DashboardView', {navigation: navigate})
     })
     .catch(err => {
       Alert.alert('', "Whoops! This email address and password combination doesn't exist",[{text: 'OK', onPress: () => {}}],{ cancelable: false })

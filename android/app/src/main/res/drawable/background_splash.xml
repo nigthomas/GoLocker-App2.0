@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:drawable="@color/primary"/>
+
+    <item
+        android:width="66dp"
+        android:height="55dp"
+        android:drawable="@mipmap/golockerbrand"
+        android:gravity="center" />
+</layer-list>

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, FlatList, Dimensions, StatusBar, Image, TextInput, Alert, TouchableHighlight} from 'react-native';
 import { Theme } from '../Common/Theme'
-import { Colors } from '../Common/Colors'
-import { Storage } from '../Common/Storage'
+import Colors from '../Common/Colors'
+import Storage from '../Common/Storage'
 import LoginService from '../Services/LoginService'
 import FlatButton from '../Elements/FlatButton'
 

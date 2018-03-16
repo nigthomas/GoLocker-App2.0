@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, StatusBar, TextInput, Alert } from 'react-native';
 import { Theme } from '../Common/Theme'
-import { Colors } from '../Common/Colors'
+import Colors from '../Common/Colors'
 import FlatButton  from '../Elements/FlatButton'
 import PropertyService from '../Services/PropertyService'
 

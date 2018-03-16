@@ -1,7 +1,7 @@
 import React, { Component} from 'react';
 import { StyleSheet, Text, View, Button, FlatList, Dimensions, StatusBar, Image, TextInput, Alert, TouchableHighlight} from 'react-native';
 import { Theme } from '../Common/Theme'
-import { Colors } from '../Common/Colors'
+import Colors from '../Common/Colors'
 
 export default class FlatButton extends Component {
   onButtonPress = () => {

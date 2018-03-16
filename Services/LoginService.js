@@ -1,5 +1,5 @@
 import { Authentication } from '../Common/NetworkManager'
-import { Storage } from '../Common/Storage'
+import Storage from '../Common/Storage'
 import { Utils } from '../Common/Utils'
 import Account from '../Models/Account'
 

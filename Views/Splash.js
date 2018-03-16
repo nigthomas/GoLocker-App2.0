@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Theme } from '../Common/Theme'
 
-export class SplashView extends Component {
+export default class SplashView extends Component {
   render() {
     return (
       <View style={styles.container}>

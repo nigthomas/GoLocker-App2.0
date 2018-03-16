@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, StatusBar } from 'react-native';
 
-export class DashboardView extends Component {
+export default class DashboardView extends Component {
   static navigationOptions = { title: 'Dashboard', header: null };
   render() {
     return (

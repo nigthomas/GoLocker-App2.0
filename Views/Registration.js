@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, StatusBar, TextInput, Alert } from 'react-native';
-import { Theme } from '../Common/Theme'
+import Theme from '../Common/Theme'
 import Colors from '../Common/Colors'
 import FlatButton  from '../Elements/FlatButton'
 import PropertyService from '../Services/PropertyService'
 
-export class RegistrationView extends Component {
+export default class RegistrationView extends Component {
   constructor(props) {
    super(props);
 

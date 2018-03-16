@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation';
-import { LoginView } from './Views/Login'
-import { RegistrationView } from './Views/Registration'
-import { DashboardView } from './Views/Dashboard'
+import LoginView from './Views/Login'
+import RegistrationView from './Views/Registration'
+import DashboardView from './Views/Dashboard'
 import SplashView from './Views/Splash'
 import Storage from './Common/Storage'
 import LoginService from './Services/LoginService'

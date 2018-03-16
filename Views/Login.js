@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, FlatList, Dimensions, StatusBar, Image, TextInput, Alert, TouchableHighlight} from 'react-native';
-import { Theme } from '../Common/Theme'
+import Theme from '../Common/Theme'
 import Colors from '../Common/Colors'
 import Storage from '../Common/Storage'
 import LoginService from '../Services/LoginService'
@@ -15,7 +15,7 @@ const Label = (props) => {
     );
 }
 
-export class LoginView extends Component {
+export default class LoginView extends Component {
   static navigationOptions = { title: 'Login', header: null };
   constructor(props) {
    super(props);

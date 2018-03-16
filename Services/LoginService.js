@@ -1,10 +1,11 @@
 import { Authentication } from '../Common/NetworkManager'
 import { Storage } from '../Common/Storage'
 import { Utils } from '../Common/Utils'
+import Account from '../Models/Account'
 
 const ACCOUNT_KEY = "$account"
 
-export const LoginService = {
+export default LoginService = {
   login: (username, password) => {
     if(!username || !password) {
       return new Promise((resolve, reject) => { reject(new Error('Missing username or password'))})
@@ -12,8 +13,9 @@ export const LoginService = {
 
     return Authentication.login(username, password)
     .then(data => {
-      Storage.set(ACCOUNT_KEY, JSON.stringify(data))
-      return new Promise((resolve, reject) => { resolve(data)})
+      const account = new Account(data)
+      Storage.set(ACCOUNT_KEY, JSON.stringify(account))
+      return new Promise((resolve, reject) => { resolve(account)})
     })
   },
   account: () => {
@@ -21,7 +23,7 @@ export const LoginService = {
       Storage.get(ACCOUNT_KEY)
       .then(data => {
         if(Utils.ifDefNN(data)) {
-          return resolve(JSON.parse(data))
+          return resolve(new Account(JSON.parse(data)))
         }
 
         return resolve(null);

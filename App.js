@@ -6,13 +6,21 @@ import { RegistrationView } from './Views/Registration'
 import { DashboardView } from './Views/Dashboard'
 import { SplashView } from './Views/Splash'
 import { Storage } from './Common/Storage'
-import { LoginService } from './Services/LoginService'
+import LoginService from './Services/LoginService'
 
 const LoginNavigationController = StackNavigator({
-  LoginView: { screen: LoginView },
+  LoginView: { screen: ({ navigation }) => {
+    return <LoginView rootNavigation={{ navigate: navigation }} />
+  }},
   DashboardView: {screen: DashboardView},
   RegistrationView: {screen: RegistrationView}
-});
+},
+{
+  headerMode: 'none',
+  navigationOptions: {
+    headerVisible: false,
+  }
+ });
 
 const NavigationController = StackNavigator({
   DashboardView: {screen: DashboardView}
@@ -28,7 +36,7 @@ class App extends Component {
     }
 
     componentDidMount() {
-      LoginService.logOut() //Remove me
+      LoginService.logOut()
       LoginService.isLoggedIn()
       .then(isLoggedIn => {
         this.setState({isLoggedIn: isLoggedIn, loading: false})

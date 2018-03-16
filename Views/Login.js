@@ -3,8 +3,8 @@ import { StyleSheet, Text, View, Button, FlatList, Dimensions, StatusBar, Image,
 import { Theme } from '../Common/Theme'
 import { Colors } from '../Common/Colors'
 import { Storage } from '../Common/Storage'
-import { LoginService } from '../Services/LoginService'
-import { FlatButton } from '../Elements/FlatButton'
+import LoginService from '../Services/LoginService'
+import FlatButton from '../Elements/FlatButton'
 
 const Label = (props) => {
     return (
@@ -31,14 +31,14 @@ export class LoginView extends Component {
     const password = this.state.password
 
     if(!username || !password) {
-      Alert.alert('Hi there,', "Please enter username and password",[{text: 'OK', onPress: () => {}}],{ cancelable: false })
+      Alert.alert('Hi there,', "Please enter your username and password",[{text: 'OK', onPress: () => {}}],{ cancelable: false })
       return;
     }
 
     LoginService.login(username, password)
-    .then(data => {
-      const { navigate } = this.props.navigation;
-      navigate('DashboardView', {navigation: navigate})
+    .then(account => {
+      const { navigate }  = this.props.rootNavigation.navigate;
+      navigate('DashboardView', {navigate: navigate})
     })
     .catch(err => {
       Alert.alert('', "Whoops! This username and password combination doesn't exist",[{text: 'OK', onPress: () => {}}],{ cancelable: false })
@@ -46,11 +46,13 @@ export class LoginView extends Component {
   }
 
   onRegisterPress = () => {
-    const { navigate } = this.props.navigation;
-    navigate('RegistrationView', {navigation: navigate})
+    const { navigate } = this.props.rootNavigation.navigate;
+    navigate('RegistrationView', {navigation: this.props.rootNavigation.navigate})
   }
 
   render() {
+    var width = Dimensions.get('window').width;
+
     return (
       <View style={styles.background}>
         <StatusBar
@@ -66,9 +68,10 @@ export class LoginView extends Component {
         <View style={styles.container}>
           <TextInput style={styles.emailTextInput} underlineColorAndroid={'transparent'} placeholder="Email Address or Mobile Phone" onChangeText={(username) => this.setState({username})} value={this.state.username}/>
           <TextInput style={styles.passwordTextInput} underlineColorAndroid={'transparent'} placeholder="Enter Password" secureTextEntry={true} onChangeText={(password) => this.setState({password})} value={this.state.password}/>
-
-          <FlatButton onPress={this.onLoginPress} backgroundColor={Theme.primaryColor} title={"Login"}/>
-          <FlatButton marginTop={10} onPress={this.onRegisterPress} backgroundColor={Theme.primaryColor} title={"Register"}/>
+          <View style={{flex: 1}}>
+            <FlatButton style={{backgroundColor: 'transparent'}} onPress={this.onLoginPress} title={"Login"}/>
+            <FlatButton style={{marginTop: 10, backgroundColor: 'transparent'}} borderColor={Theme.primaryColor} fontSize={14} onPress={this.onRegisterPress} title={"Register"}/>
+          </View>
         </View>
       </View>
     );

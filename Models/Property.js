@@ -13,6 +13,10 @@ export default class Property {
     this.settings = data.settings
   }
 
+  isActive () {
+    return this.status == 1
+  }
+
   toJSON() {
     return {status: this.status,
             name: this.name,

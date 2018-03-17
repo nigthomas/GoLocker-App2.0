@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, StatusBar, Image, Platform} from 'react-native';
-import { Container, Header, Content, Card, CardItem, Left, Thumbnail, Body, Button, Icon, Title, Footer, FooterTab} from 'native-base';
-import FooterTabWithNavigation from './FooterTabWithNavigation'
-import Colors from '../Common/Colors'
+import { StyleSheet, Text, View } from 'react-native';
 import Theme from '../Common/Theme'
+import FooterTabWithNavigation from './FooterTabWithNavigation'
+import { Container, Header, Content, Card, CardItem, Left, Thumbnail, Body, Button, Icon, Title, Footer, FooterTab} from 'native-base';
 
-export default class DashboardView extends Component {
-  static navigationOptions = { title: 'Dashboard', header: null, tabBarVisible: false};
+export default class AccountView extends Component {
+  static navigationOptions = { title: 'Account', header: null, tabBarVisible: false };
 
   render() {
     return (
       <Container>
         <Header androidStatusBarColor={Theme.secondaryColor} style={{backgroundColor: Theme.primaryColor}}>
           <Body>
-            <Title style={{color: Colors.white}}>Dashboard</Title>
+            <Title style={{color: Colors.white}}>Account</Title>
           </Body>
         </Header>
         <Content>
@@ -44,44 +43,15 @@ export default class DashboardView extends Component {
           </Card>
         </Content>
 
-        <FooterTabWithNavigation navigation={this.props.navigation} active={"dashboard"}/>
+        <FooterTabWithNavigation navigation={this.props.navigation} active={"account"}/>
       </Container>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  icon: {
-    ...Platform.select({
-      ios: {
-        color: Theme.primaryColor
-      },
-      android: {
-        color: Colors.white
-      }
-    })
-  },
-  iconSelected: {
-    ...Platform.select({
-      ios: {
-        color: Theme.secondaryColor
-      },
-      android: {
-        color: Theme.secondaryColor
-      }
-    })
-  },
-  footer: {
-    ...Platform.select({
-      android: {
-        backgroundColor: Theme.primaryColor,
-      }
-    })
-  },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: Theme.primaryColor
   },
 });

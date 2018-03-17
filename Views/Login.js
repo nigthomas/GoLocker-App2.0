@@ -1,19 +1,13 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, FlatList, Dimensions, StatusBar, Image, TextInput, Alert, TouchableHighlight} from 'react-native';
+import { StyleSheet, Text, View, Button, FlatList, Dimensions, StatusBar, Image, TextInput, Alert, TouchableHighlight, Platform} from 'react-native';
+import { Container, Header, Content, Form, Item, Input, Label, Root } from 'native-base';
 import Theme from '../Common/Theme'
 import Colors from '../Common/Colors'
 import Storage from '../Common/Storage'
 import LoginService from '../Services/LoginService'
 import FlatButton from '../Elements/FlatButton'
-
-const Label = (props) => {
-    return (
-      <Text
-        style={props.styles && props.styles.textLabel ? props.styles.textLabel : styles.textLabel}>
-        {props.text}
-      </Text>
-    );
-}
+import AlertView from '../Elements/AlertView'
+import { Toast } from 'native-base';
 
 export default class LoginView extends Component {
   static navigationOptions = { title: 'Login', header: null };
@@ -31,7 +25,7 @@ export default class LoginView extends Component {
     const password = this.state.password
 
     if(!username || !password) {
-      Alert.alert('Hi there,', "Please enter your username and password",[{text: 'OK', onPress: () => {}}],{ cancelable: false })
+      AlertView.showConfirmation("Hi there", "Please enter your username and password")
       return;
     }
 
@@ -41,7 +35,7 @@ export default class LoginView extends Component {
       navigate('DashboardView', {navigate: navigate})
     })
     .catch(err => {
-      Alert.alert('', "Whoops! This username and password combination doesn't exist",[{text: 'OK', onPress: () => {}}],{ cancelable: false })
+      AlertView.showConfirmation("Whoops! This username and password combination doesn't exist")
     })
   }
 
@@ -54,26 +48,35 @@ export default class LoginView extends Component {
     var width = Dimensions.get('window').width;
 
     return (
-      <View style={styles.background}>
-        <StatusBar
-        barStyle="light-content"
-       />
-       <View style={{alignItems: 'center'}}>
-         <Image
-          style={{width: 66, height: 50}}
-          source={require('../Images/go-locker-brand.png')}
+      <Root>
+        <View style={styles.background}>
+          <StatusBar
+          barStyle="light-content"
          />
-       </View>
+         <View style={{alignItems: 'center'}}>
+           <Image
+            style={{width: 66, height: 50}}
+            source={require('../Images/go-locker-brand.png')}
+           />
+         </View>
+          <View style={styles.container}>
+            <Item floatingLabel style={{marginTop: 10, height: 60}}>
+             <Label style={{marginTop: Platform.OS === 'ios' ? -5:0}}>Email Address or Mobile Phone</Label>
+             <Input style={{color: Colors.white}} onChangeText={(username) => this.setState({username})} value={this.state.username}/>
+            </Item>
 
-        <View style={styles.container}>
-          <TextInput style={styles.emailTextInput} underlineColorAndroid={'transparent'} placeholder="Email Address or Mobile Phone" onChangeText={(username) => this.setState({username})} value={this.state.username}/>
-          <TextInput style={styles.passwordTextInput} underlineColorAndroid={'transparent'} placeholder="Enter Password" secureTextEntry={true} onChangeText={(password) => this.setState({password})} value={this.state.password}/>
-          <View style={{flex: 1}}>
-            <FlatButton style={{backgroundColor: 'transparent'}} onPress={this.onLoginPress} title={"Login"}/>
-            <FlatButton style={{marginTop: 10, backgroundColor: 'transparent'}} borderColor={Theme.primaryColor} fontSize={14} onPress={this.onRegisterPress} title={"Register"}/>
+            <Item floatingLabel style={{marginTop: 15, height: 60}}>
+              <Label style={{marginTop: Platform.OS === 'ios' ? -5:0}}>Password</Label>
+              <Input style={{color: Colors.white}} secureTextEntry={true} onChangeText={(password) => this.setState({password})} value={this.state.password} />
+             </Item>
+
+            <View style={{flex: 1, marginTop: 25}}>
+              <FlatButton style={{backgroundColor: 'transparent'}} onPress={this.onLoginPress} title={"Sign In"}/>
+              <FlatButton style={{marginTop: 10, backgroundColor: 'transparent'}} borderColor={Theme.primaryColor} fontSize={14} onPress={this.onRegisterPress} title={"Register"}/>
+            </View>
           </View>
         </View>
-      </View>
+      </Root>
     );
   }
 }
@@ -83,7 +86,7 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
     backgroundColor: Theme.primaryColor,
-    paddingTop: 50,
+    paddingTop: 40,
     paddingLeft: 20,
     paddingRight: 20,
     paddingBottom: 50,

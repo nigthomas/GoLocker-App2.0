@@ -19,7 +19,7 @@ export default class FlatButton extends Component {
     return (
       <TouchableHighlight onPress={onPress}  style={style} underlayColor={'transparent'}>
         <View>
-          <Text style={{color: color, fontSize: fontSize, borderColor: borderColor, borderWidth: 1, padding: 10, fontWeight: 'bold', textAlign: 'center'}}>{title}</Text>
+          <Text style={{color: color, fontSize: fontSize, borderRadius: 2, borderColor: borderColor, borderWidth: 1, padding: 10, fontWeight: 'bold', textAlign: 'center'}}>{title}</Text>
         </View>
       </TouchableHighlight>
     );

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, StatusBar, TextInput, Alert } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, TextInput, Alert, Image } from 'react-native';
 import Theme from '../Common/Theme'
 import Colors from '../Common/Colors'
 import FlatButton  from '../Elements/FlatButton'
@@ -45,11 +45,18 @@ export default class RegistrationView extends Component {
       <View style={styles.container}>
         <StatusBar barStyle="dark-content"/>
         <View style={styles.background}>
-          <Text style={{color: Colors.black_3c, fontSize: 20}}>{enter_zip}</Text>
+          <View style={{alignItems: 'center'}}>
+            <Image
+             style={{width: 66, height: 50}}
+             source={require('../Images/go-locker-brand.png')}
+            />
+          </View>
+          <Text style={{color: Colors.black_3c, fontSize: 20, marginTop: 20}}>{enter_zip}</Text>
           <Text style={{color: Colors.black_3c, fontSize: 13, marginTop: 10}}>{lets_check}</Text>
           <TextInput style={styles.zipCodeInput} underlineColorAndroid={'transparent'} placeholder="Zip code" onChangeText={(zip_code) => this.setState({zip_code})} value={this.state.zip_code}/>
           <FlatButton style={{backgroundColor: 'transparent', marginTop: 10, width: '90%', marginLeft: '2.5%'}} onPress={this.onCheckPress} title={"Check"}/>
-          <FlatButton style={{marginTop: 10, backgroundColor: 'transparent'}} borderColor={Theme.primaryColor} fontSize={14} onPress={this.onLoginPress} title={"Login"}/>
+          <FlatButton style={{backgroundColor: 'transparent', marginTop: 10, width: '90%', marginLeft: '2.5%'}} onPress={this.onCheckPress} title={"I have a location code"}/>
+          <FlatButton style={{marginTop: 10, backgroundColor: 'transparent'}} borderColor={Theme.primaryColor} fontSize={14} onPress={this.onLoginPress} title={"Sign In"}/>
         </View>
       </View>
     );

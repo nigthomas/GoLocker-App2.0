@@ -62,5 +62,12 @@ const styles = StyleSheet.create({
         color: Theme.secondaryColor
       }
     })
+  },
+  footer: {
+    ...Platform.select({
+      android: {
+        backgroundColor: Theme.primaryColor,
+      }
+    })
   }
 });

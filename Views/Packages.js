@@ -16,31 +16,7 @@ export default class PackagesView extends Component {
           </Body>
         </Header>
         <Content>
-          <Card style={{flex: 0}}>
-            <CardItem>
-              <Left>
-                <Body>
-                  <Text>NativeBase</Text>
-                  <Text note>April 15, 2016</Text>
-                </Body>
-              </Left>
-            </CardItem>
-            <CardItem>
-              <Body>
-                <Text>
-                  //Your text here
-                </Text>
-              </Body>
-            </CardItem>
-            <CardItem>
-              <Left>
-                <Button transparent textStyle={{color: '#87838B'}}>
-                  <Icon name="logo-github" />
-                  <Text>1,926 stars</Text>
-                </Button>
-              </Left>
-            </CardItem>
-          </Card>
+
         </Content>
 
         <FooterTabWithNavigation navigation={this.props.navigation} active={"package"}/>

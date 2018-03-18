@@ -61,13 +61,13 @@ export default class LoginView extends Component {
          </View>
           <View style={styles.container}>
             <Item floatingLabel style={{marginTop: 10, height: 60}}>
-             <Label style={{marginTop: Platform.OS === 'ios' ? -5:0}}>Email Address or Mobile Phone</Label>
-             <Input style={{color: Colors.white}} onChangeText={(username) => this.setState({username})} value={this.state.username}/>
+             <Label style={{marginTop: Platform.OS === 'ios' ? -5:0, fontFamily: Theme.primaryFont}}>Email Address or Mobile Phone</Label>
+             <Input style={{color: Colors.white, fontFamily: Theme.primaryFont}} onChangeText={(username) => this.setState({username})} value={this.state.username}/>
             </Item>
 
             <Item floatingLabel style={{marginTop: 15, height: 60}}>
-              <Label style={{marginTop: Platform.OS === 'ios' ? -5:0}}>Password</Label>
-              <Input style={{color: Colors.white}} secureTextEntry={true} onChangeText={(password) => this.setState({password})} value={this.state.password} />
+              <Label style={{marginTop: Platform.OS === 'ios' ? -5:0, fontFamily: Theme.primaryFont}}>Password</Label>
+              <Input style={{color: Colors.white, fontFamily: Theme.primaryFont}} secureTextEntry={true} onChangeText={(password) => this.setState({password})} value={this.state.password} />
              </Item>
 
             <View style={{flex: 1, marginTop: 25}}>

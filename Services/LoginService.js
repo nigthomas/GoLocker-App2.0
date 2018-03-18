@@ -1,9 +1,12 @@
-import { Authentication } from '../Common/NetworkManager'
+import { AuthenticationNetworkManager } from '../Common/NetworkManager'
 import Storage from '../Common/Storage'
 import { Utils } from '../Common/Utils'
 import Account from '../Models/Account'
 
 const ACCOUNT_KEY = "$account"
+
+//Quick access to current account
+var currentAccount = null
 
 export default LoginService = {
   login: (username, password) => {
@@ -11,7 +14,7 @@ export default LoginService = {
       return new Promise((resolve, reject) => { reject(new Error('Missing username or password'))})
     }
 
-    return Authentication.login(username, password)
+    return AuthenticationNetworkManager.login(username, password)
     .then(data => {
       const account = new Account(data)
       Storage.set(ACCOUNT_KEY, JSON.stringify(account))
@@ -19,6 +22,10 @@ export default LoginService = {
     })
   },
   account: () => {
+    if (currentAccount) {
+      return new Promise((resolve, reject) => { resolve(currentAccount)})
+    }
+
     return new Promise((resolve, reject) => {
       Storage.get(ACCOUNT_KEY)
       .then(data => {
@@ -34,12 +41,18 @@ export default LoginService = {
     })
   },
   logOut: () => {
+    currentAccount = null
     Storage.remove(ACCOUNT_KEY, null)
   },
   isLoggedIn: () => {
+    if (currentAccount) {
+      return new Promise((resolve, reject) => { resolve(true)})
+    }
+
     return new Promise((resolve, reject) => {
       Storage.get(ACCOUNT_KEY)
       .then(data => {
+        currentAccount = new Account(JSON.parse(data))
         resolve(Utils.ifDefNN(data))
       })
       .catch(err => {

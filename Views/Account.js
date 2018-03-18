@@ -9,7 +9,7 @@ export default class AccountView extends Component {
   static navigationOptions = { title: 'Account', header: null, tabBarVisible: false };
 
   onLogoutPress = () => {
-    console.log("Logout")
+
   }
 
   render() {
@@ -17,55 +17,53 @@ export default class AccountView extends Component {
       <Container>
         <Header androidStatusBarColor={Theme.secondaryColor} style={{backgroundColor: Theme.primaryColor}}>
           <Body>
-            <Title style={{color: Colors.white}}>Account</Title>
+            <Title style={{color: Colors.white, fontFamily: Theme.primaryFont}}>Account</Title>
           </Body>
         </Header>
         <Content>
         <List>
-
           <Separator bordered style={styles.headerStyle}>
-            <Text>BILLING</Text>
+            <Text style={styles.textStyle}>BILLING</Text>
           </Separator>
           <ListItem style={styles.itemStyle}>
-            <Text>Address</Text>
+            <Text style={styles.textStyle}>Address</Text>
           </ListItem>
           <ListItem style={styles.itemStyle}>
-            <Text>Payment Info</Text>
-          </ListItem>
-          <Separator bordered style={styles.headerStyle}>
-            <Text>MEMBERSHIP</Text>
-          </Separator>
-          <ListItem style={styles.itemStyle}>
-            <Text>Plan</Text>
+            <Text style={styles.textStyle}>Payment Info</Text>
           </ListItem>
           <Separator bordered style={styles.headerStyle}>
-            <Text>PROFILE</Text>
+            <Text style={styles.textStyle}>MEMBERSHIP</Text>
           </Separator>
           <ListItem style={styles.itemStyle}>
-            <Text>Phone</Text>
+            <Text style={styles.textStyle}>Plan</Text>
+          </ListItem>
+          <Separator bordered style={styles.headerStyle}>
+            <Text style={styles.textStyle}>PROFILE</Text>
+          </Separator>
+          <ListItem style={styles.itemStyle}>
+            <Text style={styles.textStyle}>Phone</Text>
           </ListItem>
           <ListItem style={styles.itemStyle}>
-            <Text>Mailing Address</Text>
+            <Text style={styles.textStyle}>Mailing Address</Text>
           </ListItem>
           <Separator bordered style={styles.headerStyle}>
           </Separator>
           <ListItem style={styles.itemStyle}>
-            <Text>Password</Text>
+            <Text style={styles.textStyle}>Change Password</Text>
           </ListItem>
           <ListItem style={styles.itemStyle}>
-            <Text>Terms</Text>
+            <Text style={styles.textStyle}>Terms</Text>
           </ListItem>
           <ListItem style={styles.itemStyle}>
-            <Text>Privacy</Text>
+            <Text style={styles.textStyle}>Privacy</Text>
           </ListItem>
             <ListItem style={styles.itemStyle} onPress={this.onLogoutPress}>
-              <Text>Logout</Text>
+              <Text style={styles.textStyle}>Logout</Text>
             </ListItem>
-          </List>
-        </Content>
-
-        <FooterTabWithNavigation navigation={this.props.navigation} active={"account"}/>
-      </Container>
+        </List>
+      </Content>
+      <FooterTabWithNavigation navigation={this.props.navigation} active={"account"}/>
+    </Container>
     );
   }
 }
@@ -84,5 +82,8 @@ const styles = StyleSheet.create({
   },
   headerStyle: {
     height: 45
+  },
+  textStyle: {
+    fontFamily: Theme.primaryFont
   }
 });

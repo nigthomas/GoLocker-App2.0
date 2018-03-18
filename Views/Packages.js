@@ -12,13 +12,20 @@ export default class PackagesView extends Component {
       <Container>
         <Header androidStatusBarColor={Theme.secondaryColor} style={{backgroundColor: Theme.primaryColor}}>
           <Body>
-            <Title style={{color: Colors.white}}>Packages</Title>
+            <Title style={{color: Colors.white, fontFamily: Theme.primaryFont}}>Incoming Packages</Title>
           </Body>
         </Header>
         <Content>
-
+          <Card style={{marginTop: 5}}>
+            <CardItem>
+              <Body>
+                <Text style={{fontFamily: Theme.primaryFont}}>
+                   No tracking information available at this time
+                </Text>
+              </Body>
+            </CardItem>
+            </Card>
         </Content>
-
         <FooterTabWithNavigation navigation={this.props.navigation} active={"package"}/>
       </Container>
     );

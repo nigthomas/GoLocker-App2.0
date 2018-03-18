@@ -13,6 +13,7 @@ import Ionicons from 'react-native-vector-icons/dist/Ionicons';
 import _ from 'underscore'
 import LoginService from '../Services/LoginService'
 import Utils from '../Common/Utils'
+import MaterialIcons from 'react-native-vector-icons/dist/MaterialIcons'
 
 const CANCEL_INDEX = 3
 
@@ -30,8 +31,13 @@ export default class DashboardView extends Component {
    };
   }
 
+  componentWillMount() {
+    StatusBar.setBarStyle('light-content', true);
+  }
+
   componentDidMount() {
     ActionSheet.actionsheetInstance = null;
+
     this.setState({loading: true})
     this.fetch()
   }
@@ -43,7 +49,6 @@ export default class DashboardView extends Component {
     })
     .catch(err => {
       this.setState({error: err, loading: false})
-      console.log(err)
     })
   }
 
@@ -98,7 +103,7 @@ export default class DashboardView extends Component {
                   <Text >{locker.property.city}, {locker.property.stateProvince} {locker.property.postalCode}</Text>
                 </Body>
               </CardItem>
-              <CardItem  style={{borderTopColor: Colors.gray_ef, borderTopWidth: 1}}>
+              <CardItem style={{borderTopColor: Colors.gray_ef, borderTopWidth: 1}}>
                 <View style={{marginLeft: 0, padding: 0, marginLeft: -10}}>
                   <ClearButton fontSize={13} fontWeight={'bold'} color={Theme.primaryColor} padding={0} style={{backgroundColor: 'transparent'}} onPress={this.onLoginPress} title={"SHIP A PACKAGE"}/>
                 </View>
@@ -155,6 +160,38 @@ export default class DashboardView extends Component {
           </Content>
           <FooterTabWithNavigation navigation={this.props.navigation} active={"dashboard"}/>
         </Container>
+      )
+    }
+
+    if(this.state.error) {
+      return (
+        <Root>
+          <Container>
+            <Header androidStatusBarColor={Theme.secondaryColor} style={{backgroundColor: Theme.primaryColor}}>
+              <Body>
+                <Title style={{color: Colors.white, fontFamily: Theme.primaryFont}}>Dashboard</Title>
+              </Body>
+            </Header>
+            <Content>
+              <Card>
+                <CardItem style={{borderBottomColor: Colors.gray_ef, borderBottomWidth: 1}}>
+                  <Body>
+                    <Text style={{fontSize: 15, fontWeight: '300'}}>Whoops! An error has occurred</Text>
+                  </Body>
+                  <Right>
+                    <MaterialIcons name={"error-outline"} size={25} color={Colors.red} />
+                  </Right>
+                 </CardItem>
+                 <CardItem style={{borderTopColor: Colors.gray_ef, borderTopWidth: 1}}>
+                   <View style={{marginLeft: 0, padding: 0, marginLeft: -10}}>
+                     <ClearButton fontSize={13} fontWeight={'bold'} color={Theme.primaryColor} padding={0} style={{backgroundColor: 'transparent'}} onPress={() => this.fetch()} title={"TRY AGAIN"}/>
+                   </View>
+                 </CardItem>
+               </Card>
+            </Content>
+            <FooterTabWithNavigation navigation={this.props.navigation} active={"dashboard"}/>
+          </Container>
+        </Root>
       )
     }
 

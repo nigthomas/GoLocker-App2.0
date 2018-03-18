@@ -3,5 +3,6 @@ export default Colors = {
   black: "#000000",
   black_3c: "#3c3c3c",
   gray: 'gray',
-  gray_ef: "#EFEFEF"
+  gray_ef: "#EFEFEF",
+  red: 'red'
 }

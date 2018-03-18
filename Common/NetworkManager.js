@@ -6,7 +6,7 @@ const URL = {
   login: `${BASE_URL}/v1/authenticate`,
   properties: `${BASE_URL}/v1/properties`,
   dashboard: `${BASE_URL}/v1/account`,
-  reservation: `${BASE_URL}/v1/reservation`
+  reservation: `${BASE_URL}/v1/account/reservations`
 }
 
 const STATUS_CODE = {

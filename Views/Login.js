@@ -50,9 +50,6 @@ export default class LoginView extends Component {
     return (
       <Root>
         <View style={styles.background}>
-          <StatusBar
-          barStyle="light-content"
-         />
          <View style={{alignItems: 'center'}}>
            <Image
             style={{width: 66, height: 50}}

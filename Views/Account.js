@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, TouchableHighlight, StatusBar } from 'react-native';
 import Theme from '../Common/Theme'
 import Colors from '../Common/Colors'
 import FooterTabWithNavigation from './FooterTabWithNavigation'
@@ -7,6 +7,9 @@ import { Container, Header, Content, Card, CardItem, Left, Thumbnail, Body, Butt
 
 export default class AccountView extends Component {
   static navigationOptions = { title: 'Account', header: null, tabBarVisible: false };
+  componentWillMount() {
+    StatusBar.setBarStyle('light-content', true);
+  }
 
   onLogoutPress = () => {
 

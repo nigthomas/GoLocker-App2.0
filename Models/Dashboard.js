@@ -11,8 +11,8 @@ export default class Dashboard {
     this.apartmentNumber = data.apartmentNumber
     this.disability = data.disability
     this.signupDate = data.signupDate
-    this.firstname = data.firstname
-    this.lastname = data.lastname
+    this.firstName = data.firstname
+    this.lastName = data.lastname
     this.email = data.email
     this.mobilePhone = data.mobilePhone
     this.homePhone = data.homePhone
@@ -41,8 +41,8 @@ export default class Dashboard {
             apartmentNumber: this.apartmentNumber,
             disability: this.disability,
             signupDate: this.signupDate,
-            firstname: this.firstname,
-            lastname: this.lastname,
+            firstname: this.firstName,
+            lastname: this.lastName,
             email: this.email,
             mobilePhone: this.mobilePhone,
             homePhone: this.homePhone,

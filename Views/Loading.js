@@ -7,7 +7,7 @@ export default class PackagesView extends Component {
     const style = this.props.style || {}
     style.justifyContent = 'center'
     style.flex = 1
-    
+
     return (
       <View style={style}>
         <ActivityIndicator size="large" color={Theme.primaryColor} />

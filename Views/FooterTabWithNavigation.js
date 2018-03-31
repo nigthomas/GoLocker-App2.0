@@ -5,36 +5,45 @@ import Octicon from 'react-native-vector-icons/dist/Octicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/dist/MaterialCommunityIcons'
 import MaterialIcons from 'react-native-vector-icons/dist/MaterialIcons'
 import Theme from '../Common/Theme'
+import FontAwesome from 'react-native-vector-icons/dist/FontAwesome'
 
 export default class FooterTabWithNavigation extends Component {
-  onCompassPress = () => {
-    this.props.navigation.navigate('Dashboard')
+  onIncomingPress = () => {
+    this.props.navigation.navigate('Incoming')
   }
 
-  onPackagePress = () => {
-    this.props.navigation.navigate('Packages')
+  onShipPress = () => {
+    this.props.navigation.navigate('Ship')
   }
 
-  onAccountPress = () => {
-    this.props.navigation.navigate('Account')
+  onDetailsPress = () => {
+    this.props.navigation.navigate('Details')
   }
 
   render() {
-    const compassStyle = this.props.active == "dashboard" ? styles.iconSelected : styles.icon
-    const packageStyle = this.props.active == "package" ? styles.iconSelected : styles.icon
-    const accountStyle = this.props.active == "account" ? styles.iconSelected : styles.icon
+    const shipStyle = this.props.active == "ship" ? styles.iconSelected : styles.icon
+    const incomingStyle = this.props.active == "incoming" ? styles.iconSelected : styles.icon
+    const detailsStyle = this.props.active == "details" ? styles.iconSelected : styles.icon
+
+    const shipTextStyle = this.props.active == "ship" ? styles.activeText : styles.text
+    const incomingTextStyle = this.props.active == "incoming" ? styles.activeText : styles.text
+    const detailsTextStyle = this.props.active == "details" ? styles.activeText : styles.text
+
 
     return (
-      <Footer>
+      <Footer style={{borderTopWidth: 0, paddingLeft: 30, paddingRight: 30, backgroundColor: Colors.white}}>
        <FooterTab style={styles.footer}>
-         <Button onPress={this.onCompassPress}>
-           <MaterialCommunityIcons name="compass-outline" size={30} style={compassStyle}/>
+         <Button vertical onPress={this.onIncomingPress}>
+           <FontAwesome name="th-list" size={20} style={incomingStyle}/>
+           <Text style={incomingTextStyle}>Incoming</Text>
          </Button>
-         <Button onPress={this.onPackagePress}>
-           <MaterialCommunityIcons active name="package-variant-closed" size={30} style={packageStyle} />
+         <Button vertical onPress={this.onShipPress}>
+           <FontAwesome name="send" size={20} style={shipStyle} />
+           <Text style={shipTextStyle}>Ship</Text>
          </Button>
-         <Button onPress={this.onAccountPress}>
-           <MaterialIcons name="person-outline" size={30} style={accountStyle}/>
+         <Button vertical onPress={this.onDetailsPress}>
+           <MaterialCommunityIcons name="account-box-outline" size={20} style={detailsStyle}/>
+           <Text style={detailsTextStyle}>Details</Text>
          </Button>
        </FooterTab>
      </Footer>
@@ -43,30 +52,44 @@ export default class FooterTabWithNavigation extends Component {
 }
 
 const styles = StyleSheet.create({
+  text: {
+    fontSize: 10,
+    fontFamily: Theme.primaryFont,
+    marginTop: 3
+  },
+  activeText: {
+    fontSize: 10,
+    fontFamily: Theme.primaryFont,
+    marginTop: 3,
+    fontWeight: '600' //Semi-bold
+  },
   icon: {
     ...Platform.select({
       ios: {
-        color: Theme.primaryColor
+        color: Colors.gray
       },
       android: {
-        color: Colors.white
+        color: Colors.gray
       }
     })
   },
   iconSelected: {
     ...Platform.select({
       ios: {
-        color: Theme.secondaryColor
+        color: Colors.black
       },
       android: {
-        color: Theme.secondaryColor
+        color: Colors.black
       }
     })
   },
   footer: {
     ...Platform.select({
       android: {
-        backgroundColor: Theme.primaryColor,
+        backgroundColor: Colors.white,
+      },
+      ios: {
+        backgroundColor: Colors.white
       }
     })
   }

@@ -36,7 +36,6 @@ export default class RegistrationView extends Component {
     navigation.goBack()
   }
 
-
   static navigationOptions = { title: 'Registration', header: null };
   render() {
     const enter_zip = "Enter your ZipCode"

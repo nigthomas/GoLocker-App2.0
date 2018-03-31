@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, StatusBar, Image, Platform, TouchableHighlight} from 'react-native';
+import { StyleSheet, Text, View, StatusBar, Image, Platform, TouchableHighlight, Modal} from 'react-native';
 import { Container, Header, Content, Card, CardItem, Left, Thumbnail, Body, Button, Icon, Title, Footer, FooterTab, Right, ActionSheet, Root} from 'native-base';
 import FooterTabWithNavigation from './FooterTabWithNavigation'
 import ClearButton from '../Elements/ClearButton'
 import Colors from '../Common/Colors'
 import Theme from '../Common/Theme'
 import DashboardService from '../Services/DashboardService'
-import AlertView from '../Elements/AlertView'
+import ShippingPackageView from './ShipPackage'
 import LoadingView from './Loading'
 import MaterialCommunityIcons from 'react-native-vector-icons/dist/MaterialCommunityIcons'
 import Ionicons from 'react-native-vector-icons/dist/Ionicons';
@@ -18,7 +18,7 @@ import MaterialIcons from 'react-native-vector-icons/dist/MaterialIcons'
 const CANCEL_INDEX = 3
 
 export default class DashboardView extends Component {
-  static navigationOptions = { title: 'Dashboard', header: null, tabBarVisible: false};
+  static navigationOptions = { title: '', header: null, tabBarVisible: false};
 
   constructor(props) {
    super(props);
@@ -27,12 +27,10 @@ export default class DashboardView extends Component {
      data: null,
      loading: false,
      error: null,
-     account: null
+     account: null,
+     modalVisible: false,
+     selectedLocker: null
    };
-  }
-
-  componentWillMount() {
-    StatusBar.setBarStyle('light-content', true);
   }
 
   componentDidMount() {
@@ -59,6 +57,10 @@ export default class DashboardView extends Component {
 
     const ACTION_SHEET_BUTTONS = locker.isPrimaryLocker() ? [{ text: "Set as Secondary" }, { text: "Change Locker" }, { text: "Cancel" }] : [{ text: "Change Locker" }, { text: "Cancel" }];
     ActionSheet.show({options: ACTION_SHEET_BUTTONS, cancelButtonIndex: CANCEL_INDEX, title: "Select option"}, buttonIndex => {})
+  }
+
+  onShipPackage (locker) {
+    this.setState({selectedLocker: locker, modalVisible: true})
   }
 
   lockerCards() {
@@ -105,7 +107,7 @@ export default class DashboardView extends Component {
               </CardItem>
               <CardItem style={{borderTopColor: Colors.gray_ef, borderTopWidth: 1}}>
                 <View style={{marginLeft: 0, padding: 0, marginLeft: -10}}>
-                  <ClearButton fontSize={13} fontWeight={'bold'} color={Theme.primaryColor} padding={0} style={{backgroundColor: 'transparent'}} onPress={this.onLoginPress} title={"SHIP A PACKAGE"}/>
+                  <ClearButton fontSize={13} fontWeight={'bold'} color={Theme.primaryColor} padding={0} style={{backgroundColor: 'transparent'}} onPress={ () => {this.onShipPackage(locker)}} title={"SHIP A PACKAGE"}/>
                 </View>
               </CardItem>
             </Card>
@@ -146,19 +148,22 @@ export default class DashboardView extends Component {
       )
   }
 
+  closedModal () {
+    this.setState({modalVisible: false})
+  }
+
   render() {
     if(this.state.loading) {
       return (
         <Container>
-          <Header androidStatusBarColor={Theme.secondaryColor} style={{backgroundColor: Theme.primaryColor}}>
+          <Header androidStatusBarColor={Colors.white} style={{backgroundColor: Colors.white, borderBottomWidth: 0}}>
             <Body>
-              <Title style={{color: Colors.white, fontFamily: Theme.primaryFont}}>Dashboard</Title>
             </Body>
           </Header>
           <Content>
             <LoadingView style={{marginTop: 50}}/>
           </Content>
-          <FooterTabWithNavigation navigation={this.props.navigation} active={"dashboard"}/>
+          <FooterTabWithNavigation navigation={this.props.navigation} active={"ship"}/>
         </Container>
       )
     }
@@ -167,7 +172,7 @@ export default class DashboardView extends Component {
       return (
         <Root>
           <Container>
-            <Header androidStatusBarColor={Theme.secondaryColor} style={{backgroundColor: Theme.primaryColor}}>
+            <Header androidStatusBarColor={Colors.white} style={{backgroundColor: Colors.white, borderBottomWidth: 0}}>
               <Body>
                 <Title style={{color: Colors.white, fontFamily: Theme.primaryFont}}>Dashboard</Title>
               </Body>
@@ -201,12 +206,21 @@ export default class DashboardView extends Component {
     return (
         <Root>
           <Container>
-            <Header androidStatusBarColor={Theme.secondaryColor} style={{backgroundColor: Theme.primaryColor}}>
+            <Header androidStatusBarColor={Colors.white} style={{backgroundColor: Colors.white, borderBottomWidth: 0}}>
               <Body>
                 <Title style={{color: Colors.white, fontFamily: Theme.primaryFont}}>Dashboard</Title>
               </Body>
             </Header>
-            <Content>
+            <Content style={{backgroundColor: Colors.white}}>
+              <Modal
+                animationType="slide"
+                transparent={false}
+                visible={this.state.modalVisible}
+                onRequestClose={() => {
+                  this.closedModal()
+                }}>
+                  <Container><ShippingPackageView close={() => { this.closedModal() }} data={this.state.selectedLocker}/></Container>
+              </Modal>
               {welcomeCard}
               {lockerCards}
             </Content>

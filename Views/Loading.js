@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ActivityIndicator } from 'react-native';
+import { View, ActivityIndicator, Text} from 'react-native';
 import Theme from '../Common/Theme'
 
 export default class PackagesView extends Component {
@@ -10,7 +10,7 @@ export default class PackagesView extends Component {
 
     return (
       <View style={style}>
-        <ActivityIndicator size="large" color={Theme.primaryColor} />
+        <Text style={{textAlign: 'center', fontWeight: '500', fontSize: 18}}>Loading...</Text>
       </View>
     );
   }

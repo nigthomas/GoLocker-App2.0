@@ -3,34 +3,21 @@ import { StyleSheet, Text, View } from 'react-native';
 import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation';
 import LoginView from './Views/Login'
 import RegistrationView from './Views/Registration'
-import DashboardView from './Views/Dashboard'
-import AccountView from './Views/Account'
-import PackagesView from './Views/Packages'
+import ShipView from './Views/Ship'
+import DetailsView from './Views/Details'
+import IncomingView from './Views/Incoming'
 import SplashView from './Views/Splash'
+import ForgotPasswordView from './Views/ForgotPassword'
+import ResetPasswordView from './Views/ResetPassword'
 import Storage from './Common/Storage'
 import LoginService from './Services/LoginService'
 import Ionicons from 'react-native-vector-icons/MaterialIcons';
 
 const TabController = TabNavigator({
-   Dashboard: { screen: DashboardView },
-   Packages: { screen: PackagesView },
-   Account: { screen: AccountView }
+   Incoming: { screen: IncomingView },
+   Ship: { screen: ShipView },
+   Details: { screen: DetailsView }
 }, {
-  navigationOptions: ({ navigation }) => ({
-    tabBarIcon: ({ focused, tintColor }) => {
-      const { routeName } = navigation.state;
-      let iconName;
-      if (routeName === 'Dashboard') {
-        iconName = 'home';
-      } else if (routeName === 'More') {
-        iconName = `ios-options${focused ? '' : '-outline'}`;
-      } else if (routeName === 'Settings') {
-        iconName = `ios-settings${focused ? '' : '-outline'}`;
-      }
-
-      return <Ionicons name={iconName} size={25} color={tintColor} />;
-    },
-  }),
   tabBarComponent: TabBarBottom,
    tabBarPosition: 'bottom',
    animationEnabled: false,
@@ -42,8 +29,10 @@ const LoginNavigationController = StackNavigator({
   LoginView: { screen: ({ navigation }) => {
     return <LoginView rootNavigation={{ navigate: navigation }} />
   }},
-  DashboardView: {screen: TabController},
-  RegistrationView: {screen: RegistrationView}
+  IncomingView: {screen: TabController},
+  RegistrationView: {screen: RegistrationView},
+  ForgotPasswordView: {screen: ForgotPasswordView},
+  ResetPasswordView: {screen: ResetPasswordView}
 },
 {
   headerMode: 'none',
@@ -53,7 +42,7 @@ const LoginNavigationController = StackNavigator({
  });
 
 const NavigationController = StackNavigator({
-  DashboardView: {screen: TabController}
+  IncomingView: {screen: IncomingView}
 });
 
 class App extends Component {

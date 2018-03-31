@@ -52,7 +52,16 @@ export default LoginService = {
     return new Promise((resolve, reject) => {
       Storage.get(ACCOUNT_KEY)
       .then(data => {
-        currentAccount = new Account(JSON.parse(data))
+        const accountData = JSON.parse(data);
+        const expirationDate = new Date(accountData.expires_in * 1000)
+
+        if(expirationDate < new Date()) {
+          //Clean up old account information
+          Storage.remove(ACCOUNT_KEY, null)
+          resolve(false)
+        }
+
+        currentAccount = new Account(accountData)
         resolve(Utils.ifDefNN(data))
       })
       .catch(err => {

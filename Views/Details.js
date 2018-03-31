@@ -5,11 +5,8 @@ import Colors from '../Common/Colors'
 import FooterTabWithNavigation from './FooterTabWithNavigation'
 import { Container, Header, Content, Card, CardItem, Left, Thumbnail, Body, Button, Icon, Title, Footer, FooterTab, List, ListItem, Separator} from 'native-base';
 
-export default class AccountView extends Component {
+export default class DetailsView extends Component {
   static navigationOptions = { title: 'Account', header: null, tabBarVisible: false };
-  componentWillMount() {
-    StatusBar.setBarStyle('light-content', true);
-  }
 
   onLogoutPress = () => {
 
@@ -65,7 +62,7 @@ export default class AccountView extends Component {
             </ListItem>
         </List>
       </Content>
-      <FooterTabWithNavigation navigation={this.props.navigation} active={"account"}/>
+      <FooterTabWithNavigation navigation={this.props.navigation} active={"details"}/>
     </Container>
     );
   }

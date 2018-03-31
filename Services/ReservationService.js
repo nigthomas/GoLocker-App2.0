@@ -7,5 +7,11 @@ export default ReservationService = {
     .then(data => {
       return new Promise((resolve, reject) => { resolve(data.map((reservationData) => { return new Reservation(reservationData)}))})
     })
+  },
+  createReservation: (parcel, accountNumber, type, trackingNumber, lockerId) => {
+    return ReservationNetworkManager.create(parcel, accountNumber, type, trackingNumber, lockerId)
+  },
+  cancelReservation: (reservationId) => {
+    return ReservationNetworkManager.cancel(reservationId)
   }
 }

@@ -126,7 +126,6 @@ export default class DashboardView extends Component {
 
     return (
       <Root>
-        <ScrollView ref="scrollView" keyboardDismissMode='interactive' style={{backgroundColor: Colors.white}}>
           <Container>
             <Content style={{backgroundColor: Colors.white}}>
               <View style={{marginTop: 30}}>
@@ -212,7 +211,6 @@ export default class DashboardView extends Component {
             </Content>
             <FooterTabWithNavigation navigation={this.props.navigation} active={"ship"}/>
           </Container>
-        </ScrollView>
       </Root>
     );
   }

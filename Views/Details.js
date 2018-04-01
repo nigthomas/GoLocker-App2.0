@@ -31,6 +31,42 @@ export default class DetailsView extends Component {
     this.fetch()
   }
 
+  onPaymentMethod() {
+    this.showNewUpdatePaymentMethod()
+  }
+
+  onBillingAddress() {
+    this.showNewUpdateBillingAddress()
+  }
+
+  onMailingAddress() {
+    this.showNewUpdateMailingAddress()
+  }
+
+  onChangePassword() {
+    this.showChangePassword()
+  }
+
+  showChangePassword() {
+    const { navigate }  = this.props.navigation;
+    navigate('ChangePassword', {})
+  }
+
+  showNewUpdateMailingAddress() {
+    const { navigate }  = this.props.navigation;
+    navigate('NewUpdateMailingAddress', {})
+  }
+
+  showNewUpdateBillingAddress() {
+    const { navigate }  = this.props.navigation;
+    navigate('NewUpdateBillingAddress', {})
+  }
+
+  showNewUpdatePaymentMethod() {
+    const { navigate }  = this.props.navigation;
+    navigate('NewUpdatePaymentMethod', {})
+  }
+
   fetch() {
     Promise.all([DashboardService.getInfo()])
     .then(results => {
@@ -39,6 +75,10 @@ export default class DetailsView extends Component {
     .catch(err => {
       this.setState({error: err, loading: false})
     })
+  }
+
+  onLogout() {
+
   }
 
   render() {
@@ -54,7 +94,6 @@ export default class DetailsView extends Component {
 
     return (
       <Root>
-        <ScrollView ref="scrollView" keyboardDismissMode='interactive' style={{backgroundColor: Colors.white}}>
         <Container>
           <Content style={{backgroundColor: Colors.white}}>
             <View style={{marginTop: 30}}>
@@ -116,7 +155,7 @@ export default class DetailsView extends Component {
             </View>
 
             <View style={{justifyContent: 'center', borderTopColor: Colors.gray_ef, borderTopWidth: 1, borderBottomColor: Colors.gray_ef, borderBottomWidth: 1, height: 50, flex: 1, marginTop: 20}}>
-              <TouchableHighlight onPress={() => {this.onChangeLocker()}} underlayColor={'transparent'}>
+              <TouchableHighlight onPress={() => {this.onPaymentMethod()}} underlayColor={'transparent'}>
                 <View style={{flexDirection:'row', flexWrap:'wrap'}}>
                   <Text style={{fontSize: Utils.normalize(14), color: Colors.gray_85, marginLeft: 21}}>
                     Payment Info
@@ -127,10 +166,21 @@ export default class DetailsView extends Component {
             </View>
 
             <View style={{justifyContent: 'center', borderBottomColor: Colors.gray_ef, borderBottomWidth: 1, height: 50, flex: 1}}>
-              <TouchableHighlight onPress={() => {this.onChangeLocker()}} underlayColor={'transparent'}>
+              <TouchableHighlight onPress={() => {this.onBillingAddress()}} underlayColor={'transparent'}>
                 <View style={{flexDirection:'row', flexWrap:'wrap'}}>
                   <Text style={{fontSize: Utils.normalize(14), color: Colors.gray_85, marginLeft: 21}}>
                     Billing Address
+                  </Text>
+                </View>
+              </TouchableHighlight>
+              <Entypo name="chevron-small-right" size={25} style={{color: Colors.gray_85, position: 'absolute', right: 21}}/>
+            </View>
+
+            <View style={{justifyContent: 'center', borderBottomColor: Colors.gray_ef, borderBottomWidth: 1, height: 50, flex: 1}}>
+              <TouchableHighlight onPress={() => {this.onMailingAddress()}} underlayColor={'transparent'}>
+                <View style={{flexDirection:'row', flexWrap:'wrap'}}>
+                  <Text style={{fontSize: Utils.normalize(14), color: Colors.gray_85, marginLeft: 21}}>
+                    Mailing Address
                   </Text>
                 </View>
               </TouchableHighlight>
@@ -141,8 +191,8 @@ export default class DetailsView extends Component {
               <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(16), color: Colors.gray_85, fontWeight: 'bold'}}>Security</Text>
             </View>
 
-            <View style={{justifyContent: 'center', borderTopColor: Colors.gray_ef, borderTopWidth: 1, height: 50, flex: 1, marginTop: 20}}>
-              <TouchableHighlight onPress={() => {this.onChangeLocker()}} underlayColor={'transparent'}>
+            <View style={{justifyContent: 'center', borderTopColor: Colors.gray_ef, borderTopWidth: 1, borderBottomColor: Colors.gray_ef, borderBottomWidth: 1, height: 50, flex: 1, marginTop: 20}}>
+              <TouchableHighlight onPress={() => {this.onChangePassword()}} underlayColor={'transparent'}>
                 <View style={{flexDirection:'row', flexWrap:'wrap'}}>
                   <Text style={{fontSize: Utils.normalize(14), color: Colors.gray_85, marginLeft: 21}}>
                     Change Password
@@ -152,10 +202,22 @@ export default class DetailsView extends Component {
               <Entypo name="chevron-small-right" size={25} style={{color: Colors.gray_85, position: 'absolute', right: 21}}/>
             </View>
 
+            <View style={{marginTop: 20}}>
+              <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(16), color: Colors.gray_85, fontWeight: 'bold'}}>Profile</Text>
+            </View>
 
+            <View style={{justifyContent: 'center', borderTopColor: Colors.gray_ef, borderTopWidth: 1, marginTop: 20, height: 50, flex: 1, marginTop: 20}}>
+              <TouchableHighlight onPress={() => {this.onLogout()}} underlayColor={'transparent'}>
+                <View style={{flexDirection:'row', flexWrap:'wrap'}}>
+                  <Text style={{fontSize: Utils.normalize(14), color: Colors.gray_85, marginLeft: 21}}>
+                    Logout
+                  </Text>
+                </View>
+              </TouchableHighlight>
+              <Entypo name="chevron-small-right" size={25} style={{color: Colors.gray_85, position: 'absolute', right: 21}}/>
+            </View>
           </Content>
           </Container>
-        </ScrollView>
         <FooterTabWithNavigation navigation={this.props.navigation} active={"details"}/>
       </Root>
     );

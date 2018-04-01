@@ -13,16 +13,34 @@ import ResetPasswordView from './Views/ResetPassword'
 import Storage from './Common/Storage'
 import LoginService from './Services/LoginService'
 import Ionicons from 'react-native-vector-icons/MaterialIcons';
+import NewUpdateBillingAddress from './Views/NewUpdateBillingAddress'
+import NewUpdateMailingAddress from './Views/NewUpdateMailingAddress'
+import NewUpdatePaymentMethod from './Views/NewUpdatePaymentMethod'
+import ChangePassword from './Views/ChangePassword'
+import OptionSelector from './Views/OptionSelector'
+
+const IncomingNavigationController = StackNavigator({
+  IncomingView: { screen: IncomingView }
+});
 
 const ShipNavigationController = StackNavigator({
   ShipView: { screen: ShipView },
   SelectLockerView: {screen: SelectLockerView}
 });
 
+const DetailsNavigationController = StackNavigator({
+  DetailsView: { screen: DetailsView },
+  NewUpdateBillingAddress: {screen: NewUpdateBillingAddress},
+  NewUpdatePaymentMethod: {screen: NewUpdatePaymentMethod},
+  NewUpdateMailingAddress: {screen: NewUpdateMailingAddress},
+  ChangePassword: {screen: ChangePassword},
+  OptionSelector: {screen: OptionSelector}
+});
+
 const TabController = TabNavigator({
-   Incoming: { screen: IncomingView },
+   Incoming: { screen: IncomingNavigationController },
    Ship: { screen: ShipNavigationController },
-   Details: { screen: DetailsView }
+   Details: { screen: DetailsNavigationController }
 }, {
   tabBarComponent: TabBarBottom,
    tabBarPosition: 'bottom',

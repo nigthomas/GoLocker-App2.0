@@ -10,5 +10,7 @@ export default Colors = {
   red: '#D0021B',
   tapable_blue: '#6D89AF',
   light_green: '#7ED321',
-  gray_47: "#474E58"
+  gray_47: "#474E58",
+  gray_d8: "#D8D8D8",
+  gray_f3: "#F3F3F3"
 }

@@ -47,6 +47,15 @@ export default class DetailsView extends Component {
     this.showChangePassword()
   }
 
+  onChangePlan() {
+    this.showChangePlan()
+  }
+
+  showChangePlan() {
+    const { navigate }  = this.props.navigation;
+    navigate('ChangePlan', {})
+  }
+
   showChangePassword() {
     const { navigate }  = this.props.navigation;
     navigate('ChangePassword', {})
@@ -108,14 +117,16 @@ export default class DetailsView extends Component {
             </View>
 
             <View style={{justifyContent: 'center', borderTopColor: Colors.gray_ef, borderTopWidth: 1, borderBottomColor: Colors.gray_ef, borderBottomWidth: 1, marginTop: 15, height: 50, flex: 1}}>
-              <TouchableHighlight onPress={() => {this.onChangeLocker()}} underlayColor={'transparent'}>
+              <TouchableHighlight onPress={() => {this.showChangePlan()}} underlayColor={'transparent'}>
                 <Text style={{fontSize: Utils.normalize(14), color: Theme.primaryColor, marginLeft: 21, fontWeight: '600'}}>
                   Pay-per-package
                 </Text>
               </TouchableHighlight>
 
-              <Text style={{color: Colors.gray_85, position: 'absolute', right: 47}}>Upgrade</Text>
-              <Entypo name="chevron-small-right" size={25} style={{color: Colors.gray_85, position: 'absolute', right: 21, top: 11}}/>
+              <View style={{position: 'absolute', right: 21, flex: 1, flexDirection:'row', zIndex: -1}}>
+                <Text style={{color: Colors.gray_85, marginTop: 10}}>Upgrade</Text>
+                <Entypo name="chevron-small-right" size={25} style={{color: Colors.gray_85, marginTop: 5}}/>
+              </View>
             </View>
 
             <View style={{marginTop: 20}}>

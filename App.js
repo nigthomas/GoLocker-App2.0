@@ -18,6 +18,7 @@ import NewUpdateMailingAddress from './Views/NewUpdateMailingAddress'
 import NewUpdatePaymentMethod from './Views/NewUpdatePaymentMethod'
 import ChangePassword from './Views/ChangePassword'
 import OptionSelector from './Views/OptionSelector'
+import ChangePlan from './Views/ChangePlan'
 
 const IncomingNavigationController = StackNavigator({
   IncomingView: { screen: IncomingView }
@@ -34,7 +35,8 @@ const DetailsNavigationController = StackNavigator({
   NewUpdatePaymentMethod: {screen: NewUpdatePaymentMethod},
   NewUpdateMailingAddress: {screen: NewUpdateMailingAddress},
   ChangePassword: {screen: ChangePassword},
-  OptionSelector: {screen: OptionSelector}
+  OptionSelector: {screen: OptionSelector},
+  ChangePlan: {screen: ChangePlan}
 });
 
 const TabController = TabNavigator({

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, StatusBar, Image, Platform, TouchableHighlight, Modal} from 'react-native';
+import { StyleSheet, Text, View, StatusBar, Image, Platform, TouchableHighlight, Modal, ScrollView, TextInput, findNodeHandle} from 'react-native';
 import { Container, Header, Content, Card, CardItem, Left, Thumbnail, Body, Button, Icon, Title, Footer, FooterTab, Right, ActionSheet, Root} from 'native-base';
 import FooterTabWithNavigation from './FooterTabWithNavigation'
 import ClearButton from '../Elements/ClearButton'
@@ -8,14 +8,15 @@ import Theme from '../Common/Theme'
 import DashboardService from '../Services/DashboardService'
 import ShippingPackageView from './ShipPackage'
 import LoadingView from './Loading'
+import ErrorView from './ErrorView'
 import MaterialCommunityIcons from 'react-native-vector-icons/dist/MaterialCommunityIcons'
+import Entypo from 'react-native-vector-icons/dist/Entypo'
 import Ionicons from 'react-native-vector-icons/dist/Ionicons';
 import _ from 'underscore'
 import LoginService from '../Services/LoginService'
 import Utils from '../Common/Utils'
 import MaterialIcons from 'react-native-vector-icons/dist/MaterialIcons'
-
-const CANCEL_INDEX = 3
+import HeaderView from '../Elements/HeaderView'
 
 export default class DashboardView extends Component {
   static navigationOptions = { title: '', header: null, tabBarVisible: false};
@@ -24,18 +25,21 @@ export default class DashboardView extends Component {
    super(props);
 
    this.state = {
-     data: null,
+     data: {},
      loading: false,
      error: null,
      account: null,
      modalVisible: false,
-     selectedLocker: null
+     selectedLocker: null,
+     sendToLocker: null,
+     number: null,
+     smallParcelSelected: false,
+     mediumParcelSelected: false,
+     largeParcelSelected: false
    };
   }
 
   componentDidMount() {
-    ActionSheet.actionsheetInstance = null;
-
     this.setState({loading: true})
     this.fetch()
   }
@@ -43,190 +47,171 @@ export default class DashboardView extends Component {
   fetch() {
     Promise.all([DashboardService.getInfo()])
     .then(results => {
-      this.setState({data: results[0], loading: false})
+      const dashboardInfo = results[0]
+      const primaryLocker = dashboardInfo.primaryLocker
+      this.setState({data: dashboardInfo, loading: false, sendToLocker: primaryLocker})
     })
     .catch(err => {
       this.setState({error: err, loading: false})
     })
   }
 
-  cardOnPress (locker) {
-    if(!locker) {
-      return
-    }
-
-    const ACTION_SHEET_BUTTONS = locker.isPrimaryLocker() ? [{ text: "Set as Secondary" }, { text: "Change Locker" }, { text: "Cancel" }] : [{ text: "Change Locker" }, { text: "Cancel" }];
-    ActionSheet.show({options: ACTION_SHEET_BUTTONS, cancelButtonIndex: CANCEL_INDEX, title: "Select option"}, buttonIndex => {})
+  inputFocused(ref) {
+    this._scroll(ref, 10);
   }
 
-  onShipPackage (locker) {
-    this.setState({selectedLocker: locker, modalVisible: true})
+  inputBlurred(ref) {
+    this._scroll(ref, 0);
   }
 
-  lockerCards() {
-    if(!this.state.data || (!this.state.data.hasPrimaryLocker() && !this.state.data.hasSecondaryLocker())) {
-      return (<Card></Card>)
-    }
-
-    var lockers = []
-
-    if(this.state.data.hasPrimaryLocker()) {
-      lockers.push(this.state.data.primaryLocker)
-    }
-
-    if(this.state.data.hasSecondaryLocker()) {
-      lockers.push(this.state.data.secondaryLocker)
-    }
-
-    lockers = _.uniq(lockers, 'id')
-
-    return lockers.map((locker, i) => {
-      return <Card key={i}>
-              <CardItem>
-                <Left>
-                  <MaterialCommunityIcons name={"locker"} size={25} color={Theme.primaryColor} />
-                  <Body>
-                  <Text>{locker.property.name}</Text>
-                  <Text note style={{color: Colors.gray}}>{locker.isPrimary ? 'Primary' : 'Secondary'}</Text>
-                  </Body>
-                  <TouchableHighlight onPress={() => {this.cardOnPress(locker)}} underlayColor={'transparent'}>
-                    <View style={{width: 50, alignItems: 'flex-end'}}>
-                      <Ionicons name={"md-more"} size={30} color={'gray'}/>
-                    </View>
-                  </TouchableHighlight>
-                </Left>
-              </CardItem>
-              <CardItem cardBody>
-                <Image source={require('../Images/maps.png')} style={{height: 200, width: null, flex: 1}}/>
-              </CardItem>
-              <CardItem>
-                <Body>
-                  <Text style={{color: Colors.gray}}>{locker.property.address}</Text>
-                  <Text >{locker.property.city}, {locker.property.stateProvince} {locker.property.postalCode}</Text>
-                </Body>
-              </CardItem>
-              <CardItem style={{borderTopColor: Colors.gray_ef, borderTopWidth: 1}}>
-                <View style={{marginLeft: 0, padding: 0, marginLeft: -10}}>
-                  <ClearButton fontSize={13} fontWeight={'bold'} color={Theme.primaryColor} padding={0} style={{backgroundColor: 'transparent'}} onPress={ () => {this.onShipPackage(locker)}} title={"SHIP A PACKAGE"}/>
-                </View>
-              </CardItem>
-            </Card>
-    })
+  _scroll(ref, offset) {
+    setTimeout(() => {
+      var scrollResponder = this.refs.scrollView.getScrollResponder();
+      scrollResponder.scrollResponderScrollNativeHandleToKeyboard(
+                 findNodeHandle(this.refs[ref]),
+                 offset,
+                 true
+             );
+      }, 50);
   }
 
-  welcomeCard () {
-    if(!this.state.data) {
-      return
-    }
-
-    const firstName = Utils.capitalize(this.state.data.firstName)
-    const lastName = Utils.capitalize(this.state.data.lastName)
-    const accountNumber = this.state.data.accountNumber
-
-    return (
-        <Card>
-          <CardItem style={{borderBottomColor: Colors.gray_ef, borderBottomWidth: 1}}>
-            <Body>
-              <Text style={{fontSize: 15, fontWeight: '300'}}>Welcome {firstName}</Text>
-              <Text style={{fontSize: 13, fontWeight: '300', color: Colors.gray}}>Account Number: {accountNumber}</Text>
-            </Body>
-            <Right>
-              <MaterialCommunityIcons name={"account"} size={25} color={Theme.primaryColor} />
-            </Right>
-           </CardItem>
-           <CardItem>
-             <Body>
-               <Text style={{fontSize: 15, fontWeight: '300'}}>Send Deliveries To:</Text>
-               <Text style={{fontSize: 13, fontWeight: '300', color: Colors.gray}}>GoLocker</Text>
-               <Text style={{fontSize: 13, fontWeight: '300', color: Colors.gray}}>209A Morgan Avenue - Ste F</Text>
-               <Text style={{fontSize: 13, fontWeight: '300', color: Colors.gray}}>Brooklyn, NY 11237</Text>
-             </Body>
-             <Right>
-             </Right>
-            </CardItem>
-         </Card>
-      )
+  selectedLocker(locker) {
+    this.props.navigation.goBack()
+    this.setState({sendToLocker: locker})
   }
 
-  closedModal () {
-    this.setState({modalVisible: false})
+  onSmallParcelPress() {
+    this.setState({smallParcelSelected: true, mediumParcelSelected: false, largeParcelSelected: false})
+  }
+
+  onMediumParcelPress() {
+    this.setState({smallParcelSelected: false, mediumParcelSelected: true, largeParcelSelected: false})
+  }
+
+  onLargeParcelPress() {
+    this.setState({smallParcelSelected: false, mediumParcelSelected: false, largeParcelSelected: true})
+  }
+
+  onChangeLocker() {
+    const { navigate }  = this.props.navigation;
+    const primaryLocker = this.state.data.primaryLocker
+    const secondaryLocker = this.state.data.secondaryLocker
+    const lockers = [primaryLocker, secondaryLocker]
+
+    navigate('SelectLockerView', {lockers: lockers, onLockerSelected: this.selectedLocker.bind(this)})
   }
 
   render() {
     if(this.state.loading) {
       return (
-        <Container>
-          <Header androidStatusBarColor={Colors.white} style={{backgroundColor: Colors.white, borderBottomWidth: 0}}>
-            <Body>
-            </Body>
-          </Header>
-          <Content>
-            <LoadingView style={{marginTop: 50}}/>
-          </Content>
-          <FooterTabWithNavigation navigation={this.props.navigation} active={"ship"}/>
-        </Container>
+        <LoadingView />
       )
     }
 
     if(this.state.error) {
       return (
-        <Root>
-          <Container>
-            <Header androidStatusBarColor={Colors.white} style={{backgroundColor: Colors.white, borderBottomWidth: 0}}>
-              <Body>
-                <Title style={{color: Colors.white, fontFamily: Theme.primaryFont}}>Dashboard</Title>
-              </Body>
-            </Header>
-            <Content>
-              <Card>
-                <CardItem style={{borderBottomColor: Colors.gray_ef, borderBottomWidth: 1}}>
-                  <Body>
-                    <Text style={{fontSize: 15, fontWeight: '300'}}>Whoops! An error has occurred</Text>
-                  </Body>
-                  <Right>
-                    <MaterialIcons name={"error-outline"} size={25} color={Colors.red} />
-                  </Right>
-                 </CardItem>
-                 <CardItem style={{borderTopColor: Colors.gray_ef, borderTopWidth: 1}}>
-                   <View style={{marginLeft: 0, padding: 0, marginLeft: -10}}>
-                     <ClearButton fontSize={13} fontWeight={'bold'} color={Theme.primaryColor} padding={0} style={{backgroundColor: 'transparent'}} onPress={() => this.fetch()} title={"TRY AGAIN"}/>
-                   </View>
-                 </CardItem>
-               </Card>
-            </Content>
-            <FooterTabWithNavigation navigation={this.props.navigation} active={"dashboard"}/>
-          </Container>
-        </Root>
+        <ErrorView />
       )
     }
 
-    const lockerCards = this.lockerCards()
-    const welcomeCard = this.welcomeCard()
+    const firstName = this.state.data.firstName
+    const lastName = this.state.data.lastName
+    const lockerName = (this.state.sendToLocker && this.state.sendToLocker.property) ? this.state.sendToLocker.property.name: ""
+
+    const smallParcelButton = this.state.smallParcelSelected ? <View style={styles.activeCircle}/> : <View style={styles.circle}/>
+    const mediumParcelButton = this.state.mediumParcelSelected ? <View style={styles.activeCircle}/> : <View style={styles.circle}/>
+    const largeParcelButton = this.state.largeParcelSelected ? <View style={styles.activeCircle}/> : <View style={styles.circle}/>
 
     return (
-        <Root>
+      <Root>
+        <ScrollView ref="scrollView" keyboardDismissMode='interactive' style={{backgroundColor: Colors.white}}>
           <Container>
-            <Header androidStatusBarColor={Colors.white} style={{backgroundColor: Colors.white, borderBottomWidth: 0}}>
-              <Body>
-                <Title style={{color: Colors.white, fontFamily: Theme.primaryFont}}>Dashboard</Title>
-              </Body>
-            </Header>
             <Content style={{backgroundColor: Colors.white}}>
-              <Modal
-                animationType="slide"
-                transparent={false}
-                visible={this.state.modalVisible}
-                onRequestClose={() => {
-                  this.closedModal()
-                }}>
-                  <Container><ShippingPackageView close={() => { this.closedModal() }} data={this.state.selectedLocker}/></Container>
-              </Modal>
-              {welcomeCard}
-              {lockerCards}
+              <View style={{marginTop: 30}}>
+                <HeaderView title={`${Utils.capitalize(firstName)} ${Utils.capitalize(lastName)}`} details={""}/>
+              </View>
+              <View>
+                <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>Send a package</Text>
+              </View>
+              <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(16), color: Colors.gray_85, fontWeight: 'bold'}}>Location</Text>
+
+              <View style={{borderTopColor: Colors.gray_ef, borderTopWidth: 1, borderBottomColor: Colors.gray_ef, borderBottomWidth: 1, marginTop: 15, height: 50}}>
+                <TouchableHighlight onPress={this.onLoginPress} underlayColor={'transparent'}>
+                  <Text style={{marginLeft: 21, paddingTop:15, fontSize: Utils.normalize(14), color: Colors.gray_85}}>GoLocker HQ</Text>
+                </TouchableHighlight>
+              </View>
+
+              <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(16), color: Colors.gray_85, fontWeight: 'bold'}}>Deliver to:</Text>
+              <View style={{justifyContent: 'center', borderTopColor: Colors.gray_ef, borderTopWidth: 1, borderBottomColor: Colors.gray_ef, borderBottomWidth: 1, marginTop: 15, height: 50, flex: 1}}>
+                <TouchableHighlight onPress={() => {this.onChangeLocker()}} underlayColor={'transparent'}>
+                  <Text style={{fontSize: Utils.normalize(14), color: Colors.gray_85, marginLeft: 21}}>
+                  {lockerName}
+                  </Text>
+                </TouchableHighlight>
+                <Entypo name="chevron-small-right" size={25} style={{color: Colors.gray_85, position: 'absolute', right: 0}}/>
+              </View>
+
+              <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(16), color: Colors.gray_85, fontWeight: 'bold'}}>Please choose a package size</Text>
+
+              <View style={{justifyContent: 'center', borderTopColor: Colors.gray_ef, borderTopWidth: 1, borderBottomColor: Colors.gray_ef, borderBottomWidth: 1, marginTop: 15, height: 50, flex: 1}}>
+                <TouchableHighlight onPress={() => {this.onSmallParcelPress()}} underlayColor={'transparent'}>
+                  <View>
+                    <Text style={{fontSize: Utils.normalize(14), color: Colors.gray_85, marginLeft: 21}}>
+                      Small Parcel
+                    </Text>
+                    <Text style={{fontSize: Utils.normalize(10), color: Colors.gray_85, marginLeft: 21, marginTop: 3}}>
+                      No bigger than 4 H x 15 W x 24 L
+                    </Text>
+                    {smallParcelButton}
+                  </View>
+                </TouchableHighlight>
+              </View>
+
+              <View style={{justifyContent: 'center', borderBottomColor: Colors.gray_ef, borderBottomWidth: 1, height: 50, flex: 1}}>
+                <TouchableHighlight onPress={() => {this.onMediumParcelPress()}} underlayColor={'transparent'}>
+                  <View>
+                    <Text style={{fontSize: Utils.normalize(14), color: Colors.gray_85, marginLeft: 21}}>
+                      Medium Parcel
+                    </Text>
+                    <Text style={{fontSize: Utils.normalize(10), color: Colors.gray_85, marginLeft: 21, marginTop: 3}}>
+                      No bigger than 8 H x 15 W x 24 L
+                    </Text>
+                    {mediumParcelButton}
+                  </View>
+                </TouchableHighlight>
+              </View>
+
+              <View style={{justifyContent: 'center', borderBottomColor: Colors.gray_ef, borderBottomWidth: 1, height: 50, flex: 1}}>
+                <TouchableHighlight onPress={() => {this.onLargeParcelPress()}} underlayColor={'transparent'}>
+                  <View>
+                    <Text style={{fontSize: Utils.normalize(14), color: Colors.gray_85, marginLeft: 21}}>
+                      Large Parcel
+                    </Text>
+                    <Text style={{fontSize: Utils.normalize(10), color: Colors.gray_85, marginLeft: 21, marginTop: 3}}>
+                      No bigger than 17 H x 15 W x 25 L
+                    </Text>
+                    {largeParcelButton}
+                  </View>
+                </TouchableHighlight>
+              </View>
+
+              <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(16), color: Colors.gray_85, fontWeight: 'bold'}}>Destination Shipping Info</Text>
+              <View style={{marginLeft: 21, marginTop: 15, marginRight: 21}}>
+                <TextInput underlineColorAndroid='transparent' ref="trackingNumberField" onFocus={this.inputFocused.bind(this, 'trackingNumberField')} onBlur={this.inputBlurred.bind(this, 'trackingNumberField')} placeholderTextColor={Colors.gray_85} style={{color: Colors.gray_ef, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont, paddingLeft: 10}} placeholder={"Tracking Number"} onChangeText={(number) => this.setState({number})} value={this.state.number}/>
+              </View>
+
+              <TouchableHighlight onPress={this.onLoginPress} underlayColor={'transparent'}>
+                <View style={{height: 50, borderRadius: 4, backgroundColor: Colors.light_green, marginLeft: 21, marginTop: 25, marginRight: 21}}>
+                  <Text style={{textAlign: 'center', color: Colors.white, marginTop: 17}}>Reserve a locker</Text>
+                </View>
+              </TouchableHighlight>
+
+
             </Content>
-            <FooterTabWithNavigation navigation={this.props.navigation} active={"dashboard"}/>
+            <FooterTabWithNavigation navigation={this.props.navigation} active={"ship"}/>
           </Container>
-        </Root>
+        </ScrollView>
+      </Root>
     );
   }
 }
@@ -264,5 +249,24 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  circle: {
+    width: 25,
+    height: 25,
+    borderRadius: 50/2,
+    borderWidth: 1,
+    position: 'absolute',
+    borderColor: Colors.gray_85,
+    right: 10,
+    top: 3
+  },
+  activeCircle: {
+    width: 25,
+    height: 25,
+    borderRadius: 50/2,
+    backgroundColor: Colors.light_green,
+    position: 'absolute',
+    right: 10,
+    top: 3
   },
 });

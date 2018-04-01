@@ -13,6 +13,24 @@ export default class Property {
     this.settings = data.settings
   }
 
+  fullAddress() {
+    var address = this.address || ""
+
+    if(this.city && this.city.length > 0) {
+      address = address + this.city + ", "
+    }
+
+    if(this.stateProvince && this.stateProvince.length > 0) {
+      address = address + this.stateProvince + ", "
+    }
+
+    if(this.postalCode && this.postalCode.length > 0) {
+      address = address + this.postalCode
+    }
+
+    return address
+  }
+
   isActive () {
     return this.status == 1
   }

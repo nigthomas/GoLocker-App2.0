@@ -8,5 +8,6 @@ export default Colors = {
   gray_85: "#858585",
   dark_gray: "#4A4A4A",
   red: '#D0021B',
-  tapable_blue: '#6D89AF'
+  tapable_blue: '#6D89AF',
+  light_green: '#7ED321'
 }

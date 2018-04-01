@@ -10,6 +10,24 @@ export default class Address {
     this.countryCode = data.countryCode
   }
 
+  fullAddress() {
+    var address = this.address || ""
+
+    if(this.city && this.city.length > 0) {
+      address = address + this.city + ", "
+    }
+
+    if(this.state && this.state.length > 0) {
+      address = address + this.state + ", "
+    }
+
+    if(this.postalCode && this.postalCode.length > 0) {
+      address = address + this.postalCode
+    }
+
+    return address
+  }
+
   toJSON() {
     return {address: this.address,
             address2: this.address2,

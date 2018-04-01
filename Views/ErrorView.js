@@ -10,7 +10,7 @@ export default class PackagesView extends Component {
 
     return (
       <View style={style}>
-        <Text style={{textAlign: 'center', fontWeight: '500', fontSize: 18, color: Colors.gray_ef}}>Loading...</Text>
+        <Text style={{textAlign: 'center', fontWeight: '500', fontSize: 18}}>An error has occurred</Text>
       </View>
     );
   }

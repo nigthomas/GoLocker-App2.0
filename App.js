@@ -7,15 +7,21 @@ import ShipView from './Views/Ship'
 import DetailsView from './Views/Details'
 import IncomingView from './Views/Incoming'
 import SplashView from './Views/Splash'
+import SelectLockerView from './Views/SelectLocker'
 import ForgotPasswordView from './Views/ForgotPassword'
 import ResetPasswordView from './Views/ResetPassword'
 import Storage from './Common/Storage'
 import LoginService from './Services/LoginService'
 import Ionicons from 'react-native-vector-icons/MaterialIcons';
 
+const ShipNavigationController = StackNavigator({
+  ShipView: { screen: ShipView },
+  SelectLockerView: {screen: SelectLockerView}
+});
+
 const TabController = TabNavigator({
    Incoming: { screen: IncomingView },
-   Ship: { screen: ShipView },
+   Ship: { screen: ShipNavigationController },
    Details: { screen: DetailsView }
 }, {
   tabBarComponent: TabBarBottom,
@@ -42,7 +48,7 @@ const LoginNavigationController = StackNavigator({
  });
 
 const NavigationController = StackNavigator({
-  IncomingView: {screen: IncomingView}
+  IncomingView: {screen: TabController}
 });
 
 class App extends Component {

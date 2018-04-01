@@ -86,7 +86,7 @@ export default class LoginView extends Component {
                 <TextInput underlineColorAndroid='transparent' ref="usernameField" onFocus={this.inputFocused.bind(this, 'usernameField')} onBlur={this.inputBlurred.bind(this, 'usernameField')} placeholderTextColor={Colors.tapable_blue} style={{color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, textAlign: 'center', fontFamily: Theme.primaryFont}} placeholder={"Your Email"} onChangeText={(username) => this.setState({username})} value={this.state.username}/>
                 <TextInput underlineColorAndroid='transparent' ref="passwordField" secureTextEntry={true} onFocus={this.inputFocused.bind(this, 'passwordField')} onBlur={this.inputBlurred.bind(this, 'passwordField')} placeholderTextColor={Colors.tapable_blue} style={{color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, textAlign: 'center', fontFamily: Theme.primaryFont, marginTop: 5}} placeholder={"Password"} onChangeText={(password) => this.setState({password})} value={this.state.password}/>
                 <TouchableHighlight onPress={this.onLoginPress} underlayColor={'transparent'}>
-                  <View style={{height: 50, borderRadius: 4, backgroundColor: '#7ED321', marginTop: 10}}>
+                  <View style={{height: 50, borderRadius: 4, backgroundColor: Colors.light_green, marginTop: 10}}>
                     <Text style={{textAlign: 'center', color: Colors.white, marginTop: 17}}>Sign In</Text>
                   </View>
                 </TouchableHighlight>

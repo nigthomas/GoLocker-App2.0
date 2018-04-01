@@ -67,6 +67,10 @@ export default class SelectLocker extends Component {
     )
   }
 
+  onCancel() {
+    this.props.navigation.goBack()
+  }
+
   render() {
     if(this.state.loading) {
       return <LoadingView />
@@ -91,8 +95,14 @@ export default class SelectLocker extends Component {
               <FlatList data={data} keyExtractor={(item, index) => item.id} renderItem={({ item }) => {return this.renderItem(item)}} backgroundColor={'white'}/>
             </View>
 
+            <TouchableHighlight onPress={() => {this.onCancel()}} underlayColor={'transparent'}>
+              <View style={{justifyContent: 'center', borderBottomColor: Colors.gray_ef, borderBottomWidth: 1, height: 50, flex: 1, marginRight: 21}}>
+                <Text style={{color: Colors.dark_gray, marginLeft: 21}}>Cancel</Text>
+                <Entypo name="chevron-small-right" size={25} style={{color: Colors.gray_85, position: 'absolute', right: 0}}/>
+              </View>
+            </TouchableHighlight>
           </Content>
-          <FooterTabWithNavigation navigation={this.props.navigation} active={"incoming"}/>
+          <FooterTabWithNavigation navigation={this.props.navigation} active={"ship"}/>
         </Container>
       </Root>
     );

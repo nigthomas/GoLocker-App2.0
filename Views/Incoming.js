@@ -101,7 +101,7 @@ export default class IncomingView extends Component {
               <Text style={{marginLeft: 21, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>Packages</Text>
             </View>
             <View style={{marginTop: 20}}>
-              <Text style={{marginLeft: 21, color: Colors.dark_gray}}>You have no incoming packages</Text>
+              <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(16), color: Colors.gray_85, fontWeight: 'bold'}}>You have no incoming packages</Text>
             </View>
           </Content>
           <FooterTabWithNavigation navigation={this.props.navigation} active={"incoming"}/>
@@ -112,7 +112,10 @@ export default class IncomingView extends Component {
 
   render() {
     if(this.state.loading) {
-      return <LoadingView />
+      return <View style={{flex: 1}}>
+              <LoadingView />
+              <FooterTabWithNavigation navigation={this.props.navigation} active={"incoming"}/>
+            </View>
     }
 
     const firstName = this.state.dashboardData.firstName

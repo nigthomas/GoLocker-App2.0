@@ -103,15 +103,17 @@ export default class DashboardView extends Component {
 
   render() {
     if(this.state.loading) {
-      return (
-        <LoadingView />
-      )
+        return <View style={{flex: 1, backgroundColor: Colors.white}}>
+                <LoadingView />
+                <FooterTabWithNavigation navigation={this.props.navigation} active={"ship"}/>
+              </View>
     }
 
     if(this.state.error) {
-      return (
-        <ErrorView />
-      )
+        return <View style={{flex: 1, backgroundColor: Colors.white}}>
+                <ErrorView />
+                <FooterTabWithNavigation navigation={this.props.navigation} active={"ship"}/>
+              </View>
     }
 
     const firstName = this.state.data.firstName
@@ -128,7 +130,7 @@ export default class DashboardView extends Component {
           <Container>
             <Content style={{backgroundColor: Colors.white}}>
               <View style={{marginTop: 30}}>
-                <HeaderView title={`${Utils.capitalize(firstName)} ${Utils.capitalize(lastName)}`} details={""}/>
+                <HeaderView title={`${Utils.capitalize(firstName)} ${Utils.capitalize(lastName)}`} details={"Show QR code"}/>
               </View>
               <View>
                 <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>Send a package</Text>

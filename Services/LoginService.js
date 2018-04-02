@@ -64,6 +64,7 @@ export default class LoginService {
 
   logOut() {
     Storage.remove(ACCOUNT_KEY, null)
+    this.state.currentAccount = null
     this.state.listener.emit('LOGGED_OUT');
   }
 
@@ -85,7 +86,7 @@ export default class LoginService {
         }
 
         resolve(Utils.ifDefNN(data))
-        this.setState({currentAccount: new Account(accountData)})
+        this.state.currentAccount = new Account(accountData)
       })
       .catch(err => {
         resolve(false)

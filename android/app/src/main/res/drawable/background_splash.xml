@@ -2,11 +2,11 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:drawable="@color/primary"/>
+        android:drawable="@color/white"/>
 
     <item
-        android:width="66dp"
-        android:height="55dp"
-        android:drawable="@mipmap/golockerbrand"
+        android:width="144dp"
+        android:height="95dp"
+        android:drawable="@mipmap/golockergrayscale"
         android:gravity="center" />
 </layer-list>

@@ -69,11 +69,13 @@ export default class HomeView extends Component {
         <View style={{flex: 1}}>
           <MapView
             style={{flex: 1, height: 200, borderRadius: 4}}
+            scrollEnabled={false}
             initialRegion={{
             latitude: location.latitude,
             longitude: location.longitude,
             latitudeDelta: 0.0222,
-            longitudeDelta: 0.0221}}
+            longitudeDelta: 0.0221,
+            }}
             />
           </View>
           <View>
@@ -91,6 +93,10 @@ export default class HomeView extends Component {
   render() {
     if(this.state.loading) {
       return <View style={{flex: 1}}>
+              <StatusBar
+                backgroundColor={Colors.white}
+                barStyle="dark-content"
+              />
               <LoadingView />
               <FooterTabWithNavigation navigation={this.props.navigation} active={"home"}/>
             </View>
@@ -110,6 +116,10 @@ export default class HomeView extends Component {
     return (
       <Root>
         <Container>
+        <StatusBar
+          backgroundColor={Colors.white}
+          barStyle="dark-content"
+        />
           <Content style={{backgroundColor: Colors.white}}>
             <View style={{marginTop: 50}}>
               <Text style={{marginLeft: 21, marginTop: 20, fontSize: 36, color: Colors.dark_gray, fontWeight: 'bold'}}>Welcome</Text>

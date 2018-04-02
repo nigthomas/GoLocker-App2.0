@@ -92,7 +92,7 @@ class App extends Component {
     }
 
     componentDidMount() {
-      LoginService.isLoggedIn()
+      LoginService.getInstance().isLoggedIn()
       .then(isLoggedIn => {
         this.setState({isLoggedIn: isLoggedIn, loading: false})
       })

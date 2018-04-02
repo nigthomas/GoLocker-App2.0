@@ -28,7 +28,7 @@ export default class LoginView extends Component {
       return;
     }
 
-    LoginService.login(username, password)
+    LoginService.getInstance().login(username, password)
     .then(account => {
       const { navigate }  = this.props.rootNavigation.navigate;
       navigate('IncomingView', {navigate: navigate})

@@ -73,7 +73,7 @@ export const PropertiesNetworkManager = {
 
 export const DashboardNetworkManager = {
   get: () => {
-    return LoginService.account()
+    return LoginService.getInstance().account()
     .then(account => {
       return fetch(URL.dashboard, {
         method: 'GET',
@@ -96,7 +96,7 @@ export const DashboardNetworkManager = {
 
 export const ReservationNetworkManager = {
   get: () => {
-    return LoginService.account()
+    return LoginService.getInstance().account()
     .then(account => {
       return fetch(URL.reservation, {
         method: 'GET',
@@ -117,7 +117,7 @@ export const ReservationNetworkManager = {
     })
   },
   cancel: (reservationId) => {
-    return LoginService.account()
+    return LoginService.getInstance().account()
     .then(account => {
       return axios({
               method: 'DELETE',
@@ -139,7 +139,7 @@ export const ReservationNetworkManager = {
     })
   },
   create: (parcel, accountNumber, type, trackingNumber, lockerId) => {
-    return LoginService.account()
+    return LoginService.getInstance().account()
     .then(account => {
       return fetch(URL.createReservation, {
         method: 'POST',

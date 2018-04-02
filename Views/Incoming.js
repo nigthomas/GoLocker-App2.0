@@ -112,7 +112,7 @@ export default class IncomingView extends Component {
 
   render() {
     if(this.state.loading) {
-      return <View style={{flex: 1}}>
+      return <View style={{flex: 1, backgroundColor: Colors.white}}>
               <LoadingView />
               <FooterTabWithNavigation navigation={this.props.navigation} active={"incoming"}/>
             </View>

@@ -7,13 +7,10 @@ import { Container, Header, Content, Card, CardItem, Left, Thumbnail, Body, Butt
 import HeaderView from '../Elements/HeaderView'
 import LoadingView from './Loading'
 import Entypo from 'react-native-vector-icons/dist/Entypo'
+import LoginService from '../Services/LoginService'
 
 export default class DetailsView extends Component {
   static navigationOptions = { title: 'Account', header: null, tabBarVisible: false };
-
-  onLogoutPress = () => {
-
-  }
 
   constructor(props) {
    super(props);
@@ -84,6 +81,10 @@ export default class DetailsView extends Component {
     this.showUpdatePhone()
   }
 
+  onLogout() {
+    LoginService.getInstance().logOut()
+  }
+
   showUpdateEmail() {
     const { navigate }  = this.props.navigation;
     navigate('UpdateEmail', {})
@@ -104,13 +105,9 @@ export default class DetailsView extends Component {
     })
   }
 
-  onLogout() {
-
-  }
-
   render() {
     if(this.state.loading) {
-      return <View style={{flex: 1}}>
+      return <View style={{flex: 1, backgroundColor: Colors.white}}>
               <LoadingView />
               <FooterTabWithNavigation navigation={this.props.navigation} active={"details"}/>
             </View>

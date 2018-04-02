@@ -136,9 +136,17 @@ export default class DashboardView extends Component {
               </View>
               <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(16), color: Colors.gray_85, fontWeight: 'bold'}}>Location</Text>
 
-              <View style={{borderTopColor: Colors.gray_ef, borderTopWidth: 1, borderBottomColor: Colors.gray_ef, borderBottomWidth: 1, marginTop: 15, height: 50}}>
+              <View style={{borderTopColor: Colors.gray_ef, borderTopWidth: 1, borderBottomColor: Colors.gray_ef, borderBottomWidth: 1, marginTop: 15, height: 80}}>
                 <TouchableHighlight onPress={this.onLoginPress} underlayColor={'transparent'}>
+                  <View>
                   <Text style={{marginLeft: 21, paddingTop:15, fontSize: Utils.normalize(14), color: Colors.gray_85}}>GoLocker HQ</Text>
+                  <Text style={{fontSize: Utils.normalize(10), color: Colors.gray_85, marginLeft: 21, marginTop: 3}}>
+                    209A Morgan Avenue - Ste F
+                  </Text>
+                  <Text style={{fontSize: Utils.normalize(10), color: Colors.gray_85, marginLeft: 21, marginTop: 3}}>
+                    Brooklyn, NY 11237
+                  </Text>
+                  </View>
                 </TouchableHighlight>
               </View>
 

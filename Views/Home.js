@@ -92,7 +92,7 @@ export default class HomeView extends Component {
 
   render() {
     if(this.state.loading) {
-      return <View style={{flex: 1}}>
+      return <View style={{flex: 1, backgroundColor: Colors.white}}>
               <StatusBar
                 backgroundColor={Colors.white}
                 barStyle="dark-content"

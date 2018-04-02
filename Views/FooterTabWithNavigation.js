@@ -40,7 +40,7 @@ export default class FooterTabWithNavigation extends Component {
       <Footer style={{borderTopWidth: 0, backgroundColor: Colors.white}}>
        <FooterTab style={styles.footer}>
        <Button vertical onPress={this.onHomePress}>
-         <FontAwesome name="compass" size={20} style={homeStyle}/>
+         <FontAwesome name="compass" size={22} style={homeStyle}/>
          <Text style={homeTextStyle}>Home</Text>
        </Button>
          <Button vertical onPress={this.onIncomingPress}>

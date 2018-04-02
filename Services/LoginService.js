@@ -2,14 +2,34 @@ import { AuthenticationNetworkManager } from '../Common/NetworkManager'
 import Storage from '../Common/Storage'
 import Utils from '../Common/Utils'
 import Account from '../Models/Account'
-
+import events from 'events'
 const ACCOUNT_KEY = "$account"
 
 //Quick access to current account
-var currentAccount = null
 
-export default LoginService = {
-  login: (username, password) => {
+export default class LoginService {
+  static sharedInstance = null;
+
+  constructor(props) {
+   this.state = {
+     currentAccount: null,
+     listener: new events.EventEmitter()
+   };
+  }
+
+  static getInstance() {
+     if (this.sharedInstance == null) {
+         this.sharedInstance = new LoginService();
+     }
+
+     return this.sharedInstance;
+   }
+
+   getListener() {
+     return this.state.listener
+   }
+
+  login(username, password) {
     if(!username || !password) {
       return new Promise((resolve, reject) => { reject(new Error('Missing username or password'))})
     }
@@ -20,10 +40,11 @@ export default LoginService = {
       Storage.set(ACCOUNT_KEY, JSON.stringify(account))
       return new Promise((resolve, reject) => { resolve(account)})
     })
-  },
-  account: () => {
-    if (currentAccount) {
-      return new Promise((resolve, reject) => { resolve(currentAccount)})
+  }
+
+  account()  {
+    if (this.state.currentAccount) {
+      return new Promise((resolve, reject) => { resolve(this.state.currentAccount)})
     }
 
     return new Promise((resolve, reject) => {
@@ -39,13 +60,15 @@ export default LoginService = {
         resolve(null)
       })
     })
-  },
-  logOut: () => {
-    currentAccount = null
+  }
+
+  logOut() {
     Storage.remove(ACCOUNT_KEY, null)
-  },
-  isLoggedIn: () => {
-    if (currentAccount) {
+    this.state.listener.emit('LOGGED_OUT');
+  }
+
+  isLoggedIn() {
+    if (this.state.currentAccount) {
       return new Promise((resolve, reject) => { resolve(true)})
     }
 
@@ -58,11 +81,11 @@ export default LoginService = {
         if(expirationDate < new Date()) {
           //Clean up old account information
           Storage.remove(ACCOUNT_KEY, null)
-          resolve(false)
+          return resolve(false)
         }
 
-        currentAccount = new Account(accountData)
         resolve(Utils.ifDefNN(data))
+        this.setState({currentAccount: new Account(accountData)})
       })
       .catch(err => {
         resolve(false)

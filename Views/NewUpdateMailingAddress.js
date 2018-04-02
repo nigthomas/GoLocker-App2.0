@@ -13,6 +13,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/dist/MaterialCommu
 import Moment from 'moment'
 import Utils from '../Common/Utils'
 import Swipeout from 'react-native-swipeout';
+import ThreeHeaderView from '../Elements/ThreeHeaderView'
 
 export default class NewUpdateMailingAddress extends Component {
   static navigationOptions = { header: null, tabBarVisible: false };
@@ -41,15 +42,8 @@ export default class NewUpdateMailingAddress extends Component {
       <Root>
         <Container>
           <Content style={{backgroundColor: Colors.white}}>
-          <View style={{marginTop: 50, flex: 1, flexDirection:'row'}}>
-            <TouchableHighlight onPress={() => {this.onBackPress()}} underlayColor={'transparent'}>
-              <View style={{width: 50, height: 50, marginLeft: 21}}>
-                <Text style={{color: Colors.gray_85}}>Back</Text>
-              </View>
-            </TouchableHighlight>
-            <View style={{width: '100%', position: 'absolute', left: 0, zIndex: -1}}>
-              <Text style={{flex: 1,textAlign: 'center', fontWeight: 'bold', color: Colors.dark_gray}}>Mailing Address</Text>
-            </View>
+          <View style={{marginTop: 40}}>
+            <ThreeHeaderView title={"Mailing Address"} leftButtonTitle={"Back"} rightButtonTitle={"Save"} onLeftPress={() => {this.onBackPress()}} onRightPress={() => {this.onSavePress()}}/>
           </View>
 
           <View style={{marginLeft: 21, marginRight: 21, marginTop: 30}}>
@@ -60,12 +54,6 @@ export default class NewUpdateMailingAddress extends Component {
               <TextInput underlineColorAndroid='transparent' ref="usernameField" placeholderTextColor={Colors.tapable_blue} style={{flex: 1, marginTop: 10, marginLeft: 5, paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Zip Code"} onChangeText={(zip) => this.setState({zip})} value={this.state.zip}/>
             </View>
           </View>
-
-          <TouchableHighlight onPress={this.onSavePress} underlayColor={'transparent'}>
-            <View style={{height: 50, borderRadius: 4, backgroundColor: Colors.light_green, marginLeft: 21, marginTop: 25, marginRight: 21}}>
-              <Text style={{textAlign: 'center', color: Colors.white, marginTop: 17}}>Save</Text>
-            </View>
-          </TouchableHighlight>
 
           </Content>
           <FooterTabWithNavigation navigation={this.props.navigation} active={"details"}/>

@@ -76,6 +76,24 @@ export default class DetailsView extends Component {
     navigate('NewUpdatePaymentMethod', {})
   }
 
+  onEmail() {
+    this.showUpdateEmail()
+  }
+
+  onPhone() {
+    this.showUpdatePhone()
+  }
+
+  showUpdateEmail() {
+    const { navigate }  = this.props.navigation;
+    navigate('UpdateEmail', {})
+  }
+
+  showUpdatePhone() {
+    const { navigate }  = this.props.navigation;
+    navigate('UpdatePhone', {})
+  }
+
   fetch() {
     Promise.all([DashboardService.getInfo()])
     .then(results => {
@@ -134,7 +152,7 @@ export default class DetailsView extends Component {
             </View>
 
             <View style={{justifyContent: 'center', borderTopColor: Colors.gray_ef, borderTopWidth: 1, borderBottomColor: Colors.gray_ef, borderBottomWidth: 1, marginTop: 15, height: 50, flex: 1}}>
-              <TouchableHighlight onPress={() => {this.onChangeLocker()}} underlayColor={'transparent'}>
+              <TouchableHighlight onPress={() => {this.onEmail()}} underlayColor={'transparent'}>
                 <View style={{flexDirection:'row', flexWrap:'wrap'}}>
                   <Text style={{fontSize: Utils.normalize(14), color: Colors.gray_85, marginLeft: 21, width: 50}}>
                     Email
@@ -148,7 +166,7 @@ export default class DetailsView extends Component {
             </View>
 
             <View style={{justifyContent: 'center', borderBottomColor: Colors.gray_ef, borderBottomWidth: 1, height: 50, flex: 1}}>
-              <TouchableHighlight onPress={() => {this.onChangeLocker()}} underlayColor={'transparent'}>
+              <TouchableHighlight onPress={() => {this.onPhone()}} underlayColor={'transparent'}>
                 <View style={{flexDirection:'row', flexWrap:'wrap'}}>
                   <Text style={{fontSize: Utils.normalize(14), color: Colors.gray_85, marginLeft: 21, width: 50}}>
                     Phone

@@ -13,17 +13,17 @@ import MaterialCommunityIcons from 'react-native-vector-icons/dist/MaterialCommu
 import Moment from 'moment'
 import Utils from '../Common/Utils'
 import Swipeout from 'react-native-swipeout';
+import Entypo from 'react-native-vector-icons/dist/Entypo'
 import ThreeHeaderView from '../Elements/ThreeHeaderView'
 
-export default class ChangePassword extends Component {
+export default class UpdatePhone extends Component {
   static navigationOptions = { header: null, tabBarVisible: false };
 
   constructor(props) {
    super(props);
 
    this.state = {
-     password: null,
-     passwordConfirmation: null
+     phone: null
    };
   }
 
@@ -41,12 +41,15 @@ export default class ChangePassword extends Component {
         <Container>
           <Content style={{backgroundColor: Colors.white}}>
           <View style={{marginTop: 40}}>
-            <ThreeHeaderView title={"Change Password"} leftButtonTitle={"Back"} rightButtonTitle={"Save"} onLeftPress={() => {this.onBackPress()}} onRightPress={() => {this.onSavePress()}}/>
+            <ThreeHeaderView title={"Phone"} leftButtonTitle={"Back"} rightButtonTitle={"Save"} onLeftPress={() => {this.onBackPress()}} onRightPress={() => {this.onSavePress()}}/>
           </View>
-
-          <View style={{marginLeft: 21, marginRight: 21, marginTop: 30}}>
-            <TextInput underlineColorAndroid='transparent' ref="passwordField" placeholderTextColor={Colors.tapable_blue} style={{paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Password"} onChangeText={(password) => this.setState({password})} value={this.state.password}/>
-            <TextInput underlineColorAndroid='transparent' ref="passwordConfirmationField" placeholderTextColor={Colors.tapable_blue} style={{marginTop: 10, paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Password Confirmation"} onChangeText={(passwordConfirmation) => this.setState({passwordConfirmation})} value={this.state.passwordConfirmation}/>
+          <View style={{justifyContent: 'center', borderTopColor: Colors.gray_ef, borderTopWidth: 1, borderBottomColor: Colors.gray_ef, borderBottomWidth: 1, height: 50, flex: 1}}>
+            <View style={{flexDirection:'row', flexWrap:'wrap'}}>
+              <Text style={{textAlign: 'center', fontSize: 15, color: Colors.dark_gray, height: 50, lineHeight: 50, backgroundColor: Colors.gray_f3, width: 100}}>
+                US +1
+              </Text>
+              <TextInput underlineColorAndroid='transparent' placeholderTextColor={Colors.dark_gray} keyboardType='numeric' style={{flex: 1, paddingLeft: 21, color: Colors.dark_gray, backgroundColor: Colors.white, height: 50, fontFamily: Theme.primaryFont, borderTopColor: Colors.gray_ef, borderTopWidth: 1, borderBottomColor: Colors.gray_ef, borderBottomWidth: 1}} placeholder={"Phone Number"} onChangeText={(phone) => this.setState({phone})} value={this.state.phone}/>
+            </View>
           </View>
 
           </Content>

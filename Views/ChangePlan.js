@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, StatusBar, FlatList, TextInput, TouchableHighlight} from 'react-native';
+import { StyleSheet, Text, View, StatusBar, FlatList, TextInput, TouchableHighlight, Platform} from 'react-native';
 import Theme from '../Common/Theme'
 import FooterTabWithNavigation from './FooterTabWithNavigation'
 import { Container, Header, Content, Card, CardItem, Left, Thumbnail, Body, Button, Icon, Title, Footer, FooterTab, Root, Right} from 'native-base';
@@ -13,6 +13,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/dist/MaterialCommu
 import Moment from 'moment'
 import Utils from '../Common/Utils'
 import Swipeout from 'react-native-swipeout';
+import ThreeHeaderView from '../Elements/ThreeHeaderView'
 
 export default class ChangePlan extends Component {
   static navigationOptions = { header: null, tabBarVisible: false };
@@ -38,20 +39,8 @@ export default class ChangePlan extends Component {
       <Root>
         <Container>
           <Content style={{backgroundColor: Colors.white}}>
-          <View style={{marginTop: 40, flex: 1, flexDirection:'row'}}>
-            <TouchableHighlight onPress={() => {this.onBackPress()}} underlayColor={'transparent'}>
-              <View style={{width: 50, height: 50, marginLeft: 21}}>
-                <Text style={{color: Colors.gray_85}}>Back</Text>
-              </View>
-            </TouchableHighlight>
-            <View style={{flex: 2}}>
-              <Text style={{flex: 1,textAlign: 'center', fontWeight: 'bold', color: Colors.dark_gray}}>Update Plan</Text>
-            </View>
-            <TouchableHighlight onPress={() => {this.onSavePress()}} underlayColor={'transparent'}>
-              <View style={{height: 50, width: 50, flex: 1, marginRight: 21}}>
-                <Text style={{color: Colors.gray_85}}>Save</Text>
-              </View>
-            </TouchableHighlight>
+          <View style={{marginTop: 40}}>
+            <ThreeHeaderView title={"Update Plan"} leftButtonTitle={"Back"} rightButtonTitle={"Save"} onLeftPress={() => {this.onBackPress()}} onRightPress={() => {this.onSavePress()}}/>
           </View>
 
           <View style={{marginLeft: 21, marginRight: 21}}>
@@ -141,7 +130,7 @@ const styles = StyleSheet.create({
   },
   activePlan: {
     padding: 10,
-    height: 120,
+    height: Platform.OS === 'ios' ? 120 : 140,
     borderRadius: 4,
     borderColor: Colors.dark_gray,
     borderWidth: 1,
@@ -151,7 +140,7 @@ const styles = StyleSheet.create({
   },
   plan: {
     padding: 10,
-    height: 120,
+    height: Platform.OS === 'ios' ? 120 : 140,
     borderRadius: 4,
     borderColor: Colors.gray_d8,
     borderWidth: 1,

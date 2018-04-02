@@ -12,7 +12,8 @@ import HeaderView from '../Elements/HeaderView'
 import MaterialCommunityIcons from 'react-native-vector-icons/dist/MaterialCommunityIcons'
 import Moment from 'moment'
 import Utils from '../Common/Utils'
-import Swipeout from 'react-native-swipeout';
+import Swipeout from 'react-native-swipeout'
+import MapView from 'react-native-maps';
 
 export default class HomeView extends Component {
   static navigationOptions = { header: null, tabBarVisible: false };
@@ -43,13 +44,48 @@ export default class HomeView extends Component {
   }
 
   renderLocker(locker) {
-    if(!locker) {
+    if(!locker || !locker.property) {
       return (<View></View>)
     }
 
-    const location = (locker && locker.property) ? locker.property.location : null
+    const location = (locker.property.location) ? locker.property.location : null
+    const name = locker.property.name
+    const address = locker.property.address
+    const city = locker.property.city
+    const state = locker.property.stateProvince
+    const zip = locker.property.postalCode
+    const lockerPositionText = locker.isPrimaryLocker() ? "PRIMARY" : "SECONDARY"
 
-    return 
+    if(!location) {
+      return (
+        <View>
+
+        </View>
+      )
+    }
+
+    return (
+      <View style={{flex: 1}}>
+        <View style={{flex: 1}}>
+          <MapView
+            style={{flex: 1, height: 200, borderRadius: 4}}
+            initialRegion={{
+            latitude: location.latitude,
+            longitude: location.longitude,
+            latitudeDelta: 0.0222,
+            longitudeDelta: 0.0221}}
+            />
+          </View>
+          <View>
+            <View style={{flexDirection: 'row', flex: 1}}>
+              <Text style={{fontSize: 16, color: Colors.dark_gray, marginTop: 10, fontWeight: '600', flex: 2}}>{name}</Text>
+              <Text style={{fontSize: 12, color: Colors.gray_85, marginTop: 10, flex: 1, textAlign: 'right'}}>{lockerPositionText}</Text>
+            </View>
+            <Text style={{fontSize: 14, color: Colors.gray_85, marginTop: 10}}>{address}</Text>
+            <Text style={{fontSize: 14, color: Colors.gray_85}}>{city}, {state}, {zip}</Text>
+          </View>
+      </View>
+      )
   }
 
   render() {
@@ -82,10 +118,10 @@ export default class HomeView extends Component {
               <Text style={{marginLeft: 21, marginTop: 40, fontSize: 20, color: Colors.gray_85, fontWeight: 'bold'}}>Location</Text>
             </View>
 
-            <View style={{marginLeft: 21, marginRight: 21}}>
+            <View style={{marginTop: 20, marginLeft: 21, marginRight: 21}}>
               {primaryLockerView}
             </View>
-            <View style={{marginTop: 20, marginLeft: 21, marginRight: 21}}>
+            <View style={{marginTop: 50, marginLeft: 21, marginRight: 21}}>
               {secondaryLockerView}
             </View>
           </Content>

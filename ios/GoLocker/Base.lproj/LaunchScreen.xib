@@ -15,15 +15,15 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="go-locker-brand-1" translatesAutoresizingMaskIntoConstraints="NO" id="5RU-gO-f1P">
-                    <rect key="frame" x="207" y="165" width="66" height="50"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="go_locker_grayscale" translatesAutoresizingMaskIntoConstraints="NO" id="5RU-gO-f1P">
+                    <rect key="frame" x="168" y="142.5" width="144" height="95"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="66" id="UDo-Rg-FUN"/>
-                        <constraint firstAttribute="height" constant="50" id="u6Q-h9-Pm6"/>
+                        <constraint firstAttribute="width" constant="144" id="UDo-Rg-FUN"/>
+                        <constraint firstAttribute="height" constant="95" id="u6Q-h9-Pm6"/>
                     </constraints>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" red="0.36691457033157349" green="0.6607322096824646" blue="0.16926389932632446" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="5RU-gO-f1P" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-50" id="Im1-pe-One"/>
                 <constraint firstItem="5RU-gO-f1P" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="SUG-oa-ggu"/>
@@ -34,6 +34,6 @@
         </view>
     </objects>
     <resources>
-        <image name="go-locker-brand-1" width="66" height="50"/>
+        <image name="go_locker_grayscale" width="721" height="477"/>
     </resources>
 </document>

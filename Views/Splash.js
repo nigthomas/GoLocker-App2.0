@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Theme from '../Common/Theme'
+import Colors from '../Common/Colors'
 
 export default class SplashView extends Component {
   render() {
@@ -14,6 +15,6 @@ export default class SplashView extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Theme.primaryColor
+    backgroundColor: Colors.white
   },
 });

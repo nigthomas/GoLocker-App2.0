@@ -21,6 +21,12 @@ import OptionSelector from './Views/OptionSelector'
 import ChangePlan from './Views/ChangePlan'
 import UpdateEmail from './Views/UpdateEmail'
 import UpdatePhone from './Views/UpdatePhone'
+import HomeView from './Views/Home'
+import Theme from './Common/Theme'
+
+const HomeNavigationController = StackNavigator({
+  HomeView: { screen: HomeView }
+});
 
 const IncomingNavigationController = StackNavigator({
   IncomingView: { screen: IncomingView }
@@ -44,6 +50,7 @@ const DetailsNavigationController = StackNavigator({
 });
 
 const TabController = TabNavigator({
+   Home: {screen: HomeNavigationController},
    Incoming: { screen: IncomingNavigationController },
    Ship: { screen: ShipNavigationController },
    Details: { screen: DetailsNavigationController }
@@ -52,7 +59,7 @@ const TabController = TabNavigator({
    tabBarPosition: 'bottom',
    animationEnabled: false,
    swipeEnabled: false,
-   tabBarTextFontFamily: 'Avenir-Medium'
+   tabBarTextFontFamily: Theme.primaryFont
 });
 
 const LoginNavigationController = StackNavigator({
@@ -72,7 +79,7 @@ const LoginNavigationController = StackNavigator({
  });
 
 const NavigationController = StackNavigator({
-  IncomingView: {screen: TabController}
+  View: {screen: TabController}
 });
 
 class App extends Component {

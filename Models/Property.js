@@ -1,3 +1,5 @@
+import Location from './Location'
+
 export default class Property {
   constructor (data) {
     this.status = data.status
@@ -8,7 +10,7 @@ export default class Property {
     this.stateProvince = data.stateProvince
     this.postalCode = data.postalCode
     this.countryCode = data.countryCode
-    this.location = data.location
+    this.location = new Location(data.location)
     this.showPlan = data.showPlan
     this.settings = data.settings
   }

@@ -8,6 +8,11 @@ import Theme from '../Common/Theme'
 import FontAwesome from 'react-native-vector-icons/dist/FontAwesome'
 
 export default class FooterTabWithNavigation extends Component {
+
+  onHomePress = () => {
+    this.props.navigation.navigate('Home')
+  }
+
   onIncomingPress = () => {
     this.props.navigation.navigate('Incoming')
   }
@@ -21,18 +26,23 @@ export default class FooterTabWithNavigation extends Component {
   }
 
   render() {
+    const homeStyle = this.props.active == "home" ? styles.iconSelected : styles.icon
     const shipStyle = this.props.active == "ship" ? styles.iconSelected : styles.icon
     const incomingStyle = this.props.active == "incoming" ? styles.iconSelected : styles.icon
     const detailsStyle = this.props.active == "details" ? styles.iconSelected : styles.icon
 
+    const homeTextStyle = this.props.active == "home" ? styles.activeText : styles.text
     const shipTextStyle = this.props.active == "ship" ? styles.activeText : styles.text
     const incomingTextStyle = this.props.active == "incoming" ? styles.activeText : styles.text
     const detailsTextStyle = this.props.active == "details" ? styles.activeText : styles.text
 
-
     return (
-      <Footer style={{borderTopWidth: 0, paddingLeft: 30, paddingRight: 30, backgroundColor: Colors.white}}>
+      <Footer style={{borderTopWidth: 0, backgroundColor: Colors.white}}>
        <FooterTab style={styles.footer}>
+       <Button vertical onPress={this.onHomePress}>
+         <FontAwesome name="compass" size={20} style={homeStyle}/>
+         <Text style={homeTextStyle}>Home</Text>
+       </Button>
          <Button vertical onPress={this.onIncomingPress}>
            <FontAwesome name="th-list" size={20} style={incomingStyle}/>
            <Text style={incomingTextStyle}>Incoming</Text>

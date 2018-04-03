@@ -146,15 +146,20 @@ export const ReservationNetworkManager = {
         headers: {
           Accept: HEADERS.Accept,
           authorization: `${account.token_type} ${account.access_token}`,
-          body: {type: type, trackingNumber: trackingNumber, accountNumber: accountNumber, parcel: parcel, lockerID:lockerId}
-        }
+        },
+        body: JSON.stringify({type: type,
+                              trackingNumber: trackingNumber,
+                              accountNumber: accountNumber,
+                              parcel: parcel,
+                              lockerID:lockerId}
+        )
       })
     })
     .then((response) => {
       if(response.status === STATUS_CODE.OK) {
         return response.json()
       }
-
+      
       return new Promise((resolve, reject) => { reject(new Error('Error has occurred'))})
     })
   }

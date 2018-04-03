@@ -5,7 +5,6 @@ import FooterTabWithNavigation from './FooterTabWithNavigation'
 import { Container, Header, Content, Card, CardItem, Left, Thumbnail, Body, Button, Icon, Title, Footer, FooterTab, Root, Right} from 'native-base';
 import LoadingView from './Loading'
 import DashboardService from '../Services/DashboardService'
-import ReservationService from '../Services/ReservationService'
 import MaterialIcons from 'react-native-vector-icons/dist/MaterialIcons'
 import ClearButton from '../Elements/ClearButton'
 import HeaderView from '../Elements/HeaderView'

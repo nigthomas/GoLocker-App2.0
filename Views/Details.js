@@ -19,6 +19,9 @@ export default class DetailsView extends Component {
      data: {},
      loading: false,
      error: null,
+     plan: null,
+     phone: null,
+     email: null,
      plan: null
    };
   }
@@ -98,7 +101,11 @@ export default class DetailsView extends Component {
   fetch() {
     Promise.all([DashboardService.getInfo()])
     .then(results => {
-      this.setState({data: results[0], loading: false, error: null})
+      const dashboardData = results[0]
+      const email = dashboardData.email
+      const phone = dashboardData.mobilePhone || dashboardData.homePhone
+      const plan = dashboardData.membership.plan
+      this.setState({data: dashboardData, loading: false, error: null, email: email, phone:phone, plan:plan})
     })
     .catch(err => {
       this.setState({error: err, loading: false})
@@ -134,7 +141,7 @@ export default class DetailsView extends Component {
             <View style={{justifyContent: 'center', borderTopColor: Colors.gray_ef, borderTopWidth: 1, borderBottomColor: Colors.gray_ef, borderBottomWidth: 1, marginTop: 15, height: 50, flex: 1}}>
               <TouchableHighlight onPress={() => {this.showChangePlan()}} underlayColor={'transparent'}>
                 <Text style={{fontSize: Utils.normalize(14), color: Theme.primaryColor, marginLeft: 21, fontWeight: '600'}}>
-                  Pay-per-package
+                  {this.state.plan}
                 </Text>
               </TouchableHighlight>
 
@@ -155,7 +162,7 @@ export default class DetailsView extends Component {
                     Email
                   </Text>
                   <Text style={{fontSize: Utils.normalize(14), color: Colors.gray_47, marginLeft: 21}}>
-                    louis.f.ellis@gmail.com
+                    {this.state.email}
                   </Text>
                 </View>
               </TouchableHighlight>
@@ -169,7 +176,7 @@ export default class DetailsView extends Component {
                     Phone
                   </Text>
                   <Text style={{fontSize: Utils.normalize(14), color: Colors.gray_47, marginLeft: 21}}>
-                    (203) 583-6765
+                    {this.state.phone}
                   </Text>
                 </View>
               </TouchableHighlight>

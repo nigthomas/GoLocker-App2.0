@@ -24,6 +24,7 @@ export default class IncomingView extends Component {
      dashboardData: {},
      reservationData: [],
      loading: false,
+     loaded: false,
      error: null
    };
   }
@@ -31,13 +32,22 @@ export default class IncomingView extends Component {
   componentDidMount() {
     this.setState({loading: true})
     this.fetch()
+
+    const { params } = this.props.navigation.state;
+
+    ReservationService.getInstance().getListener()
+    .on("CREATED_RESERVATION", () => {
+      this.setState({loading: true})
+      this.fetch()
+      console.log("reload")
+    })
   }
 
   fetch() {
     Promise.all([DashboardService.getInfo(),
-                 ReservationService.getReservations()])
+                 ReservationService.getInstance().getReservations()])
     .then(results => {
-      this.setState({dashboardData: results[0], reservationData: results[1], loading: false, error: null})
+      this.setState({dashboardData: results[0], reservationData: results[1], loading: false, loaded:true, error: null})
     })
     .catch(err => {
       this.setState({error: err, loading: false})
@@ -45,9 +55,9 @@ export default class IncomingView extends Component {
   }
 
   cancelReservation(reservation) {
-    ReservationService.cancelReservation(reservation.id)
+    ReservationService.getInstance().cancelReservation(reservation.id)
     .then(() => {
-        return ReservationService.getReservations()
+        return ReservationService.getInstance().getReservations()
     })
     .then(results => {
       this.setState({reservationData: results, loading: false, error: null})

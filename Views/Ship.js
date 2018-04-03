@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, StatusBar, Image, Platform, TouchableHighlight, Modal, ScrollView, TextInput, findNodeHandle} from 'react-native';
+import { StyleSheet, Text, View, StatusBar, Image, Platform, TouchableHighlight, Modal, ScrollView, TextInput, findNodeHandle, Keyboard} from 'react-native';
 import { Container, Header, Content, Card, CardItem, Left, Thumbnail, Body, Button, Icon, Title, Footer, FooterTab, Right, ActionSheet, Root} from 'native-base';
 import FooterTabWithNavigation from './FooterTabWithNavigation'
 import ClearButton from '../Elements/ClearButton'
 import Colors from '../Common/Colors'
 import Theme from '../Common/Theme'
 import DashboardService from '../Services/DashboardService'
-import ShippingPackageView from './ShipPackage'
+import ReservationService from '../Services/ReservationService'
 import LoadingView from './Loading'
 import ErrorView from './ErrorView'
 import MaterialCommunityIcons from 'react-native-vector-icons/dist/MaterialCommunityIcons'
@@ -18,7 +18,7 @@ import Utils from '../Common/Utils'
 import MaterialIcons from 'react-native-vector-icons/dist/MaterialIcons'
 import HeaderView from '../Elements/HeaderView'
 
-export default class DashboardView extends Component {
+export default class Ship extends Component {
   static navigationOptions = { title: '', header: null, tabBarVisible: false};
 
   constructor(props) {
@@ -29,13 +29,13 @@ export default class DashboardView extends Component {
      loading: false,
      error: null,
      account: null,
-     modalVisible: false,
-     selectedLocker: null,
      sendToLocker: null,
      number: null,
      smallParcelSelected: false,
      mediumParcelSelected: false,
-     largeParcelSelected: false
+     largeParcelSelected: false,
+     choosePackageError: false,
+     enterTrackingNumberError: false
    };
   }
 
@@ -101,6 +101,62 @@ export default class DashboardView extends Component {
     navigate('SelectLockerView', {lockers: lockers, onLockerSelected: this.selectedLocker.bind(this)})
   }
 
+  onReserveLocker() {
+    Keyboard.dismiss()
+
+    this.refs.trackingNumberField.blur();
+
+    const smallParcelSelected = this.state.smallParcelSelected
+    const mediumParcelSelected = this.state.mediumParcelSelected
+    const largeParcelSelected = this.state.largeParcelSelected
+    const locker = this.state.sendToLocker
+    const choosePackageError =  !(smallParcelSelected || mediumParcelSelected || largeParcelSelected)
+    const enterTrackingNumberError = this.state.number === null
+
+    if(choosePackageError || enterTrackingNumberError) {
+      this.component._root.scrollToPosition(0, 0)
+      this.setState({choosePackageError: choosePackageError, enterTrackingNumberError: enterTrackingNumberError})
+      return
+    }
+
+    const accountNumber = null
+    const lockerId = this.state.sendToLocker.id
+
+    var parcelSizeCode = null
+
+    if(smallParcelSelected) {
+      parcelSizeCode = "S"
+    }
+    else if (mediumParcelSelected) {
+      parcelSizeCode = "M"
+    }
+    else if (largeParcelSelected) {
+      parcelSizeCode = "L"
+    }
+
+    if(!parcelSizeCode) {
+      return;
+    }
+
+    const compartment = _.find(locker.compartmentSizes, (compartment) => {
+      return compartment.code === parcelSizeCode
+    })
+
+    if(!compartment) {
+      return
+    }
+
+    ReservationService.getInstance().createReservation(compartment, accountNumber, 1, this.state.number, lockerId)
+    .then(() => {
+      this.setState({choosePackageError: false, enterTrackingNumberError: false, number: null, smallParcelSelected: false, mediumParcelSelected:false, largeParcelSelected:false})
+      const { navigate } = this.props.navigation;
+      navigate('Incoming', {refresh: true})
+    })
+    .catch(err => {
+      this.setState({error: err, loading: false})
+    })
+  }
+
   render() {
     if(this.state.loading) {
         return <View style={{flex: 1, backgroundColor: Colors.white}}>
@@ -124,18 +180,21 @@ export default class DashboardView extends Component {
     const mediumParcelButton = this.state.mediumParcelSelected ? <View style={styles.activeCircle}/> : <View style={styles.circle}/>
     const largeParcelButton = this.state.largeParcelSelected ? <View style={styles.activeCircle}/> : <View style={styles.circle}/>
 
+    const errorText = this.state.error ? <Text style={{marginLeft: 21, color: Colors.red, marginTop: 5}}>An error has occurred. Please try again</Text> : null
+
     return (
       <Root>
           <Container>
-            <Content style={{backgroundColor: Colors.white}}>
+            <Content style={{backgroundColor: Colors.white}} ref={c => (this.component = c)}>
               <View style={{marginTop: 30}}>
                 <HeaderView title={`${Utils.capitalize(firstName)} ${Utils.capitalize(lastName)}`} details={"Show QR code"}/>
               </View>
               <View>
                 <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>Send a package</Text>
               </View>
-              <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(16), color: Colors.gray_85, fontWeight: 'bold'}}>Location</Text>
+              {errorText}
 
+              <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(16), color: Colors.gray_85, fontWeight: 'bold'}}>Location</Text>
               <View style={{borderTopColor: Colors.gray_ef, borderTopWidth: 1, borderBottomColor: Colors.gray_ef, borderBottomWidth: 1, marginTop: 15, height: 80}}>
                 <TouchableHighlight onPress={this.onLoginPress} underlayColor={'transparent'}>
                   <View>
@@ -160,7 +219,7 @@ export default class DashboardView extends Component {
                 <Entypo name="chevron-small-right" size={25} style={{color: Colors.gray_85, position: 'absolute', right: 0}}/>
               </View>
 
-              <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(16), color: Colors.gray_85, fontWeight: 'bold'}}>Please choose a package size</Text>
+              <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(16), color: this.state.choosePackageError ? Colors.red : Colors.gray_85, fontWeight: 'bold'}}>Please choose a package size</Text>
 
               <View style={{justifyContent: 'center', borderTopColor: Colors.gray_ef, borderTopWidth: 1, borderBottomColor: Colors.gray_ef, borderBottomWidth: 1, marginTop: 15, height: 50, flex: 1}}>
                 <TouchableHighlight onPress={() => {this.onSmallParcelPress()}} underlayColor={'transparent'}>
@@ -204,18 +263,16 @@ export default class DashboardView extends Component {
                 </TouchableHighlight>
               </View>
 
-              <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(16), color: Colors.gray_85, fontWeight: 'bold'}}>Destination Shipping Info</Text>
+              <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(16), color:  this.state.enterTrackingNumberError ? Colors.red : Colors.gray_85, fontWeight: 'bold'}}>Destination Shipping Info</Text>
               <View style={{marginLeft: 21, marginTop: 15, marginRight: 21}}>
-                <TextInput underlineColorAndroid='transparent' ref="trackingNumberField" onFocus={this.inputFocused.bind(this, 'trackingNumberField')} onBlur={this.inputBlurred.bind(this, 'trackingNumberField')} placeholderTextColor={Colors.gray_85} style={{color: Colors.gray_ef, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont, paddingLeft: 10}} placeholder={"Tracking Number"} onChangeText={(number) => this.setState({number})} value={this.state.number}/>
+                <TextInput underlineColorAndroid='transparent' ref="trackingNumberField" onFocus={() => {this.inputFocused.bind(this, 'trackingNumberField')}} onBlur={() => {this.inputBlurred.bind(this, 'trackingNumberField')}} placeholderTextColor={Colors.gray_85} style={{color: Colors.dark_gray, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont, paddingLeft: 10}} placeholder={"Enter Tracking Number"} onChangeText={(number) => this.setState({number})} value={this.state.number}/>
               </View>
 
-              <TouchableHighlight onPress={this.onLoginPress} underlayColor={'transparent'}>
+              <TouchableHighlight onPress={() => {this.onReserveLocker()}} underlayColor={'transparent'}>
                 <View style={{height: 50, borderRadius: 4, backgroundColor: Colors.light_green, marginLeft: 21, marginTop: 25, marginRight: 21}}>
                   <Text style={{textAlign: 'center', color: Colors.white, marginTop: 17}}>Reserve a locker</Text>
                 </View>
               </TouchableHighlight>
-
-
             </Content>
             <FooterTabWithNavigation navigation={this.props.navigation} active={"ship"}/>
           </Container>

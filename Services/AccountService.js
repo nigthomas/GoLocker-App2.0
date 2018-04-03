@@ -26,6 +26,17 @@ export default class AccountService {
      return this.state.listener
    }
 
+   updatePassword(password) {
+     if(!password) {
+       return new Promise((resolve, reject) => { reject(new Error('Missing password'))})
+     }
+
+     return AccountNetworkManager.updatePassword(password)
+     .then(data => {
+       return new Promise((resolve, reject) => { resolve()})
+     })
+   }
+
    updateEmail(email) {
      if(!email) {
        return new Promise((resolve, reject) => { reject(new Error('Missing email'))})
@@ -40,7 +51,7 @@ export default class AccountService {
 
    updatePhone(phone) {
      if(!phone) {
-       return new Promise((resolve, reject) => { reject(new Error('Missing email'))})
+       return new Promise((resolve, reject) => { reject(new Error('Missing phone number'))})
      }
 
      return AccountNetworkManager.updatePhone(phone)

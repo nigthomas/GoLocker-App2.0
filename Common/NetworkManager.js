@@ -72,6 +72,26 @@ export const PropertiesNetworkManager = {
 }
 
 export const AccountNetworkManager = {
+  updatePassword: (password) => {
+    return LoginService.getInstance().account()
+    .then(account => {
+      return fetch(URL.dashboard, {
+        method: 'PUT',
+        headers: {
+          Accept: HEADERS.Accept,
+          authorization: `${account.token_type} ${account.access_token}`,
+        },
+        body: JSON.stringify({newPassword: password})
+      })
+    })
+    .then((response) => {
+      if(response.status === STATUS_CODE.OK) {
+        return response.json()
+      }
+
+      return new Promise((resolve, reject) => { reject(new Error('Error has occurred'))})
+    })
+  },
   updateEmail: (email) => {
     return LoginService.getInstance().account()
     .then(account => {

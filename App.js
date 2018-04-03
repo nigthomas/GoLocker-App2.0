@@ -88,22 +88,28 @@ class App extends Component {
     this.state = {
       loading: true,
       isLoggedIn: false
-     } 
+     }
     }
 
     componentDidMount() {
-      LoginService.getInstance()
-      .getListener()
-      .on("LOGGED_OUT", () => {
-        this.setState({isLoggedIn: false})
-      })
-
       LoginService.getInstance().isLoggedIn()
       .then(isLoggedIn => {
         this.setState({isLoggedIn: isLoggedIn, loading: false})
       })
       .catch(err => {
         this.setState({isLoggedIn: false, loading: false})
+      })
+
+      LoginService.getInstance()
+      .getListener()
+      .on("LOGGED_OUT", () => {
+        this.setState({isLoggedIn: false})
+      })
+
+      LoginService.getInstance()
+      .getListener()
+      .on("LOGGED_IN", () => {
+        this.setState({isLoggedIn: true})
       })
     }
 

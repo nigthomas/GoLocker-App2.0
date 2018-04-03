@@ -30,8 +30,7 @@ export default class LoginView extends Component {
 
     LoginService.getInstance().login(username, password)
     .then(account => {
-      const { navigate }  = this.props.rootNavigation.navigate;
-      navigate('IncomingView', {navigate: navigate})
+
     })
     .catch(err => {
       AlertView.showConfirmation("Whoops! This username and password combination doesn't exist")

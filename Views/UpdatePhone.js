@@ -14,6 +14,8 @@ import Utils from '../Common/Utils'
 import Swipeout from 'react-native-swipeout';
 import Entypo from 'react-native-vector-icons/dist/Entypo'
 import ThreeHeaderView from '../Elements/ThreeHeaderView'
+import AccountService from '../Services/AccountService'
+import ErrorView from './ErrorView'
 
 export default class UpdatePhone extends Component {
   static navigationOptions = { header: null, tabBarVisible: false };
@@ -21,13 +23,24 @@ export default class UpdatePhone extends Component {
   constructor(props) {
    super(props);
 
+   const { params } = this.props.navigation.state;
+   const phone = params.phone
+
+
    this.state = {
-     phone: null
+     phone: phone,
+     error: null
    };
   }
 
   onSavePress() {
-
+    AccountService.getInstance().updatePhone(this.state.phone)
+    .then(() => {
+      this.props.navigation.goBack()
+    })
+    .catch(err => {
+      this.setState({error: err})
+    })
   }
 
   onBackPress() {
@@ -35,6 +48,13 @@ export default class UpdatePhone extends Component {
   }
 
   render() {
+    if(this.state.error) {
+        return <View style={{flex: 1, backgroundColor: Colors.white}}>
+                <ErrorView />
+                <FooterTabWithNavigation navigation={this.props.navigation} active={"details"}/>
+              </View>
+    }
+
     return (
       <Root>
         <Container>

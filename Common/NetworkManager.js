@@ -71,6 +71,49 @@ export const PropertiesNetworkManager = {
   }
 }
 
+export const AccountNetworkManager = {
+  updateEmail: (email) => {
+    return LoginService.getInstance().account()
+    .then(account => {
+      return fetch(URL.dashboard, {
+        method: 'PUT',
+        headers: {
+          Accept: HEADERS.Accept,
+          authorization: `${account.token_type} ${account.access_token}`,
+        },
+        body: JSON.stringify({email: email})
+      })
+    })
+    .then((response) => {
+      if(response.status === STATUS_CODE.OK) {
+        return response.json()
+      }
+
+      return new Promise((resolve, reject) => { reject(new Error('Error has occurred'))})
+    })
+  },
+  updatePhone: (phone) => {
+    return LoginService.getInstance().account()
+    .then(account => {
+      return fetch(URL.dashboard, {
+        method: 'PUT',
+        headers: {
+          Accept: HEADERS.Accept,
+          authorization: `${account.token_type} ${account.access_token}`,
+        },
+        body: JSON.stringify({mobilePhone: phone})
+      })
+    })
+    .then((response) => {
+      if(response.status === STATUS_CODE.OK) {
+        return response.json()
+      }
+
+      return new Promise((resolve, reject) => { reject(new Error('Error has occurred'))})
+    })
+  }
+}
+
 export const DashboardNetworkManager = {
   get: () => {
     return LoginService.getInstance().account()
@@ -159,7 +202,7 @@ export const ReservationNetworkManager = {
       if(response.status === STATUS_CODE.OK) {
         return response.json()
       }
-      
+
       return new Promise((resolve, reject) => { reject(new Error('Error has occurred'))})
     })
   }

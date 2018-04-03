@@ -8,6 +8,7 @@ import HeaderView from '../Elements/HeaderView'
 import LoadingView from './Loading'
 import Entypo from 'react-native-vector-icons/dist/Entypo'
 import LoginService from '../Services/LoginService'
+import AccountService from '../Services/AccountService'
 
 export default class DetailsView extends Component {
   static navigationOptions = { title: 'Account', header: null, tabBarVisible: false };
@@ -29,6 +30,12 @@ export default class DetailsView extends Component {
   componentDidMount() {
     this.setState({loading: true})
     this.fetch()
+
+    AccountService.getInstance().getListener()
+    .on("UPDATED", () => {
+      this.setState({loading: true})
+      this.fetch()
+    })
   }
 
   onPaymentMethod() {
@@ -90,12 +97,14 @@ export default class DetailsView extends Component {
 
   showUpdateEmail() {
     const { navigate }  = this.props.navigation;
-    navigate('UpdateEmail', {})
+    const email = this.state.data.email
+    navigate('UpdateEmail', {email: this.state.data.email})
   }
 
   showUpdatePhone() {
     const { navigate }  = this.props.navigation;
-    navigate('UpdatePhone', {})
+    const phone = this.state.data.mobilePhone || this.state.data.homePhone
+    navigate('UpdatePhone', {phone: phone})
   }
 
   fetch() {

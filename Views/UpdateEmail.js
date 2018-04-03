@@ -14,6 +14,8 @@ import Utils from '../Common/Utils'
 import Swipeout from 'react-native-swipeout';
 import Entypo from 'react-native-vector-icons/dist/Entypo'
 import ThreeHeaderView from '../Elements/ThreeHeaderView'
+import AccountService from '../Services/AccountService'
+import ErrorView from './ErrorView'
 
 export default class UpdateEmail extends Component {
   static navigationOptions = { header: null, tabBarVisible: false };
@@ -21,13 +23,23 @@ export default class UpdateEmail extends Component {
   constructor(props) {
    super(props);
 
+   const { params } = this.props.navigation.state;
+   const email = params.email
+
    this.state = {
-     email: null
+     email: email,
+     error: null
    };
   }
 
   onSavePress() {
-
+    AccountService.getInstance().updateEmail(this.state.email)
+    .then(() => {
+      this.props.navigation.goBack()
+    })
+    .catch(err => {
+      this.setState({error: err})
+    })
   }
 
   onBackPress() {
@@ -35,6 +47,13 @@ export default class UpdateEmail extends Component {
   }
 
   render() {
+    if(this.state.error) {
+        return <View style={{flex: 1, backgroundColor: Colors.white}}>
+                <ErrorView />
+                <FooterTabWithNavigation navigation={this.props.navigation} active={"details"}/>
+              </View>
+    }
+
     return (
       <Root>
         <Container>
@@ -44,7 +63,7 @@ export default class UpdateEmail extends Component {
           </View>
           <View style={{justifyContent: 'center', height: 50, flex: 1}}>
             <View style={{flexDirection:'row', flexWrap:'wrap'}}>
-              <TextInput underlineColorAndroid='transparent' placeholderTextColor={Colors.dark_gray} keyboardType='numeric' style={{borderTopColor: Colors.gray_ef, borderTopWidth: 1, borderBottomColor: Colors.gray_ef, borderBottomWidth: 1, flex: 1, paddingLeft: 21, color: Colors.dark_gray, backgroundColor: Colors.white, height: 50, fontFamily: Theme.primaryFont}} placeholder={"Email"} onChangeText={(email) => this.setState({email})} value={this.state.email}/>
+              <TextInput underlineColorAndroid='transparent' placeholderTextColor={Colors.dark_gray} keyboardType='email-address' style={{borderTopColor: Colors.gray_ef, borderTopWidth: 1, borderBottomColor: Colors.gray_ef, borderBottomWidth: 1, flex: 1, paddingLeft: 21, color: Colors.dark_gray, backgroundColor: Colors.white, height: 50, fontFamily: Theme.primaryFont}} placeholder={"Email"} onChangeText={(email) => this.setState({email})} value={this.state.email}/>
             </View>
           </View>
 

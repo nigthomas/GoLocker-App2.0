@@ -13,6 +13,9 @@ import Moment from 'moment'
 import Utils from '../Common/Utils'
 import Swipeout from 'react-native-swipeout';
 import ThreeHeaderView from '../Elements/ThreeHeaderView'
+import ErrorView from './ErrorView'
+import Address from '../Models/Address'
+import AccountService from '../Services/AccountService'
 
 export default class NewUpdateMailingAddress extends Component {
   static navigationOptions = { header: null, tabBarVisible: false };
@@ -20,16 +23,31 @@ export default class NewUpdateMailingAddress extends Component {
   constructor(props) {
    super(props);
 
+   const { params } = this.props.navigation.state;
+   const address = params.address
+
    this.state = {
-     address: null,
-     city: null,
-     state: null,
-     zip: null
+     address: address.address,
+     city: address.city,
+     state: address.stateProvince,
+     zip: address.postalCode
    };
   }
 
   onSavePress() {
+    const address = this.state.address
+    const city = this.state.city
+    const state = this.state.state
+    const zip = this.state.zip
 
+    const updatedAddress = new Address({address: address, city: city, stateProvince: state, postalCode:zip})
+    AccountService.getInstance().updateMailingAddress(updatedAddress)
+    .then(() => {
+      this.props.navigation.goBack()
+    })
+    .catch(err => {
+      this.setState({error: err})
+    })
   }
 
   onBackPress() {
@@ -37,6 +55,8 @@ export default class NewUpdateMailingAddress extends Component {
   }
 
   render() {
+    const errorText = this.state.error ? <Text style={{marginLeft: 21, color: Colors.red, marginTop: 5}}>An error has occurred. Please try again</Text> : null
+
     return (
       <Root>
         <Container>
@@ -44,7 +64,7 @@ export default class NewUpdateMailingAddress extends Component {
           <View style={{marginTop: 40}}>
             <ThreeHeaderView title={"Mailing Address"} leftButtonTitle={"Back"} rightButtonTitle={"Save"} onLeftPress={() => {this.onBackPress()}} onRightPress={() => {this.onSavePress()}}/>
           </View>
-
+          {errorText}
           <View style={{marginLeft: 21, marginRight: 21, marginTop: 30}}>
             <TextInput underlineColorAndroid='transparent' ref="usernameField" placeholderTextColor={Colors.tapable_blue} style={{paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Address"} onChangeText={(address) => this.setState({address})} value={this.state.address}/>
             <TextInput underlineColorAndroid='transparent' ref="usernameField" placeholderTextColor={Colors.tapable_blue} style={{marginTop: 10, paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"City"} onChangeText={(city) => this.setState({city})} value={this.state.city}/>

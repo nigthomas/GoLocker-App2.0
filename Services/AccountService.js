@@ -26,6 +26,42 @@ export default class AccountService {
      return this.state.listener
    }
 
+   updateCreditCard(card) {
+     if(!card) {
+       return new Promise((resolve, reject) => { reject(new Error('Missing password'))})
+     }
+
+     return AccountNetworkManager.updateCreditCard(card)
+     .then(data => {
+       this.state.listener.emit('UPDATED');
+       return new Promise((resolve, reject) => { resolve()})
+     })
+   }
+
+   updateBillingAddress(address) {
+     if(!address) {
+       return new Promise((resolve, reject) => { reject(new Error('Missing password'))})
+     }
+
+     return AccountNetworkManager.updateBillingAddress(address)
+     .then(data => {
+       this.state.listener.emit('UPDATED');
+       return new Promise((resolve, reject) => { resolve()})
+     })
+   }
+
+   updateMailingAddress(address) {
+     if(!address) {
+       return new Promise((resolve, reject) => { reject(new Error('Missing password'))})
+     }
+
+     return AccountNetworkManager.updateMailingAddress(address)
+     .then(data => {
+       this.state.listener.emit('UPDATED');
+       return new Promise((resolve, reject) => { resolve()})
+     })
+   }
+
    updatePassword(password) {
      if(!password) {
        return new Promise((resolve, reject) => { reject(new Error('Missing password'))})

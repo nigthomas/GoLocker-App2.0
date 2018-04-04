@@ -1,3 +1,5 @@
+import CreditCard from './CreditCard'
+
 export default class Address {
   constructor (data) {
     this.address = data.address
@@ -6,7 +8,7 @@ export default class Address {
     this.stateProvince = data.stateProvince || data.stateOrProvince
     this.postalCode = data.postalCode
     this.countryCode = data.countryCode
-    this.creditCard = data.creditCard
+    this.creditCard = new CreditCard(data.creditCard || {})
     this.countryCode = data.countryCode
   }
 

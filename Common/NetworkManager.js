@@ -6,7 +6,7 @@ const BASE_URL = "https://api.golocker.com"
 const URL = {
   login: `${BASE_URL}/v1/authenticate`,
   properties: `${BASE_URL}/v1/properties`,
-  dashboard: `${BASE_URL}/v1/account`,
+  account: `${BASE_URL}/v1/account`,
   reservation: `${BASE_URL}/v1/account/reservations`,
   createReservation: `${BASE_URL}/v1/packages`
 }
@@ -72,10 +72,70 @@ export const PropertiesNetworkManager = {
 }
 
 export const AccountNetworkManager = {
+  updateCreditCard: (card) => {
+    return LoginService.getInstance().account()
+    .then(account => {
+      return fetch(URL.account, {
+        method: 'PUT',
+        headers: {
+          Accept: HEADERS.Accept,
+          authorization: `${account.token_type} ${account.access_token}`,
+        },
+        body: JSON.stringify({billing: {creditCard: card}})
+      })
+    })
+    .then((response) => {
+      if(response.status === STATUS_CODE.OK) {
+        return response.json()
+      }
+
+      return new Promise((resolve, reject) => { reject(new Error('Error has occurred'))})
+    })
+  },
+  updateMailingAddress: (address) => {
+    return LoginService.getInstance().account()
+    .then(account => {
+      return fetch(URL.account, {
+        method: 'PUT',
+        headers: {
+          Accept: HEADERS.Accept,
+          authorization: `${account.token_type} ${account.access_token}`,
+        },
+        body: JSON.stringify({mailing: address})
+      })
+    })
+    .then((response) => {
+      if(response.status === STATUS_CODE.OK) {
+        return response.json()
+      }
+
+      return new Promise((resolve, reject) => { reject(new Error('Error has occurred'))})
+    })
+  },
+  updateBillingAddress: (address) => {
+    return LoginService.getInstance().account()
+    .then(account => {
+      return fetch(URL.account, {
+        method: 'PUT',
+        headers: {
+          Accept: HEADERS.Accept,
+          authorization: `${account.token_type} ${account.access_token}`,
+        },
+        body: JSON.stringify({billing: address})
+      })
+    })
+    .then((response) => {
+      if(response.status === STATUS_CODE.OK) {
+        return response.json()
+      }
+
+      return new Promise((resolve, reject) => { reject(new Error('Error has occurred'))})
+    })
+  },
   updatePassword: (password) => {
     return LoginService.getInstance().account()
     .then(account => {
-      return fetch(URL.dashboard, {
+      return fetch(URL.account, {
         method: 'PUT',
         headers: {
           Accept: HEADERS.Accept,
@@ -95,7 +155,7 @@ export const AccountNetworkManager = {
   updateEmail: (email) => {
     return LoginService.getInstance().account()
     .then(account => {
-      return fetch(URL.dashboard, {
+      return fetch(URL.account, {
         method: 'PUT',
         headers: {
           Accept: HEADERS.Accept,
@@ -115,7 +175,7 @@ export const AccountNetworkManager = {
   updatePhone: (phone) => {
     return LoginService.getInstance().account()
     .then(account => {
-      return fetch(URL.dashboard, {
+      return fetch(URL.account, {
         method: 'PUT',
         headers: {
           Accept: HEADERS.Accept,
@@ -138,7 +198,7 @@ export const DashboardNetworkManager = {
   get: () => {
     return LoginService.getInstance().account()
     .then(account => {
-      return fetch(URL.dashboard, {
+      return fetch(URL.account, {
         method: 'GET',
         headers: {
           Accept: HEADERS.Accept,

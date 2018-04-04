@@ -70,17 +70,20 @@ export default class DetailsView extends Component {
 
   showNewUpdateMailingAddress() {
     const { navigate }  = this.props.navigation;
-    navigate('NewUpdateMailingAddress', {})
+    const address = this.state.data.mailing
+    navigate('NewUpdateMailingAddress', {address: address})
   }
 
   showNewUpdateBillingAddress() {
     const { navigate }  = this.props.navigation;
-    navigate('NewUpdateBillingAddress', {})
+    const billing = this.state.data.billing
+    navigate('NewUpdateBillingAddress', {address: billing})
   }
 
   showNewUpdatePaymentMethod() {
     const { navigate }  = this.props.navigation;
-    navigate('NewUpdatePaymentMethod', {})
+    const billing = this.state.data.billing || {}
+    navigate('NewUpdatePaymentMethod', {creditCard: billing.creditCard, address: billing})
   }
 
   onEmail() {

@@ -35,6 +35,7 @@ export default class HomeView extends Component {
   fetch() {
     Promise.all([DashboardService.getInfo()])
     .then(results => {
+      console.log(results[0])
       this.setState({data: results[0], loading: false, error: null})
     })
     .catch(err => {

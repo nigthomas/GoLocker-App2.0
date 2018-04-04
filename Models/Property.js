@@ -19,7 +19,7 @@ export default class Property {
     var address = this.address || ""
 
     if(this.city && this.city.length > 0) {
-      address = address + this.city + ", "
+      address = address + ", " + this.city + ", "
     }
 
     if(this.stateProvince && this.stateProvince.length > 0) {

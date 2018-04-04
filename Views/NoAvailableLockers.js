@@ -11,42 +11,23 @@ export default class RegistrationView extends Component {
    super(props);
 
    this.state = {
-     zip_code: null,
-     error: null,
-     errorMessage: null
-   };
-  }
-
-  onCheckPress = () => {
-    const { navigation } = this.props;
-    const zip = this.state.zip_code
-
-    if(!zip || zip.length != 5) {
-      this.setState({errorMessage: "Please enter valid zip code"})
-      return
-    }
-
-    PropertyService.getProperties(this.state.zip_code)
-    .then(properties => {
-      if(properties.length == 0) {
-        navigation.navigate('NoAvailableLockers', {})
-      }
-
-      navigation.navigate('RegistrationSelectLocker', {lockers: properties})
-    })
-    .catch(err => {
-      this.setState({error: err})
-    })
+     email: null
+   }
   }
 
   onLoginPress = () => {
+    const { navigation } = this.props;
+    navigation.popToTop()
+  }
+
+  onTryAgain = () => {
     const { navigation } = this.props;
     navigation.goBack()
   }
 
   static navigationOptions = { header: null };
   render() {
-    const text = "Let's check if we have lockers close by"
+    const text = "Unfortunately we currently don't have any lockers in your area. Enter your email address below so we can let you know when one becomes available. We'll only use it to tell you when service becomes available."
     var errorText = this.state.errorMessage ? <Text style={{marginLeft: 21, color: Colors.red, marginRight: 21}}>{this.state.errorMessage}</Text> : null
 
     if(!errorText && this.state.error ) {
@@ -61,18 +42,22 @@ export default class RegistrationView extends Component {
                 <Text style={{textAlign: 'right', color: Colors.gray_85, fontSize: 16, zIndex: 1}}>Sign in</Text>
               </View>
             </TouchableHighlight>
-            <View style={{marginTop: 30}}>
-              <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>Enter your </Text>
-              <Text style={{marginLeft: 21, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>ZipCode</Text>
+              <View style={{marginTop: 30}}>
+              <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>Sorry</Text>
               {errorText}
               <View style={{marginTop: 20}}>
-                <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(16), color: Colors.gray_85, fontWeight: 'bold'}}>{text}</Text>
+                <Text style={{marginLeft: 21, marginRight: 21,marginTop: 20, fontSize: Utils.normalize(16), color: Colors.gray_85, fontWeight: 'bold'}}>{text}</Text>
               </View>
               <View style={{marginLeft: 21, marginRight: 21}}>
-                <TextInput underlineColorAndroid='transparent' ref="zipField"  maxLength={5} placeholderTextColor={Colors.tapable_blue} style={{flex: 1, marginTop: 10, paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Enter ZIP"} onChangeText={(zip_code) => this.setState({zip_code})} value={this.state.zip_code}/>
+                <TextInput underlineColorAndroid='transparent' ref="emailField" placeholderTextColor={Colors.tapable_blue} style={{flex: 1, marginTop: 10, marginRight: 5,paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Enter Email"} onChangeText={(email) => this.setState({email})} value={this.state.email}/>
                 <TouchableHighlight onPress={() => {this.onCheckPress()}} underlayColor={'transparent'}>
                   <View style={{height: 50, borderRadius: 4, backgroundColor: Colors.light_green, marginTop: 10}}>
-                    <Text style={{textAlign: 'center', color: Colors.white, marginTop: 17}}>Check</Text>
+                    <Text style={{textAlign: 'center', color: Colors.white, marginTop: 17}}>Save</Text>
+                  </View>
+                </TouchableHighlight>
+                <TouchableHighlight onPress={() => {this.onTryAgain()} } underlayColor={'transparent'}>
+                  <View>
+                    <Text style={{textAlign: 'center', color: Colors.tapable_blue, marginTop: 20}}>Try a different ZIP Code</Text>
                   </View>
                 </TouchableHighlight>
               </View>

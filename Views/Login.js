@@ -19,7 +19,7 @@ export default class LoginView extends Component {
      password: null,
      shouldShowOnboarding: false,
      loading: true
-   };
+   }; 
   }
 
   onLoginPress = () => {
@@ -57,6 +57,11 @@ export default class LoginView extends Component {
   goToForgotPassword() {
     const { navigate }  = this.props.rootNavigation.navigate;
     navigate('ForgotPasswordView', {navigate: navigate})
+  }
+
+  goToRegistration() {
+    const { navigate }  = this.props.rootNavigation.navigate;
+    navigate('RegistrationView', {navigate: navigate})
   }
 
   inputFocused(ref) {
@@ -121,6 +126,11 @@ export default class LoginView extends Component {
                 <TouchableHighlight onPress={() => {this.goToForgotPassword()} } underlayColor={'transparent'}>
                   <View>
                     <Text style={{textAlign: 'center', color: Colors.tapable_blue, marginTop: 20}}>Forgot your password?</Text>
+                  </View>
+                </TouchableHighlight>
+                <TouchableHighlight onPress={() => {this.goToRegistration()} } underlayColor={'transparent'}>
+                  <View>
+                    <Text style={{textAlign: 'center', color: Colors.tapable_blue, marginTop: 20}}>Register</Text>
                   </View>
                 </TouchableHighlight>
             </View>

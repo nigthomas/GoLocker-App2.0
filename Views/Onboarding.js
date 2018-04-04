@@ -36,7 +36,6 @@ export default class Onboarding extends Component {
         <Container>
           <Content style={{backgroundColor: Colors.white}}>
           <View style={styles.background}>
-
           <TouchableHighlight onPress={() => {this.onSkip()}} underlayColor={'transparent'}>
             <View style={{marginTop: 35, marginRight: 20}}>
               <Text style={{textAlign: 'right', color: Colors.gray_85, fontSize: 16, zIndex: 1}}>Skip</Text>

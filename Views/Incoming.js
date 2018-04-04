@@ -144,8 +144,8 @@ export default class IncomingView extends Component {
               <HeaderView title={`${Utils.capitalize(firstName)} ${Utils.capitalize(lastName)}`} details={"Show QR code"}/>
             </View>
             <View>
-              <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>Incoming</Text>
-              <Text style={{marginLeft: 21, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>Packages</Text>
+              <Text style={{marginLeft: 21, marginTop: 20, fontSize: 36, color: Colors.dark_gray, fontWeight: 'bold'}}>Incoming</Text>
+              <Text style={{marginLeft: 21, fontSize: 36, color: Colors.dark_gray, fontWeight: 'bold'}}>Packages</Text>
             </View>
             <View style={{marginTop: 20, borderTopColor: Colors.gray_ef, borderTopWidth: 1}}>
               <FlatList data={data} keyExtractor={(item, index) => item.trackingNumber} renderItem={({ item }) => {return this.renderItem(item)}} backgroundColor={'white'}/>

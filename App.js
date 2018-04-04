@@ -23,6 +23,9 @@ import UpdateEmail from './Views/UpdateEmail'
 import UpdatePhone from './Views/UpdatePhone'
 import HomeView from './Views/Home'
 import Theme from './Common/Theme'
+import NoAvailableLockers from './Views/NoAvailableLockers'
+import RegistrationSelectLocker from './Views/RegistrationSelectLocker'
+import RegistrationForm from './Views/RegistrationForm'
 
 const HomeNavigationController = StackNavigator({
   HomeView: { screen: HomeView }
@@ -69,7 +72,10 @@ const LoginNavigationController = StackNavigator({
   IncomingView: {screen: TabController},
   RegistrationView: {screen: RegistrationView},
   ForgotPasswordView: {screen: ForgotPasswordView},
-  ResetPasswordView: {screen: ResetPasswordView}
+  ResetPasswordView: {screen: ResetPasswordView},
+  NoAvailableLockers: {screen: NoAvailableLockers},
+  RegistrationSelectLocker: {screen: RegistrationSelectLocker},
+  RegistrationForm: {screen: RegistrationForm}
 },
 {
   headerMode: 'none',

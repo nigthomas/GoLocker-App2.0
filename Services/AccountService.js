@@ -26,9 +26,21 @@ export default class AccountService {
      return this.state.listener
    }
 
+   updatePlan(plan) {
+     if(!plan) {
+       return new Promise((resolve, reject) => { reject(new Error('Missing plan'))})
+     }
+
+     return AccountNetworkManager.updatePlan(plan)
+     .then(data => {
+       this.state.listener.emit('UPDATED');
+       return new Promise((resolve, reject) => { resolve()})
+     })
+   }
+
    updateCreditCard(card) {
      if(!card) {
-       return new Promise((resolve, reject) => { reject(new Error('Missing password'))})
+       return new Promise((resolve, reject) => { reject(new Error('Missing card'))})
      }
 
      return AccountNetworkManager.updateCreditCard(card)
@@ -40,7 +52,7 @@ export default class AccountService {
 
    updateBillingAddress(address) {
      if(!address) {
-       return new Promise((resolve, reject) => { reject(new Error('Missing password'))})
+       return new Promise((resolve, reject) => { reject(new Error('Missing address'))})
      }
 
      return AccountNetworkManager.updateBillingAddress(address)
@@ -52,7 +64,7 @@ export default class AccountService {
 
    updateMailingAddress(address) {
      if(!address) {
-       return new Promise((resolve, reject) => { reject(new Error('Missing password'))})
+       return new Promise((resolve, reject) => { reject(new Error('Missing address'))})
      }
 
      return AccountNetworkManager.updateMailingAddress(address)

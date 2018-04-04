@@ -13,6 +13,7 @@ export default class Dashboard {
     this.signupDate = data.signupDate
     this.firstName = data.firstname
     this.lastName = data.lastname
+    this.mobileVerified = data.mobileVerified
     this.email = data.email
     this.mobilePhone = data.mobilePhone
     this.homePhone = data.homePhone
@@ -23,6 +24,10 @@ export default class Dashboard {
     this.secondaryLockerID = data.secondaryLockerID
     this.primaryLocker = new Locker(data.primaryLocker, this.primaryLockerID)
     this.secondaryLocker = new Locker(data.secondaryLocker, this.primaryLockerID)
+  }
+
+  isVerified() {
+    return this.mobileVerified
   }
 
   hasPrimaryLocker () {
@@ -44,6 +49,7 @@ export default class Dashboard {
             firstname: this.firstName,
             lastname: this.lastName,
             email: this.email,
+            mobileVerified: this.mobileVerified,
             mobilePhone: this.mobilePhone,
             homePhone: this.homePhone,
             mailing: this.mailing,

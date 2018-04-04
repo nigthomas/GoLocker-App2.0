@@ -35,7 +35,6 @@ export default class HomeView extends Component {
   fetch() {
     Promise.all([DashboardService.getInfo()])
     .then(results => {
-      console.log(results[0])
       this.setState({data: results[0], loading: false, error: null})
     })
     .catch(err => {
@@ -125,7 +124,7 @@ export default class HomeView extends Component {
               <Text style={{marginLeft: 21, marginTop: 20, fontSize: 36, color: Colors.dark_gray, fontWeight: 'bold'}}>Welcome</Text>
               <Text style={{marginLeft: 21, fontSize: 36, color: Colors.dark_gray, fontWeight: 'bold'}}>{firstName} {lastName}</Text>
               <Text style={{marginLeft: 21, fontSize: 14, color: Colors.gray_b5}}>Account #{accountNumber}</Text>
-              <Text style={{marginLeft: 21, marginTop: 40, fontSize: 20, color: Colors.gray_85, fontWeight: 'bold'}}>Location</Text>
+              <Text style={{marginLeft: 21, marginTop: 40, fontSize: 20, color: Colors.gray_85, fontWeight: 'bold'}}>Lockers</Text>
             </View>
 
             <View style={{marginTop: 20, marginLeft: 21, marginRight: 21}}>

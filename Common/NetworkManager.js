@@ -72,6 +72,26 @@ export const PropertiesNetworkManager = {
 }
 
 export const AccountNetworkManager = {
+  updatePlan: (plan) => {
+    return LoginService.getInstance().account()
+    .then(account => {
+      return fetch(URL.account, {
+        method: 'PUT',
+        headers: {
+          Accept: HEADERS.Accept,
+          authorization: `${account.token_type} ${account.access_token}`,
+        },
+        body: JSON.stringify({plan: plan})
+      })
+    })
+    .then((response) => {
+      if(response.status === STATUS_CODE.OK) {
+        return response.json()
+      }
+
+      return new Promise((resolve, reject) => { reject(new Error('Error has occurred'))})
+    })
+  },
   updateCreditCard: (card) => {
     return LoginService.getInstance().account()
     .then(account => {
@@ -81,7 +101,7 @@ export const AccountNetworkManager = {
           Accept: HEADERS.Accept,
           authorization: `${account.token_type} ${account.access_token}`,
         },
-        body: JSON.stringify({billing: {creditCard: card}})
+        body: JSON.stringify({billing: {creditCard: card}, postalCode: card.postalCode})
       })
     })
     .then((response) => {

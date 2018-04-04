@@ -13,6 +13,7 @@ import Moment from 'moment'
 import Utils from '../Common/Utils'
 import Swipeout from 'react-native-swipeout';
 import ThreeHeaderView from '../Elements/ThreeHeaderView'
+import AccountService from '../Services/AccountService'
 
 export default class ChangePlan extends Component {
   static navigationOptions = { header: null, tabBarVisible: false };
@@ -21,12 +22,40 @@ export default class ChangePlan extends Component {
    super(props);
 
    this.state = {
-     selectedPlan: null
+     selectedPlan: null,
+     loading: false,
+     data: {},
+     error: null
    };
   }
 
   onSavePress() {
+    const plan = this.state.selectedPlan
+    AccountService.getInstance().updatePlan(plan)
+    .then(() => {
+      this.props.navigation.goBack()
+      this.setState({error: null})
+    })
+    .catch(err => {
+      this.setState({error: err})
+    })
+  }
 
+  componentDidMount() {
+    this.setState({loading: true})
+    this.fetch()
+  }
+
+  fetch() {
+    Promise.all([DashboardService.getInfo()])
+    .then(results => {
+      const dashboardData = results[0] || {}
+      const membership = dashboardData.membership
+      this.setState({data: dashboardData, selectedPlan: membership.plan,loading: false, error: null})
+    })
+    .catch(err => {
+      this.setState({error: err, loading: false})
+    })
   }
 
   onBackPress() {
@@ -34,6 +63,27 @@ export default class ChangePlan extends Component {
   }
 
   render() {
+    if(this.state.loading) {
+      return <View style={{flex: 1, backgroundColor: Colors.white}}>
+              <LoadingView />
+              <FooterTabWithNavigation navigation={this.props.navigation} active={"details"}/>
+            </View>
+    }
+
+    const payPerPackageSelected = this.state.selectedPlan === "Pay-Per-Package"
+    const premiumSelected = this.state.selectedPlan === "Premium"
+    const unlimitedSelected = this.state.selectedPlan === "Unlimited"
+
+    const payPerPackageStyle = payPerPackageSelected ? styles.activePlan : styles.plan
+    const premiumStyle = premiumSelected ? styles.activePlan : styles.plan
+    const unlimitedStyle = unlimitedSelected ? styles.activePlan : styles.plan
+
+    const payPerPackageCircleStyle = payPerPackageSelected ? styles.activeCircle : styles.circle
+    const premiumCircleStyle = premiumSelected ? styles.activeCircle : styles.circle
+    const unlimitedCircleStyle = unlimitedSelected ? styles.activeCircle : styles.circle
+
+    const errorText = this.state.error ? <Text style={{marginLeft: 21, color: Colors.red, marginTop: 5}}>An error has occurred. Please try again</Text> : null
+
     return (
       <Root>
         <Container>
@@ -41,52 +91,61 @@ export default class ChangePlan extends Component {
           <View style={{marginTop: 40}}>
             <ThreeHeaderView title={"Update Plan"} leftButtonTitle={"Back"} rightButtonTitle={"Save"} onLeftPress={() => {this.onBackPress()}} onRightPress={() => {this.onSavePress()}}/>
           </View>
-
+          {errorText}
           <View style={{marginLeft: 21, marginRight: 21}}>
-            <View style={styles.activePlan}>
-              <View style={{flex: 1}}>
-                <Text style={styles.headerText}>PAY PER PACKAGE</Text>
-                <Text style={styles.text}>Pickup within 48 hours</Text>
-                <Text style={styles.text}>Secure and Convenient</Text>
-                <Text style={styles.text}>Free First Delivery</Text>
+            <TouchableHighlight onPress={() => { this.setState({selectedPlan: "Pay-Per-Package"})}} underlayColor={'transparent'}>
+              <View style={payPerPackageStyle}>
+                <View style={{flex: 1}}>
+                  <Text style={styles.headerText}>PAY PER PACKAGE</Text>
+                  <Text style={styles.text}>Pickup within 48 hours</Text>
+                  <Text style={styles.text}>Secure and Convenient</Text>
+                  <Text style={styles.text}>Free First Delivery</Text>
+                </View>
+                <View style={{flex: 1}}>
+                    <View style={payPerPackageCircleStyle}></View>
+                    <Text style={styles.price}>$1.99</Text>
+                    <Text style={styles.cycle}>/per delivery*</Text>
+                  </View>
               </View>
-              <View style={{flex: 1}}>
-                <View style={styles.activeCircle}></View>
-                <Text style={styles.price}>$1.99</Text>
-                <Text style={styles.cycle}>/per delivery*</Text>
-              </View>
-            </View>
+            </TouchableHighlight>
 
-            <View style={styles.plan}>
-              <View style={{flex: 1}}>
-                <Text style={styles.headerText}>PREMIUM</Text>
-                <Text style={styles.text}>10 Deliveries Per Month</Text>
-                <Text style={styles.text}>Pickup within 48 hours</Text>
-                <Text style={styles.text}>Secure and Convenient</Text>
-                <Text style={styles.text}>Free First Delivery</Text>
+            <TouchableHighlight onPress={() => { this.setState({selectedPlan: "Premium"})}} underlayColor={'transparent'}>
+              <View style={premiumStyle}>
+                <View style={{flex: 1}}>
+                  <Text style={styles.headerText}>PREMIUM</Text>
+                  <Text style={styles.text}>10 Deliveries Per Month</Text>
+                  <Text style={styles.text}>Pickup within 48 hours</Text>
+                  <Text style={styles.text}>Secure and Convenient</Text>
+                  <Text style={styles.text}>Free First Delivery</Text>
+                </View>
+                <View style={{flex: 1}}>
+                  <View style={premiumCircleStyle}></View>
+                  <Text style={styles.price}>$7.99</Text>
+                  <Text style={styles.cycle}>/per month</Text>
+                </View>
               </View>
-              <View style={{flex: 1}}>
-                <View style={styles.circle}></View>
-                <Text style={styles.price}>$7.99</Text>
-                <Text style={styles.cycle}>/per month</Text>
+            </TouchableHighlight>
+
+            <TouchableHighlight onPress={() => { this.setState({selectedPlan: "Unlimited"})}} underlayColor={'transparent'}>
+              <View style={unlimitedStyle}>
+                <View style={{flex: 1}}>
+                  <Text style={styles.headerText}>UNLIMITED</Text>
+                  <Text style={styles.text}>Unlimited Deliveries!</Text>
+                  <Text style={styles.text}>Pickup within 48 hours</Text>
+                  <Text style={styles.text}>Secure and Convenient</Text>
+                  <Text style={styles.text}>Free First Delivery</Text>
+                </View>
+                <View style={{flex: 1}}>
+                  <View style={unlimitedCircleStyle}></View>
+                  <Text style={styles.price}>$14.99</Text>
+                  <Text style={styles.cycle}>/per month</Text>
+                </View>
               </View>
-            </View>
-            <View style={styles.plan}>
-              <View style={{flex: 1}}>
-                <Text style={styles.headerText}>UNLIMITED</Text>
-                <Text style={styles.text}>Unlimited Deliveries!</Text>
-                <Text style={styles.text}>Pickup within 48 hours</Text>
-                <Text style={styles.text}>Secure and Convenient</Text>
-                <Text style={styles.text}>Free First Delivery</Text>
-              </View>
-              <View style={{flex: 1}}>
-                <View style={styles.circle}></View>
-                <Text style={styles.price}>$14.99</Text>
-                <Text style={styles.cycle}>/per month</Text>
-              </View>
-            </View>
+            </TouchableHighlight>
 
             <Text style={styles.disclaimer}>* A $0.31 processing fee will be applied to each pay per package delivery</Text>
+            <Text style={styles.disclaimer}>Please note when downgrading your account, the current plan will remain effective through the end of the billing period. Plan upgrades take effect immediately.</Text>
+
           </View>
 
           </Content>
@@ -133,7 +192,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     borderColor: Colors.dark_gray,
     borderWidth: 1,
-    marginTop: 30,
+    marginTop: 20,
     backgroundColor: Colors.gray_f3,
     flexDirection:'row'
   },
@@ -143,7 +202,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     borderColor: Colors.gray_d8,
     borderWidth: 1,
-    marginTop: 30,
+    marginTop: 20,
     flexDirection:'row'
   },
   circle: {

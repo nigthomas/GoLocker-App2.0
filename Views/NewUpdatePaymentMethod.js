@@ -31,7 +31,7 @@ export default class NewUpdatePaymentMethod extends Component {
    const expirationMonth = card.month
 
    this.state = {
-     cardNumber: card.number,
+     cardNumber: card.number || bullets,
      expirationMonth: expirationMonth || defaultExpirationMonth,
      expirationYear: expirationYear || defaultExpirationYear,
      cvv: null,
@@ -48,28 +48,28 @@ export default class NewUpdatePaymentMethod extends Component {
     const cvv = this.state.cvv
     const zip = this.state.zip
 
-    if(!cardNumber || cardNumber.length >= 15) {
-      this.setState({missingCheckMessage: "Please enter a valid credit card", cardNumber: null, expirationMonth: null, expirationYear: null, cvv: null, zip: null})
+    if(!cardNumber || cardNumber.length < 15) {
+      this.setState({missingCheckMessage: "Please enter a valid credit card", error: null, cardNumber: null, expirationMonth: null, expirationYear: null, cvv: null, zip: null})
       return
     }
 
     if(!expirationMonth) {
-      this.setState({missingCheckMessage: "Please enter a valid expiration month", cardNumber: null, expirationMonth: null, expirationYear: null, cvv: null, zip: null})
+      this.setState({missingCheckMessage: "Please enter a valid expiration month", error: null, cardNumber: null, expirationMonth: null, expirationYear: null, cvv: null, zip: null})
       return
     }
 
     if(!expirationYear || expirationYear.length != 4) {
-      this.setState({missingCheckMessage: "Please enter a valid expiration year", cardNumber: null, expirationMonth: null, expirationYear: null, cvv: null, zip: null})
+      this.setState({missingCheckMessage: "Please enter a valid expiration year", error: null, cardNumber: null, expirationMonth: null, expirationYear: null, cvv: null, zip: null})
       return
     }
 
     if(!cvv) {
-      this.setState({missingCheckMessage: "Please enter a valid cvv", cardNumber: null, expirationMonth: null, expirationYear: null, cvv: null, zip: null})
+      this.setState({missingCheckMessage: "Please enter a valid cvv", error: null, cardNumber: null, expirationMonth: null, expirationYear: null, cvv: null, zip: null})
       return
     }
 
     if(!zip) {
-      this.setState({missingCheckMessage: "Please enter a valid postal code", cardNumber: null, expirationMonth: null, expirationYear: null, cvv: null, zip: null})
+      this.setState({missingCheckMessage: "Please enter a valid postal code", error: null, cardNumber: null, expirationMonth: null, expirationYear: null, cvv: null, zip: null})
       return
     }
 
@@ -126,10 +126,16 @@ export default class NewUpdatePaymentMethod extends Component {
   }
 
   render() {
-    const missingCheckMessage = this.state.missingCheckMessage
-    const errorText = missingCheckMessage ? <Text style={{marginLeft: 21, color: Colors.red, marginTop: 5, marginBottom: 5}}>{missingCheckMessage}</Text> : null
-    const expirationYear = this.state.expirationYear
-    const expirationMonth = this.state.expirationMonth
+    var missingCheckMessage = this.state.missingCheckMessage
+
+    if(!missingCheckMessage && this.state.error) {
+      missingCheckMessage = "An error has occurred. Try again"
+    }
+
+    var errorText = missingCheckMessage ? <Text style={{marginLeft: 21, color: Colors.red, marginBottom: 10}}>{missingCheckMessage}</Text> : null
+
+    const expirationYear = this.state.expirationYear || ""
+    const expirationMonth = this.state.expirationMonth || ""
     const expiration = `${expirationMonth}/${expirationYear}`
 
     return (

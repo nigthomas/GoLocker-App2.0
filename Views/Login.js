@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, FlatList, Dimensions, StatusBar, Image, TextInput, Alert, TouchableHighlight, Platform, ScrollView, findNodeHandle} from 'react-native';
+import { Modal, StyleSheet, Text, View, Button, FlatList, Dimensions, StatusBar, Image, TextInput, Alert, TouchableHighlight, Platform, ScrollView, findNodeHandle} from 'react-native';
 import { Container, Header, Content, Form, Item, Input, Label, Root } from 'native-base';
 import Theme from '../Common/Theme'
 import Colors from '../Common/Colors'
@@ -7,15 +7,18 @@ import Storage from '../Common/Storage'
 import LoginService from '../Services/LoginService'
 import FlatButton from '../Elements/FlatButton'
 import AlertView from '../Elements/AlertView'
+import OnboardingService from '../Services/OnboardingService'
+import OnboardingView from '../Views/Onboarding'
 
 export default class LoginView extends Component {
   static navigationOptions = { title: 'Login', header: null };
   constructor(props) {
    super(props);
-
    this.state = {
      username: null,
-     password: null
+     password: null,
+     shouldShowOnboarding: false,
+     loading: true
    };
   }
 
@@ -34,6 +37,20 @@ export default class LoginView extends Component {
     })
     .catch(err => {
       AlertView.showConfirmation("Whoops! This username and password combination doesn't exist")
+    })
+  }
+
+  componentDidMount() {
+    this.fetch()
+  }
+
+  fetch() {
+    Promise.all([OnboardingService.getInstance().shouldShowOnboarding()])
+    .then(results => {
+      this.setState({shouldShowOnboarding: results[0], loading: false})
+    })
+    .catch(err => {
+
     })
   }
 
@@ -69,7 +86,19 @@ export default class LoginView extends Component {
       }, 50);
   }
 
+  onOnboardingSkip() {
+    this.setState({shouldShowOnboarding: false})
+  }
+
   render() {
+    if (this.state.loading) {
+      return <View />
+    }
+
+    if (this.state.shouldShowOnboarding) {
+      return <OnboardingView onSkip={() => {this.onOnboardingSkip()}}/>
+    }
+
     return (
       <Root>
         <ScrollView ref="scrollView" keyboardDismissMode='interactive' style={{backgroundColor: Colors.white}}>

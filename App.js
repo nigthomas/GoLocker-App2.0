@@ -85,16 +85,18 @@ const NavigationController = StackNavigator({
 class App extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       loading: true,
-      isLoggedIn: false
+      isLoggedIn: false,
+      shouldShowOnboarding: false
      }
     }
 
     componentDidMount() {
-      LoginService.getInstance().isLoggedIn()
-      .then(isLoggedIn => {
-        this.setState({isLoggedIn: isLoggedIn, loading: false})
+      Promise.all([LoginService.getInstance().isLoggedIn()])
+      .then(results => {
+        this.setState({isLoggedIn: results[0], loading: false})
       })
       .catch(err => {
         this.setState({isLoggedIn: false, loading: false})

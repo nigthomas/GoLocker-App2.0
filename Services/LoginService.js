@@ -5,8 +5,6 @@ import Account from '../Models/Account'
 import events from 'events'
 const ACCOUNT_KEY = "$account"
 
-//Quick access to current account
-
 export default class LoginService {
   static sharedInstance = null;
 

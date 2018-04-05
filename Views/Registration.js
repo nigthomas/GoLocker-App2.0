@@ -30,6 +30,7 @@ export default class RegistrationView extends Component {
     .then(properties => {
       if(properties.length == 0) {
         navigation.navigate('NoAvailableLockers', {})
+        return;
       }
 
       navigation.navigate('RegistrationSelectLocker', {lockers: properties})
@@ -50,7 +51,7 @@ export default class RegistrationView extends Component {
     var errorText = this.state.errorMessage ? <Text style={{marginLeft: 21, color: Colors.red, marginRight: 21}}>{this.state.errorMessage}</Text> : null
 
     if(!errorText && this.state.error ) {
-      errorText = <Text style={{marginLeft: 21, color: Colors.red, marginRight: 21}}>An error has occurred. Please try again</Text>
+      errorText = <Text style={{marginLeft: 21, color: Colors.red, marginRight: 21}}>Something is wrong. Please try again</Text>
     }
 
     return (

@@ -8,7 +8,8 @@ const URL = {
   properties: `${BASE_URL}/v1/properties`,
   account: `${BASE_URL}/v1/account`,
   reservation: `${BASE_URL}/v1/account/reservations`,
-  createReservation: `${BASE_URL}/v1/packages`
+  createReservation: `${BASE_URL}/v1/packages`,
+  register: `${BASE_URL}/v1/register`,
 }
 
 const STATUS_CODE = {
@@ -34,6 +35,49 @@ export const AuthenticationNetworkManager = {
         body: JSON.stringify({
          username: username,
          password: password,
+       }),
+      })
+    .then((response) => {
+      if(response.status === STATUS_CODE.OK) {
+        return response.json()
+      }
+
+      return new Promise((resolve, reject) => { reject(new Error('Error has occurred'))})
+    })
+  },
+  registerUser: (firstName, lastName, email, phone, password, lockerIdentifier, disability) => {
+    return fetch(URL.register, {
+      method: 'POST',
+      headers: {
+        Accept: HEADERS.Accept,
+        },
+        body: JSON.stringify({
+         firstname: firstName,
+         lastname: lastName,
+         email: email,
+         mobilePhone: phone,
+         password: password,
+         primaryPropertyID: lockerIdentifier,
+         disability: disability
+       }),
+      })
+    .then((response) => {
+      if(response.status === STATUS_CODE.OK) {
+        return response.json()
+      }
+
+      return new Promise((resolve, reject) => { reject(new Error('Error has occurred'))})
+    })
+  },
+  verifyUser: (email, code) => {
+    return fetch(URL.register, {
+      method: 'PUT',
+      headers: {
+        Accept: HEADERS.Accept,
+        },
+        body: JSON.stringify({
+         email: email,
+         verificationCode: code
        }),
       })
     .then((response) => {

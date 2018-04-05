@@ -2,6 +2,7 @@ import Location from './Location'
 
 export default class Property {
   constructor (data) {
+    this.id = data.id
     this.status = data.status
     this.name = data.name
     this.address = data.address
@@ -39,6 +40,7 @@ export default class Property {
 
   toJSON() {
     return {status: this.status,
+            id: this.id,
             name: this.name,
             address: this.address,
             address2: this.address2,

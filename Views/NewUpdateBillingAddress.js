@@ -13,7 +13,6 @@ import Moment from 'moment'
 import Utils from '../Common/Utils'
 import Swipeout from 'react-native-swipeout';
 import ThreeHeaderView from '../Elements/ThreeHeaderView'
-import ErrorView from './ErrorView'
 import Address from '../Models/Address'
 import AccountService from '../Services/AccountService'
 
@@ -55,7 +54,7 @@ export default class NewUpdateBillingAddress extends Component {
   }
 
   render() {
-    const errorText = this.state.error ? <Text style={{marginLeft: 21, color: Colors.red, marginTop: 5}}>An error has occurred. Please try again</Text> : null
+    const errorText = this.state.error ? <Text style={{marginLeft: 21, color: Colors.red, marginTop: 5}}>Something is wrong. Please try again</Text> : null
 
     return (
       <Root>

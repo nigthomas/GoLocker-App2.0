@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, StatusBar, TextInput, Alert, Image, TouchableHighlight, FlatList} from 'react-native';
+import { StyleSheet, Text, View, StatusBar, TextInput, Alert, Image, TouchableHighlight, FlatList, Switch} from 'react-native';
 import Theme from '../Common/Theme'
 import Colors from '../Common/Colors'
 import FlatButton  from '../Elements/FlatButton'
 import PropertyService from '../Services/PropertyService'
 import { Container, Header, Content, Form, Item, Input, Label, Root } from 'native-base';
 import MapView from 'react-native-maps';
+import LoginService from '../Services/LoginService'
 
 export default class RegistrationSelectLocker extends Component {
   static navigationOptions = { header: null };
@@ -19,19 +20,102 @@ export default class RegistrationSelectLocker extends Component {
      phone: null,
      email: null,
      password: null,
-     passwordConfirmation: null
+     passwordConfirmation: null,
+     handicap: false,
+     errorMessage: null
    }
   }
 
   componentDidMount() {
     setTimeout(() => {
-      this.refs.firstNameField.focus()
-    }, 2000)
+      if(this.refs.firstNameField) {
+        this.refs.firstNameField.focus()
+      }
+    }, 1500)
   }
 
   onLoginPress() {
     const { navigation } = this.props;
     navigation.popToTop()
+  }
+
+  onChange() {
+    const { navigation } = this.props;
+    navigation.goBack()
+  }
+
+  onCreateAccountPress() {
+    const firstName = this.state.firstName
+    const lastName = this.state.lastName
+    const phone = this.state.phone
+    const email = this.state.email
+    const password = this.state.password
+    const passwordConfirmation = this.state.passwordConfirmation
+    const handicap = this.state.handicap
+    const locker = (this.props.navigation && this.props.navigation.state && this.props.navigation.state.params) ? this.props.navigation.state.params.property : {}
+    const { navigation } = this.props;
+    const passwordsMatch = password && password.length > 0 && passwordConfirmation === password
+    const isComplexPassword = (password && password.length >= 8 && //Is >=8 characters
+      password != password.toLowerCase() && //Has uppercase character
+      /\d/.test(password) &&  //Has numbers
+      !/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/g.test(password)) //Doesn't have special characters
+
+    if(!firstName) {
+      this.setState({errorMessage: "Please enter your first name"})
+      this.component._root.scrollToPosition(0, 0)
+      return
+    }
+
+    if(!lastName) {
+      this.setState({errorMessage: "Please enter your last name"})
+      this.component._root.scrollToPosition(0, 0)
+      return
+    }
+
+    if(!phone) {
+      this.setState({errorMessage: "Please enter your phone number"})
+      this.component._root.scrollToPosition(0, 0)
+      return
+    }
+
+    if(!email) {
+      this.setState({errorMessage: "Please enter a valid email"})
+      this.component._root.scrollToPosition(0, 0)
+      return
+    }
+
+    if(!password) {
+      this.setState({errorMessage: "Please enter a password"})
+      this.component._root.scrollToPosition(0, 0)
+      return
+    }
+
+    if(!passwordConfirmation) {
+      this.setState({errorMessage: "Please confirm your password"})
+      this.component._root.scrollToPosition(0, 0)
+      return
+    }
+
+    if(!passwordsMatch) {
+      this.setState({errorMessage: "Passwords don't match"})
+      this.component._root.scrollToPosition(0, 0)
+      return
+    }
+
+    if(!isComplexPassword) {
+      this.setState({errorMessage: "Password is too weak or contains invalid characters"})
+      this.component._root.scrollToPosition(0, 0)
+      return
+    }
+
+    LoginService.getInstance().registerUser(firstName, lastName, email, phone, password, locker.id, handicap)
+    .then(() => {
+      navigation.navigate('Verification', {email: email, firstName: firstName})
+    })
+    .catch(err => {
+      this.setState({errorMessage: "Something is wrong or your phone number or email is in use"})
+      this.component._root.scrollToPosition(0, 0)
+    })
   }
 
   renderItem(property) {
@@ -53,7 +137,6 @@ export default class RegistrationSelectLocker extends Component {
     }
 
     return (
-      <TouchableHighlight onPress={() => {this.onPropertyPress(property)}} underlayColor={'transparent'}>
         <View style={{flex: 1, marginBottom: 30}}>
           <View style={{flex: 1}}>
             <MapView
@@ -70,17 +153,19 @@ export default class RegistrationSelectLocker extends Component {
             <View>
               <View style={{flexDirection: 'row', flex: 1}}>
                 <Text style={{fontSize: 16, color: Colors.dark_gray, marginTop: 10, fontWeight: '600', flex: 2}}>{name}</Text>
+                <TouchableHighlight onPress={() => {this.onChange()}} underlayColor={'transparent'}>
+                  <Text style={{fontSize: 12, color: Colors.gray_85, marginTop: 13, flex: 1, textAlign: 'right'}}>CHANGE</Text>
+                </TouchableHighlight>
               </View>
               <Text style={{fontSize: 14, color: Colors.gray_85, marginTop: 10}}>{address}</Text>
               <Text style={{fontSize: 14, color: Colors.gray_85}}>{city}, {state}, {zip}</Text>
             </View>
         </View>
-      </TouchableHighlight>
       )
   }
 
-  onCreateAccountPress() {
-
+  onSwitchChange(value) {
+    this.setState({handicap: value})
   }
 
   render() {
@@ -91,19 +176,20 @@ export default class RegistrationSelectLocker extends Component {
     var errorText = this.state.errorMessage ? <Text style={{marginLeft: 21, color: Colors.red, marginRight: 21}}>{this.state.errorMessage}</Text> : null
 
     if(!errorText && this.state.error ) {
-      errorText = <Text style={{marginLeft: 21, color: Colors.red, marginRight: 21}}>An error has occurred. Please try again</Text>
+      errorText = <Text style={{marginLeft: 21, color: Colors.red, marginRight: 21}}>Something is wrong. Please try again</Text>
     }
 
     return (
+      <Root>
         <Container>
-          <Content style={{backgroundColor: Colors.white}}>
+          <Content style={{backgroundColor: Colors.white}} ref={c => (this.component = c)}>
             <TouchableHighlight onPress={() => {this.onLoginPress()}} underlayColor={'transparent'}>
               <View style={{marginTop: 35, marginRight: 20}}>
                 <Text style={{textAlign: 'right', color: Colors.gray_85, fontSize: 16, zIndex: 1}}>Sign in</Text>
               </View>
             </TouchableHighlight>
               <View style={{marginTop: 30}}>
-              <Text style={{marginLeft: 21, marginTop: 20, fontSize: 36, color: Colors.dark_gray, fontWeight: 'bold'}}>{headerText}</Text>
+                <Text style={{marginLeft: 21, marginTop: 20, fontSize: 36, color: Colors.dark_gray, fontWeight: 'bold'}}>{headerText}</Text>
                 <Text style={{marginLeft: 21, fontSize: 36, color: Colors.dark_gray, fontWeight: 'bold'}}>{text}</Text>
                 {errorText}
              </View>
@@ -119,14 +205,18 @@ export default class RegistrationSelectLocker extends Component {
                  <TextInput underlineColorAndroid='transparent' ref="firstNameField" placeholderTextColor={Colors.tapable_blue} style={{flex: 1, paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, marginRight: 5, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"First Name"} onChangeText={(firstName) => this.setState({firstName})} value={this.state.firstName}/>
                  <TextInput underlineColorAndroid='transparent' ref="lastNameField" placeholderTextColor={Colors.tapable_blue} style={{flex: 1, paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, marginLeft: 5, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Last Name"} onChangeText={(lastName) => this.setState({lastName})} value={this.state.lastName}/>
                </View>
-               <TextInput underlineColorAndroid='transparent' ref="phoneField" placeholderTextColor={Colors.tapable_blue} style={{flex: 1, marginTop: 10, paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Phone"} onChangeText={(phone) => this.setState({phone})} value={this.state.phone}/>
-               <TextInput underlineColorAndroid='transparent' ref="emailField" placeholderTextColor={Colors.tapable_blue} style={{flex: 1, marginTop: 10, paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Email"} onChangeText={(email) => this.setState({email})} value={this.state.email}/>
+               <TextInput underlineColorAndroid='transparent' ref="phoneField" keyboardType='numeric' placeholderTextColor={Colors.tapable_blue} style={{flex: 1, marginTop: 10, paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Phone"} onChangeText={(phone) => this.setState({phone})} value={this.state.phone}/>
+               <TextInput underlineColorAndroid='transparent' ref="emailField" keyboardType='email-address' placeholderTextColor={Colors.tapable_blue} style={{flex: 1, marginTop: 10, paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Email"} onChangeText={(email) => this.setState({email})} value={this.state.email}/>
 
                <TextInput underlineColorAndroid='transparent' ref="passwordField" placeholderTextColor={Colors.tapable_blue} style={{flex: 1, marginTop: 10, paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Password"} onChangeText={(password) => this.setState({password})} value={this.state.password}/>
                <TextInput underlineColorAndroid='transparent' ref="passwordConfirmationField" placeholderTextColor={Colors.tapable_blue} style={{flex: 1, marginTop: 10, paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Password Confirmation"} onChangeText={(passwordConfirmation) => this.setState({passwordConfirmation})} value={this.state.passwordConfirmation}/>
-
+               <View style={{marginTop: 10, flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+                 <Switch onValueChange={(value) => {this.onSwitchChange(value)}} value={this.state.handicap}/>
+                 <Text style={{marginLeft: 5, textAlign: 'left', color: Colors.dark_gray, fontWeight: 'bold'}}>Handicap</Text>
+               </View>
+               <Text style={{textAlign: 'left', color: Colors.dark_gray, fontSize: 10, marginTop: 5}}>*Packages for users with physical disabilities will be placed in lower compartments)</Text>
                <TouchableHighlight onPress={() => {this.onCreateAccountPress()}} underlayColor={'transparent'}>
-                 <View style={{height: 50, borderRadius: 4, backgroundColor: Colors.light_green, marginTop: 10, marginBottom: 30}}>
+                 <View style={{height: 50, borderRadius: 4, backgroundColor: Colors.light_green, marginTop: 20, marginBottom: 30}}>
                    <Text style={{textAlign: 'center', color: Colors.white, marginTop: 17}}>Create Account</Text>
                  </View>
                </TouchableHighlight>
@@ -134,6 +224,7 @@ export default class RegistrationSelectLocker extends Component {
 
           </Content>
         </Container>
+      </Root>
     );
   }
 }

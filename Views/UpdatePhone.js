@@ -15,7 +15,6 @@ import Swipeout from 'react-native-swipeout';
 import Entypo from 'react-native-vector-icons/dist/Entypo'
 import ThreeHeaderView from '../Elements/ThreeHeaderView'
 import AccountService from '../Services/AccountService'
-import ErrorView from './ErrorView'
 
 export default class UpdatePhone extends Component {
   static navigationOptions = { header: null, tabBarVisible: false };
@@ -25,7 +24,6 @@ export default class UpdatePhone extends Component {
 
    const { params } = this.props.navigation.state;
    const phone = params.phone
-
 
    this.state = {
      phone: phone,
@@ -48,13 +46,7 @@ export default class UpdatePhone extends Component {
   }
 
   render() {
-    if(this.state.error) {
-        return <View style={{flex: 1, backgroundColor: Colors.white}}>
-                <ErrorView />
-                <FooterTabWithNavigation navigation={this.props.navigation} active={"details"}/>
-              </View>
-    }
-
+    const errorText = this.state.error ? <Text style={{marginLeft: 21, color: Colors.red, marginTop: 10}}>Something is wrong. Please try again</Text> : null
     return (
       <Root>
         <Container>
@@ -70,7 +62,7 @@ export default class UpdatePhone extends Component {
               <TextInput underlineColorAndroid='transparent' placeholderTextColor={Colors.dark_gray} keyboardType='numeric' style={{flex: 1, paddingLeft: 21, color: Colors.dark_gray, backgroundColor: Colors.white, height: 50, fontFamily: Theme.primaryFont, borderTopColor: Colors.gray_ef, borderTopWidth: 1, borderBottomColor: Colors.gray_ef, borderBottomWidth: 1}} placeholder={"Phone Number"} onChangeText={(phone) => this.setState({phone})} value={this.state.phone}/>
             </View>
           </View>
-
+          {errorText}
           </Content>
           <FooterTabWithNavigation navigation={this.props.navigation} active={"details"}/>
         </Container>

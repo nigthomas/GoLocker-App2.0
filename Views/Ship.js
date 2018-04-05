@@ -8,7 +8,6 @@ import Theme from '../Common/Theme'
 import DashboardService from '../Services/DashboardService'
 import ReservationService from '../Services/ReservationService'
 import LoadingView from './Loading'
-import ErrorView from './ErrorView'
 import MaterialCommunityIcons from 'react-native-vector-icons/dist/MaterialCommunityIcons'
 import Entypo from 'react-native-vector-icons/dist/Entypo'
 import Ionicons from 'react-native-vector-icons/dist/Ionicons';
@@ -165,13 +164,6 @@ export default class Ship extends Component {
               </View>
     }
 
-    if(this.state.error) {
-        return <View style={{flex: 1, backgroundColor: Colors.white}}>
-                <ErrorView />
-                <FooterTabWithNavigation navigation={this.props.navigation} active={"ship"}/>
-              </View>
-    }
-
     const firstName = this.state.data.firstName
     const lastName = this.state.data.lastName
     const lockerName = (this.state.sendToLocker && this.state.sendToLocker.property) ? this.state.sendToLocker.property.name: ""
@@ -180,7 +172,7 @@ export default class Ship extends Component {
     const mediumParcelButton = this.state.mediumParcelSelected ? <View style={styles.activeCircle}/> : <View style={styles.circle}/>
     const largeParcelButton = this.state.largeParcelSelected ? <View style={styles.activeCircle}/> : <View style={styles.circle}/>
 
-    const errorText = this.state.error ? <Text style={{marginLeft: 21, color: Colors.red, marginTop: 5}}>An error has occurred. Please try again</Text> : null
+    const errorText = this.state.error ? <Text style={{marginLeft: 21, color: Colors.red, marginTop: 5}}>Something is wrong. Please try again</Text> : null
 
     return (
       <Root>

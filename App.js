@@ -26,6 +26,7 @@ import Theme from './Common/Theme'
 import NoAvailableLockers from './Views/NoAvailableLockers'
 import RegistrationSelectLocker from './Views/RegistrationSelectLocker'
 import RegistrationForm from './Views/RegistrationForm'
+import Verification from './Views/RegistrationVerification'
 
 const HomeNavigationController = StackNavigator({
   HomeView: { screen: HomeView }
@@ -75,7 +76,9 @@ const LoginNavigationController = StackNavigator({
   ResetPasswordView: {screen: ResetPasswordView},
   NoAvailableLockers: {screen: NoAvailableLockers},
   RegistrationSelectLocker: {screen: RegistrationSelectLocker},
-  RegistrationForm: {screen: RegistrationForm}
+  RegistrationForm: {screen: RegistrationForm},
+  Verification: {screen: Verification},
+  Login: {screen: LoginView}
 },
 {
   headerMode: 'none',

@@ -27,6 +27,22 @@ export default class LoginService {
      return this.state.listener
    }
 
+  registerUser(firstName, lastName, email, phone, password, lockerIdentifier, disability) {
+    if(!firstName || !lastName || !email || !phone || !password || !lockerIdentifier) {
+      return new Promise((resolve, reject) => { reject(new Error('Missing parameters'))})
+    }
+
+    return AuthenticationNetworkManager.registerUser(firstName, lastName, email, phone, password, lockerIdentifier, disability)
+  }
+
+  verifyUser(email, code) {
+    if(!email || !code) {
+      return new Promise((resolve, reject) => { reject(new Error('Missing email or code'))})
+    }
+
+    return AuthenticationNetworkManager.verifyUser(email, code)
+  }
+
   login(username, password) {
     if(!username || !password) {
       return new Promise((resolve, reject) => { reject(new Error('Missing username or password'))})

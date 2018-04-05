@@ -13,7 +13,6 @@ import Moment from 'moment'
 import Utils from '../Common/Utils'
 import Swipeout from 'react-native-swipeout';
 import ThreeHeaderView from '../Elements/ThreeHeaderView'
-import ErrorView from './ErrorView'
 import AccountService from '../Services/AccountService'
 import CreditCard from '../Models/CreditCard'
 
@@ -129,7 +128,7 @@ export default class NewUpdatePaymentMethod extends Component {
     var missingCheckMessage = this.state.missingCheckMessage
 
     if(!missingCheckMessage && this.state.error) {
-      missingCheckMessage = "An error has occurred. Try again"
+      missingCheckMessage = "Something is wrong. Please try again"
     }
 
     var errorText = missingCheckMessage ? <Text style={{marginLeft: 21, color: Colors.red, marginBottom: 10}}>{missingCheckMessage}</Text> : null

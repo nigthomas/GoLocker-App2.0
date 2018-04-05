@@ -73,11 +73,11 @@ export default class RegistrationSelectLocker extends Component {
   render() {
     const lockers = (this.props.navigation && this.props.navigation.state && this.props.navigation.state.params) ? this.props.navigation.state.params.lockers : []
     const headerText = lockers.length == 1 ? "Great! We found 1 close by locker" : `Great! We found ${lockers.length} close by lockers`
-    const text = "Please select one"
+    const text = "Please select one locker"
     var errorText = this.state.errorMessage ? <Text style={{marginLeft: 21, color: Colors.red, marginRight: 21}}>{this.state.errorMessage}</Text> : null
 
     if(!errorText && this.state.error ) {
-      errorText = <Text style={{marginLeft: 21, color: Colors.red, marginRight: 21}}>An error has occurred. Please try again</Text>
+      errorText = <Text style={{marginLeft: 21, color: Colors.red, marginRight: 21}}>Something is wrong. Please try again</Text>
     }
 
     return (

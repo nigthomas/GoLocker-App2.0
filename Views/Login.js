@@ -12,14 +12,21 @@ import OnboardingView from '../Views/Onboarding'
 
 export default class LoginView extends Component {
   static navigationOptions = { title: 'Login', header: null };
+
   constructor(props) {
    super(props);
+
+   const headerText = (this.props && this.props.navigation && this.props.navigation.state && this.props.navigation.state.params) ? this.props.navigation.state.params.headerText : "Sign in"
+   const firstName = (this.props && this.props.navigation && this.props.navigation.state && this.props.navigation.state.params) ? this.props.navigation.state.params.firstName : null
+   
    this.state = {
      username: null,
      password: null,
      shouldShowOnboarding: false,
-     loading: true
-   }; 
+     loading: true,
+     headerText: headerText,
+     firstName: firstName
+   };
   }
 
   onLoginPress = () => {
@@ -64,33 +71,6 @@ export default class LoginView extends Component {
     navigate('RegistrationView', {navigate: navigate})
   }
 
-  inputFocused(ref) {
-    const usernameFieldOffset = Platform.OS === 'ios' ? 75 : 125
-    const passwordFieldOffset = Platform.OS === 'ios' ? 150 : 170
-
-    if(ref === "usernameField") {
-      this._scroll(ref, usernameFieldOffset);
-      return
-    }
-
-    this._scroll(ref, passwordFieldOffset);
-  }
-
-  inputBlurred(ref) {
-    this._scroll(ref, 0);
-  }
-
-  _scroll(ref, offset) {
-    setTimeout(() => {
-      var scrollResponder = this.refs.scrollView.getScrollResponder();
-      scrollResponder.scrollResponderScrollNativeHandleToKeyboard(
-                 findNodeHandle(this.refs[ref]),
-                 offset,
-                 true
-             );
-      }, 50);
-  }
-
   onOnboardingSkip() {
     this.setState({shouldShowOnboarding: false})
   }
@@ -104,20 +84,23 @@ export default class LoginView extends Component {
       return <OnboardingView onSkip={() => {this.onOnboardingSkip()}}/>
     }
 
+    const headerText = `${this.state.headerText} ${this.state.firstName || ""}`
+
     return (
       <Root>
-        <ScrollView ref="scrollView" keyboardDismissMode='interactive' style={{backgroundColor: Colors.white}}>
+      <Container>
+        <Content style={{backgroundColor: Colors.white}}>
           <View style={styles.background}>
            <View style={{alignItems: 'center', marginTop: 40}}>
              <Image
               style={{width: 145, height: 111}}
               source={require('../Images/go_locker_grayscale.jpg')}
              />
-             <Text style={{textAlign: 'center', fontSize: 28, color: Colors.dark_gray, marginTop: 30}}>Sign in</Text>
+             <Text style={{textAlign: 'center', fontSize: 28, color: Colors.dark_gray, marginTop: 30}}>{headerText}</Text>
            </View>
             <View style={styles.container}>
-                <TextInput underlineColorAndroid='transparent' ref="usernameField" onFocus={this.inputFocused.bind(this, 'usernameField')} onBlur={this.inputBlurred.bind(this, 'usernameField')} placeholderTextColor={Colors.tapable_blue} style={{color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, textAlign: 'center', fontFamily: Theme.primaryFont}} placeholder={"Your Email"} onChangeText={(username) => this.setState({username})} value={this.state.username}/>
-                <TextInput underlineColorAndroid='transparent' ref="passwordField" secureTextEntry={true} onFocus={this.inputFocused.bind(this, 'passwordField')} onBlur={this.inputBlurred.bind(this, 'passwordField')} placeholderTextColor={Colors.tapable_blue} style={{color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, textAlign: 'center', fontFamily: Theme.primaryFont, marginTop: 5}} placeholder={"Password"} onChangeText={(password) => this.setState({password})} value={this.state.password}/>
+                <TextInput underlineColorAndroid='transparent' ref="usernameField"  placeholderTextColor={Colors.tapable_blue} style={{color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, textAlign: 'center', fontFamily: Theme.primaryFont}} placeholder={"Your Email"} onChangeText={(username) => this.setState({username})} value={this.state.username}/>
+                <TextInput underlineColorAndroid='transparent' ref="passwordField" secureTextEntry={true} placeholderTextColor={Colors.tapable_blue} style={{color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, textAlign: 'center', fontFamily: Theme.primaryFont, marginTop: 5}} placeholder={"Password"} onChangeText={(password) => this.setState({password})} value={this.state.password}/>
                 <TouchableHighlight onPress={this.onLoginPress} underlayColor={'transparent'}>
                   <View style={{height: 50, borderRadius: 4, backgroundColor: Colors.light_green, marginTop: 10}}>
                     <Text style={{textAlign: 'center', color: Colors.white, marginTop: 17}}>Sign In</Text>
@@ -135,7 +118,8 @@ export default class LoginView extends Component {
                 </TouchableHighlight>
             </View>
         </View>
-      </ScrollView>
+        </Content>
+      </Container>
     </Root>
     );
   }

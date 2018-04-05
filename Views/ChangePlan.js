@@ -81,7 +81,7 @@ export default class ChangePlan extends Component {
     const payPerPackageCircleStyle = payPerPackageSelected ? styles.activeCircle : styles.circle
     const premiumCircleStyle = premiumSelected ? styles.activeCircle : styles.circle
     const unlimitedCircleStyle = unlimitedSelected ? styles.activeCircle : styles.circle
-    const error = "An error has occurred or you're missing a payment method"
+    const error = "Something is wrong or you're missing a payment method"
     const errorText = this.state.error ? <Text style={{marginLeft: 21, color: Colors.red, marginTop: 5}}>{error}</Text> : null
 
     return (

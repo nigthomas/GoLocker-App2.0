@@ -14,7 +14,6 @@ import Utils from '../Common/Utils'
 import Swipeout from 'react-native-swipeout';
 import ThreeHeaderView from '../Elements/ThreeHeaderView'
 import AccountService from '../Services/AccountService'
-import ErrorView from './ErrorView'
 
 export default class ChangePassword extends Component {
   static navigationOptions = { header: null, tabBarVisible: false };
@@ -63,18 +62,12 @@ export default class ChangePassword extends Component {
   }
 
   render() {
-    if(this.state.error) {
-        return <View style={{flex: 1, backgroundColor: Colors.white}}>
-                <ErrorView />
-                <FooterTabWithNavigation navigation={this.props.navigation} active={"details"}/>
-              </View>
-    }
-
     const matchText = "Passwords don't match"
     const complexText = "Password is too weak or contains invalid characters"
 
     const passwordDoesntMatchText = this.state.passwordNoMatchError ? <Text style={{marginLeft: 21, color: Colors.red, marginTop: 5}}>{matchText}</Text> : null
     const complexityText = this.state.passwordComplexityError ? <Text style={{marginLeft: 21, color: Colors.red, marginTop: 5}}>{complexText}</Text> : null
+    const errorText = this.state.error ? <Text style={{marginLeft: 21, color: Colors.red, marginTop: 5}}>Something is wrong. Please try again</Text> : null
 
     return (
       <Root>
@@ -89,6 +82,7 @@ export default class ChangePassword extends Component {
             </View>
             {passwordDoesntMatchText}
             {complexityText}
+            {errorText}
             <Text style={{marginTop: 10, fontSize: 10, marginLeft: 21, marginRight: 21}}>*Password must contain at least 8 characters, one uppercase letter and one number. No special characters.</Text>
           </Content>
           <FooterTabWithNavigation navigation={this.props.navigation} active={"details"}/>

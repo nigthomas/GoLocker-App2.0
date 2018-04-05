@@ -15,7 +15,6 @@ import Swipeout from 'react-native-swipeout';
 import Entypo from 'react-native-vector-icons/dist/Entypo'
 import ThreeHeaderView from '../Elements/ThreeHeaderView'
 import AccountService from '../Services/AccountService'
-import ErrorView from './ErrorView'
 import Swiper from 'react-native-swiper';
 import Colors from '../Common/Colors'
 import OnboardingService from '../Services/OnboardingService'

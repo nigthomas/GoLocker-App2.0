@@ -13,7 +13,6 @@ import Moment from 'moment'
 import Utils from '../Common/Utils'
 import Swipeout from 'react-native-swipeout';
 import Entypo from 'react-native-vector-icons/dist/Entypo'
-import ErrorView from './ErrorView'
 
 export default class OptionSelector extends Component {
   static navigationOptions = { title: 'Packages', header: null, tabBarVisible: false };

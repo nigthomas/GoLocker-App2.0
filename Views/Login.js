@@ -18,7 +18,7 @@ export default class LoginView extends Component {
 
    const headerText = (this.props && this.props.navigation && this.props.navigation.state && this.props.navigation.state.params) ? this.props.navigation.state.params.headerText : "Sign in"
    const firstName = (this.props && this.props.navigation && this.props.navigation.state && this.props.navigation.state.params) ? this.props.navigation.state.params.firstName : null
-   
+
    this.state = {
      username: null,
      password: null,
@@ -62,12 +62,34 @@ export default class LoginView extends Component {
   }
 
   goToForgotPassword() {
-    const { navigate }  = this.props.rootNavigation.navigate;
+    var navigate;
+
+    if(this.props.navigation) {
+      navigate = this.props.navigation.navigate
+    }
+
+    if(this.props.rootNavigation && this.props.rootNavigation.navigate) {
+      navigate = this.props.rootNavigation.navigate.navigate
+    }
+
+    if(!navigate) {
+      return
+    }
+
     navigate('ForgotPasswordView', {navigate: navigate})
   }
 
   goToRegistration() {
-    const { navigate }  = this.props.rootNavigation.navigate;
+    var navigate;
+
+    if(this.props.navigation) {
+      navigate = this.props.navigation.navigate
+    }
+
+    if(this.props.rootNavigation && this.props.rootNavigation.navigate) {
+      navigate = this.props.rootNavigation.navigate.navigate
+    }
+
     navigate('RegistrationView', {navigate: navigate})
   }
 

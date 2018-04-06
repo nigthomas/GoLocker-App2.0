@@ -85,6 +85,39 @@ export default class AccountService {
      })
    }
 
+   resetPassword(email) {
+     if(!email) {
+       return new Promise((resolve, reject) => { reject(new Error('Missing email'))})
+     }
+
+     return AccountNetworkManager.resetPassword(email)
+     .then(data => {
+       return new Promise((resolve, reject) => { resolve()})
+     })
+   }
+
+   verifyCode(code, email) {
+     if(!code || !email) {
+       return new Promise((resolve, reject) => { reject(new Error('Missing code or email'))})
+     }
+
+     return AccountNetworkManager.verifyCode(code, email)
+     .then(data => {
+       return new Promise((resolve, reject) => { resolve()})
+     })
+   }
+
+   setNewPassword(password, email, code) {
+     if(!code || !email || !password) {
+       return new Promise((resolve, reject) => { reject(new Error('Missing code or email or password'))})
+     }
+
+     return AccountNetworkManager.setNewPassword(password, code, email)
+     .then(data => {
+       return new Promise((resolve, reject) => { resolve()})
+     })
+   }
+
    updateEmail(email) {
      if(!email) {
        return new Promise((resolve, reject) => { reject(new Error('Missing email'))})

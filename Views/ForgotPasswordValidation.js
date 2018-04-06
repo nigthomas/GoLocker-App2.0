@@ -10,13 +10,16 @@ import AlertView from '../Elements/AlertView'
 import AccountService from '../Services/AccountService'
 import Utils from '../Common/Utils'
 
-export default class ForgotPassword extends Component {
-
+export default class ForgotPasswordValidation extends Component {
   constructor(props) {
    super(props);
 
+   const { params } = this.props.navigation.state;
+   const email = params.email
+
    this.state = {
-     username: null,
+     email: email,
+     code: null,
      error: null,
      errorMessage: null
    };
@@ -24,24 +27,25 @@ export default class ForgotPassword extends Component {
 
   goToSignIn() {
     const { navigation } = this.props;
-    navigation.goBack()
+    navigation.popToTop()
   }
 
-  onResetPassword() {
-    const email = this.state.username
+  onVerify() {
+    const code = this.state.code
+    const email = this.state.email
     const { navigation } = this.props;
 
-    if(!email || !Utils.validateEmail(email)) {
-      this.setState({errorMessage: "Please enter a valid email address"})
+    if(!code) {
+      this.setState({errorMessage: "Please enter your verification code"})
       return
     }
 
     this.setState({errorMessage: null})
 
     AccountService.getInstance()
-    .resetPassword(email)
+    .verifyCode(code, email)
     .then(() => {
-      navigation.navigate('ForgotPasswordValidation', {email: email})
+      navigation.navigate('NewPassword', {email: email, code: code})
     })
     .catch(err => {
       this.setState({error: err})
@@ -56,7 +60,7 @@ export default class ForgotPassword extends Component {
     var errorText = this.state.errorMessage ? <Text style={{color: Colors.red, marginRight: 21, marginTop: 5}}>{this.state.errorMessage}</Text> : null
 
     if(!errorText && this.state.error) {
-      errorText = <Text style={{color: Colors.red, marginRight: 21, marginTop: 5}}>Something is wrong. Please try again</Text>
+      errorText = <Text style={{color: Colors.red, marginRight: 21, marginTop: 5}}>Something is wrong or your verification code is incorrect. Please try again</Text>
     }
 
     return (
@@ -68,17 +72,16 @@ export default class ForgotPassword extends Component {
             </View>
           </TouchableHighlight>
          <View style={{marginTop: 75, marginLeft: 21, marginRight: 21}}>
-          <Text style={{marginTop: 20, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>Forgot</Text>
+          <Text style={{marginTop: 20, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>Reset</Text>
           <Text style={{fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>your password?</Text>
-          <View style={{marginTop: 20}}>
-            <Text style={{fontSize: Utils.normalize(16), color: Colors.gray_85, fontWeight: 'bold'}}>We can help you with that</Text>
-          </View>
           {errorText}
-           <TextInput placeholderTextColor={Colors.tapable_blue} style={{color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, paddingLeft: 21, fontFamily: Theme.primaryFont, marginTop: 25}} placeholder={"Your Email"} onChangeText={(username) => this.setState({username})} value={this.state.username}/>
-
-           <TouchableHighlight onPress={() => {this.onResetPassword()}} underlayColor={'transparent'}>
+          <View style={{marginTop: 20}}>
+            <Text style={{marginTop: 20, fontSize: Utils.normalize(16), color: Colors.gray_85, fontWeight: 'bold'}}>Provide that verification code sent to your email</Text>
+          </View>
+           <TextInput placeholderTextColor={Colors.tapable_blue} style={{color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, paddingLeft: 21, fontFamily: Theme.primaryFont, marginTop: 25}} placeholder={"Verification Code"} onChangeText={(code) => this.setState({code})} value={this.state.code}/>
+           <TouchableHighlight onPress={() => {this.onVerify()}} underlayColor={'transparent'}>
              <View style={{height: 50, borderRadius: 4, backgroundColor: '#7ED321', marginTop: 10}}>
-               <Text style={{textAlign: 'center', color: Colors.white, marginTop: 17}}>Send Recovery Code</Text>
+               <Text style={{textAlign: 'center', color: Colors.white, marginTop: 17}}>Verify</Text>
              </View>
            </TouchableHighlight>
          </View>

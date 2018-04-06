@@ -7,6 +7,7 @@ import PropertyService from '../Services/PropertyService'
 import { Container, Header, Content, Form, Item, Input, Label, Root } from 'native-base';
 import MapView from 'react-native-maps';
 import LoginService from '../Services/LoginService'
+import Utils from '../Common/Utils'
 
 export default class RegistrationSelectLocker extends Component {
   static navigationOptions = { header: null };
@@ -55,10 +56,7 @@ export default class RegistrationSelectLocker extends Component {
     const locker = (this.props.navigation && this.props.navigation.state && this.props.navigation.state.params) ? this.props.navigation.state.params.property : {}
     const { navigation } = this.props;
     const passwordsMatch = password && password.length > 0 && passwordConfirmation === password
-    const isComplexPassword = (password && password.length >= 8 && //Is >=8 characters
-      password != password.toLowerCase() && //Has uppercase character
-      /\d/.test(password) &&  //Has numbers
-      !/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/g.test(password)) //Doesn't have special characters
+    const isComplexPassword = Utils.isPasswordComplex(password)
 
     if(!firstName) {
       this.setState({errorMessage: "Please enter your first name"})
@@ -78,7 +76,7 @@ export default class RegistrationSelectLocker extends Component {
       return
     }
 
-    if(!email) {
+    if(!email || !Utils.validateEmail(email)) {
       this.setState({errorMessage: "Please enter a valid email"})
       this.component._root.scrollToPosition(0, 0)
       return

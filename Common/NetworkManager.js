@@ -10,6 +10,7 @@ const URL = {
   reservation: `${BASE_URL}/v1/account/reservations`,
   createReservation: `${BASE_URL}/v1/packages`,
   register: `${BASE_URL}/v1/register`,
+  resetPassword: `${BASE_URL}/v1/resetPassword`
 }
 
 const STATUS_CODE = {
@@ -116,6 +117,60 @@ export const PropertiesNetworkManager = {
 }
 
 export const AccountNetworkManager = {
+  setNewPassword: (password, code, email) => {
+    return fetch(URL.resetPassword, {
+      method: 'PUT',
+      headers: {
+        Accept: HEADERS.Accept,
+        },
+        body: JSON.stringify({
+         password: password,
+         email: email,
+         resetCode: code
+       })
+      })
+    .then((response) => {
+      if(response.status === STATUS_CODE.OK) {
+        return response.json()
+      }
+
+      return new Promise((resolve, reject) => { reject(new Error('Error has occurred'))})
+    })
+  },
+  verifyCode: (code, email) => {
+    const url = `${URL.resetPassword}?email=${email}&code=${code}`
+    return fetch(url, {
+      method: 'GET',
+      headers: {
+        Accept: HEADERS.Accept,
+      }
+      })
+    .then((response) => {
+      if(response.status === STATUS_CODE.OK) {
+        return response.json()
+      }
+
+      return new Promise((resolve, reject) => { reject(new Error('Error has occurred'))})
+    })
+  },
+  resetPassword: (email) => {
+    return fetch(URL.resetPassword, {
+      method: 'POST',
+      headers: {
+        Accept: HEADERS.Accept,
+        },
+        body: JSON.stringify({
+         email: email
+       })
+      })
+    .then((response) => {
+      if(response.status === STATUS_CODE.OK) {
+        return response.json()
+      }
+
+      return new Promise((resolve, reject) => { reject(new Error('Error has occurred'))})
+    })
+  },
   updatePlan: (plan) => {
     return LoginService.getInstance().account()
     .then(account => {

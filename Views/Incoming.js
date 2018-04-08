@@ -109,12 +109,12 @@ export default class IncomingView extends Component {
         <Container>
           <Content style={{backgroundColor: Colors.white, flex: 1}}>
             <TouchableHighlight onPress={() => {this.onRefresh()}} underlayColor={'transparent'}>
-              <View style={{height: 50, width: 50, marginTop: 50, marginRight: 20, alignSelf: 'flex-end'}}>
+              <View style={{height: 30, width: 50, marginTop: 40, marginRight: 21, alignSelf: 'flex-end'}}>
                 <FontAwesome name="refresh" size={22} style={{color: Colors.gray_85,  alignSelf: 'flex-end'}}/>
               </View>
             </TouchableHighlight>
             <View>
-              <Text style={{marginLeft: 21, marginTop: 21, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>Tracking</Text>
+              <Text style={{marginLeft: 21, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>Tracking</Text>
             </View>
             <View style={{marginTop: 20, marginLeft: 21}}>
               <Text style={{fontSize: Utils.normalize(16), color: Colors.gray_85, fontWeight: 'bold'}}>You have no packages</Text>

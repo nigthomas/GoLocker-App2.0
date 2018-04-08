@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, StatusBar, FlatList} from 'react-native';
 import Theme from '../Common/Theme'
 import FooterTabWithNavigation from './FooterTabWithNavigation'
 import { Container, Header, Content, Card, CardItem, Left, Thumbnail, Body, Button, Icon, Title, Footer, FooterTab, Root, Right} from 'native-base';
+import { StyleSheet, Text, View, StatusBar, FlatList, TouchableHighlight} from 'react-native';
 import LoadingView from './Loading'
 import DashboardService from '../Services/DashboardService'
 import ReservationService from '../Services/ReservationService'
@@ -13,6 +13,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/dist/MaterialCommu
 import Moment from 'moment'
 import Utils from '../Common/Utils'
 import Swipeout from 'react-native-swipeout';
+import FontAwesome from 'react-native-vector-icons/dist/FontAwesome'
 
 export default class IncomingView extends Component {
   static navigationOptions = { title: 'Packages', header: null, tabBarVisible: false };
@@ -24,7 +25,6 @@ export default class IncomingView extends Component {
      dashboardData: {},
      reservationData: [],
      loading: false,
-     loaded: false,
      error: null
    };
   }
@@ -34,20 +34,23 @@ export default class IncomingView extends Component {
     this.fetch()
 
     const { params } = this.props.navigation.state;
-
     ReservationService.getInstance().getListener()
     .on("CREATED_RESERVATION", () => {
       this.setState({loading: true})
       this.fetch()
-      console.log("reload")
     })
+  }
+
+  onRefresh() {
+    this.setState({loading: true})
+    this.fetch()
   }
 
   fetch() {
     Promise.all([DashboardService.getInfo(),
                  ReservationService.getInstance().getReservations()])
     .then(results => {
-      this.setState({dashboardData: results[0], reservationData: results[1], loading: false, loaded:true, error: null})
+      this.setState({dashboardData: results[0], reservationData: results[1], loading: false, error: null})
     })
     .catch(err => {
       this.setState({error: err, loading: false})
@@ -63,7 +66,7 @@ export default class IncomingView extends Component {
       this.setState({reservationData: results, loading: false, error: null})
     })
     .catch(err => {
-      console.error(err)
+      this.setState({reservationData: results, loading: false, error: err})
     })
   }
 
@@ -99,20 +102,24 @@ export default class IncomingView extends Component {
   }
 
   renderEmptyList(firstName, lastName) {
+    const errorText = this.state.error ? <Text style={{marginLeft: 21, color: Colors.red, marginTop: 5}}>Something is wrong. Please try again</Text> : null
+
     return (
       <Root>
         <Container>
-          <Content style={{backgroundColor: Colors.white}}>
-            <View style={{marginTop: 30}}>
-              <HeaderView title={`${Utils.capitalize(firstName)} ${Utils.capitalize(lastName)}`} details={"Show QR code"}/>
-            </View>
+          <Content style={{backgroundColor: Colors.white, flex: 1}}>
+            <TouchableHighlight onPress={() => {this.onRefresh()}} underlayColor={'transparent'}>
+              <View style={{height: 50, width: 50, marginTop: 50, marginRight: 20, alignSelf: 'flex-end'}}>
+                <FontAwesome name="refresh" size={22} style={{color: Colors.gray_85,  alignSelf: 'flex-end'}}/>
+              </View>
+            </TouchableHighlight>
             <View>
-              <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>Incoming</Text>
-              <Text style={{marginLeft: 21, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>Packages</Text>
+              <Text style={{marginLeft: 21, marginTop: 21, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>Tracking</Text>
             </View>
-            <View style={{marginTop: 20}}>
-              <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(16), color: Colors.gray_85, fontWeight: 'bold'}}>You have no incoming packages</Text>
+            <View style={{marginTop: 20, marginLeft: 21}}>
+              <Text style={{fontSize: Utils.normalize(16), color: Colors.gray_85, fontWeight: 'bold'}}>You have no packages</Text>
             </View>
+            {errorText}
           </Content>
           <FooterTabWithNavigation navigation={this.props.navigation} active={"incoming"}/>
         </Container>
@@ -136,17 +143,21 @@ export default class IncomingView extends Component {
       return this.renderEmptyList(firstName, lastName)
     }
 
+    const errorText = this.state.error ? <Text style={{marginLeft: 21, color: Colors.red, marginTop: 5}}>Something is wrong. Please try again</Text> : null
+
     return (
       <Root>
         <Container>
-          <Content style={{backgroundColor: Colors.white}}>
-            <View style={{marginTop: 30}}>
-              <HeaderView title={`${Utils.capitalize(firstName)} ${Utils.capitalize(lastName)}`} details={"Show QR code"}/>
+          <Content style={{backgroundColor: Colors.white, flex: 1}}>
+          <TouchableHighlight onPress={() => {this.onRefresh()}} underlayColor={'transparent'}>
+            <View style={{position: 'absolute', right: 21, top: 40, height: 50, width: 50}}>
+              <FontAwesome name="refresh" size={22} style={{alignSelf: 'flex-end'}}/>
             </View>
-            <View>
-              <Text style={{marginLeft: 21, marginTop: 20, fontSize: 36, color: Colors.dark_gray, fontWeight: 'bold'}}>Incoming</Text>
-              <Text style={{marginLeft: 21, fontSize: 36, color: Colors.dark_gray, fontWeight: 'bold'}}>Packages</Text>
-            </View>
+          </TouchableHighlight>
+          <View style={{marginTop: 70, backgroundColor: 'orange', flex: 1}}>
+            <Text style={{marginLeft: 21, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>Tracking</Text>
+          </View>
+          {errorText}
             <View style={{marginTop: 20, borderTopColor: Colors.gray_ef, borderTopWidth: 1}}>
               <FlatList data={data} keyExtractor={(item, index) => item.trackingNumber} renderItem={({ item }) => {return this.renderItem(item)}} backgroundColor={'white'}/>
             </View>

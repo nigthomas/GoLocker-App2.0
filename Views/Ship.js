@@ -149,7 +149,9 @@ export default class Ship extends Component {
     .then(() => {
       this.setState({choosePackageError: false, enterTrackingNumberError: false, number: null, smallParcelSelected: false, mediumParcelSelected:false, largeParcelSelected:false})
       const { navigate } = this.props.navigation;
-      navigate('Incoming', {refresh: true})
+      setTimeout(() => {
+        navigate('Incoming', {refresh: true})
+      }, 500)
     })
     .catch(err => {
       this.setState({error: err, loading: false})
@@ -178,11 +180,8 @@ export default class Ship extends Component {
       <Root>
           <Container>
             <Content style={{backgroundColor: Colors.white}} ref={c => (this.component = c)}>
-              <View style={{marginTop: 30}}>
-                <HeaderView title={`${Utils.capitalize(firstName)} ${Utils.capitalize(lastName)}`} details={"Show QR code"}/>
-              </View>
-              <View>
-                <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>Send a package</Text>
+              <View style={{marginTop: 70}}>
+                <Text style={{marginLeft: 21, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>Send a package</Text>
               </View>
               {errorText}
 

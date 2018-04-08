@@ -108,7 +108,7 @@ export default class RegistrationSelectLocker extends Component {
 
     LoginService.getInstance().registerUser(firstName, lastName, email, phone, password, locker.id, handicap)
     .then(() => {
-      navigation.navigate('Verification', {email: email, firstName: firstName})
+      navigation.navigate('Verification', {email: email.trim(), firstName: firstName})
     })
     .catch(err => {
       this.setState({errorMessage: "Something is wrong or your phone number or email is in use"})
@@ -210,7 +210,7 @@ export default class RegistrationSelectLocker extends Component {
                <TextInput underlineColorAndroid='transparent' ref="passwordConfirmationField" placeholderTextColor={Colors.tapable_blue} style={{flex: 1, marginTop: 10, paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Password Confirmation"} onChangeText={(passwordConfirmation) => this.setState({passwordConfirmation})} value={this.state.passwordConfirmation}/>
                <View style={{marginTop: 10, flex: 1, flexDirection: 'row', alignItems: 'center'}}>
                  <Switch onValueChange={(value) => {this.onSwitchChange(value)}} value={this.state.handicap}/>
-                 <Text style={{marginLeft: 5, textAlign: 'left', color: Colors.dark_gray, fontWeight: 'bold'}}>Handicap</Text>
+                 <Text style={{marginLeft: 5, textAlign: 'left', color: Colors.dark_gray, fontWeight: 'bold'}}>Disability</Text>
                </View>
                <Text style={{textAlign: 'left', color: Colors.dark_gray, fontSize: 10, marginTop: 5}}>*Packages for users with physical disabilities will be placed in lower compartments)</Text>
                <TouchableHighlight onPress={() => {this.onCreateAccountPress()}} underlayColor={'transparent'}>

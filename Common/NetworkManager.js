@@ -1,5 +1,6 @@
 import LoginService from '../Services/LoginService'
 import axios from 'axios'
+import events from 'events'
 
 const BASE_URL = "https://api.golocker.com"
 
@@ -15,11 +16,39 @@ const URL = {
 
 const STATUS_CODE = {
   OK: 200,
+  UNAUTHORIZED: 401,
   NO_CONTENT: 204
 }
 
 const HEADERS = {
   Accept: 'application/json','Content-Type': 'application/json'
+}
+
+export class NetworkStatusListener {
+  static sharedInstance = null;
+
+  constructor(props) {
+   this.state = {
+     listener: new events.EventEmitter(),
+     eventListeners: []
+   };
+  }
+
+  static getInstance() {
+     if (this.sharedInstance == null) {
+         this.sharedInstance = new NetworkStatusListener();
+     }
+
+     return this.sharedInstance;
+   }
+
+   getListener() {
+     return this.state.listener
+   }
+
+   forceLogout() {
+     this.state.listener.emit('FORCE_LOGOUT');
+   }
 }
 
 export const AuthenticationNetworkManager = {
@@ -188,6 +217,11 @@ export const AccountNetworkManager = {
         return response.json()
       }
 
+      if(response.status === STATUS_CODE.UNAUTHORIZED) {
+        NetworkStatusListener.getInstance().forceLogout()
+        return new Promise((resolve, reject) => { reject(new Error('Unauthorized'))})
+      }
+
       return new Promise((resolve, reject) => { reject(new Error('Error has occurred'))})
     })
   },
@@ -206,6 +240,11 @@ export const AccountNetworkManager = {
     .then((response) => {
       if(response.status === STATUS_CODE.OK) {
         return response.json()
+      }
+
+      if(response.status === STATUS_CODE.UNAUTHORIZED) {
+        NetworkStatusListener.getInstance().forceLogout()
+        return new Promise((resolve, reject) => { reject(new Error('Unauthorized'))})
       }
 
       return new Promise((resolve, reject) => { reject(new Error('Error has occurred'))})
@@ -228,6 +267,11 @@ export const AccountNetworkManager = {
         return response.json()
       }
 
+      if(response.status === STATUS_CODE.UNAUTHORIZED) {
+        NetworkStatusListener.getInstance().forceLogout()
+        return new Promise((resolve, reject) => { reject(new Error('Unauthorized'))})
+      }
+
       return new Promise((resolve, reject) => { reject(new Error('Error has occurred'))})
     })
   },
@@ -246,6 +290,11 @@ export const AccountNetworkManager = {
     .then((response) => {
       if(response.status === STATUS_CODE.OK) {
         return response.json()
+      }
+
+      if(response.status === STATUS_CODE.UNAUTHORIZED) {
+        NetworkStatusListener.getInstance().forceLogout()
+        return new Promise((resolve, reject) => { reject(new Error('Unauthorized'))})
       }
 
       return new Promise((resolve, reject) => { reject(new Error('Error has occurred'))})
@@ -268,6 +317,11 @@ export const AccountNetworkManager = {
         return response.json()
       }
 
+      if(response.status === STATUS_CODE.UNAUTHORIZED) {
+        NetworkStatusListener.getInstance().forceLogout()
+        return new Promise((resolve, reject) => { reject(new Error('Unauthorized'))})
+      }
+
       return new Promise((resolve, reject) => { reject(new Error('Error has occurred'))})
     })
   },
@@ -288,6 +342,11 @@ export const AccountNetworkManager = {
         return response.json()
       }
 
+      if(response.status === STATUS_CODE.UNAUTHORIZED) {
+        NetworkStatusListener.getInstance().forceLogout()
+        return new Promise((resolve, reject) => { reject(new Error('Unauthorized'))})
+      }
+
       return new Promise((resolve, reject) => { reject(new Error('Error has occurred'))})
     })
   },
@@ -306,6 +365,11 @@ export const AccountNetworkManager = {
     .then((response) => {
       if(response.status === STATUS_CODE.OK) {
         return response.json()
+      }
+
+      if(response.status === STATUS_CODE.UNAUTHORIZED) {
+        NetworkStatusListener.getInstance().forceLogout()
+        return new Promise((resolve, reject) => { reject(new Error('Unauthorized'))})
       }
 
       return new Promise((resolve, reject) => { reject(new Error('Error has occurred'))})
@@ -331,6 +395,11 @@ export const DashboardNetworkManager = {
         return response.json()
       }
 
+      if(response.status === STATUS_CODE.UNAUTHORIZED) {
+        NetworkStatusListener.getInstance().forceLogout()
+        return new Promise((resolve, reject) => { reject(new Error('Unauthorized'))})
+      }
+
       return new Promise((resolve, reject) => { reject(new Error('Error has occurred'))})
     })
   }
@@ -354,6 +423,10 @@ export const ReservationNetworkManager = {
         return response.json()
       }
 
+      if(response.status === STATUS_CODE.UNAUTHORIZED) {
+        NetworkStatusListener.getInstance().forceLogout()
+        return new Promise((resolve, reject) => { reject(new Error('Unauthorized'))})
+      }
 
       return new Promise((resolve, reject) => { reject(new Error('Error has occurred'))})
     })
@@ -375,6 +448,11 @@ export const ReservationNetworkManager = {
     .then((response) => {
       if(response.status === STATUS_CODE.NO_CONTENT) {
         return new Promise((resolve, reject) => { resolve({})})
+      }
+
+      if(response.status === STATUS_CODE.UNAUTHORIZED) {
+        NetworkStatusListener.getInstance().forceLogout()
+        return new Promise((resolve, reject) => { reject(new Error('Unauthorized'))})
       }
 
       return new Promise((resolve, reject) => { reject(new Error('Error has occurred'))})
@@ -400,6 +478,11 @@ export const ReservationNetworkManager = {
     .then((response) => {
       if(response.status === STATUS_CODE.OK) {
         return response.json()
+      }
+
+      if(response.status === STATUS_CODE.UNAUTHORIZED) {
+        NetworkStatusListener.getInstance().forceLogout()
+        return new Promise((resolve, reject) => { reject(new Error('Unauthorized'))})
       }
 
       return new Promise((resolve, reject) => { reject(new Error('Error has occurred'))})

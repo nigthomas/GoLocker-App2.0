@@ -81,7 +81,7 @@ export default class Onboarding extends Component {
 
 const styles = StyleSheet.create({
   wrapper: {
-    height: 340
+    height: 370
   },
   slide1: {
     flex: 1,

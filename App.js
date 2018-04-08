@@ -10,6 +10,7 @@ import SplashView from './Views/Splash'
 import SelectLockerView from './Views/SelectLocker'
 import ForgotPasswordView from './Views/ForgotPassword'
 import ResetPasswordView from './Views/ResetPassword'
+import OnboardingService from './Services/OnboardingService'
 import Storage from './Common/Storage'
 import LoginService from './Services/LoginService'
 import Ionicons from 'react-native-vector-icons/MaterialIcons';
@@ -29,6 +30,7 @@ import RegistrationForm from './Views/RegistrationForm'
 import Verification from './Views/RegistrationVerification'
 import ForgotPasswordValidation from './Views/ForgotPasswordValidation'
 import NewPassword from './Views/NewPassword'
+import { NetworkStatusListener } from './Common/NetworkManager'
 
 const HomeNavigationController = StackNavigator({
   HomeView: { screen: HomeView }
@@ -107,6 +109,12 @@ class App extends Component {
     }
 
     componentDidMount() {
+      NetworkStatusListener.getInstance()
+      .getListener()
+      .on("FORCE_LOGOUT", () => {
+        LoginService.getInstance().logOut()
+      })
+
       Promise.all([LoginService.getInstance().isLoggedIn()])
       .then(results => {
         this.setState({isLoggedIn: results[0], loading: false})

@@ -37,7 +37,7 @@ export default class OnboardingService {
    }
 
    markShown() {
-     Storage.set(ONBOARDING_KEY, JSON.stringify({shown: true})) 
+     Storage.set(ONBOARDING_KEY, JSON.stringify({shown: true}))
    }
 
    clearShown() {

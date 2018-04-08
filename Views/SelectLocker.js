@@ -83,23 +83,19 @@ export default class SelectLocker extends Component {
       <Root>
         <Container>
           <Content style={{backgroundColor: Colors.white}}>
-            <View style={{marginTop: 30}}>
-              <HeaderView title={`${Utils.capitalize(firstName)} ${Utils.capitalize(lastName)}`} details={"Show QR code"}/>
-            </View>
-            <View>
-              <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>Select a locker</Text>
+            <TouchableHighlight onPress={() => {this.onCancel()}} underlayColor={'transparent'}>
+              <View style={{marginRight: 21, marginTop: 30}}>
+                <Text style={{textAlign: 'right', color: Colors.gray_85, fontSize: 16, zIndex: 1}}>Cancel</Text>
+              </View>
+            </TouchableHighlight>
+            <Text style={{marginLeft:21, marginTop: 20, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>Deliver to</Text>
+            <View style={{marginTop: 20, marginLeft:21}}>
+              <Text style={{fontSize: Utils.normalize(16), color: Colors.gray_85, fontWeight: 'bold'}}>Select a locker</Text>
             </View>
 
             <View style={{borderTopColor: Colors.gray_ef, borderTopWidth: 1, marginTop: 10}}>
               <FlatList data={data} keyExtractor={(item, index) => item.id} renderItem={({ item }) => {return this.renderItem(item)}} backgroundColor={'white'}/>
             </View>
-
-            <TouchableHighlight onPress={() => {this.onCancel()}} underlayColor={'transparent'}>
-              <View style={{justifyContent: 'center', borderBottomColor: Colors.gray_ef, borderBottomWidth: 1, height: 50, flex: 1, marginRight: 21}}>
-                <Text style={{color: Colors.dark_gray, marginLeft: 21}}>Cancel</Text>
-                <Entypo name="chevron-small-right" size={25} style={{color: Colors.gray_85, position: 'absolute', right: 0}}/>
-              </View>
-            </TouchableHighlight>
           </Content>
           <FooterTabWithNavigation navigation={this.props.navigation} active={"ship"}/>
         </Container>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, StatusBar, FlatList} from 'react-native';
+import { StyleSheet, Text, View, StatusBar, FlatList, TouchableHighlight} from 'react-native';
 import Theme from '../Common/Theme'
 import FooterTabWithNavigation from './FooterTabWithNavigation'
 import { Container, Header, Content, Card, CardItem, Left, Thumbnail, Body, Button, Icon, Title, Footer, FooterTab, Root, Right} from 'native-base';
@@ -13,6 +13,7 @@ import Moment from 'moment'
 import Utils from '../Common/Utils'
 import Swipeout from 'react-native-swipeout'
 import MapView from 'react-native-maps';
+import FontAwesome from 'react-native-vector-icons/dist/FontAwesome'
 
 export default class HomeView extends Component {
   static navigationOptions = { header: null, tabBarVisible: false };
@@ -28,6 +29,11 @@ export default class HomeView extends Component {
   }
 
   componentDidMount() {
+    this.setState({loading: true})
+    this.fetch()
+  }
+
+  onRefresh() {
     this.setState({loading: true})
     this.fetch()
   }
@@ -120,6 +126,11 @@ export default class HomeView extends Component {
           barStyle="dark-content"
         />
           <Content style={{backgroundColor: Colors.white}}>
+            <TouchableHighlight onPress={() => {this.onRefresh()}} underlayColor={'transparent'}>
+              <View style={{position: 'absolute', right: 21, top: 40, height: 50, width: 50}}>
+                <FontAwesome name="refresh" size={22} style={{alignSelf: 'flex-end', color: Colors.gray_85}}/>
+              </View>
+            </TouchableHighlight>
             <View style={{marginTop: 50}}>
               <Text style={{marginLeft: 21, marginTop: 20, fontSize: 36, color: Colors.dark_gray, fontWeight: 'bold'}}>Welcome</Text>
               <Text style={{marginLeft: 21, fontSize: 36, color: Colors.dark_gray, fontWeight: 'bold'}}>{firstName} {lastName}</Text>

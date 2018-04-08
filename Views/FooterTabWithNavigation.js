@@ -45,7 +45,7 @@ export default class FooterTabWithNavigation extends Component {
        </Button>
          <Button vertical onPress={this.onIncomingPress}>
            <FontAwesome name="th-list" size={20} style={incomingStyle}/>
-           <Text style={incomingTextStyle}>Incoming</Text>
+           <Text style={incomingTextStyle}>Tracking</Text>
          </Button>
          <Button vertical onPress={this.onShipPress}>
            <FontAwesome name="send" size={20} style={shipStyle} />

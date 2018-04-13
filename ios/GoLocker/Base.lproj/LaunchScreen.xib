@@ -15,11 +15,11 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="go_locker_grayscale" translatesAutoresizingMaskIntoConstraints="NO" id="5RU-gO-f1P">
-                    <rect key="frame" x="168" y="142.5" width="144" height="95"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="golockerLogo" translatesAutoresizingMaskIntoConstraints="NO" id="5RU-gO-f1P">
+                    <rect key="frame" x="190.5" y="152.5" width="99" height="75.5"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="144" id="UDo-Rg-FUN"/>
-                        <constraint firstAttribute="height" constant="95" id="u6Q-h9-Pm6"/>
+                        <constraint firstAttribute="width" constant="99" id="UDo-Rg-FUN"/>
+                        <constraint firstAttribute="height" constant="75.5" id="u6Q-h9-Pm6"/>
                     </constraints>
                 </imageView>
             </subviews>
@@ -34,6 +34,6 @@
         </view>
     </objects>
     <resources>
-        <image name="go_locker_grayscale" width="721" height="477"/>
+        <image name="golockerLogo" width="99" height="75"/>
     </resources>
 </document>

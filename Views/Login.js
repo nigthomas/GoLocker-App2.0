@@ -9,6 +9,7 @@ import FlatButton from '../Elements/FlatButton'
 import AlertView from '../Elements/AlertView'
 import OnboardingService from '../Services/OnboardingService'
 import OnboardingView from '../Views/Onboarding'
+import { NetworkStatusListener } from '../Common/NetworkManager'
 
 export default class LoginView extends Component {
   static navigationOptions = { title: 'Login', header: null };
@@ -40,7 +41,7 @@ export default class LoginView extends Component {
 
     LoginService.getInstance().login(username, password)
     .then(account => {
-
+      //Login event will update route
     })
     .catch(err => {
       AlertView.showConfirmation("Whoops! This username and password combination doesn't exist")
@@ -49,6 +50,12 @@ export default class LoginView extends Component {
 
   componentDidMount() {
     this.fetch()
+
+    NetworkStatusListener.getInstance()
+    .getListener()
+    .on("FORCE_LOGOUT", () => {
+      this.setState({headerText: "Your session has expired"})
+    })
   }
 
   fetch() {
@@ -115,8 +122,8 @@ export default class LoginView extends Component {
           <View style={styles.background}>
            <View style={{alignItems: 'center', marginTop: 40}}>
              <Image
-              style={{width: 145, height: 111}}
-              source={require('../Images/go_locker_grayscale.jpg')}
+              style={{width: 198/2, height: 151/2}}
+              source={require('../Images/golockerLogo.png')}
              />
              <Text style={{textAlign: 'center', fontSize: 28, color: Colors.dark_gray, marginTop: 30}}>{headerText}</Text>
            </View>

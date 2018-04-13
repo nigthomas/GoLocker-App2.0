@@ -42,8 +42,8 @@ export default class Onboarding extends Component {
           </TouchableHighlight>
            <View style={{alignItems: 'center', marginTop: 40}}>
              <Image
-              style={{width: 145, height: 111}}
-              source={require('../Images/go_locker_grayscale.jpg')}
+              style={{width: 198/2, height: 151/2}}
+              source={require('../Images/golockerLogo.png')}
              />
              </View>
 

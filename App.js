@@ -30,6 +30,7 @@ import RegistrationForm from './Views/RegistrationForm'
 import Verification from './Views/RegistrationVerification'
 import ForgotPasswordValidation from './Views/ForgotPasswordValidation'
 import NewPassword from './Views/NewPassword'
+import LocationCode from './Views/LocationCode'
 import { NetworkStatusListener } from './Common/NetworkManager'
 
 const HomeNavigationController = StackNavigator({
@@ -84,7 +85,8 @@ const LoginNavigationController = StackNavigator({
   Verification: {screen: Verification},
   Login: {screen: LoginView},
   ForgotPasswordValidation: {screen: ForgotPasswordValidation},
-  NewPassword: {screen: NewPassword}
+  NewPassword: {screen: NewPassword},
+  LocationCode: {screen: LocationCode}
 },
 {
   headerMode: 'none',

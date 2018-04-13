@@ -6,38 +6,19 @@ import FlatButton  from '../Elements/FlatButton'
 import PropertyService from '../Services/PropertyService'
 import { Container, Header, Content, Form, Item, Input, Label, Root } from 'native-base';
 
-export default class RegistrationView extends Component {
+export default class LocationCodeView extends Component {
   constructor(props) {
    super(props);
 
    this.state = {
-     zip_code: null,
+     locationCode: null,
      error: null,
      errorMessage: null
    };
   }
 
   onCheckPress = () => {
-    const { navigation } = this.props;
-    const zip = this.state.zip_code
 
-    if(!zip || zip.length != 5) {
-      this.setState({errorMessage: "Please enter valid zip code"})
-      return
-    }
-
-    PropertyService.getProperties(this.state.zip_code)
-    .then(properties => {
-      if(properties.length == 0) {
-        navigation.navigate('NoAvailableLockers', {})
-        return;
-      }
-
-      navigation.navigate('RegistrationSelectLocker', {lockers: properties})
-    })
-    .catch(err => {
-      this.setState({error: err})
-    })
   }
 
   onLoginPress = () => {
@@ -45,14 +26,9 @@ export default class RegistrationView extends Component {
     navigation.goBack()
   }
 
-  goToLocationCode() {
-    const { navigation } = this.props;
-    navigation.navigate('LocationCode', {})
-  }
-
   static navigationOptions = { header: null };
   render() {
-    const text = "Let's check if we have lockers close by"
+    const text = "Let's look up your location code"
     var errorText = this.state.errorMessage ? <Text style={{marginLeft: 21, color: Colors.red, marginRight: 21}}>{this.state.errorMessage}</Text> : null
 
     if(!errorText && this.state.error ) {
@@ -69,21 +45,16 @@ export default class RegistrationView extends Component {
             </TouchableHighlight>
             <View style={{marginTop: 30}}>
               <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>Enter your </Text>
-              <Text style={{marginLeft: 21, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>ZipCode</Text>
+              <Text style={{marginLeft: 21, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>location code</Text>
               {errorText}
               <View style={{marginTop: 20}}>
                 <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(16), color: Colors.gray_85, fontWeight: 'bold'}}>{text}</Text>
               </View>
               <View style={{marginLeft: 21, marginRight: 21}}>
-                <TextInput underlineColorAndroid='transparent' ref="zipField"  maxLength={5} placeholderTextColor={Colors.tapable_blue} style={{flex: 1, marginTop: 10, paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Enter ZIP"} onChangeText={(zip_code) => this.setState({zip_code})} value={this.state.zip_code}/>
+                <TextInput underlineColorAndroid='transparent' ref="locationCodeField"  maxLength={5} placeholderTextColor={Colors.tapable_blue} style={{flex: 1, marginTop: 10, paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Enter location code"} onChangeText={(locationCode) => this.setState({locationCode})} value={this.state.locationCode}/>
                 <TouchableHighlight onPress={() => {this.onCheckPress()}} underlayColor={'transparent'}>
                   <View style={{height: 50, borderRadius: 4, backgroundColor: Colors.light_green, marginTop: 10}}>
                     <Text style={{textAlign: 'center', color: Colors.white, marginTop: 17}}>Check</Text>
-                  </View>
-                </TouchableHighlight>
-                <TouchableHighlight onPress={() => {this.goToLocationCode()} } underlayColor={'transparent'}>
-                  <View>
-                    <Text style={{textAlign: 'center', color: Colors.tapable_blue, marginTop: 20}}>I have a location code</Text>
                   </View>
                 </TouchableHighlight>
               </View>

@@ -6,9 +6,9 @@
     android:background="@color/white"
     android:gravity="center">
     <ImageView
-        android:layout_width="132dp"
-        android:layout_height="50dp"
+        android:layout_width="99dp"
+        android:layout_height="75dp"
         android:layout_marginTop="24dp"
-        android:src="@mipmap/golockergrayscale"
+        android:src="@mipmap/golockerlogo"
         />
 </LinearLayout>

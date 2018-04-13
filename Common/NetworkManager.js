@@ -122,10 +122,6 @@ export const AuthenticationNetworkManager = {
 
 export const PropertiesNetworkManager = {
   get: (postalCode) => {
-    if(!postalCode) {
-      return new Promise((resolve, reject) => { reject(new Error('Missing zip code'))})
-    }
-
     return fetch(URL.properties, {
       method: 'PUT',
       headers: {
@@ -133,6 +129,24 @@ export const PropertiesNetworkManager = {
         },
         body: JSON.stringify({
          postalCode: postalCode
+       })
+      })
+    .then((response) => {
+      if(response.status === STATUS_CODE.OK) {
+        return response.json()
+      }
+
+      return new Promise((resolve, reject) => { reject(new Error('Error has occurred'))})
+    })
+  },
+  getPropertiesFromLocationCode: (code) => {
+    return fetch(URL.properties, {
+      method: 'PUT',
+      headers: {
+        Accept: HEADERS.Accept,
+        },
+        body: JSON.stringify({
+         registrationCode: code
        })
       })
     .then((response) => {

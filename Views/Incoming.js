@@ -81,20 +81,18 @@ export default class IncomingView extends Component {
     const expiration = (item.expirationDate) ? new Moment(item.expirationDate).format('MM/DD') : ""
     const trackingNumber = item.trackingNumber
     const pin = item.pin
+    const direction = (item.barcode && item.barcode.includes("CNTI")) ? "Outgoing" : "Incoming"
 
     return (
       <Swipeout right={swipeBtns}
         backgroundColor= 'transparent'>
-        <View style={{height: 93, paddingTop:5, paddingBottom: 5, paddingLeft: 21, paddingRight: 21, flexDirection: 'row', alignSelf: 'flex-start', borderBottomWidth: 1, borderBottomColor: Colors.gray_ef}}>
+        <View style={{paddingTop:5, paddingBottom: 5, paddingLeft: 21, paddingRight: 21, flexDirection: 'row', alignSelf: 'flex-start', borderBottomWidth: 1, borderBottomColor: Colors.gray_ef}}>
           <View style={{flex: 1}}>
-            <Text style={{ color: Colors.gray_85}}>Name</Text>
-            <Text style={{ color: Colors.dark_gray, fontWeight: '600', marginTop: 2}}>{lockerName}</Text>
-            <Text style={{ color: Colors.gray_85, marginTop: 20}}>{expiration}</Text>
-          </View>
-          <View style={{flex: 1}}>
-            <Text style={{ color: Colors.gray_85}}>Tracking #</Text>
-            <Text style={{ color: Colors.gray_85,  marginTop: 2}}>{trackingNumber}</Text>
-            <Text style={{ color: Colors.gray_85, marginTop: 20}}>Pin {pin}</Text>
+            <Text style={{ color: Colors.gray_85}}>Name: <Text style={{ color: Colors.dark_gray, fontWeight: '600'}}>{lockerName}</Text></Text>
+            <Text style={{ color: Colors.gray_85, marginTop: 2}}>Tracking: {trackingNumber}</Text>
+            <Text style={{ color: Colors.gray_85, marginTop: 2}}>Pin: {pin}</Text>
+            <Text style={{ color: Colors.gray_85, marginTop: 2}}>Created: {expiration}</Text>
+            <Text style={{ color: Colors.gray_85, marginTop: 2}}>Direction: {direction}</Text>
           </View>
         </View>
       </Swipeout>
@@ -154,7 +152,7 @@ export default class IncomingView extends Component {
               <FontAwesome name="refresh" size={22} style={{alignSelf: 'flex-end'}}/>
             </View>
           </TouchableHighlight>
-          <View style={{marginTop: 70, backgroundColor: 'orange', flex: 1}}>
+          <View style={{marginTop: 70, flex: 1}}>
             <Text style={{marginLeft: 21, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>Tracking</Text>
           </View>
           {errorText}

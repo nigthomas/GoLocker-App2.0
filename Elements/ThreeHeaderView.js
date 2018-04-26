@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-import { StyleSheet, Text, View, Button, FlatList, Dimensions, StatusBar, Image, TextInput, Alert, TouchableHighlight} from 'react-native';
+import { StyleSheet, Text, View, Button, FlatList, Dimensions, StatusBar, Image, TextInput, Alert, TouchableHighlight, SafeAreaView} from 'react-native';
 import Theme from '../Common/Theme'
 import Colors from '../Common/Colors'
 import Utils from '../Common/Utils'
@@ -21,7 +21,7 @@ export default class HeaderView extends Component {
     const rightButtonTitle = this.props.rightButtonTitle || ""
 
     return (
-      <View style={{flex: 1, flexDirection:'row'}}>
+      <SafeAreaView style={{flex: 1, flexDirection:'row'}}>
         <TouchableHighlight onPress={() => {onLeftPress()}} underlayColor={'transparent'}>
           <View style={{width: 50, height: 50, marginLeft: 21}}>
             <Text style={{color: Colors.gray_85}}>{leftButtonTitle}</Text>
@@ -35,7 +35,7 @@ export default class HeaderView extends Component {
             <Text style={{color: Colors.gray_85, textAlign: 'right'}}>{rightButtonTitle}</Text>
           </View>
         </TouchableHighlight>
-      </View>
+      </SafeAreaView>
     );
   }
 }

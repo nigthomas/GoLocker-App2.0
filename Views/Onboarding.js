@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, StatusBar, FlatList, TextInput, TouchableHighlight, Image} from 'react-native';
+import { StyleSheet, Text, View, StatusBar, FlatList, TextInput, TouchableHighlight, Image, SafeAreaView} from 'react-native';
 import Theme from '../Common/Theme'
 import FooterTabWithNavigation from './FooterTabWithNavigation'
 import { Container, Header, Content, Card, CardItem, Left, Thumbnail, Body, Button, Icon, Title, Footer, FooterTab, Root, Right} from 'native-base';
@@ -33,46 +33,51 @@ export default class Onboarding extends Component {
     return (
       <Root>
         <Container>
-          <Content style={{backgroundColor: Colors.white}}>
-          <View style={styles.background}>
-          <TouchableHighlight onPress={() => {this.onSkip()}} underlayColor={'transparent'}>
-            <View style={{marginTop: 35, marginRight: 20}}>
-              <Text style={{textAlign: 'right', color: Colors.gray_85, fontSize: 16, zIndex: 1}}>Skip</Text>
-            </View>
-          </TouchableHighlight>
-           <View style={{alignItems: 'center', marginTop: 40}}>
+          <Content style={{backgroundColor: Colors.gray_f1}}>
+          <View>
+           <View style={{alignItems: 'center', marginTop: 60}}>
              <Image
-              style={{width: 198/2, height: 151/2}}
+              style={{width: 198/3.5, height: 151/3.5}}
               source={require('../Images/golockerLogo.png')}
              />
              </View>
 
              <Swiper style={styles.wrapper} showsButtons={true} autoplay={true} showsButtons={false} activeDotColor={Theme.primaryColor} activeDotStyle={{height: 15, width: 15, borderRadius: 7.5}} dotStyle={{height: 10, width: 10, borderRadius: 5}}>
                <View style={styles.slide1}>
-                 <Image
-                  style={{width: 145, height: 111}}
-                  source={require('../Images/gl-illustration-buy.png')}
-                 />
+                  <View style={{width: 250, height: 250, borderRadius: 125, backgroundColor: Colors.white, justifyContent: 'center', alignItems: 'center'}}>
+                     <Image
+                      style={{width: 145, height: 111}}
+                      source={require('../Images/gl-illustration-buy.png')}
+                     />
+                 </View>
                  <Text style={styles.text}>You order a frame for that photo from the bachelorette party. Yes, that one.</Text>
                </View>
                <View style={styles.slide2}>
-                 <Image
-                  style={{width: 145, height: 111}}
-                  source={require('../Images/gl-illustration-pickup.png')}
-                 />
+                <View style={{width: 250, height: 250, borderRadius: 125, backgroundColor: Colors.white, justifyContent: 'center', alignItems: 'center'}}>
+                   <Image
+                    style={{width: 145, height: 111}}
+                    source={require('../Images/gl-illustration-pickup.png')}
+                   />
+                 </View>
                  <Text style={styles.text}>You go to your important job. You don’t have time to worry about your package.</Text>
                </View>
                <View style={styles.slide3}>
-                 <Image
-                  style={{width: 145, height: 111}}
-                  source={require('../Images/gl-illustration-pick-up.png')}
-                 />
+                 <View style={{width: 250, height: 250, borderRadius: 125, backgroundColor: Colors.white, justifyContent: 'center', alignItems: 'center'}}>
+                   <Image
+                    style={{width: 145, height: 111}}
+                    source={require('../Images/gl-illustration-pick-up.png')}
+                   />
+                 </View>
                  <Text style={styles.text}>We accept your parcel and place it in our dreamy kiosk. It waits (safely and cozily) until you’re ready to pick it up.</Text>
                </View>
              </Swiper>
-
            </View>
           </Content>
+          <TouchableHighlight onPress={() => {this.onSkip()}} underlayColor={'transparent'}>
+            <SafeAreaView style={{position: 'absolute', right: 21, bottom: 21, zIndex: 100}}>
+              <Text style={{textAlign: 'right', color: Colors.gray_85, fontSize: 16, zIndex: 1, fontWeight: '300'}}>Skip</Text>
+            </SafeAreaView>
+          </TouchableHighlight>
         </Container>
       </Root>
     );
@@ -81,7 +86,7 @@ export default class Onboarding extends Component {
 
 const styles = StyleSheet.create({
   wrapper: {
-    height: 370
+    height: 475
   },
   slide1: {
     flex: 1,
@@ -100,10 +105,10 @@ const styles = StyleSheet.create({
   },
   text: {
     textAlign: 'center',
-    width: 250,
-    fontSize: 16,
+    width: 300,
+    fontSize: 15,
     color: Colors.gray_85,
-    fontWeight: '600',
-    marginTop: 20
+    fontWeight: '200',
+    marginTop: 35
   }
 })

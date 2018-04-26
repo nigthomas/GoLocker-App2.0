@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Theme from '../Common/Theme'
 import FooterTabWithNavigation from './FooterTabWithNavigation'
 import { Container, Header, Content, Card, CardItem, Left, Thumbnail, Body, Button, Icon, Title, Footer, FooterTab, Root, Right} from 'native-base';
-import { StyleSheet, Text, View, StatusBar, FlatList, TouchableHighlight} from 'react-native';
+import { StyleSheet, Text, View, StatusBar, FlatList, TouchableHighlight, SafeAreaView} from 'react-native';
 import LoadingView from './Loading'
 import DashboardService from '../Services/DashboardService'
 import ReservationService from '../Services/ReservationService'
@@ -107,9 +107,9 @@ export default class IncomingView extends Component {
         <Container>
           <Content style={{backgroundColor: Colors.white, flex: 1}}>
             <TouchableHighlight onPress={() => {this.onRefresh()}} underlayColor={'transparent'}>
-              <View style={{height: 30, width: 50, marginTop: 40, marginRight: 21, alignSelf: 'flex-end'}}>
+              <SafeAreaView style={{height: 30, width: 50, marginTop: 40, marginRight: 21, alignSelf: 'flex-end'}}>
                 <FontAwesome name="refresh" size={22} style={{color: Colors.gray_85,  alignSelf: 'flex-end'}}/>
-              </View>
+              </SafeAreaView>
             </TouchableHighlight>
             <View>
               <Text style={{marginLeft: 21, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>Tracking</Text>

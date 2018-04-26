@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, StatusBar, FlatList, TouchableHighlight} from 'react-native';
+import { StyleSheet, Text, View, StatusBar, FlatList, TouchableHighlight, SafeAreaView} from 'react-native';
 import Theme from '../Common/Theme'
 import FooterTabWithNavigation from './FooterTabWithNavigation'
 import { Container, Header, Content, Card, CardItem, Left, Thumbnail, Body, Button, Icon, Title, Footer, FooterTab, Root, Right} from 'native-base';
@@ -84,9 +84,9 @@ export default class SelectLocker extends Component {
         <Container>
           <Content style={{backgroundColor: Colors.white}}>
             <TouchableHighlight onPress={() => {this.onCancel()}} underlayColor={'transparent'}>
-              <View style={{marginRight: 21, marginTop: 30}}>
+              <SafeAreaView style={{marginRight: 21, marginTop: 30}}>
                 <Text style={{textAlign: 'right', color: Colors.gray_85, fontSize: 16, zIndex: 1}}>Cancel</Text>
-              </View>
+              </SafeAreaView>
             </TouchableHighlight>
             <Text style={{marginLeft:21, marginTop: 20, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>Deliver to</Text>
             <View style={{marginTop: 20, marginLeft:21}}>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, StatusBar, FlatList, TouchableHighlight, Modal, Image} from 'react-native';
+import { StyleSheet, Text, View, StatusBar, FlatList, TouchableHighlight, Modal, Image, SafeAreaView} from 'react-native';
 import Theme from '../Common/Theme'
 import FooterTabWithNavigation from './FooterTabWithNavigation'
 import { Container, Header, Content, Card, CardItem, Left, Thumbnail, Body, Button, Icon, Title, Footer, FooterTab, Root, Right} from 'native-base';
@@ -141,9 +141,9 @@ export default class HomeView extends Component {
         />
           <Content style={{backgroundColor: Colors.white}}>
             <TouchableHighlight onPress={() => {this.onRefresh()}} underlayColor={'transparent'}>
-              <View style={{position: 'absolute', right: 21, top: 40, height: 50, width: 50}}>
+              <SafeAreaView style={{position: 'absolute', right: 21, top: 40, height: 50, width: 50}}>
                 <FontAwesome name="refresh" size={22} style={{alignSelf: 'flex-end', color: Colors.gray_85}}/>
-              </View>
+              </SafeAreaView>
             </TouchableHighlight>
             <View style={{marginTop: 50}}>
               <Text style={{marginLeft: 21, marginTop: 20, fontSize: 36, color: Colors.dark_gray, fontWeight: 'bold'}}>Welcome</Text>
@@ -152,7 +152,7 @@ export default class HomeView extends Component {
                 <Text style={{marginLeft: 21, fontSize: 14, color: Colors.gray_b5, textAlign: 'left', flex: 1}}>Account #{accountNumber}</Text>
 
                 <TouchableHighlight onPress={() => {this.onShowQRCode()}} underlayColor={'transparent'} style={{flex: 1, marginRight: 21, height: 50}}>
-                    <Text style={{textAlign: 'right', color: Colors.gray_b5}}>Show QR Code</Text>
+                  <FontAwesome name="qrcode" size={30} style={{alignSelf: 'flex-end', color: Colors.gray_85, marginTop: -10}}/>
                 </TouchableHighlight>
               </View>
 

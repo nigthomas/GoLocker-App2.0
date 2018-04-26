@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, StatusBar, TextInput, Alert, Image, TouchableHighlight} from 'react-native';
+import { StyleSheet, Text, View, StatusBar, TextInput, Alert, Image, TouchableHighlight, SafeAreaView} from 'react-native';
 import Theme from '../Common/Theme'
 import Colors from '../Common/Colors'
 import FlatButton  from '../Elements/FlatButton'
@@ -44,7 +44,7 @@ export default class LocationCodeView extends Component {
 
   onLoginPress = () => {
     const { navigation } = this.props;
-    navigation.goBack()
+    navigation.popToTop()
   }
 
   static navigationOptions = { header: null };
@@ -62,9 +62,9 @@ export default class LocationCodeView extends Component {
         <Container>
           <Content style={{backgroundColor: Colors.white}}>
             <TouchableHighlight onPress={() => {this.onLoginPress()}} underlayColor={'transparent'}>
-              <View style={{marginTop: 35, marginRight: 20}}>
+              <SafeAreaView style={{marginTop: 35, marginRight: 20}}>
                 <Text style={{textAlign: 'right', color: Colors.gray_85, fontSize: 16, zIndex: 1}}>Sign in</Text>
-              </View>
+              </SafeAreaView>
             </TouchableHighlight>
             <View style={{marginTop: 30}}>
               <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>Enter your </Text>

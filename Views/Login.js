@@ -122,7 +122,7 @@ export default class LoginView extends Component {
           <View style={styles.background}>
            <View style={{alignItems: 'center', marginTop: 40}}>
              <Image
-              style={{width: 198/2, height: 151/2}}
+              style={{width: 198/3, height: 151/3}}
               source={require('../Images/golockerLogo.png')}
              />
              <Text style={{textAlign: 'center', fontSize: 28, color: Colors.dark_gray, marginTop: 30}}>{headerText}</Text>

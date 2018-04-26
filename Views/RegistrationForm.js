@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, StatusBar, TextInput, Alert, Image, TouchableHighlight, FlatList, Switch} from 'react-native';
+import { StyleSheet, Text, View, StatusBar, TextInput, Alert, Image, TouchableHighlight, FlatList, Switch, SafeAreaView} from 'react-native';
 import Theme from '../Common/Theme'
 import Colors from '../Common/Colors'
 import FlatButton  from '../Elements/FlatButton'
@@ -182,9 +182,9 @@ export default class RegistrationSelectLocker extends Component {
         <Container>
           <Content style={{backgroundColor: Colors.white}} ref={c => (this.component = c)}>
             <TouchableHighlight onPress={() => {this.onLoginPress()}} underlayColor={'transparent'}>
-              <View style={{marginTop: 35, marginRight: 20}}>
+              <SafeAreaView style={{marginTop: 35, marginRight: 20}}>
                 <Text style={{textAlign: 'right', color: Colors.gray_85, fontSize: 16, zIndex: 1}}>Sign in</Text>
-              </View>
+              </SafeAreaView>
             </TouchableHighlight>
               <View style={{marginTop: 30}}>
                 <Text style={{marginLeft: 21, marginTop: 20, fontSize: 36, color: Colors.dark_gray, fontWeight: 'bold'}}>{headerText}</Text>

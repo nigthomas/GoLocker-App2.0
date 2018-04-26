@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, StatusBar, FlatList, TouchableHighlight} from 'react-native';
+import { StyleSheet, Text, View, StatusBar, FlatList, TouchableHighlight, SafeAreaView} from 'react-native';
 import Theme from '../Common/Theme'
 import FooterTabWithNavigation from './FooterTabWithNavigation'
 import { Container, Header, Content, Card, CardItem, Left, Thumbnail, Body, Button, Icon, Title, Footer, FooterTab, Root, Right} from 'native-base';
@@ -75,9 +75,9 @@ export default class OptionSelector extends Component {
           <Content style={{backgroundColor: Colors.white}}>
             <View style={{marginTop: 50}}>
               <TouchableHighlight onPress={() => {this.onBackPress()}} underlayColor={'transparent'}>
-                <View style={{width: 50, height: 50, position: 'absolute', left: 21}}>
+                <SafeAreaView style={{width: 50, height: 50, position: 'absolute', left: 21}}>
                   <Text style={{color: Colors.gray_85}}>Back</Text>
-                </View>
+                </SafeAreaView>
               </TouchableHighlight>
               <Text style={{textAlign: 'center', fontWeight: 'bold', color: Colors.dark_gray}}>{title}</Text>
             </View>

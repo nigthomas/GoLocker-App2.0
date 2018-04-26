@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, FlatList, Dimensions, StatusBar, Image, TextInput, Alert, TouchableHighlight, Platform} from 'react-native';
+import { StyleSheet, Text, View, Button, FlatList, Dimensions, StatusBar, Image, TextInput, Alert, TouchableHighlight, Platform, SafeAreaView} from 'react-native';
 import { Container, Header, Content, Form, Item, Input, Label, Root } from 'native-base';
 import Theme from '../Common/Theme'
 import Colors from '../Common/Colors'
@@ -91,9 +91,9 @@ export default class NewPasswordView extends Component {
       <Root>
         <View style={styles.background}>
           <TouchableHighlight onPress={() => {this.goToSignIn()}} underlayColor={'transparent'}>
-            <View style={{marginTop: 35, marginRight: 20}}>
+            <SafeAreaView style={{marginTop: 35, marginRight: 20}}>
               <Text style={{textAlign: 'right', color: Colors.gray_85, fontSize: 16, zIndex: 1}}>Sign in</Text>
-            </View>
+            </SafeAreaView>
           </TouchableHighlight>
          <View style={{marginTop: 75, marginLeft: 21, marginRight: 21}}>
           <Text style={{marginTop: 20, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>{headerText}</Text>

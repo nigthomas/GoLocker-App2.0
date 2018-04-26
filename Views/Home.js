@@ -169,19 +169,19 @@ export default class HomeView extends Component {
               onRequestClose={() => {
                 alert('Modal has been closed.');
               }}>
-              <View style={{marginTop: 22, flex: 1}}>
+              <SafeAreaView style={{marginTop: 20, flex: 1}}>
                 <TouchableHighlight
                   onPress={() => {
                     this.setState({qrCodeShown: false});
                   }}>
-                  <View style={{position: 'absolute', right: 21, top: 15}}>
+                  <View style={{position: 'absolute', right: 21}}>
                     <Text style={{color: Colors.gray_b5}}>Close</Text>
                   </View>
                 </TouchableHighlight>
                 <View style={{flex: 1, marginTop: 100, marginLeft: 21, alignItems: 'center'}}>
                     <Image style={{width: 164, height: 164}} source={{uri: 'https://chart.googleapis.com/chart?cht=qr&chl=enecg.com&chs=180x180&choe=UTF-8&chld=L|2'}}/>
                 </View>
-              </View>
+              </SafeAreaView>
             </Modal>
           </Content>
           <FooterTabWithNavigation navigation={this.props.navigation} active={"home"}/>

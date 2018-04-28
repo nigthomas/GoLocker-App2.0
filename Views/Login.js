@@ -26,7 +26,9 @@ export default class LoginView extends Component {
      shouldShowOnboarding: false,
      loading: true,
      headerText: headerText,
-     firstName: firstName
+     firstName: firstName,
+     signInText: "Sign In",
+     signInColor: Colors.light_green
    };
   }
 
@@ -39,11 +41,14 @@ export default class LoginView extends Component {
       return;
     }
 
+    this.showProcessingState()
     LoginService.getInstance().login(username, password)
     .then(account => {
       //Login event will update route
+      this.showRegularState()
     })
     .catch(err => {
+      this.showRegularState()
       AlertView.showConfirmation("Whoops! This username and password combination doesn't exist")
     })
   }
@@ -83,6 +88,7 @@ export default class LoginView extends Component {
       return
     }
 
+    this.showRegularState()
     navigate('ForgotPasswordView', {navigate: navigate})
   }
 
@@ -97,7 +103,16 @@ export default class LoginView extends Component {
       navigate = this.props.rootNavigation.navigate.navigate
     }
 
+    this.showRegularState()
     navigate('RegistrationView', {navigate: navigate})
+  }
+
+  showProcessingState() {
+    this.setState({signInText: "Signing in...", signInColor: Colors.gray_85})
+  }
+
+  showRegularState() {
+    this.setState({signInText: "Sign in", signInColor: Colors.light_green})
   }
 
   onOnboardingSkip() {
@@ -131,8 +146,8 @@ export default class LoginView extends Component {
                 <TextInput underlineColorAndroid='transparent' ref="usernameField"  placeholderTextColor={Colors.tapable_blue} style={{color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, textAlign: 'center', fontFamily: Theme.primaryFont}} placeholder={"Your Email"} onChangeText={(username) => this.setState({username})} value={this.state.username}/>
                 <TextInput underlineColorAndroid='transparent' ref="passwordField" secureTextEntry={true} placeholderTextColor={Colors.tapable_blue} style={{color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, textAlign: 'center', fontFamily: Theme.primaryFont, marginTop: 5}} placeholder={"Password"} onChangeText={(password) => this.setState({password})} value={this.state.password}/>
                 <TouchableHighlight onPress={this.onLoginPress} underlayColor={'transparent'}>
-                  <View style={{height: 50, borderRadius: 4, backgroundColor: Colors.light_green, marginTop: 10}}>
-                    <Text style={{textAlign: 'center', color: Colors.white, marginTop: 17}}>Sign In</Text>
+                  <View style={{height: 50, borderRadius: 4, backgroundColor: this.state.signInColor, marginTop: 10}}>
+                    <Text style={{textAlign: 'center', color: Colors.white, marginTop: 17}}>{this.state.signInText}</Text>
                   </View>
                 </TouchableHighlight>
                 <TouchableHighlight onPress={() => {this.goToForgotPassword()} } underlayColor={'transparent'}>

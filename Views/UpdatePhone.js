@@ -15,6 +15,7 @@ import Swipeout from 'react-native-swipeout';
 import Entypo from 'react-native-vector-icons/dist/Entypo'
 import ThreeHeaderView from '../Elements/ThreeHeaderView'
 import AccountService from '../Services/AccountService'
+import PhoneInput from 'react-native-phone-input'
 
 export default class UpdatePhone extends Component {
   static navigationOptions = { header: null, tabBarVisible: false };
@@ -23,16 +24,25 @@ export default class UpdatePhone extends Component {
    super(props);
 
    const { params } = this.props.navigation.state;
-   const phone = params.phone
+   var phone = params.phone
+   var countryCode = 1;
+
+   if(phone.length > 10) {
+     countryCode = phone.substr(0, phone.length - 10)
+     phone = phone.substr(countryCode.length, phone.length)
+   }
 
    this.state = {
      phone: phone,
-     error: null
+     error: null,
+     countryCode: String(countryCode)
    };
   }
 
   onSavePress() {
-    AccountService.getInstance().updatePhone(this.state.phone)
+    const countryCode = this.countryCode.getValue().replace("+", "")
+    const number = countryCode + this.state.phone
+    AccountService.getInstance().updatePhone(number)
     .then(() => {
       this.props.navigation.goBack()
     })
@@ -56,10 +66,10 @@ export default class UpdatePhone extends Component {
           </View>
           <View style={{justifyContent: 'center', borderTopColor: Colors.gray_ef, borderTopWidth: 1, borderBottomColor: Colors.gray_ef, borderBottomWidth: 1, height: 50, flex: 1}}>
             <View style={{flexDirection:'row', flexWrap:'wrap'}}>
-              <Text style={{textAlign: 'center', fontSize: 15, color: Colors.dark_gray, height: 50, lineHeight: 50, backgroundColor: Colors.gray_f3, width: 100}}>
-                US +1
-              </Text>
-              <TextInput underlineColorAndroid='transparent' placeholderTextColor={Colors.dark_gray} keyboardType='numeric' style={{flex: 1, paddingLeft: 21, color: Colors.dark_gray, backgroundColor: Colors.white, height: 50, fontFamily: Theme.primaryFont, borderTopColor: Colors.gray_ef, borderTopWidth: 1, borderBottomColor: Colors.gray_ef, borderBottomWidth: 1}} placeholder={"Phone Number"} onChangeText={(phone) => this.setState({phone})} value={this.state.phone}/>
+              <View style={{flex: 1, marginLeft: 21, marginTop: 15}}>
+              <PhoneInput ref={(ref) => { this.countryCode = ref; }} value={this.state.countryCode}/>
+              </View>
+              <TextInput underlineColorAndroid='transparent' placeholderTextColor={Colors.dark_gray} keyboardType='numeric' style={{flex: 3, paddingLeft: 10, color: Colors.dark_gray, backgroundColor: Colors.white, height: 50, fontFamily: Theme.primaryFont, borderTopColor: Colors.gray_ef, borderTopWidth: 1, borderBottomColor: Colors.gray_ef, borderBottomWidth: 1}} placeholder={"Phone Number"} onChangeText={(phone) => this.setState({phone})} value={this.state.phone}/>
             </View>
           </View>
           {errorText}

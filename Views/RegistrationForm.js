@@ -8,6 +8,7 @@ import { Container, Header, Content, Form, Item, Input, Label, Root } from 'nati
 import MapView from 'react-native-maps';
 import LoginService from '../Services/LoginService'
 import Utils from '../Common/Utils'
+import PhoneInput from 'react-native-phone-input'
 
 export default class RegistrationSelectLocker extends Component {
   static navigationOptions = { header: null };
@@ -48,7 +49,7 @@ export default class RegistrationSelectLocker extends Component {
   onCreateAccountPress() {
     const firstName = this.state.firstName
     const lastName = this.state.lastName
-    const phone = this.state.phone
+    const number = this.state.phone
     const email = this.state.email
     const password = this.state.password
     const passwordConfirmation = this.state.passwordConfirmation
@@ -57,6 +58,8 @@ export default class RegistrationSelectLocker extends Component {
     const { navigation } = this.props;
     const passwordsMatch = password && password.length > 0 && passwordConfirmation === password
     const isComplexPassword = Utils.isPasswordComplex(password)
+    const countryCode = this.countryCode.getValue().replace("+", "")
+    const completePhoneNumber = countryCode + number
 
     if(!firstName) {
       this.setState({errorMessage: "Please enter your first name"})
@@ -70,7 +73,7 @@ export default class RegistrationSelectLocker extends Component {
       return
     }
 
-    if(!phone) {
+    if(!number) {
       this.setState({errorMessage: "Please enter your phone number"})
       this.component._root.scrollToPosition(0, 0)
       return
@@ -106,7 +109,7 @@ export default class RegistrationSelectLocker extends Component {
       return
     }
 
-    LoginService.getInstance().registerUser(firstName, lastName, email, phone, password, locker.id, handicap)
+    LoginService.getInstance().registerUser(firstName, lastName, email, completePhoneNumber, password, locker.id, handicap)
     .then(() => {
       navigation.navigate('Verification', {email: email.trim(), firstName: firstName})
     })
@@ -203,7 +206,12 @@ export default class RegistrationSelectLocker extends Component {
                  <TextInput underlineColorAndroid='transparent' ref="firstNameField" placeholderTextColor={Colors.tapable_blue} style={{flex: 1, paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, marginRight: 5, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"First Name"} onChangeText={(firstName) => this.setState({firstName})} value={this.state.firstName}/>
                  <TextInput underlineColorAndroid='transparent' ref="lastNameField" placeholderTextColor={Colors.tapable_blue} style={{flex: 1, paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, marginLeft: 5, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Last Name"} onChangeText={(lastName) => this.setState({lastName})} value={this.state.lastName}/>
                </View>
-               <TextInput underlineColorAndroid='transparent' ref="phoneField" keyboardType='numeric' placeholderTextColor={Colors.tapable_blue} style={{flex: 1, marginTop: 10, paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Phone"} onChangeText={(phone) => this.setState({phone})} value={this.state.phone}/>
+               <View style={{flexDirection:'row', flexWrap:'wrap'}}>
+                  <View style={{flex: 2, paddingTop: 23}}>
+                    <PhoneInput ref={(ref) => { this.countryCode = ref; }} value={this.state.countryCode}/>
+                  </View>
+                  <TextInput underlineColorAndroid='transparent' ref="phoneField" keyboardType='numeric' placeholderTextColor={Colors.tapable_blue} style={{flex: 5, marginTop: 10, paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Phone"} onChangeText={(phone) => this.setState({phone})} value={this.state.phone}/>
+               </View>
                <TextInput underlineColorAndroid='transparent' ref="emailField" keyboardType='email-address' placeholderTextColor={Colors.tapable_blue} style={{flex: 1, marginTop: 10, paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Email"} onChangeText={(email) => this.setState({email})} value={this.state.email}/>
 
                <TextInput underlineColorAndroid='transparent' ref="passwordField" placeholderTextColor={Colors.tapable_blue} style={{flex: 1, marginTop: 10, paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Password"} onChangeText={(password) => this.setState({password})} value={this.state.password}/>

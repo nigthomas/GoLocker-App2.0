@@ -55,7 +55,7 @@ const DetailsNavigationController = StackNavigator({
   OptionSelector: {screen: OptionSelector},
   ChangePlan: {screen: ChangePlan},
   UpdateEmail: {screen: UpdateEmail},
-  UpdatePhone: {screen: UpdatePhone}
+  UpdatePhone: {screen: UpdatePhone},
 });
 
 const TabController = TabNavigator({

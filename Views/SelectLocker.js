@@ -72,7 +72,10 @@ export default class SelectLocker extends Component {
 
   render() {
     if(this.state.loading) {
-      return <LoadingView />
+      return <View style={{flex: 1, backgroundColor: Colors.white}}>
+              <LoadingView />
+              <FooterTabWithNavigation navigation={this.props.navigation} active={"ship"}/>
+            </View>
     }
 
     const firstName = this.state.data.firstName

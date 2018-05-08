@@ -11,7 +11,8 @@ const URL = {
   reservation: `${BASE_URL}/v1/account/reservations`,
   createReservation: `${BASE_URL}/v1/packages`,
   register: `${BASE_URL}/v1/register`,
-  resetPassword: `${BASE_URL}/v1/resetPassword`
+  resetPassword: `${BASE_URL}/v1/resetPassword`,
+  action: `${BASE_URL}/v1/properties`
 }
 
 const STATUS_CODE = {
@@ -51,6 +52,35 @@ export class NetworkStatusListener {
    }
 }
 
+export const ActionNetworkManager = {
+  openDoor: (propertyID) => {
+    if(!propertyID) {
+      return new Promise((resolve, reject) => { reject(new Error('Missing propertyID'))})
+    }
+
+    return LoginService.getInstance().account()
+    .then(account => {
+      return fetch(`${URL.action}/${propertyID}/action`, {
+        method: 'POST',
+        headers: {
+            Accept: HEADERS.Accept,
+            authorization: `${account.token_type} ${account.access_token}`,
+          },
+          body: JSON.stringify({
+           action: "open_door"
+         }),
+        })
+    })
+    .then((response) => {
+      if(response.status === STATUS_CODE.OK) {
+        return response.json()
+      }
+
+      return new Promise((resolve, reject) => { reject(new Error('Error has occurred'))})
+    })
+  }
+}
+
 export const AuthenticationNetworkManager = {
   login: (username, password) => {
     if(!username || !password) {
@@ -76,20 +106,24 @@ export const AuthenticationNetworkManager = {
     })
   },
   registerUser: (firstName, lastName, email, phone, password, lockerIdentifier, disability) => {
+    const data = JSON.stringify({
+     firstname: firstName,
+     lastname: lastName,
+     email: email,
+     mobilePhone: phone,
+     phoneNumber: phone,
+     password: password,
+     primaryPropertyID: lockerIdentifier,
+     disability: disability
+    })
+
+    console.log(data)
     return fetch(URL.register, {
       method: 'POST',
       headers: {
         Accept: HEADERS.Accept,
         },
-        body: JSON.stringify({
-         firstname: firstName,
-         lastname: lastName,
-         email: email,
-         mobilePhone: phone,
-         password: password,
-         primaryPropertyID: lockerIdentifier,
-         disability: disability
-       }),
+        body: data,
       })
     .then((response) => {
       if(response.status === STATUS_CODE.OK) {

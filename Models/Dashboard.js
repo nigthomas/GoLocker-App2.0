@@ -5,6 +5,7 @@ import Locker from './Locker'
 export default class Dashboard {
   constructor (data) {
     this.status = data.status
+    this.usernameQR = data.usernameQR
     this.type = data.type
     this.username = data.username
     this.accountNumber = data.accountNumber

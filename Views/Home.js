@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, StatusBar, FlatList, TouchableHighlight, Modal, Image, SafeAreaView} from 'react-native';
+import { StyleSheet, Text, View, StatusBar, FlatList, TouchableHighlight, Modal, Image, SafeAreaView, ScrollView, Dimensions} from 'react-native';
 import Theme from '../Common/Theme'
 import FooterTabWithNavigation from './FooterTabWithNavigation'
 import { Container, Header, Content, Card, CardItem, Left, Thumbnail, Body, Button, Icon, Title, Footer, FooterTab, Root, Right} from 'native-base';
@@ -49,65 +49,68 @@ export default class HomeView extends Component {
     })
   }
 
-  renderLockers(locker, secondaryLocker) {
-    if(!locker || !locker.property) {
-      return (<View></View>)
-    }
-
-    const location = (locker.property.location) ? locker.property.location : null
-    const secondaryLocation = (secondaryLocker && secondaryLocker.property) ? secondaryLocker.property.location : null
-
-    const name = locker.property.name
-    const address = locker.property.address
-    const fullAddress = locker.property.fullAddress()
-    const coordinate = {latitude: location.latitude, longitude: location.longitude}
-    const city = locker.property.city
-    const state = locker.property.stateProvince
-    const zip = locker.property.postalCode
-    const lockerPositionText = locker.isPrimaryLocker() ? "PRIMARY" : "SECONDARY"
-
-    if(!location) {
-      return (
-        <View>
-        </View>
-      )
-    }
-
-    var markers = [{title: locker.property.name, description: fullAddress, coordinate: coordinate}]
-
-    if(secondaryLocker) {
-      const secondaryLocation = (secondaryLocker.property.location) ? secondaryLocker.property.location : null
-      markers.push({title: secondaryLocker.property.name, description: secondaryLocker.property.fullAddress(), coordinate: {latitude: secondaryLocation.latitude, longitude: secondaryLocation.longitude}})
-    }
-
-    return (
-      <View style={{flex: 1}}>
-        <View style={{flex: 1}}>
-          <MapView
-            style={{flex: 1, height: 200, borderRadius: 4}}
-            initialRegion={{
-            latitude: location.latitude,
-            longitude: location.longitude,
-            latitudeDelta: 0.0522,
-            longitudeDelta: 0.0521,
-            }}
-            >
-            {markers.map(marker => (
-             <Marker
-                key={marker.description}
-               coordinate={marker.coordinate}
-               title={marker.title}
-               description={marker.description}
-             />
-            ))}
-            </MapView>
-          </View>
-      </View>
-      )
+  showLockerDetails(locker) {
+    const { navigate }  = this.props.navigation;
+    navigate('LockerDetailView', {locker: locker})
   }
 
   onShowQRCode() {
     this.setState({qrCodeShown: true})
+  }
+
+  canShowQRCode() {
+    return Utils.ifDefNN(this.state.data.usernameQR)
+  }
+
+  renderQRCode() {
+    const qrCodeData = this.state.data.usernameQR
+
+    if(!qrCodeData) {
+      return null
+    }
+
+    const base64Icon = 'data:image/png;base64,' + qrCodeData
+
+    return (
+      <Modal
+        animationType="slide"
+        transparent={false}
+        visible={this.state.qrCodeShown}
+        onRequestClose={() => {
+        }}>
+        <SafeAreaView style={{marginTop: 30, flex: 1}}>
+          <TouchableHighlight
+            onPress={() => {
+              this.setState({qrCodeShown: false});
+            }}>
+            <View style={{position: 'absolute', right: 21}}>
+              <Text style={{color: Colors.gray_b5}}>Close</Text>
+            </View>
+          </TouchableHighlight>
+          <View style={{flex: 1, marginTop: 100, marginLeft: 21, alignItems: 'center'}}>
+              <Image style={{width: 164, height: 164}} source={{uri: base64Icon}}/>
+          </View>
+        </SafeAreaView>
+      </Modal>
+    )
+  }
+
+  renderQRCodeButton() {
+    if(!this.canShowQRCode()) {
+      return null
+    }
+
+    const dashboardData = this.state.data || {}
+    const accountNumber = dashboardData.accountNumber || ""
+
+    return (
+      <View style={{flex: 1, flexDirection: 'row'}}>
+        <Text style={{marginLeft: 21, fontSize: 14, color: Colors.gray_b5, textAlign: 'left', flex: 1}}>Account #{accountNumber}</Text>
+        <TouchableHighlight onPress={() => {this.onShowQRCode()}} underlayColor={'transparent'} style={{flex: 1, marginRight: 21, height: 50}}>
+          <FontAwesome name="qrcode" size={30} style={{alignSelf: 'flex-end', color: Colors.gray_85, marginTop: -10}}/>
+        </TouchableHighlight>
+      </View>
+    )
   }
 
   render() {
@@ -122,7 +125,7 @@ export default class HomeView extends Component {
             </View>
     }
 
-    const dashboardData = this.state.data
+    const dashboardData = this.state.data || {}
     const firstName = Utils.capitalize(dashboardData.firstName || "")
     const lastName = Utils.capitalize(dashboardData.lastName || "")
     const accountNumber = dashboardData.accountNumber || ""
@@ -130,7 +133,9 @@ export default class HomeView extends Component {
     const primaryLocker = dashboardData && dashboardData.hasPrimaryLocker && dashboardData.hasPrimaryLocker() ? dashboardData.primaryLocker : null
     const secondaryLocker = dashboardData && dashboardData.hasSecondaryLocker && dashboardData.hasSecondaryLocker() ? dashboardData.secondaryLocker : null
 
-    const lockerView = this.renderLockers(primaryLocker, secondaryLocker)
+
+    const qrCodeView = this.renderQRCode()
+    const qrCodeButtonView = this.renderQRCodeButton()
 
     return (
       <Root>
@@ -145,44 +150,12 @@ export default class HomeView extends Component {
                 <FontAwesome name="refresh" size={22} style={{alignSelf: 'flex-end', color: Colors.gray_85}}/>
               </SafeAreaView>
             </TouchableHighlight>
-            <View style={{marginTop: 50}}>
+            <View style={{marginTop: 60}}>
               <Text style={{marginLeft: 21, marginTop: 20, fontSize: 36, color: Colors.dark_gray, fontWeight: 'bold'}}>Welcome</Text>
               <Text style={{marginLeft: 21, fontSize: 36, color: Colors.dark_gray, fontWeight: 'bold'}}>{firstName} {lastName}</Text>
-              <View style={{flex: 1, flexDirection: 'row'}}>
-                <Text style={{marginLeft: 21, fontSize: 14, color: Colors.gray_b5, textAlign: 'left', flex: 1}}>Account #{accountNumber}</Text>
-
-                <TouchableHighlight onPress={() => {this.onShowQRCode()}} underlayColor={'transparent'} style={{flex: 1, marginRight: 21, height: 50}}>
-                  <FontAwesome name="qrcode" size={30} style={{alignSelf: 'flex-end', color: Colors.gray_85, marginTop: -10}}/>
-                </TouchableHighlight>
-              </View>
-
-              <Text style={{marginLeft: 21, marginTop: 40, fontSize: 20, color: Colors.gray_85, fontWeight: 'bold'}}>Lockers</Text>
+              {qrCodeButtonView}
             </View>
-            <View style={{marginTop: 20, marginLeft: 21, marginRight: 21}}>
-              {lockerView}
-            </View>
-
-            <Modal
-              animationType="slide"
-              transparent={false}
-              visible={this.state.qrCodeShown}
-              onRequestClose={() => {
-                alert('Modal has been closed.');
-              }}>
-              <SafeAreaView style={{marginTop: 20, flex: 1}}>
-                <TouchableHighlight
-                  onPress={() => {
-                    this.setState({qrCodeShown: false});
-                  }}>
-                  <View style={{position: 'absolute', right: 21}}>
-                    <Text style={{color: Colors.gray_b5}}>Close</Text>
-                  </View>
-                </TouchableHighlight>
-                <View style={{flex: 1, marginTop: 100, marginLeft: 21, alignItems: 'center'}}>
-                    <Image style={{width: 164, height: 164}} source={{uri: 'https://chart.googleapis.com/chart?cht=qr&chl=enecg.com&chs=180x180&choe=UTF-8&chld=L|2'}}/>
-                </View>
-              </SafeAreaView>
-            </Modal>
+            {qrCodeView}
           </Content>
           <FooterTabWithNavigation navigation={this.props.navigation} active={"home"}/>
         </Container>

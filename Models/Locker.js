@@ -16,6 +16,10 @@ export default class Locker {
     this.compartmentSizes = this.buildCompartments(data.compartmentSizes)
   }
 
+  propertyName() {
+    return this.property && this.property.name ? this.property.name : ""
+  }
+
   isPrimaryLocker () {
     return this.isPrimary;
   }

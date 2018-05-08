@@ -20,6 +20,8 @@ import NewUpdatePaymentMethod from './Views/NewUpdatePaymentMethod'
 import ChangePassword from './Views/ChangePassword'
 import OptionSelector from './Views/OptionSelector'
 import ChangePlan from './Views/ChangePlan'
+import LockerDetail from './Views/LockerDetail'
+import LockerList from './Views/LockerList'
 import UpdateEmail from './Views/UpdateEmail'
 import UpdatePhone from './Views/UpdatePhone'
 import HomeView from './Views/Home'
@@ -34,7 +36,8 @@ import LocationCode from './Views/LocationCode'
 import { NetworkStatusListener } from './Common/NetworkManager'
 
 const HomeNavigationController = StackNavigator({
-  HomeView: { screen: HomeView }
+  HomeView: { screen: HomeView },
+  LockerDetailView: {screen: LockerDetail}
 });
 
 const IncomingNavigationController = StackNavigator({
@@ -56,6 +59,8 @@ const DetailsNavigationController = StackNavigator({
   ChangePlan: {screen: ChangePlan},
   UpdateEmail: {screen: UpdateEmail},
   UpdatePhone: {screen: UpdatePhone},
+  LockerList: {screen: LockerList},
+  LockerDetailView: {screen: LockerDetail}
 });
 
 const TabController = TabNavigator({

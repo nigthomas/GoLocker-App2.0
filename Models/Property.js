@@ -14,13 +14,19 @@ export default class Property {
     this.location = new Location(data.location)
     this.showPlan = data.showPlan
     this.settings = data.settings
+    this.actions = data.actions
   }
 
-  fullAddress() {
+  fullAddress(lines) {
     var address = this.address || ""
 
     if(this.city && this.city.length > 0) {
-      address = address + ", " + this.city + ", "
+      if(lines == 2) {
+        address = address + "\n" + this.city + ", "
+      }
+      else {
+        address = address + ", " + this.city + ", "
+      }
     }
 
     if(this.stateProvince && this.stateProvince.length > 0) {

@@ -86,6 +86,14 @@ export default class DetailsView extends Component {
     navigate('NewUpdatePaymentMethod', {creditCard: billing.creditCard, address: billing})
   }
 
+  showLockers() {
+    const primaryLocker = this.state.data.primaryLocker
+    const secondaryLocker = this.state.data.secondaryLocker
+    const lockers = [primaryLocker, secondaryLocker]
+
+    this.showLockersList(lockers)
+  }
+
   onEmail() {
     this.showUpdateEmail()
   }
@@ -112,6 +120,11 @@ export default class DetailsView extends Component {
     const { navigate }  = this.props.navigation;
     const phone = this.state.data.mobilePhone || this.state.data.homePhone
     navigate('UpdatePhone', {phone: phone})
+  }
+
+  showLockersList(lockers) {
+    const { navigate }  = this.props.navigation;
+    navigate('LockerList', {lockers: lockers})
   }
 
   fetch() {
@@ -144,16 +157,16 @@ export default class DetailsView extends Component {
         <Container>
           <Content style={{backgroundColor: Colors.white}}>
             <View style={{marginTop: 70}}>
-              <Text style={{marginLeft: 21, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>Membership</Text>
-              <Text style={{marginLeft: 21, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>Details</Text>
+              <Text style={{marginLeft: 21, fontSize: 36, color: Colors.dark_gray, fontWeight: 'bold'}}>Membership</Text>
+              <Text style={{marginLeft: 21, fontSize: 36, color: Colors.dark_gray, fontWeight: 'bold'}}>Details</Text>
             </View>
             <View style={{marginTop: 20}}>
-              <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(16), color: Colors.gray_85, fontWeight: 'bold'}}>Current Plan</Text>
+              <Text style={{marginLeft: 21, marginTop: 20, fontSize: 16, color: Colors.gray_85, fontWeight: 'bold'}}>Current Plan</Text>
             </View>
 
             <View style={{justifyContent: 'center', borderTopColor: Colors.gray_ef, borderTopWidth: 1, borderBottomColor: Colors.gray_ef, borderBottomWidth: 1, marginTop: 15, height: 50, flex: 1}}>
               <TouchableHighlight onPress={() => {this.showChangePlan()}} underlayColor={'transparent'}>
-                <Text style={{fontSize: Utils.normalize(14), color: Theme.primaryColor, marginLeft: 21, fontWeight: '600'}}>
+                <Text style={{fontSize: 14, color: Theme.primaryColor, marginLeft: 21, fontWeight: '600'}}>
                   {this.state.plan}
                 </Text>
               </TouchableHighlight>
@@ -171,10 +184,10 @@ export default class DetailsView extends Component {
             <View style={{justifyContent: 'center', borderTopColor: Colors.gray_ef, borderTopWidth: 1, borderBottomColor: Colors.gray_ef, borderBottomWidth: 1, marginTop: 15, height: 50, flex: 1}}>
               <TouchableHighlight onPress={() => {this.onEmail()}} underlayColor={'transparent'}>
                 <View style={{flexDirection:'row', flexWrap:'wrap'}}>
-                  <Text style={{fontSize: Utils.normalize(14), color: Colors.gray_85, marginLeft: 21, width: 50}}>
+                  <Text style={{fontSize: 14, color: Colors.gray_85, marginLeft: 21, width: 50}}>
                     Email
                   </Text>
-                  <Text style={{fontSize: Utils.normalize(14), color: Colors.gray_47, marginLeft: 21}}>
+                  <Text style={{fontSize: 14, color: Colors.gray_47, marginLeft: 21}}>
                     {this.state.email}
                   </Text>
                 </View>
@@ -268,7 +281,18 @@ export default class DetailsView extends Component {
               <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(16), color: Colors.gray_85, fontWeight: 'bold'}}>Profile</Text>
             </View>
 
-            <View style={{justifyContent: 'center', borderTopColor: Colors.gray_ef, borderTopWidth: 1, marginTop: 20, height: 50, flex: 1, marginTop: 20}}>
+            <View style={{justifyContent: 'center', borderTopColor: Colors.gray_ef, borderTopWidth: 1, height: 50, flex: 1, marginTop: 20}}>
+              <TouchableHighlight onPress={() => {this.showLockers()}} underlayColor={'transparent'}>
+                <View style={{flexDirection:'row', flexWrap:'wrap'}}>
+                  <Text style={{fontSize: Utils.normalize(14), color: Colors.gray_85, marginLeft: 21}}>
+                    Lockers
+                  </Text>
+                </View>
+              </TouchableHighlight>
+              <Entypo name="chevron-small-right" size={25} style={{color: Colors.gray_85, position: 'absolute', right: 21}}/>
+            </View>
+
+            <View style={{justifyContent: 'center', borderTopColor: Colors.gray_ef, borderTopWidth: 1, height: 50, flex: 1}}>
               <TouchableHighlight onPress={() => {this.onLogout()}} underlayColor={'transparent'}>
                 <View style={{flexDirection:'row', flexWrap:'wrap'}}>
                   <Text style={{fontSize: Utils.normalize(14), color: Colors.gray_85, marginLeft: 21}}>

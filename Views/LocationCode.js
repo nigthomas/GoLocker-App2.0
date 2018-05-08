@@ -75,7 +75,7 @@ export default class LocationCodeView extends Component {
                 <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(16), color: Colors.gray_85, fontWeight: 'bold'}}>{text}</Text>
               </View>
               <View style={{marginLeft: 21, marginRight: 21}}>
-                <TextInput underlineColorAndroid='transparent' ref="locationCodeField"  maxLength={5} placeholderTextColor={Colors.tapable_blue} style={{flex: 1, marginTop: 10, paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Enter location code"} onChangeText={(code) => this.setState({code})} value={this.state.code}/>
+                <TextInput underlineColorAndroid='transparent' ref="locationCodeField"  maxLength={10} placeholderTextColor={Colors.tapable_blue} style={{flex: 1, marginTop: 10, paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Enter location code"} onChangeText={(code) => this.setState({code: code.toUpperCase()})} value={this.state.code}/>
                 <TouchableHighlight onPress={() => {this.onCheckPress()}} underlayColor={'transparent'}>
                   <View style={{height: 50, borderRadius: 4, backgroundColor: Colors.light_green, marginTop: 10}}>
                     <Text style={{textAlign: 'center', color: Colors.white, marginTop: 17}}>Check</Text>

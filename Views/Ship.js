@@ -181,44 +181,44 @@ export default class Ship extends Component {
           <Container>
             <Content style={{backgroundColor: Colors.white}} ref={c => (this.component = c)}>
               <View style={{marginTop: 70}}>
-                <Text style={{marginLeft: 21, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>Send a package</Text>
+                <Text style={{marginLeft: 21, fontSize: 36, color: Colors.dark_gray, fontWeight: 'bold'}}>Send a package</Text>
               </View>
               {errorText}
 
-              <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(16), color: Colors.gray_85, fontWeight: 'bold'}}>Location</Text>
+              <Text style={{marginLeft: 21, marginTop: 20, fontSize: 16, color: Colors.gray_85, fontWeight: 'bold'}}>Location:</Text>
               <View style={{borderTopColor: Colors.gray_ef, borderTopWidth: 1, borderBottomColor: Colors.gray_ef, borderBottomWidth: 1, marginTop: 15, height: 80}}>
                 <TouchableHighlight onPress={this.onLoginPress} underlayColor={'transparent'}>
                   <View>
-                  <Text style={{marginLeft: 21, paddingTop:15, fontSize: Utils.normalize(14), color: Colors.gray_85}}>GoLocker HQ</Text>
-                  <Text style={{fontSize: Utils.normalize(10), color: Colors.gray_85, marginLeft: 21, marginTop: 3}}>
+                  <Text style={{marginLeft: 21, paddingTop:9, fontSize: 14, color: Colors.gray_85}}>GoLocker HQ</Text>
+                  <Text style={{fontSize: 14, color: Colors.gray_85, marginLeft: 21, marginTop: 3}}>
                     209A Morgan Avenue - Ste F
                   </Text>
-                  <Text style={{fontSize: Utils.normalize(10), color: Colors.gray_85, marginLeft: 21, marginTop: 3}}>
+                  <Text style={{fontSize: 14, color: Colors.gray_85, marginLeft: 21, marginTop: 3}}>
                     Brooklyn, NY 11237
                   </Text>
                   </View>
                 </TouchableHighlight>
               </View>
 
-              <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(16), color: Colors.gray_85, fontWeight: 'bold'}}>Deliver to:</Text>
+              <Text style={{marginLeft: 21, marginTop: 20, fontSize: 16, color: Colors.gray_85, fontWeight: 'bold'}}>Deliver to:</Text>
               <View style={{justifyContent: 'center', borderTopColor: Colors.gray_ef, borderTopWidth: 1, borderBottomColor: Colors.gray_ef, borderBottomWidth: 1, marginTop: 15, height: 50, flex: 1}}>
                 <TouchableHighlight onPress={() => {this.onChangeLocker()}} underlayColor={'transparent'}>
-                  <Text style={{fontSize: Utils.normalize(14), color: Colors.gray_85, marginLeft: 21}}>
+                  <Text style={{fontSize: 14, color: Colors.gray_85, marginLeft: 21}}>
                   {lockerName}
                   </Text>
                 </TouchableHighlight>
                 <Entypo name="chevron-small-right" size={25} style={{color: Colors.gray_85, position: 'absolute', right: 0}}/>
               </View>
 
-              <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(16), color: this.state.choosePackageError ? Colors.red : Colors.gray_85, fontWeight: 'bold'}}>Please choose a package size</Text>
+              <Text style={{marginLeft: 21, marginTop: 20, fontSize: 16, color: this.state.choosePackageError ? Colors.red : Colors.gray_85, fontWeight: 'bold'}}>Please choose a package size</Text>
 
               <View style={{justifyContent: 'center', borderTopColor: Colors.gray_ef, borderTopWidth: 1, borderBottomColor: Colors.gray_ef, borderBottomWidth: 1, marginTop: 15, height: 50, flex: 1}}>
                 <TouchableHighlight onPress={() => {this.onSmallParcelPress()}} underlayColor={'transparent'}>
                   <View>
-                    <Text style={{fontSize: Utils.normalize(14), color: Colors.gray_85, marginLeft: 21}}>
+                    <Text style={{fontSize: 14, color: Colors.gray_85, marginLeft: 21}}>
                       Small Parcel
                     </Text>
-                    <Text style={{fontSize: Utils.normalize(10), color: Colors.gray_85, marginLeft: 21, marginTop: 3}}>
+                    <Text style={{fontSize: 10, color: Colors.gray_85, marginLeft: 21, marginTop: 3}}>
                       No bigger than 4 H x 15 W x 24 L
                     </Text>
                     {smallParcelButton}

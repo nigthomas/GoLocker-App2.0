@@ -32,4 +32,4 @@ export default class Member {
             primaryLockerID: this.primaryLockerID,
             secondaryLockerID: this.secondaryLockerID}
   }
-} 
+}

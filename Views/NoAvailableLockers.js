@@ -25,6 +25,10 @@ export default class NoAvailableLockers extends Component {
     navigation.goBack()
   }
 
+  onSavePress() {
+
+  }
+
   static navigationOptions = { header: null };
   render() {
     const text = "Unfortunately we currently don't have any lockers in your area. Enter your email address below so we can let you know when one becomes available. We'll only use it to tell you when service becomes available."
@@ -50,7 +54,7 @@ export default class NoAvailableLockers extends Component {
               </View>
               <View style={{marginLeft: 21, marginRight: 21}}>
                 <TextInput underlineColorAndroid='transparent' ref="emailField" placeholderTextColor={Colors.tapable_blue} style={{flex: 1, marginTop: 10, marginRight: 5,paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Enter Email"} onChangeText={(email) => this.setState({email})} value={this.state.email}/>
-                <TouchableHighlight onPress={() => {this.onCheckPress()}} underlayColor={'transparent'}>
+                <TouchableHighlight onPress={() => {this.onSavePress()}} underlayColor={'transparent'}>
                   <View style={{height: 50, borderRadius: 4, backgroundColor: Colors.light_green, marginTop: 10}}>
                     <Text style={{textAlign: 'center', color: Colors.white, marginTop: 17}}>Save</Text>
                   </View>

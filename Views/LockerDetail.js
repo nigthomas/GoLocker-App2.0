@@ -78,7 +78,7 @@ export default class LockerDetail extends Component {
 
     const name = locker.property.name
     const address = locker.property.address
-    const fullAddress = locker.property.fullAddress(2)
+    const fullAddress = locker.property.fullAddress()
     const location = (locker.property.location) ? locker.property.location : null
     const coordinate = {latitude: location.latitude, longitude: location.longitude}
     const city = locker.property.city
@@ -87,7 +87,7 @@ export default class LockerDetail extends Component {
 
     return (
         <View style={{flex: 1, marginTop: 10}}>
-          <View><Text style={{color: Colors.gray_b5, fontSize: 14, marginTop: 10}}>{fullAddress}</Text></View>
+          <Text style={{color: Colors.gray_b5, fontSize: 14, marginTop: 10}}>{fullAddress}</Text>
         </View>
     )
   }

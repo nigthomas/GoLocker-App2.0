@@ -49,7 +49,7 @@ export default class FooterTabWithNavigation extends Component {
          </Button>
          <Button vertical onPress={this.onDetailsPress}>
            <MaterialCommunityIcons name="account-box-outline" size={20} style={detailsStyle}/>
-           <Text style={detailsTextStyle}>Details</Text>
+           <Text style={detailsTextStyle}>Account</Text>
          </Button>
        </FooterTab>
      </Footer>

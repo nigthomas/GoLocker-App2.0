@@ -30,23 +30,21 @@ export default class IncomingView extends Component {
   }
 
   componentDidMount() {
-    this.setState({loading: true})
-    this.fetch()
-
     const { params } = this.props.navigation.state;
     ReservationService.getInstance().getListener()
     .on("CREATED_RESERVATION", () => {
-      this.setState({loading: true})
       this.fetch()
     })
+
+    this.fetch()
   }
 
   onRefresh() {
-    this.setState({loading: true})
     this.fetch()
   }
 
   fetch() {
+    this.setState({loading: true})
     Promise.all([DashboardService.getInfo(),
                  ReservationService.getInstance().getReservations()])
     .then(results => {
@@ -99,7 +97,7 @@ export default class IncomingView extends Component {
     )
   }
 
-  renderEmptyList(firstName, lastName) {
+  renderEmptyList() {
     const errorText = this.state.error ? <Text style={{marginLeft: 21, color: Colors.red, marginTop: 5}}>Something is wrong. Please try again</Text> : null
 
     return (
@@ -133,12 +131,11 @@ export default class IncomingView extends Component {
             </View>
     }
 
-    const firstName = this.state.dashboardData.firstName
-    const lastName = this.state.dashboardData.lastName
+
     const data = this.state.reservationData
 
     if(data.length === 0) {
-      return this.renderEmptyList(firstName, lastName)
+      return this.renderEmptyList()
     }
 
     const errorText = this.state.error ? <Text style={{marginLeft: 21, color: Colors.red, marginTop: 5}}>Something is wrong. Please try again</Text> : null

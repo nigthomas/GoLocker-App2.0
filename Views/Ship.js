@@ -35,7 +35,10 @@ export default class Ship extends Component {
      mediumParcelSelected: false,
      largeParcelSelected: false,
      choosePackageError: false,
-     enterTrackingNumberError: false
+     enterTrackingNumberError: false,
+     buttonText: "Reserve a locker",
+     buttonColor: Colors.light_green,
+     reserving: false
    };
   }
 
@@ -97,6 +100,14 @@ export default class Ship extends Component {
     this.setState({smallParcelSelected: false, mediumParcelSelected: false, largeParcelSelected: true})
   }
 
+  showProcessingState() {
+    this.setState({buttonText: "Reserving...", buttonColor: Colors.gray_85, reserving: true})
+  }
+
+  showRegularState() {
+    this.setState({buttonText: "Reserve a locker", buttonColor: Colors.light_green, reserving: false})
+  }
+
   onChangeLocker() {
     const { navigate }  = this.props.navigation;
     const primaryLocker = this.state.data.primaryLocker
@@ -151,16 +162,24 @@ export default class Ship extends Component {
       return
     }
 
+    if(this.state.reserving) {
+      return;
+    }
+
+    this.showProcessingState()
+
     ReservationService.getInstance().createReservation(compartment, accountNumber, 1, this.state.number, lockerId)
     .then(() => {
       this.setState({choosePackageError: false, enterTrackingNumberError: false, number: null, smallParcelSelected: false, mediumParcelSelected:false, largeParcelSelected:false})
+      this.showRegularState()
       const { navigate } = this.props.navigation;
       setTimeout(() => {
-        navigate('Incoming', {refresh: true})
+        navigate('Home', {refresh: true})
       }, 500)
     })
     .catch(err => {
       this.setState({error: err, loading: false})
+      this.showRegularState()
     })
   }
 
@@ -266,8 +285,8 @@ export default class Ship extends Component {
               </View>
 
               <TouchableHighlight onPress={() => {this.onReserveLocker()}} underlayColor={'transparent'}>
-                <View style={{height: 50, borderRadius: 4, backgroundColor: Colors.light_green, marginLeft: 21, marginTop: 25, marginRight: 21}}>
-                  <Text style={{textAlign: 'center', color: Colors.white, marginTop: 17}}>Reserve a locker</Text>
+                <View style={{height: 50, borderRadius: 4, backgroundColor: this.state.buttonColor, marginLeft: 21, marginTop: 25, marginRight: 21}}>
+                  <Text style={{textAlign: 'center', color: Colors.white, marginTop: 17}}>{this.state.buttonText}</Text>
                 </View>
               </TouchableHighlight>
             </Content>

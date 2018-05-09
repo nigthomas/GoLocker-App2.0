@@ -24,6 +24,7 @@ export default class HomeView extends Component {
 
    this.state = {
      data: {},
+     reservationData: [],
      loading: false,
      error: null,
      qrCodeShown: false
@@ -31,22 +32,26 @@ export default class HomeView extends Component {
   }
 
   componentDidMount() {
-    this.setState({loading: true})
+    ReservationService.getInstance().getListener()
+    .on("CREATED_RESERVATION", () => {
+      this.fetch()
+    })
+
     this.fetch()
   }
 
   onRefresh() {
-    this.setState({loading: true})
     this.fetch()
   }
 
   fetch() {
+    this.setState({loading: true})
     Promise.all([DashboardService.getInfo(), ReservationService.getInstance().getReservations()])
     .then(results => {
-      this.setState({data: results[0], loading: false, error: null})
+      this.setState({data: results[0], reservationData: results[1], loading: false, error: null})
     })
     .catch(err => {
-      this.setState({error: err, loading: false})
+      this.setState({error: err, loading: false, cancelling: false})
     })
   }
 
@@ -55,12 +60,51 @@ export default class HomeView extends Component {
     navigate('LockerDetailView', {locker: locker})
   }
 
+  cancelReservation(reservation) {
+    ReservationService.getInstance().cancelReservation(reservation.id)
+    .then(() => {
+      this.fetch()
+    })
+    .catch(err => {
+      this.setState({loading: false, error: err})
+    })
+  }
+
   onShowQRCode() {
     this.setState({qrCodeShown: true})
   }
 
   canShowQRCode() {
     return Utils.ifDefNN(this.state.data.usernameQR)
+  }
+
+  renderItem(item) {
+    const swipeBtns = [{
+      text: 'Cancel',
+      backgroundColor: Colors.red,
+      onPress: () => { this.cancelReservation(item) }
+    }];
+
+    const lockerName = (item.locker && item.locker.property) ? item.locker.property.name : ""
+    const expiration = (item.expirationDate) ? new Moment(item.expirationDate).format('MM/DD') : ""
+    const trackingNumber = item.trackingNumber
+    const pin = item.pin
+    const direction = (item.barcode && item.barcode.includes("CNTI")) ? "Outgoing" : "Incoming"
+
+    return (
+      <Swipeout right={swipeBtns}
+        backgroundColor= 'transparent'>
+        <View style={{paddingTop:5, paddingBottom: 5, paddingLeft: 21, paddingRight: 21, flexDirection: 'row', alignSelf: 'flex-start', borderBottomWidth: 1, borderBottomColor: Colors.gray_ef}}>
+          <View style={{flex: 1}}>
+            <Text style={{ color: Colors.gray_85}}>Name: <Text style={{ color: Colors.dark_gray, fontWeight: '600'}}>{lockerName}</Text></Text>
+            <Text style={{ color: Colors.gray_85, marginTop: 2}}>Tracking: {trackingNumber}</Text>
+            <Text style={{ color: Colors.gray_85, marginTop: 2}}>Pin: {pin}</Text>
+            <Text style={{ color: Colors.gray_85, marginTop: 2}}>Created: {expiration}</Text>
+            <Text style={{ color: Colors.gray_85, marginTop: 2}}>Direction: {direction}</Text>
+          </View>
+        </View>
+      </Swipeout>
+    )
   }
 
   renderQRCode() {
@@ -114,6 +158,22 @@ export default class HomeView extends Component {
     )
   }
 
+  renderEmptyList() {
+    return (
+      <View style={{marginTop: 20, marginLeft: 21}}>
+        <Text style={{fontSize: 14, color: Colors.gray_85}}>You have no packages</Text>
+      </View>
+    );
+  }
+
+  renderList() {
+    const data = this.state.reservationData
+
+    return (<View style={{marginTop: 20, borderTopColor: Colors.gray_ef, borderTopWidth: 1}}>
+              <FlatList data={data} keyExtractor={(item, index) => item.trackingNumber} renderItem={({ item }) => {return this.renderItem(item)}} backgroundColor={'white'}/>
+            </View>)
+  }
+
   render() {
     if(this.state.loading) {
       return <View style={{flex: 1, backgroundColor: Colors.white}}>
@@ -134,9 +194,10 @@ export default class HomeView extends Component {
     const primaryLocker = dashboardData && dashboardData.hasPrimaryLocker && dashboardData.hasPrimaryLocker() ? dashboardData.primaryLocker : null
     const secondaryLocker = dashboardData && dashboardData.hasSecondaryLocker && dashboardData.hasSecondaryLocker() ? dashboardData.secondaryLocker : null
 
-
     const qrCodeView = this.renderQRCode()
     const qrCodeButtonView = this.renderQRCodeButton()
+    const data = this.state.reservationData || []
+    const packagesView = (data.length == 0) ? this.renderEmptyList() : this.renderList()
 
     return (
       <Root>
@@ -161,6 +222,25 @@ export default class HomeView extends Component {
             </View>
 
             <Text style={{marginLeft: 21, fontSize: 16, marginTop:21, color: Colors.gray_85, fontWeight: 'bold'}}>Send packages to:</Text>
+            <View style={{flex: 1, marginLeft:21, marginRight: 21, marginTop: 10}}>
+              <MapView
+                style={{flex: 1, height: 200, borderRadius: 4}}
+                initialRegion={{
+                latitude: 40.711545,
+                longitude: -73.934188,
+                latitudeDelta: 0.01,
+                longitudeDelta: 0.01,
+                }}
+                scrollEnabled={false}
+                >
+                 <Marker
+                    key={"1"}
+                   coordinate={{latitude: 40.711545, longitude: -73.934188}}
+                   title={"GoLocker HQ"}
+                   description={""}
+                 />
+                </MapView>
+              </View>
             <View style={{height: 80}}>
                 <View>
                 <Text style={{marginLeft: 21, paddingTop:9, fontSize: 14, color: Colors.gray_85}}>GoLocker HQ</Text>
@@ -174,7 +254,7 @@ export default class HomeView extends Component {
             </View>
 
             <Text style={{marginLeft: 21, fontSize: 16, marginTop:21, color: Colors.gray_85, fontWeight: 'bold'}}>Packages:</Text>
-
+            {packagesView}
 
           </Content>
           <FooterTabWithNavigation navigation={this.props.navigation} active={"home"}/>

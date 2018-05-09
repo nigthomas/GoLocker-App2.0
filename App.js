@@ -76,7 +76,7 @@ const TabController = TabNavigator({
 const LoginNavigationController = StackNavigator({
   LoginView: { screen: ({ navigation }) => {
     return <LoginView rootNavigation={{ navigate: navigation }} />
-  }}, 
+  }},
   IncomingView: {screen: TabController},
   RegistrationView: {screen: RegistrationView},
   ForgotPasswordView: {screen: ForgotPasswordView},

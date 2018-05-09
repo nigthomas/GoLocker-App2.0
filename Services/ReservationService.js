@@ -37,7 +37,9 @@ export default class ReservationService {
   createReservation(parcel, accountNumber, type, trackingNumber, lockerId)  {
     return ReservationNetworkManager.create(parcel, accountNumber, type, trackingNumber, lockerId)
     .then(data => {
-      this.state.listener.emit('CREATED_RESERVATION');
+      setTimeout(() => {
+        this.state.listener.emit('CREATED_RESERVATION');
+      }, 500)
       return new Promise((resolve, reject) => { resolve(data) })
     })
   }

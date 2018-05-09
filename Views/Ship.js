@@ -16,6 +16,7 @@ import LoginService from '../Services/LoginService'
 import Utils from '../Common/Utils'
 import MaterialIcons from 'react-native-vector-icons/dist/MaterialIcons'
 import HeaderView from '../Elements/HeaderView'
+import LockerService from '../Services/LockerService'
 
 export default class Ship extends Component {
   static navigationOptions = { title: '', header: null, tabBarVisible: false};
@@ -39,11 +40,16 @@ export default class Ship extends Component {
   }
 
   componentDidMount() {
-    this.setState({loading: true})
+    LockerService.getInstance().getListener()
+    .on("UPDATED", () => {
+      this.fetch()
+    })
+
     this.fetch()
   }
 
   fetch() {
+    this.setState({loading: true})
     Promise.all([DashboardService.getInfo()])
     .then(results => {
       const dashboardInfo = results[0]

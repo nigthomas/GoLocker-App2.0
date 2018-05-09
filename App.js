@@ -41,10 +41,6 @@ const HomeNavigationController = StackNavigator({
   LockerDetailView: {screen: LockerDetail}
 });
 
-const IncomingNavigationController = StackNavigator({
-  IncomingView: { screen: IncomingView }
-});
-
 const ShipNavigationController = StackNavigator({
   ShipView: { screen: ShipView },
   SelectLockerView: {screen: SelectLockerView}
@@ -67,7 +63,6 @@ const DetailsNavigationController = StackNavigator({
 
 const TabController = TabNavigator({
    Home: {screen: HomeNavigationController},
-   Incoming: { screen: IncomingNavigationController },
    Ship: { screen: ShipNavigationController },
    Details: { screen: DetailsNavigationController }
 }, {
@@ -81,7 +76,7 @@ const TabController = TabNavigator({
 const LoginNavigationController = StackNavigator({
   LoginView: { screen: ({ navigation }) => {
     return <LoginView rootNavigation={{ navigate: navigation }} />
-  }},
+  }}, 
   IncomingView: {screen: TabController},
   RegistrationView: {screen: RegistrationView},
   ForgotPasswordView: {screen: ForgotPasswordView},

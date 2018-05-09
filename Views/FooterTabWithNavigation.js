@@ -43,10 +43,6 @@ export default class FooterTabWithNavigation extends Component {
          <FontAwesome name="compass" size={22} style={homeStyle}/>
          <Text style={homeTextStyle}>Home</Text>
        </Button>
-         <Button vertical onPress={this.onIncomingPress}>
-           <FontAwesome name="th-list" size={20} style={incomingStyle}/>
-           <Text style={incomingTextStyle}>Tracking</Text>
-         </Button>
          <Button vertical onPress={this.onShipPress}>
            <FontAwesome name="send" size={20} style={shipStyle} />
            <Text style={shipTextStyle}>Ship</Text>

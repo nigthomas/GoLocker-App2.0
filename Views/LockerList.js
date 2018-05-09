@@ -56,7 +56,7 @@ export default class LockerDetail extends Component {
 
     if(isPrimaryLocker) {
       return (
-        <TouchableHighlight onPress={() => {this.showLockerDetail(locker)}} underlayColor={'transparent'}>
+        <TouchableHighlight onPress={() => {this.showLockerDetail(locker)}} underlayColor={'transparent'} key={locker.id}>
           <View style={{paddingLeft:21, paddingRight:21, paddingTop: 3, height: 70, flex: 1, borderTopColor: Colors.gray_ef, borderTopWidth: 1, borderBottomColor: Colors.gray_ef, borderBottomWidth: 1}}>
             <Text style={{paddingTop: 3, color: Colors.dark_gray, fontWeight: 'bold', fontSize: 16}}>{name}</Text>
             <View><Text style={{color: Colors.gray_b5, fontSize: 14}}>{fullAddress}</Text></View>
@@ -67,7 +67,7 @@ export default class LockerDetail extends Component {
     }
 
     return (
-      <TouchableHighlight onPress={() => {this.showLockerDetail(locker)}} underlayColor={'transparent'}>
+      <TouchableHighlight onPress={() => {this.showLockerDetail(locker)}} underlayColor={'transparent'} key={locker.id}>
         <View style={{height: 70, flex: 1, paddingLeft:21, paddingTop: 3, paddingRight:21}}>
           <Text style={{paddingTop: 3, color: Colors.dark_gray, fontWeight: 'bold', fontSize: 16}}>{name}</Text>
           <View><Text style={{color: Colors.gray_b5, fontSize: 14}}>{fullAddress}</Text></View>

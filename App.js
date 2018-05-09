@@ -20,6 +20,7 @@ import NewUpdatePaymentMethod from './Views/NewUpdatePaymentMethod'
 import ChangePassword from './Views/ChangePassword'
 import OptionSelector from './Views/OptionSelector'
 import ChangePlan from './Views/ChangePlan'
+import ChangeLocker from './Views/ChangeLocker'
 import LockerDetail from './Views/LockerDetail'
 import LockerList from './Views/LockerList'
 import UpdateEmail from './Views/UpdateEmail'
@@ -60,7 +61,8 @@ const DetailsNavigationController = StackNavigator({
   UpdateEmail: {screen: UpdateEmail},
   UpdatePhone: {screen: UpdatePhone},
   LockerList: {screen: LockerList},
-  LockerDetailView: {screen: LockerDetail}
+  LockerDetailView: {screen: LockerDetail},
+  ChangeLocker: {screen: ChangeLocker}
 });
 
 const TabController = TabNavigator({

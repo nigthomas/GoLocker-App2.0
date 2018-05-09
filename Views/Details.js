@@ -9,6 +9,7 @@ import LoadingView from './Loading'
 import Entypo from 'react-native-vector-icons/dist/Entypo'
 import LoginService from '../Services/LoginService'
 import AccountService from '../Services/AccountService'
+import LockerService from '../Services/LockerService'
 
 export default class DetailsView extends Component {
   static navigationOptions = { title: 'Account', header: null, tabBarVisible: false };
@@ -30,6 +31,12 @@ export default class DetailsView extends Component {
   componentDidMount() {
     this.setState({loading: true})
     this.fetch()
+
+    LockerService.getInstance().getListener()
+    .on("UPDATED", () => {
+      this.setState({loading: true})
+      this.fetch()
+    })
 
     AccountService.getInstance().getListener()
     .on("UPDATED", () => {

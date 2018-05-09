@@ -64,6 +64,13 @@ export default class LockerDetail extends Component {
     )
   }
 
+  onChangeLocker() {
+    const { navigate }  = this.props.navigation;
+    const locker = this.state.locker
+
+    navigate('ChangeLocker', {selectedLocker: locker})
+  }
+
   renderLockerItem(locker) {
     if(!locker || !locker.property) {
       return null
@@ -77,15 +84,10 @@ export default class LockerDetail extends Component {
     const city = locker.property.city
     const state = locker.property.stateProvince
     const zip = locker.property.postalCode
-    const primaryBadgeView = locker.isPrimaryLocker() ? <View style={{alignSelf: 'flex-end', backgroundColor: Theme.secondaryColor, borderRadius: 30, width: 70, paddingLeft: 10, paddingRight: 10, paddingTop: 5, paddingBottom: 5}}><Text style={{color: Colors.white, textAlign: 'center'}}>Primary</Text></View> : null
 
     return (
-        <View style={{height: 200, flex: 1, marginTop: 20}}>
-          <View style={{flexDirection: 'row', alignSelf: 'flex-start'}}>
-            <View style={{flex: 2}}><Text style={{paddingTop: 3, color: Colors.dark_gray, fontWeight: 'bold', fontSize: 16}}>{name}</Text></View>
-            <View style={{flex: 1}}>{primaryBadgeView}</View>
-          </View>
-          <View><Text style={{color: Colors.gray_b5, fontSize: 14}}>{fullAddress}</Text></View>
+        <View style={{flex: 1, marginTop: 10}}>
+          <View><Text style={{color: Colors.gray_b5, fontSize: 14, marginTop: 10}}>{fullAddress}</Text></View>
         </View>
     )
   }
@@ -139,28 +141,24 @@ export default class LockerDetail extends Component {
     const errorText = this.state.error ? <Text style={{color: Colors.red, marginBottom: 10}}>Error occurred while opening door</Text> : null
     const mapView = this.renderLocker(locker)
     const lockerView = this.renderLockerItem(locker)
-
+    const headerText = locker.isPrimaryLocker() ? "Primary Location" : "Secondary Location"
     //Check logic first
-    const actionButton = this.renderOpenDoorActionButton()
+    // const actionButton = this.renderOpenDoorActionButton()
     return (
       <Root>
         <Container>
           <Content style={{backgroundColor: Colors.white}}>
           <View style={{marginTop: 40}}>
-            <ThreeHeaderView title={this.state.lockerName} leftButtonTitle={"Back"} rightButtonTitle={""} onLeftPress={() => {this.onBackPress()}}/>
+            <ThreeHeaderView title={this.state.lockerName} leftButtonTitle={"Back"} rightButtonTitle={"Change"} onLeftPress={() => {this.onBackPress()}} onRightPress={() => {this.onChangeLocker()}}/>
           </View>
           <View style={{flex: 1, marginLeft: 21, marginRight: 21}}>
             {errorText}
-            <Text style={{fontSize: 23, color: Colors.black, fontWeight: 'bold', marginBottom: 10}}>Location</Text>
+            <Text style={{fontSize: 16, color: Colors.black, fontWeight: 'bold', marginBottom: 10}}>{headerText}</Text>
             {mapView}
             {lockerView}
           </View>
-          <View style={{position: 'absolute', left: 21, right: 21, bottom: 0}}>
-            {actionButton}
-          </View>
-
           </Content>
-          <FooterTabWithNavigation navigation={this.props.navigation} active={"home"}/>
+          <FooterTabWithNavigation navigation={this.props.navigation} active={"details"}/>
         </Container>
       </Root>
     );

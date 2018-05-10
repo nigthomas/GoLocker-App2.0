@@ -33,6 +33,10 @@ export default class Onboarding extends Component {
     return (
       <Root>
         <Container>
+        <StatusBar
+          backgroundColor={Colors.gray_f1}
+          barStyle="dark-content"
+        />
           <Content style={{backgroundColor: Colors.gray_f1}}>
           <View>
            <View style={{alignItems: 'center', marginTop: 60}}>
@@ -41,7 +45,11 @@ export default class Onboarding extends Component {
               source={require('../Images/golockerLogo.png')}
              />
              </View>
-
+               <SafeAreaView style={{position: 'absolute', right: 21, top: 21, width: 55, height: 55}}>
+                 <TouchableHighlight onPress={() => {this.onSkip()}} underlayColor={'transparent'}>
+                   <Text style={{textAlign: 'right', color: Colors.gray_85, fontSize: 16, fontWeight: '300'}}>Skip</Text>
+                </TouchableHighlight>
+               </SafeAreaView>
              <Swiper style={styles.wrapper} showsButtons={true} autoplay={true} showsButtons={false} activeDotColor={Theme.primaryColor} activeDotStyle={{height: 15, width: 15, borderRadius: 7.5}} dotStyle={{height: 10, width: 10, borderRadius: 5}}>
                <View style={styles.slide1}>
                   <View style={{width: 250, height: 250, borderRadius: 125, backgroundColor: Colors.white, justifyContent: 'center', alignItems: 'center'}}>
@@ -73,11 +81,6 @@ export default class Onboarding extends Component {
              </Swiper>
            </View>
           </Content>
-          <TouchableHighlight onPress={() => {this.onSkip()}} underlayColor={'transparent'}>
-            <SafeAreaView style={{position: 'absolute', right: 21, bottom: 21, zIndex: 100}}>
-              <Text style={{textAlign: 'right', color: Colors.gray_85, fontSize: 16, zIndex: 1, fontWeight: '300'}}>Skip</Text>
-            </SafeAreaView>
-          </TouchableHighlight>
         </Container>
       </Root>
     );

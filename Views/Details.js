@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableHighlight, StatusBar, ScrollView, Linking} from 'react-native';
+import { StyleSheet, Text, View, TouchableHighlight, StatusBar, ScrollView, Linking, Platform} from 'react-native';
 import Theme from '../Common/Theme'
 import Colors from '../Common/Colors'
 import FooterTabWithNavigation from './FooterTabWithNavigation'
@@ -179,7 +179,7 @@ export default class DetailsView extends Component {
               </TouchableHighlight>
 
               <View style={{position: 'absolute', right: 21, flex: 1, flexDirection:'row', zIndex: -1}}>
-                <Text style={{color: Colors.gray_85, marginTop: 10}}>Upgrade</Text>
+                <Text style={{color: Colors.gray_85, marginTop: Platform.OS === 'ios' ? 10 : 7}}>Upgrade</Text>
                 <Entypo name="chevron-small-right" size={25} style={{color: Colors.gray_85, marginTop: 5}}/>
               </View>
             </View>

@@ -1,4 +1,5 @@
 import Location from './Location'
+import _ from 'underscore'
 
 export default class Property {
   constructor (data) {
@@ -14,7 +15,11 @@ export default class Property {
     this.location = new Location(data.location)
     this.showPlan = data.showPlan
     this.settings = data.settings
-    this.actions = data.actions
+    this.actions = data.actions || ["open_door"] //Remove it
+  }
+
+  hasOpenDoorAction() {
+    return _.contains(this.actions, "open_door")
   }
 
   fullAddress(lines) {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, StatusBar, FlatList, TouchableHighlight, Modal, Image, SafeAreaView, ScrollView, Dimensions} from 'react-native';
+import { StyleSheet, Text, View, StatusBar, FlatList, TouchableHighlight, Modal, Image, SafeAreaView, ScrollView, Dimensions, Platform} from 'react-native';
 import Theme from '../Common/Theme'
 import FooterTabWithNavigation from './FooterTabWithNavigation'
 import { Container, Header, Content, Card, CardItem, Left, Thumbnail, Body, Button, Icon, Title, Footer, FooterTab, Root, Right} from 'native-base';
@@ -27,7 +27,8 @@ export default class HomeView extends Component {
      reservationData: [],
      loading: false,
      error: null,
-     qrCodeShown: false
+     qrCodeShown: false,
+     hasLocationPermission: false
    };
   }
 
@@ -49,6 +50,7 @@ export default class HomeView extends Component {
     Promise.all([DashboardService.getInfo(), ReservationService.getInstance().getReservations()])
     .then(results => {
       this.setState({data: results[0], reservationData: results[1], loading: false, error: null})
+      this.requestPermissionForLocationIfNeeded()
     })
     .catch(err => {
       this.setState({error: err, loading: false, cancelling: false})
@@ -124,14 +126,14 @@ export default class HomeView extends Component {
         onRequestClose={() => {
         }}>
         <SafeAreaView style={{marginTop: 30, flex: 1}}>
+        <SafeAreaView style={{position: 'absolute', right: 21}}>
           <TouchableHighlight
             onPress={() => {
               this.setState({qrCodeShown: false});
             }}>
-            <View style={{position: 'absolute', right: 21}}>
               <Text style={{color: Colors.gray_b5}}>Close</Text>
-            </View>
           </TouchableHighlight>
+          </SafeAreaView>
           <View style={{flex: 1, marginTop: 100, marginLeft: 21, alignItems: 'center'}}>
               <Image style={{width: 164, height: 164}} source={{uri: base64Icon}}/>
           </View>
@@ -151,8 +153,8 @@ export default class HomeView extends Component {
     return (
       <View style={{flex: 1, flexDirection: 'row'}}>
         <Text style={{marginLeft: 21, fontSize: 14, color: Colors.gray_ef, textAlign: 'left', flex: 1}}>Account #{accountNumber}</Text>
-        <TouchableHighlight onPress={() => {this.onShowQRCode()}} underlayColor={'transparent'} style={{flex: 1, marginRight: 21, height: 50}}>
-          <FontAwesome name="qrcode" size={30} style={{alignSelf: 'flex-end', color: Colors.white, marginTop: -10}}/>
+        <TouchableHighlight onPress={() => {this.onShowQRCode()}} underlayColor={'transparent'} style={{flex: 1, marginRight: 21, height: 70}}>
+          <FontAwesome name="qrcode" size={30} style={{alignSelf: 'flex-end', color: Colors.white, marginTop: 10}}/>
         </TouchableHighlight>
       </View>
     )
@@ -166,9 +168,45 @@ export default class HomeView extends Component {
     );
   }
 
+  lockers() {
+    const data = this.state.data
+    var lockers = []
+
+    if(data.primaryLocker) {
+      lockers.push(data.primaryLocker)
+    }
+
+    if(data.secondaryLocker) {
+      lockers.push(data.secondaryLocker)
+    }
+
+    return lockers
+  }
+
+  requestLocationPermission() {
+
+  }
+
+  requestPermissionForLocationIfNeeded() {
+    const lockers = this.lockers()
+    const lockersWithDoorAction = {"597ca867d4c637b2293ffc0d" : "597ca867d4c637b2293ffc0d"} //Hard code for now
+
+    for(var i in lockers) {
+      let locker = lockers[i];
+      if(!locker || !locker.property) {
+        continue;
+      }
+
+      let property = locker.property
+      if(lockersWithDoorAction[property.id] && property.hasOpenDoorAction()) {
+        this.requestLocationPermission()
+        break;
+      }
+    }
+  }
+
   renderList() {
     const data = this.state.reservationData
-
     return (<View style={{marginTop: 20, borderTopColor: Colors.gray_ef, borderTopWidth: 1}}>
               <FlatList data={data} keyExtractor={(item, index) => item.trackingNumber} renderItem={({ item }) => {return this.renderItem(item)}} backgroundColor={'white'}/>
             </View>)
@@ -209,12 +247,12 @@ export default class HomeView extends Component {
           <Content style={{backgroundColor: Colors.white}}>
             <View style={{backgroundColor: Theme.primaryColor}}>
             <TouchableHighlight onPress={() => {this.onRefresh()}} underlayColor={'transparent'}>
-              <SafeAreaView style={{position: 'absolute', right: 21, top: 40, height: 50, width: 50}}>
-                <FontAwesome name="refresh" size={22} style={{alignSelf: 'flex-end', color: Colors.white}}/>
+              <SafeAreaView>
+                <FontAwesome name="refresh" size={22} style={{alignSelf: 'flex-end', color: Colors.white, marginRight: 21, marginTop: Platform.OS === 'ios' ? 0 : 20}}/>
               </SafeAreaView>
             </TouchableHighlight>
-            <View style={{marginTop: 60}}>
-              <Text style={{marginLeft: 21, marginTop: 20, fontSize: 36, color: Colors.white, fontWeight: 'bold'}}>Welcome</Text>
+            <View style={{marginTop: 30}}>
+              <Text style={{marginLeft: 21, fontSize: 36, color: Colors.white, fontWeight: 'bold'}}>Welcome</Text>
               <Text style={{marginLeft: 21, fontSize: 36, color: Colors.white, fontWeight: 'bold'}}>{firstName} {lastName}</Text>
               {qrCodeButtonView}
             </View>

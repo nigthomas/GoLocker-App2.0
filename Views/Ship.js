@@ -174,7 +174,7 @@ export default class Ship extends Component {
       this.showRegularState()
       const { navigate } = this.props.navigation;
       setTimeout(() => {
-        navigate('Home', {refresh: true})
+        navigate('Home', {})
       }, 500)
     })
     .catch(err => {

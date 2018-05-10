@@ -212,7 +212,6 @@ export const AuthenticationNetworkManager = {
      disability: disability
     })
 
-    console.log(data)
     return fetch(URL.register, {
       method: 'POST',
       headers: {

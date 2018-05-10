@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, StatusBar, FlatList, TouchableHighlight, TouchableWithoutFeedback, Modal, Image, SafeAreaView, ScrollView, Dimensions, Platform, Alert} from 'react-native';
+import { StyleSheet, Text, View, StatusBar, FlatList, TouchableHighlight, TouchableWithoutFeedback, Modal, Image, SafeAreaView, ScrollView, Dimensions, Platform, Alert, PermissionsAndroid} from 'react-native';
 import Theme from '../Common/Theme'
 import FooterTabWithNavigation from './FooterTabWithNavigation'
 import { Container, Header, Content, Card, CardItem, Left, Thumbnail, Body, Button, Icon, Title, Footer, FooterTab, Root, Right} from 'native-base';
@@ -205,7 +205,6 @@ export default class HomeView extends Component {
       if (locker && locker.property && locker.property.location && locker.property.location.latitude && locker.property.location.longitude) {
         var latitude = locker.property.location.latitude
         var longitude = locker.property.location.longitude
-
         var distance = Utils.haversineDistance([latitude, longitude], [coords.latitude, coords.longitude] , true)
 
         if(!closerLockerDistance || distance < closerLockerDistance) {
@@ -241,6 +240,35 @@ export default class HomeView extends Component {
 
   requestLocationPermission(locker) {
     this.clearLocationWatch()
+
+    if (Platform.OS === 'ios') {
+      this.watchLocation(locker)
+      return;
+    }
+
+    try {
+      PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        {
+          'title': locker.propertyName(),
+          'message': "Your location is needed to open the door"
+        }
+      )
+      .then(granted => {
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          this.watchLocation(locker)
+        } else {
+          this.setState({locationMsg: "We need your location to open the door", selectedLocker: locker, showOpenDoorButton: false})
+          this.clearLocationWatch()
+        }
+      })
+    } catch (err) {
+      this.setState({locationMsg: "We couldn't find your location", selectedLocker: locker, showOpenDoorButton: false})
+      this.clearLocationWatch()
+    }
+  }
+
+  watchLocation(locker) {
     this.watchId = navigator.geolocation.watchPosition((position) => {
       this.findClosestLocker(position)
     },
@@ -261,13 +289,13 @@ export default class HomeView extends Component {
 
         //Request location in 5 seconds
         setTimeout(()=> {
-          this.requestLocationPermission()
+          this.watchLocation(locker)
         }, 7500)
+        return
       }
-
     },
-    { enableHighAccuracy: true, timeout: 60000, maximumAge: 1000, distanceFilter: 10 },
-  );
+    { enableHighAccuracy: true, timeout: 60000, maximumAge: 1000, distanceFilter: 5 },
+    );
   }
 
   requestPermissionForLocationIfNeeded() {
@@ -412,7 +440,7 @@ export default class HomeView extends Component {
             <View style={{backgroundColor: Theme.primaryColor}}>
             <TouchableHighlight onPress={() => {this.onRefresh()}} underlayColor={'transparent'}>
               <SafeAreaView>
-                <FontAwesome name="refresh" size={22} style={{alignSelf: 'flex-end', color: Colors.white, marginRight: 21, marginTop: Platform.OS === 'ios' ? 0 : 20}}/>
+                <FontAwesome name="refresh" size={22} style={{alignSelf: 'flex-end', color: Colors.white, marginRight: 21, marginTop: Platform.OS === 'ios' ? 0 : 25}}/>
               </SafeAreaView>
             </TouchableHighlight>
             <View style={{marginTop: 30}}>

@@ -45,11 +45,9 @@ export default class LockerDetail extends Component {
     const propertyID = locker.propertyID
     ActionService.openDoor(propertyID)
     .then(data => {
-      console.log(data)
       this.setState({error: null})
     })
     .catch(err => {
-      console.log(err)
       this.setState({error: err})
     })
   }

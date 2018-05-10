@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, StatusBar, FlatList, TouchableHighlight, Modal, Image, SafeAreaView, ScrollView, Dimensions, Platform, Alert} from 'react-native';
+import { StyleSheet, Text, View, StatusBar, FlatList, TouchableHighlight, TouchableWithoutFeedback, Modal, Image, SafeAreaView, ScrollView, Dimensions, Platform, Alert} from 'react-native';
 import Theme from '../Common/Theme'
 import FooterTabWithNavigation from './FooterTabWithNavigation'
 import { Container, Header, Content, Card, CardItem, Left, Thumbnail, Body, Button, Icon, Title, Footer, FooterTab, Root, Right} from 'native-base';
@@ -35,7 +35,7 @@ export default class HomeView extends Component {
      locationMsg: null,
      showOpenDoorButton: false,
      doorButtonColor: Colors.light_green,
-     doorButtonText: "Open door"
+     doorButtonText: "Hold to open door"
    };
   }
 
@@ -299,7 +299,7 @@ export default class HomeView extends Component {
   }
 
   showRegularState() {
-    this.setState({doorButtonText: "Open door", doorButtonColor: Colors.light_green})
+    this.setState({doorButtonText: "Hold to open door", doorButtonColor: Colors.light_green})
   }
 
   openDoor() {
@@ -319,11 +319,11 @@ export default class HomeView extends Component {
 
   renderOpenDoorButton() {
     return (
-      <TouchableHighlight onPress={() => {this.openDoor()}} underlayColor={'transparent'}>
+      <TouchableWithoutFeedback onLongPress={() => {this.openDoor()}} underlayColor={'transparent'}>
         <View style={{height: 50, borderRadius: 4, backgroundColor: this.state.doorButtonColor, marginLeft: 21, marginTop: 25, marginRight: 21}}>
           <Text style={{textAlign: 'center', color: Colors.white, marginTop: 17}}>{this.state.doorButtonText}</Text>
         </View>
-      </TouchableHighlight>
+      </TouchableWithoutFeedback>
     )
   }
 
@@ -348,6 +348,30 @@ export default class HomeView extends Component {
         {detailView}
       </View>
     )
+  }
+
+  renderHeadquarters() {
+    return (
+      <View style={{flex: 1, marginLeft:21, marginRight: 21, marginTop: 10}}>
+        <MapView
+          style={{flex: 1, height: 200, borderRadius: 4}}
+          initialRegion={{
+          latitude: 40.711545,
+          longitude: -73.934188,
+          latitudeDelta: 0.01,
+          longitudeDelta: 0.01,
+          }}
+          scrollEnabled={false}
+          >
+           <Marker
+              key={"1"}
+             coordinate={{latitude: 40.711545, longitude: -73.934188}}
+             title={"GoLocker HQ"}
+             description={""}
+           />
+          </MapView>
+        </View>
+      )
   }
 
   render() {
@@ -375,6 +399,7 @@ export default class HomeView extends Component {
     const data = this.state.reservationData || []
     const packagesView = (data.length == 0) ? this.renderEmptyList() : this.renderList()
     const doorOpenActionView = this.renderDoorOpenActionView()
+    const headquartersView = this.renderHeadquarters() // Add logic to decide where to render
 
     return (
       <Root>
@@ -399,25 +424,8 @@ export default class HomeView extends Component {
             </View>
 
             <Text style={{marginLeft: 21, fontSize: 16, marginTop:21, color: Colors.gray_85, fontWeight: 'bold'}}>Send packages to:</Text>
-            <View style={{flex: 1, marginLeft:21, marginRight: 21, marginTop: 10}}>
-              <MapView
-                style={{flex: 1, height: 200, borderRadius: 4}}
-                initialRegion={{
-                latitude: 40.711545,
-                longitude: -73.934188,
-                latitudeDelta: 0.01,
-                longitudeDelta: 0.01,
-                }}
-                scrollEnabled={false}
-                >
-                 <Marker
-                    key={"1"}
-                   coordinate={{latitude: 40.711545, longitude: -73.934188}}
-                   title={"GoLocker HQ"}
-                   description={""}
-                 />
-                </MapView>
-              </View>
+            {headquartersView}
+
             <View style={{height: 80}}>
                 <View>
                 <Text style={{marginLeft: 21, paddingTop:9, fontSize: 14, color: Colors.gray_85}}>GoLocker HQ</Text>
@@ -429,7 +437,6 @@ export default class HomeView extends Component {
                 </Text>
                 </View>
             </View>
-
 
             {doorOpenActionView}
             <Text style={{marginLeft: 21, fontSize: 16, marginTop:21, color: Colors.gray_85, fontWeight: 'bold'}}>Packages:</Text>

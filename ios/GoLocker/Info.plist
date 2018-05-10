@@ -24,6 +24,8 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>NSHumanReadableCopyright</key>
+	<string></string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>
@@ -40,7 +42,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>We use your location to verify if you're next to a locker</string>
+	<string>We use your location to verify if you&apos;re next to a locker</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>

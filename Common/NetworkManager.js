@@ -13,7 +13,8 @@ const URL = {
   register: `${BASE_URL}/v1/register`,
   resetPassword: `${BASE_URL}/v1/resetPassword`,
   action: `${BASE_URL}/v1/properties`,
-  lockers: `${BASE_URL}/v1/lockers`
+  lockers: `${BASE_URL}/v1/lockers`,
+  newsletter: `${BASE_URL}/v1/newsletter`
 }
 
 const STATUS_CODE = {
@@ -51,6 +52,27 @@ export class NetworkStatusListener {
    forceLogout() {
      this.state.listener.emit('FORCE_LOGOUT');
    }
+}
+
+export const NewsletterNetworkManager = {
+  addEmail: (email) => {
+    return fetch(URL.newsletter, {
+      method: 'POST',
+      headers: {
+        Accept: HEADERS.Accept,
+        },
+        body: JSON.stringify({
+         email: email
+       })
+      })
+    .then((response) => {
+      if(response.status === STATUS_CODE.OK) {
+        return response.json()
+      }
+
+      return new Promise((resolve, reject) => { reject(new Error('Error has occurred'))})
+    })
+  }
 }
 
 export const LockerNetworkManager = {

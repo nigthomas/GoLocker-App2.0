@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, StatusBar, TextInput, Alert, Image, TouchableHighlight, SafeAreaView} from 'react-native';
 import Theme from '../Common/Theme'
+import Utils from '../Common/Utils'
 import Colors from '../Common/Colors'
 import FlatButton  from '../Elements/FlatButton'
 import PropertyService from '../Services/PropertyService'
+import NewsletterService from '../Services/NewsletterService'
 import { Container, Header, Content, Form, Item, Input, Label, Root } from 'native-base';
 
 export default class NoAvailableLockers extends Component {
@@ -26,6 +28,22 @@ export default class NoAvailableLockers extends Component {
   }
 
   onSavePress() {
+    const email = this.state.email
+    if (!Utils.validateEmail(email)) {
+      this.setState({errorMessage: "Invalid email address"})
+      return;
+    }
+
+    NewsletterService.addEmail(email)
+    .then(() => {
+      Alert.alert("Success", "Email added",[{text: 'OK', onPress: () => {
+        const { navigation } = this.props;
+        navigation.popToTop()
+      }}], { cancelable: true })
+    })
+    .catch(err => {
+      this.setState({errorMessage: "An error occurred while saving your email"})
+    })
 
   }
 
@@ -34,7 +52,7 @@ export default class NoAvailableLockers extends Component {
     const text = "Unfortunately we currently don't have any lockers in your area. Enter your email address below so we can let you know when one becomes available. We'll only use it to tell you when service becomes available."
     var errorText = this.state.errorMessage ? <Text style={{marginLeft: 21, color: Colors.red, marginRight: 21}}>{this.state.errorMessage}</Text> : null
 
-    if(!errorText && this.state.error ) {
+    if(!errorText && this.state.error) {
       errorText = <Text style={{marginLeft: 21, color: Colors.red, marginRight: 21}}>Something is wrong. Please try again</Text>
     }
 

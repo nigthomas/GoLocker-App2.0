@@ -37,7 +37,8 @@ target 'GoLocker' do
   pod 'react-native-google-maps', path: rn_maps_path  # Remove this line if you don't want to support GoogleMaps on iOS
   pod 'GoogleMaps'  # Remove this line if you don't want to support GoogleMaps on iOS
   pod 'Google-Maps-iOS-Utils' # Remove this line if you don't want to support GoogleMaps on iOS
-  pod 'Firebase/Core'
+  pod 'Firebase/Analytics', '4.2.0'
+  pod 'RNFirebase', :path => '../node_modules/react-native-firebase/ios'
 end
 
 post_install do |installer|

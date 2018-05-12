@@ -17,6 +17,7 @@ import Swipeout from 'react-native-swipeout'
 import MapView, { Marker } from 'react-native-maps';
 import FontAwesome from 'react-native-vector-icons/dist/FontAwesome'
 import ActionService from '../Services/ActionService'
+import firebase from 'react-native-firebase'
 
 export default class HomeView extends Component {
   static navigationOptions = { header: null, tabBarVisible: false };
@@ -36,7 +37,8 @@ export default class HomeView extends Component {
      locationMsg: null,
      showOpenDoorButton: false,
      doorButtonColor: Colors.light_green,
-     doorButtonText: "Hold to open door"
+     doorButtonText: "Hold to open door",
+     setupAnalytics: false
    };
   }
 
@@ -53,12 +55,26 @@ export default class HomeView extends Component {
     this.fetch()
   }
 
+  setupAnalytics() {
+    const data = this.state.data || {}
+    if (data.accountNumber) {
+      firebase.analytics().setUserId(data.accountNumber)
+    }
+
+    firebase.analytics().setCurrentScreen("home")
+  }
+
   fetch() {
     this.setState({loading: true})
     Promise.all([DashboardService.getInfo(), ReservationService.getInstance().getReservations()])
     .then(results => {
       this.setState({data: results[0], reservationData: results[1], loading: false, error: null})
       this.requestPermissionForLocationIfNeeded()
+
+      if(!this.state.setupAnalytics) {
+        this.setupAnalytics()
+        this.setState({setupAnalytics: true})
+      }
     })
     .catch(err => {
       this.setState({error: err, loading: false, cancelling: false})
@@ -333,9 +349,14 @@ export default class HomeView extends Component {
 
   openDoor() {
     this.showProcessingState()
-
     const locker = this.state.selectedLocker
     const propertyID = locker.propertyID
+    const data = this.state.data || {}
+
+    if (data.accountNumber) {
+      firebase.analytics().logEvent("open_door_pressed", {propertyID: propertyID, accountNumber: accountNumber})
+    }
+
     ActionService.openDoor(propertyID)
     .then(data => {
       this.showRegularState()
@@ -424,6 +445,7 @@ export default class HomeView extends Component {
     }
 
     const dashboardData = this.state.data || {}
+
     const homeShippingAddress = dashboardData.homeShippingAddress || Address.headquarters()
     const firstName = Utils.capitalize(dashboardData.firstName || "")
     const lastName = Utils.capitalize(dashboardData.lastName || "")

@@ -9,6 +9,10 @@ export default class Location {
     }
   }
 
+  isValid() {
+    return this.latitude && this.longitude
+  }
+
   toJSON() {
     return {latitude: this.latitude,
             longitude: this.longitude}

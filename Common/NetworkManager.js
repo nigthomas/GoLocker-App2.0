@@ -2,7 +2,7 @@ import LoginService from '../Services/LoginService'
 import axios from 'axios'
 import events from 'events'
 
-const BASE_URL = "https://api.golocker.com"
+const BASE_URL = "http://localhost"
 
 const URL = {
   login: `${BASE_URL}/v1/authenticate`,

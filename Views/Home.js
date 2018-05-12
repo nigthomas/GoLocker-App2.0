@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, StatusBar, FlatList, TouchableHighlight, TouchableWithoutFeedback, Modal, Image, SafeAreaView, ScrollView, Dimensions, Platform, Alert, PermissionsAndroid} from 'react-native';
 import Theme from '../Common/Theme'
+import Address from '../Models/Address'
 import FooterTabWithNavigation from './FooterTabWithNavigation'
 import { Container, Header, Content, Card, CardItem, Left, Thumbnail, Body, Button, Icon, Title, Footer, FooterTab, Root, Right} from 'native-base';
 import LoadingView from './Loading'
@@ -378,14 +379,22 @@ export default class HomeView extends Component {
     )
   }
 
-  renderHeadquarters() {
+  renderShippingAddress(homeShippingAddress) {
+    if(!homeShippingAddress || !homeShippingAddress.location.isValid()) {
+      return null
+    }
+
+    const name = homeShippingAddress.name
+    const latitude = homeShippingAddress.location.latitude
+    const longitude = homeShippingAddress.location.longitude
+
     return (
       <View style={{flex: 1, marginLeft:21, marginRight: 21, marginTop: 10}}>
         <MapView
           style={{flex: 1, height: 200, borderRadius: 4}}
           initialRegion={{
-          latitude: 40.711545,
-          longitude: -73.934188,
+          latitude: latitude,
+          longitude: longitude,
           latitudeDelta: 0.01,
           longitudeDelta: 0.01,
           }}
@@ -393,8 +402,8 @@ export default class HomeView extends Component {
           >
            <Marker
               key={"1"}
-             coordinate={{latitude: 40.711545, longitude: -73.934188}}
-             title={"GoLocker HQ"}
+             coordinate={{latitude: latitude, longitude: longitude}}
+             title={name}
              description={""}
            />
           </MapView>
@@ -415,6 +424,7 @@ export default class HomeView extends Component {
     }
 
     const dashboardData = this.state.data || {}
+    const homeShippingAddress = dashboardData.homeShippingAddress || Address.headquarters()
     const firstName = Utils.capitalize(dashboardData.firstName || "")
     const lastName = Utils.capitalize(dashboardData.lastName || "")
     const accountNumber = dashboardData.accountNumber || ""
@@ -427,7 +437,8 @@ export default class HomeView extends Component {
     const data = this.state.reservationData || []
     const packagesView = (data.length == 0) ? this.renderEmptyList() : this.renderList()
     const doorOpenActionView = this.renderDoorOpenActionView()
-    const headquartersView = this.renderHeadquarters() // Add logic to decide where to render
+    const homeShippingAddressView =  this.renderShippingAddress(homeShippingAddress)
+    const homeShippingAddressName = homeShippingAddress.name
 
     return (
       <Root>
@@ -452,16 +463,16 @@ export default class HomeView extends Component {
             </View>
 
             <Text style={{marginLeft: 21, fontSize: 16, marginTop:21, color: Colors.gray_85, fontWeight: 'bold'}}>Send packages to:</Text>
-            {headquartersView}
+            {homeShippingAddressView}
 
             <View style={{height: 80}}>
                 <View>
-                <Text style={{marginLeft: 21, paddingTop:9, fontSize: 14, color: Colors.gray_85}}>GoLocker HQ</Text>
+                <Text style={{marginLeft: 21, paddingTop:9, fontSize: 14, color: Colors.gray_85}}>{homeShippingAddressName}</Text>
                 <Text style={{fontSize: 14, color: Colors.gray_85, marginLeft: 21, marginTop: 3}}>
-                  209A Morgan Avenue - Ste F
+                  {homeShippingAddress.address}
                 </Text>
                 <Text style={{fontSize: 14, color: Colors.gray_85, marginLeft: 21, marginTop: 3}}>
-                  Brooklyn, NY 11237
+                  {homeShippingAddress.city}, {homeShippingAddress.stateProvince} {homeShippingAddress.postalCode}
                 </Text>
                 </View>
             </View>

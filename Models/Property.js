@@ -15,7 +15,7 @@ export default class Property {
     this.location = new Location(data.location)
     this.showPlan = data.showPlan
     this.settings = data.settings
-    this.actions = data.actions || ["open_door"] //Remove it
+    this.actions = data.actions || []
   }
 
   hasOpenDoorAction() {

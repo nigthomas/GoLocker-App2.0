@@ -1,6 +1,18 @@
 PODS:
   - boost-for-react-native (1.63.0)
   - DoubleConversion (1.1.5)
+  - Firebase/Core (4.11.0):
+    - FirebaseAnalytics (= 4.1.0)
+    - FirebaseCore (= 4.0.18)
+  - FirebaseAnalytics (4.1.0):
+    - FirebaseCore (~> 4.0)
+    - FirebaseInstanceID (~> 2.0)
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
+    - nanopb (~> 0.3)
+  - FirebaseCore (4.0.18):
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
+  - FirebaseInstanceID (2.0.10):
+    - FirebaseCore (~> 4.0)
   - Folly (2016.09.26.00):
     - boost-for-react-native
     - DoubleConversion
@@ -27,6 +39,14 @@ PODS:
   - GoogleMaps/Base (2.5.0)
   - GoogleMaps/Maps (2.5.0):
     - GoogleMaps/Base
+  - GoogleToolboxForMac/Defines (2.1.3)
+  - "GoogleToolboxForMac/NSData+zlib (2.1.3)":
+    - GoogleToolboxForMac/Defines (= 2.1.3)
+  - nanopb (0.3.8):
+    - nanopb/decode (= 0.3.8)
+    - nanopb/encode (= 0.3.8)
+  - nanopb/decode (0.3.8)
+  - nanopb/encode (0.3.8)
   - React (0.54.2):
     - React/Core (= 0.54.2)
   - react-native-google-maps (0.21.0):
@@ -84,6 +104,7 @@ PODS:
 
 DEPENDENCIES:
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
+  - Firebase/Core
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - Google-Maps-iOS-Utils
@@ -108,8 +129,14 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - boost-for-react-native
+    - Firebase
+    - FirebaseAnalytics
+    - FirebaseCore
+    - FirebaseInstanceID
     - Google-Maps-iOS-Utils
     - GoogleMaps
+    - GoogleToolboxForMac
+    - nanopb
 
 EXTERNAL SOURCES:
   DoubleConversion:
@@ -130,15 +157,21 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   DoubleConversion: ebb6747c5b66026ad4f97b789c3ceac6f18e57a6
+  Firebase: cc13dfab1038c8b45d7903e01fc690451d6d0b24
+  FirebaseAnalytics: 3dfae28d4a5e06f86c4fae830efc2ad3fadb19bc
+  FirebaseCore: b981f47e5254cbcfdeb483355300d743f6fcab2c
+  FirebaseInstanceID: 8d20d890d65c917f9f7d9950b6e10a760ad34321
   Folly: 211775e49d8da0ca658aebc8eab89d642935755c
   glog: 1de0bb937dccdc981596d3b5825ebfb765017ded
   Google-Maps-iOS-Utils: c32891ff472eaaa1fca032beedafa1a013af7875
   GoogleMaps: c087b8e5dfe87ca6ebf59adb9b4894a4146bec4f
+  GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
+  nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   React: c237e42de9c70e5cac6eeb52b4cfd3a0910c1f00
   react-native-google-maps: 2cfe3b01f8422c7dae51d8764139fd70f888cfce
   react-native-maps: 066c2afcc89e18726377bcc685315f989ca22449
   yoga: 55da126afc384965b96bff46652464373b330add
 
-PODFILE CHECKSUM: f783c7fd3dcaf29e92135808bd9d2381c6912734
+PODFILE CHECKSUM: f984b2e21a09f42c98f1d0fe2b101d5b497b82ab
 
 COCOAPODS: 1.5.0

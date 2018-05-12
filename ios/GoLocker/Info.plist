@@ -24,8 +24,20 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-	<key>NSHumanReadableCopyright</key>
-	<string></string>
+	<key>Fabric</key>
+	<dict>
+		<key>APIKey</key>
+		<string>c8df2c8920f7784cd45135a8731ab15dca8a2c50</string>
+		<key>Kits</key>
+		<array>
+			<dict>
+				<key>KitInfo</key>
+				<dict/>
+				<key>KitName</key>
+				<string>Crashlytics</string>
+			</dict>
+		</array>
+	</dict>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>
@@ -41,8 +53,10 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSHumanReadableCopyright</key>
+	<string></string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>We use your location to verify if you&apos;re next to a locker</string>
+	<string>We use your location to verify if you're next to a locker</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>

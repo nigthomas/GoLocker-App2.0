@@ -45,7 +45,7 @@ export default class Onboarding extends Component {
               source={require('../Images/golockerLogo.png')}
              />
              </View>
-               <SafeAreaView style={{position: 'absolute', right: 21, top: 21, width: 55, height: 55}}>
+               <SafeAreaView style={{position: 'absolute', right: 21, top: 30, width: 55, height: 55}}>
                  <TouchableHighlight onPress={() => {this.onSkip()}} underlayColor={'transparent'}>
                    <Text style={{textAlign: 'right', color: Colors.gray_85, fontSize: 16, fontWeight: '300'}}>Skip</Text>
                 </TouchableHighlight>

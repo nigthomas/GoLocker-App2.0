@@ -38,6 +38,45 @@
 		2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E991DF850E9000B6D8A /* libRCTWebSocket-tvOS.a */; };
 		2D16E6881FA4F8E400B85C8A /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D16E6891FA4F8E400B85C8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* GoLockerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* GoLockerTests.m */; };
+		2F06DF4720A76B4400E17C96 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2FE1CE1E20A766B000410B47 /* GoogleService-Info.plist */; };
+		2F06DF4820A76B4B00E17C96 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F06DF4320A76B0D00E17C96 /* GoogleService-Info.plist */; };
+		2FE1CDE520A7631100410B47 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FE1CDE320A7631100410B47 /* Fabric.framework */; };
+		2FE1CDE620A7631100410B47 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FE1CDE420A7631100410B47 /* Crashlytics.framework */; };
+		2FE1CE2B20A7692700410B47 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
+		2FE1CE2C20A7692700410B47 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		2FE1CE2E20A7692700410B47 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
+		2FE1CE2F20A7692700410B47 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
+		2FE1CE3020A7692700410B47 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		2FE1CE3120A7692700410B47 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
+		2FE1CE3220A7692700410B47 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
+		2FE1CE3320A7692700410B47 /* libRCTImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302C01ABCB91800DB3ED1 /* libRCTImage.a */; };
+		2FE1CE3420A7692700410B47 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
+		2FE1CE3520A7692700410B47 /* libRCTNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302DC1ABCB9D200DB3ED1 /* libRCTNetwork.a */; };
+		2FE1CE3620A7692700410B47 /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
+		2FE1CE3720A7692700410B47 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FE1CDE420A7631100410B47 /* Crashlytics.framework */; };
+		2FE1CE3820A7692700410B47 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		2FE1CE3920A7692700410B47 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
+		2FE1CE3A20A7692700410B47 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
+		2FE1CE3B20A7692700410B47 /* libSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9217ACD693B34F28B0187C03 /* libSplashScreen.a */; };
+		2FE1CE3C20A7692700410B47 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15EE3AEF1A82403CB2C6078B /* libRNVectorIcons.a */; };
+		2FE1CE3D20A7692700410B47 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FE1CDE320A7631100410B47 /* Fabric.framework */; };
+		2FE1CE3E20A7692700410B47 /* libPods-GoLocker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D808AA46D94E0A0065A0EC4 /* libPods-GoLocker.a */; };
+		2FE1CE4020A7692700410B47 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		2FE1CE4120A7692700410B47 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
+		2FE1CE4220A7692700410B47 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66E6D9D78879407895D7A4C1 /* Entypo.ttf */; };
+		2FE1CE4320A7692700410B47 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9B23A3E14576454CBEDF4F5F /* EvilIcons.ttf */; };
+		2FE1CE4420A7692700410B47 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 97352734404C4C4D845EA618 /* FontAwesome.ttf */; };
+		2FE1CE4520A7692700410B47 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D35B0E10529C48259FF66EEB /* Foundation.ttf */; };
+		2FE1CE4720A7692700410B47 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFD928D4D85B4B9493608734 /* Ionicons.ttf */; };
+		2FE1CE4820A7692700410B47 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6B7457CFDFAE476A8C2F35EB /* MaterialIcons.ttf */; };
+		2FE1CE4920A7692700410B47 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B193A30E36BF4FC89FA083EB /* Octicons.ttf */; };
+		2FE1CE4A20A7692700410B47 /* Roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC23E6540BAF45F7BA834430 /* Roboto_medium.ttf */; };
+		2FE1CE4B20A7692700410B47 /* Roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA63645A73F34DB599C45D08 /* Roboto.ttf */; };
+		2FE1CE4D20A7692700410B47 /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B3B8CEBD0B384C03A26BBCD9 /* rubicon-icon-font.ttf */; };
+		2FE1CE4E20A7692700410B47 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BCB4554FB7D74E928272BEBF /* SimpleLineIcons.ttf */; };
+		2FE1CE4F20A7692700410B47 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF186AD50F3C468CBFDC48B7 /* Zocial.ttf */; };
+		2FE1CE5020A7692700410B47 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CF7E8C53D11E428696791073 /* Feather.ttf */; };
+		2FE1CE5120A7692700410B47 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7723798061E845BE9782CC47 /* MaterialCommunityIcons.ttf */; };
 		3AE81C13E7D34D09999B95A1 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7723798061E845BE9782CC47 /* MaterialCommunityIcons.ttf */; };
 		58BB161395EB42BD9F1B74D1 /* Roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA63645A73F34DB599C45D08 /* Roboto.ttf */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
@@ -47,6 +86,7 @@
 		7B5753CFA48642D5935F19F3 /* libSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9217ACD693B34F28B0187C03 /* libSplashScreen.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
+		B42BF9B3BDAA4048B8C0F254 /* libRNFirebase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7EE9FB76FB84F9FAD9E566A /* libRNFirebase.a */; };
 		BF41D8E75234462AB16A3663 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6B7457CFDFAE476A8C2F35EB /* MaterialIcons.ttf */; };
 		CB2C6A88EC794AF1BD97E569 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B193A30E36BF4FC89FA083EB /* Octicons.ttf */; };
 		CBA2D2513FF247F29B928369 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9B23A3E14576454CBEDF4F5F /* EvilIcons.ttf */; };
@@ -147,6 +187,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 3DBE0D0D1F3B181C0099AA32;
 			remoteInfo = "fishhook-tvOS";
+		};
+		2F06DF8120A76C3C00E17C96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A4573F37E0774995B5AC69E6 /* RNFirebase.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNFirebase;
 		};
 		2F460CEC2058D3D2000AE82B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -370,6 +417,12 @@
 		2D02E47B1E0B4A5D006451C7 /* GoLocker-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GoLocker-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* GoLocker-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GoLocker-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F06DF4320A76B0D00E17C96 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "production/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2FE1CDE320A7631100410B47 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		2FE1CDE420A7631100410B47 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		2FE1CE1E20A766B000410B47 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2FE1CE5820A7692700410B47 /* GoLocker copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "GoLocker copy.app"; path = "GoLocker Development.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2FE1CE5920A7692800410B47 /* GoLocker copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoLocker copy-Info.plist"; path = "/Users/Command/GoLocker/ios/GoLocker copy-Info.plist"; sourceTree = "<absolute>"; };
 		38F880436D6E3ED871D0A3C5 /* Pods-GoLocker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoLocker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GoLocker/Pods-GoLocker.debug.xcconfig"; sourceTree = "<group>"; };
 		3D808AA46D94E0A0065A0EC4 /* libPods-GoLocker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GoLocker.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CD43CB57DF64726BA5778CF /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
@@ -383,6 +436,7 @@
 		955285F4A2C9DE605D36C365 /* Pods-GoLocker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoLocker.release.xcconfig"; path = "Pods/Target Support Files/Pods-GoLocker/Pods-GoLocker.release.xcconfig"; sourceTree = "<group>"; };
 		97352734404C4C4D845EA618 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/native-base/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		9B23A3E14576454CBEDF4F5F /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/native-base/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
+		A4573F37E0774995B5AC69E6 /* RNFirebase.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFirebase.xcodeproj; path = "../node_modules/react-native-firebase/ios/RNFirebase.xcodeproj"; sourceTree = "<group>"; };
 		AC23E6540BAF45F7BA834430 /* Roboto_medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto_medium.ttf; path = "../node_modules/native-base/Fonts/Roboto_medium.ttf"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		AECAB036A1334951AF69A61D /* SplashScreen.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = SplashScreen.xcodeproj; path = "../node_modules/react-native-splash-screen/ios/SplashScreen.xcodeproj"; sourceTree = "<group>"; };
@@ -392,6 +446,7 @@
 		BCB4554FB7D74E928272BEBF /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/native-base/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		CF7E8C53D11E428696791073 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		D35B0E10529C48259FF66EEB /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/native-base/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
+		E7EE9FB76FB84F9FAD9E566A /* libRNFirebase.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFirebase.a; sourceTree = "<group>"; };
 		EA63645A73F34DB599C45D08 /* Roboto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto.ttf; path = "../node_modules/native-base/Fonts/Roboto.ttf"; sourceTree = "<group>"; };
 		EFD928D4D85B4B9493608734 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/native-base/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -419,12 +474,15 @@
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
+				2FE1CDE620A7631100410B47 /* Crashlytics.framework in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				7B5753CFA48642D5935F19F3 /* libSplashScreen.a in Frameworks */,
 				EE139C78B9C04C82B348E7BB /* libRNVectorIcons.a in Frameworks */,
+				2FE1CDE520A7631100410B47 /* Fabric.framework in Frameworks */,
 				F519AE40279DB329F0E46FA4 /* libPods-GoLocker.a in Frameworks */,
+				B42BF9B3BDAA4048B8C0F254 /* libRNFirebase.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -447,6 +505,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2FE1CE2D20A7692700410B47 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2FE1CE2E20A7692700410B47 /* libRCTBlob.a in Frameworks */,
+				2FE1CE2F20A7692700410B47 /* libRCTAnimation.a in Frameworks */,
+				2FE1CE3020A7692700410B47 /* libReact.a in Frameworks */,
+				2FE1CE2F20A7692700410B47 /* libRCTAnimation.a in Frameworks */,
+				2FE1CE3120A7692700410B47 /* libRCTActionSheet.a in Frameworks */,
+				2FE1CE3220A7692700410B47 /* libRCTGeolocation.a in Frameworks */,
+				2FE1CE3320A7692700410B47 /* libRCTImage.a in Frameworks */,
+				2FE1CE3420A7692700410B47 /* libRCTLinking.a in Frameworks */,
+				2FE1CE3520A7692700410B47 /* libRCTNetwork.a in Frameworks */,
+				2FE1CE3620A7692700410B47 /* libRCTSettings.a in Frameworks */,
+				2FE1CE3720A7692700410B47 /* Crashlytics.framework in Frameworks */,
+				2FE1CE3820A7692700410B47 /* libRCTText.a in Frameworks */,
+				2FE1CE3920A7692700410B47 /* libRCTVibration.a in Frameworks */,
+				2FE1CE3A20A7692700410B47 /* libRCTWebSocket.a in Frameworks */,
+				2FE1CE3B20A7692700410B47 /* libSplashScreen.a in Frameworks */,
+				2FE1CE3C20A7692700410B47 /* libRNVectorIcons.a in Frameworks */,
+				2FE1CE3D20A7692700410B47 /* Fabric.framework in Frameworks */,
+				2FE1CE3E20A7692700410B47 /* libPods-GoLocker.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -535,6 +618,8 @@
 		13B07FAE1A68108700A75B9A /* GoLocker */ = {
 			isa = PBXGroup;
 			children = (
+				2FE1CE1E20A766B000410B47 /* GoogleService-Info.plist */,
+				2F06DF4320A76B0D00E17C96 /* GoogleService-Info.plist */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -578,11 +663,20 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		2F06DF7E20A76C3C00E17C96 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2F06DF8220A76C3C00E17C96 /* libRNFirebase.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		2F460CC62058D3D0000AE82B /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
 				9217ACD693B34F28B0187C03 /* libSplashScreen.a */,
 				15EE3AEF1A82403CB2C6078B /* libRNVectorIcons.a */,
+				E7EE9FB76FB84F9FAD9E566A /* libRNFirebase.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -659,6 +753,7 @@
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				AECAB036A1334951AF69A61D /* SplashScreen.xcodeproj */,
 				5CD43CB57DF64726BA5778CF /* RNVectorIcons.xcodeproj */,
+				A4573F37E0774995B5AC69E6 /* RNFirebase.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -675,6 +770,8 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				2FE1CDE420A7631100410B47 /* Crashlytics.framework */,
+				2FE1CDE320A7631100410B47 /* Fabric.framework */,
 				13B07FAE1A68108700A75B9A /* GoLocker */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* GoLockerTests */,
@@ -683,6 +780,7 @@
 				2F460CC62058D3D0000AE82B /* Recovered References */,
 				71A601A4D1484038BA20FD85 /* Resources */,
 				8F59F721AC7CC785375AFDAE /* Pods */,
+				2FE1CE5920A7692800410B47 /* GoLocker copy-Info.plist */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -696,6 +794,7 @@
 				00E356EE1AD99517003FC87E /* GoLockerTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* GoLocker-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* GoLocker-tvOSTests.xctest */,
+				2FE1CE5820A7692700410B47 /* GoLocker copy.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -749,6 +848,7 @@
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				66908FD514688C34893FF151 /* [CP] Copy Pods Resources */,
+				2FE1CDBB20A762EA00410B47 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -795,6 +895,27 @@
 			productReference = 2D02E4901E0B4A5D006451C7 /* GoLocker-tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		2FE1CE2820A7692700410B47 /* GoLocker Development */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2FE1CE5520A7692700410B47 /* Build configuration list for PBXNativeTarget "GoLocker Development" */;
+			buildPhases = (
+				2FE1CE2920A7692700410B47 /* [CP] Check Pods Manifest.lock */,
+				2FE1CE2A20A7692700410B47 /* Sources */,
+				2FE1CE2D20A7692700410B47 /* Frameworks */,
+				2FE1CE3F20A7692700410B47 /* Resources */,
+				2FE1CE5220A7692700410B47 /* Bundle React Native code and images */,
+				2FE1CE5320A7692700410B47 /* [CP] Copy Pods Resources */,
+				2FE1CE5420A7692700410B47 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "GoLocker Development";
+			productName = "Hello World";
+			productReference = 2FE1CE5820A7692700410B47 /* GoLocker copy.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -827,6 +948,9 @@
 						DevelopmentTeam = 5HSHP48M6L;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 2D02E47A1E0B4A5D006451C7;
+					};
+					2FE1CE2820A7692700410B47 = {
+						DevelopmentTeam = 5HSHP48M6L;
 					};
 				};
 			};
@@ -891,6 +1015,10 @@
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
+					ProductGroup = 2F06DF7E20A76C3C00E17C96 /* Products */;
+					ProjectRef = A4573F37E0774995B5AC69E6 /* RNFirebase.xcodeproj */;
+				},
+				{
 					ProductGroup = 2FF517F2205CBE7900DBA8B3 /* Products */;
 					ProjectRef = 5CD43CB57DF64726BA5778CF /* RNVectorIcons.xcodeproj */;
 				},
@@ -905,6 +1033,7 @@
 				00E356ED1AD99517003FC87E /* GoLockerTests */,
 				2D02E47A1E0B4A5D006451C7 /* GoLocker-tvOS */,
 				2D02E48F1E0B4A5D006451C7 /* GoLocker-tvOSTests */,
+				2FE1CE2820A7692700410B47 /* GoLocker Development */,
 			);
 		};
 /* End PBXProject section */
@@ -985,6 +1114,13 @@
 			fileType = archive.ar;
 			path = "libfishhook-tvOS.a";
 			remoteRef = 2D16E6851FA4F8DC00B85C8A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2F06DF8220A76C3C00E17C96 /* libRNFirebase.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNFirebase.a;
+			remoteRef = 2F06DF8120A76C3C00E17C96 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		2F460CED2058D3D2000AE82B /* libjsinspector.a */ = {
@@ -1208,6 +1344,7 @@
 				CB2C6A88EC794AF1BD97E569 /* Octicons.ttf in Resources */,
 				724F066393C44E068FA5AC88 /* Roboto_medium.ttf in Resources */,
 				58BB161395EB42BD9F1B74D1 /* Roboto.ttf in Resources */,
+				2F06DF4720A76B4400E17C96 /* GoogleService-Info.plist in Resources */,
 				DD00AB4D3AB447548289A6EA /* rubicon-icon-font.ttf in Resources */,
 				0696CFC2B4F84C54B4DB9853 /* SimpleLineIcons.ttf in Resources */,
 				7795A972FEFC4B0BBFDD45E7 /* Zocial.ttf in Resources */,
@@ -1228,6 +1365,30 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2FE1CE3F20A7692700410B47 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2FE1CE4020A7692700410B47 /* Images.xcassets in Resources */,
+				2FE1CE4120A7692700410B47 /* LaunchScreen.xib in Resources */,
+				2FE1CE4220A7692700410B47 /* Entypo.ttf in Resources */,
+				2FE1CE4320A7692700410B47 /* EvilIcons.ttf in Resources */,
+				2FE1CE4420A7692700410B47 /* FontAwesome.ttf in Resources */,
+				2FE1CE4520A7692700410B47 /* Foundation.ttf in Resources */,
+				2FE1CE4720A7692700410B47 /* Ionicons.ttf in Resources */,
+				2FE1CE4820A7692700410B47 /* MaterialIcons.ttf in Resources */,
+				2FE1CE4920A7692700410B47 /* Octicons.ttf in Resources */,
+				2FE1CE4A20A7692700410B47 /* Roboto_medium.ttf in Resources */,
+				2FE1CE4B20A7692700410B47 /* Roboto.ttf in Resources */,
+				2FE1CE4D20A7692700410B47 /* rubicon-icon-font.ttf in Resources */,
+				2F06DF4820A76B4B00E17C96 /* GoogleService-Info.plist in Resources */,
+				2FE1CE4E20A7692700410B47 /* SimpleLineIcons.ttf in Resources */,
+				2FE1CE4F20A7692700410B47 /* Zocial.ttf in Resources */,
+				2FE1CE5020A7692700410B47 /* Feather.ttf in Resources */,
+				2FE1CE5120A7692700410B47 /* MaterialCommunityIcons.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1261,6 +1422,82 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+		};
+		2FE1CDBB20A762EA00410B47 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run c8df2c8920f7784cd45135a8731ab15dca8a2c50 ad4c225c39b5c3393bcc87466eb62a23fadb132307b860987f29f5840d6c61b6    ";
+		};
+		2FE1CE2920A7692700410B47 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GoLocker-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2FE1CE5220A7692700410B47 /* Bundle React Native code and images */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Bundle React Native code and images";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+		};
+		2FE1CE5320A7692700410B47 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-GoLocker/Pods-GoLocker-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GoLocker/Pods-GoLocker-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2FE1CE5420A7692700410B47 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run c8df2c8920f7784cd45135a8731ab15dca8a2c50 ad4c225c39b5c3393bcc87466eb62a23fadb132307b860987f29f5840d6c61b6    ";
 		};
 		54882CD18641131C7E4CA136 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1335,6 +1572,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2FE1CE2A20A7692700410B47 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2FE1CE2B20A7692700410B47 /* AppDelegate.m in Sources */,
+				2FE1CE2C20A7692700410B47 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1376,12 +1622,14 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
 				INFOPLIST_FILE = GoLockerTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
@@ -1404,12 +1652,14 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
 				INFOPLIST_FILE = GoLockerTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
@@ -1430,10 +1680,15 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 5HSHP48M6L;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
 				INFOPLIST_FILE = GoLocker/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1457,10 +1712,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5HSHP48M6L;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
 				INFOPLIST_FILE = GoLocker/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1494,11 +1754,13 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
 				INFOPLIST_FILE = "GoLocker-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
@@ -1531,11 +1793,13 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
 				INFOPLIST_FILE = "GoLocker-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
@@ -1569,6 +1833,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.GoLocker-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1596,12 +1861,86 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.GoLocker-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GoLocker-tvOS.app/GoLocker-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
+			};
+			name = Release;
+		};
+		2FE1CE5620A7692700410B47 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 38F880436D6E3ED871D0A3C5 /* Pods-GoLocker.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = 5HSHP48M6L;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
+					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
+				);
+				INFOPLIST_FILE = "GoLocker copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.golocker.golocker.dev;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Debug;
+		};
+		2FE1CE5720A7692700410B47 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 955285F4A2C9DE605D36C365 /* Pods-GoLocker.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5HSHP48M6L;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
+					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
+				);
+				INFOPLIST_FILE = "GoLocker copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.golocker.golocker.dev;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
@@ -1716,6 +2055,15 @@
 			buildConfigurations = (
 				2D02E4991E0B4A5E006451C7 /* Debug */,
 				2D02E49A1E0B4A5E006451C7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2FE1CE5520A7692700410B47 /* Build configuration list for PBXNativeTarget "GoLocker Development" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2FE1CE5620A7692700410B47 /* Debug */,
+				2FE1CE5720A7692700410B47 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

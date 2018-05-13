@@ -4,6 +4,7 @@ import { Container, Header, Content, Card, CardItem, Left, Thumbnail, Body, Butt
 import FooterTabWithNavigation from './FooterTabWithNavigation'
 import ClearButton from '../Elements/ClearButton'
 import Colors from '../Common/Colors'
+import Address from '../Models/Address'
 import Theme from '../Common/Theme'
 import DashboardService from '../Services/DashboardService'
 import ReservationService from '../Services/ReservationService'
@@ -191,8 +192,9 @@ export default class Ship extends Component {
               </View>
     }
 
-    const firstName = this.state.data.firstName
-    const lastName = this.state.data.lastName
+    const data = this.state.data || {}
+    const firstName = data.firstName
+    const lastName = data.lastName
     const lockerName = (this.state.sendToLocker && this.state.sendToLocker.property) ? this.state.sendToLocker.property.name: ""
 
     const smallParcelButton = this.state.smallParcelSelected ? <View style={styles.activeCircle}/> : <View style={styles.circle}/>
@@ -200,6 +202,7 @@ export default class Ship extends Component {
     const largeParcelButton = this.state.largeParcelSelected ? <View style={styles.activeCircle}/> : <View style={styles.circle}/>
 
     const errorText = this.state.error ? <Text style={{marginLeft: 21, color: Colors.red, marginTop: 5}}>Something is wrong. Please try again</Text> : null
+    const homeShippingAddress = data.homeShippingAddress && data.homeShippingAddress.isValid() ? data.homeShippingAddress : Address.headquarters()
 
     return (
       <Root>
@@ -214,12 +217,12 @@ export default class Ship extends Component {
               <View style={{borderTopColor: Colors.gray_ef, borderTopWidth: 1, borderBottomColor: Colors.gray_ef, borderBottomWidth: 1, marginTop: 15, height: 80}}>
                 <TouchableHighlight onPress={this.onLoginPress} underlayColor={'transparent'}>
                   <View>
-                  <Text style={{marginLeft: 21, paddingTop:9, fontSize: 14, color: Colors.gray_85}}>GoLocker HQ</Text>
+                  <Text style={{marginLeft: 21, paddingTop:9, fontSize: 14, color: Colors.gray_85}}>{homeShippingAddress.name}</Text>
                   <Text style={{fontSize: 14, color: Colors.gray_85, marginLeft: 21, marginTop: 3}}>
-                    209A Morgan Avenue - Ste F
+                    {homeShippingAddress.address}
                   </Text>
                   <Text style={{fontSize: 14, color: Colors.gray_85, marginLeft: 21, marginTop: 3}}>
-                    Brooklyn, NY 11237
+                    {homeShippingAddress.city}, {homeShippingAddress.stateProvince} {homeShippingAddress.postalCode}
                   </Text>
                   </View>
                 </TouchableHighlight>

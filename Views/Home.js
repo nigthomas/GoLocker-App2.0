@@ -57,11 +57,13 @@ export default class HomeView extends Component {
 
   setupAnalytics() {
     const data = this.state.data || {}
-    if (data.accountNumber) {
-      firebase.analytics().setUserId(data.accountNumber)
-    }
 
     firebase.analytics().setCurrentScreen("home")
+
+    if (data.accountNumber) {
+      firebase.analytics().setUserId(data.accountNumber)
+      firebase.analytics().logEvent("home_shown", {accountNumber: data.accountNumber})
+    }
   }
 
   fetch() {

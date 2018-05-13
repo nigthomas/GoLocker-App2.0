@@ -146,7 +146,7 @@ export default class NewUpdatePaymentMethod extends Component {
           </View>
           {errorText}
           <View style={styles.card}>
-            <Text style={{color: Colors.white, flex: 1, fontSize: 35, marginTop: 50, marginLeft: 21, marginRight: 21}}  numberOfLines={1} adjustsFontSizeToFit={true}>{this.state.cardNumber}</Text>
+            <Text style={{color: Colors.white, flex: 1, fontSize: 34, marginTop: 50, marginLeft: 21, marginRight: 21, textAlign: 'center'}}  numberOfLines={1} adjustsFontSizeToFit={true}>{this.state.cardNumber}</Text>
             <View style={{flex: 1, flexDirection: 'row'}}>
               <View style={{flex: 1, marginTop: 15}}>
                 <Text style={{color: Colors.white, textAlign: 'right'}}>{expiration}</Text>

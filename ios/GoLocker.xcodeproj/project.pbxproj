@@ -70,13 +70,13 @@
 		2F06E0B720A77A1000E17C96 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B193A30E36BF4FC89FA083EB /* Octicons.ttf */; };
 		2F06E0B820A77A1000E17C96 /* Roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC23E6540BAF45F7BA834430 /* Roboto_medium.ttf */; };
 		2F06E0B920A77A1000E17C96 /* Roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA63645A73F34DB599C45D08 /* Roboto.ttf */; };
-		2F06E0BA20A77A1000E17C96 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2FE1CE1E20A766B000410B47 /* GoogleService-Info.plist */; };
 		2F06E0BB20A77A1000E17C96 /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B3B8CEBD0B384C03A26BBCD9 /* rubicon-icon-font.ttf */; };
 		2F06E0BC20A77A1000E17C96 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BCB4554FB7D74E928272BEBF /* SimpleLineIcons.ttf */; };
 		2F06E0BD20A77A1000E17C96 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF186AD50F3C468CBFDC48B7 /* Zocial.ttf */; };
 		2F06E0BE20A77A1000E17C96 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CF7E8C53D11E428696791073 /* Feather.ttf */; };
 		2F06E0BF20A77A1000E17C96 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7723798061E845BE9782CC47 /* MaterialCommunityIcons.ttf */; };
-		2F06E0C920A77A3D00E17C96 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F06DF4320A76B0D00E17C96 /* GoogleService-Info.plist */; };
+		2F8FC92720A8DD380050E115 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F8FC92620A8DD380050E115 /* GoogleService-Info.plist */; };
+		2F8FC92920A8DE1B0050E115 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F8FC92820A8DE1A0050E115 /* GoogleService-Info.plist */; };
 		2FE1CDE520A7631100410B47 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FE1CDE320A7631100410B47 /* Fabric.framework */; };
 		2FE1CDE620A7631100410B47 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FE1CDE420A7631100410B47 /* Crashlytics.framework */; };
 		3AE81C13E7D34D09999B95A1 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7723798061E845BE9782CC47 /* MaterialCommunityIcons.ttf */; };
@@ -421,13 +421,13 @@
 		2D02E47B1E0B4A5D006451C7 /* GoLocker-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GoLocker-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* GoLocker-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GoLocker-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		2F06DF4320A76B0D00E17C96 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "production/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2F06E06C20A7796400E17C96 /* libPods-GoLocker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libPods-GoLocker.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F06E0C620A77A1000E17C96 /* GoLocker Development.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GoLocker Development.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F06E0C720A77A1100E17C96 /* GoLocker copy2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoLocker copy2-Info.plist"; path = "/Users/Command/GoLocker/ios/GoLocker copy2-Info.plist"; sourceTree = "<absolute>"; };
+		2F8FC92620A8DD380050E115 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2F8FC92820A8DE1A0050E115 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "development/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2FE1CDE320A7631100410B47 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		2FE1CDE420A7631100410B47 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
-		2FE1CE1E20A766B000410B47 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2FE1CE5920A7692800410B47 /* GoLocker copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoLocker copy-Info.plist"; path = "/Users/Command/GoLocker/ios/GoLocker copy-Info.plist"; sourceTree = "<absolute>"; };
 		3D808AA46D94E0A0065A0EC4 /* libPods-GoLocker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GoLocker.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CD43CB57DF64726BA5778CF /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
@@ -626,8 +626,8 @@
 		13B07FAE1A68108700A75B9A /* GoLocker */ = {
 			isa = PBXGroup;
 			children = (
-				2FE1CE1E20A766B000410B47 /* GoogleService-Info.plist */,
-				2F06DF4320A76B0D00E17C96 /* GoogleService-Info.plist */,
+				2F8FC92620A8DD380050E115 /* GoogleService-Info.plist */,
+				2F8FC92820A8DE1A0050E115 /* GoogleService-Info.plist */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -1355,9 +1355,9 @@
 				724F066393C44E068FA5AC88 /* Roboto_medium.ttf in Resources */,
 				58BB161395EB42BD9F1B74D1 /* Roboto.ttf in Resources */,
 				DD00AB4D3AB447548289A6EA /* rubicon-icon-font.ttf in Resources */,
-				2F06E0C920A77A3D00E17C96 /* GoogleService-Info.plist in Resources */,
 				0696CFC2B4F84C54B4DB9853 /* SimpleLineIcons.ttf in Resources */,
 				7795A972FEFC4B0BBFDD45E7 /* Zocial.ttf in Resources */,
+				2F8FC92720A8DD380050E115 /* GoogleService-Info.plist in Resources */,
 				EED92E61315447A5ADD06627 /* Feather.ttf in Resources */,
 				3AE81C13E7D34D09999B95A1 /* MaterialCommunityIcons.ttf in Resources */,
 			);
@@ -1393,8 +1393,8 @@
 				2F06E0B720A77A1000E17C96 /* Octicons.ttf in Resources */,
 				2F06E0B820A77A1000E17C96 /* Roboto_medium.ttf in Resources */,
 				2F06E0B920A77A1000E17C96 /* Roboto.ttf in Resources */,
-				2F06E0BA20A77A1000E17C96 /* GoogleService-Info.plist in Resources */,
 				2F06E0BB20A77A1000E17C96 /* rubicon-icon-font.ttf in Resources */,
+				2F8FC92920A8DE1B0050E115 /* GoogleService-Info.plist in Resources */,
 				2F06E0BC20A77A1000E17C96 /* SimpleLineIcons.ttf in Resources */,
 				2F06E0BD20A77A1000E17C96 /* Zocial.ttf in Resources */,
 				2F06E0BE20A77A1000E17C96 /* Feather.ttf in Resources */,
@@ -1683,6 +1683,7 @@
 			baseConfigurationReference = 2B8E89E3D02215CF029500F1 /* Pods-GoLocker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 5HSHP48M6L;
@@ -1704,7 +1705,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.golocker.golocker;
+				PRODUCT_BUNDLE_IDENTIFIER = com.golocker.cus;
 				PRODUCT_NAME = GoLocker;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1716,6 +1717,8 @@
 			baseConfigurationReference = EE39F4B4B3F68F4005A43BBB /* Pods-GoLocker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5HSHP48M6L;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1736,7 +1739,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.golocker.golocker;
+				PRODUCT_BUNDLE_IDENTIFIER = com.golocker.cus;
 				PRODUCT_NAME = GoLocker;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1895,7 +1898,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.golocker.golocker.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.golocker.cus.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1927,7 +1930,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.golocker.golocker.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.golocker.cus.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";

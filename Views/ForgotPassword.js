@@ -74,7 +74,7 @@ export default class ForgotPassword extends Component {
             <Text style={{fontSize: Utils.normalize(16), color: Colors.gray_85, fontWeight: 'bold'}}>We can help you with that</Text>
           </View>
           {errorText}
-           <TextInput placeholderTextColor={Colors.tapable_blue} style={{color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, paddingLeft: 21, fontFamily: Theme.primaryFont, marginTop: 25}} placeholder={"Your Email"} onChangeText={(username) => this.setState({username})} value={this.state.username}/>
+           <TextInput underlineColorAndroid='transparent'  placeholderTextColor={Colors.tapable_blue} style={{color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, paddingLeft: 21, fontFamily: Theme.primaryFont, marginTop: 25}} placeholder={"Your Email"} onChangeText={(username) => this.setState({username})} value={this.state.username}/>
 
            <TouchableHighlight onPress={() => {this.onResetPassword()}} underlayColor={'transparent'}>
              <View style={{height: 50, borderRadius: 4, backgroundColor: '#7ED321', marginTop: 10}}>

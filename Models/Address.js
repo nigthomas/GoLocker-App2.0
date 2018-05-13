@@ -3,16 +3,22 @@ import CreditCard from './CreditCard'
 
 export default class Address {
   constructor (data) {
-    this.name = data.name
-    this.address = data.address
-    this.address2 = data.address2
-    this.city = data.city
-    this.stateProvince = data.stateProvince || data.stateOrProvince
-    this.postalCode = data.postalCode
-    this.countryCode = data.countryCode
-    this.location = new Location(data.location)
-    this.creditCard = new CreditCard(data.creditCard || {})
-    this.countryCode = data.countryCode
+    if (data) {
+      this.name = data.name
+      this.address = data.address
+      this.address2 = data.address2
+      this.city = data.city
+      this.stateProvince = data.stateProvince || data.stateOrProvince
+      this.postalCode = data.postalCode
+      this.countryCode = data.countryCode
+      this.location = new Location(data.location)
+      this.creditCard = new CreditCard(data.creditCard || {})
+      this.countryCode = data.countryCode
+    }
+  }
+
+  isValid() {
+    return this.address && this.city && this.stateProvince && this.postalCode
   }
 
   static headquarters() {

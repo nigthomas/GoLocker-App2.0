@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "883497519155",
+    "firebase_url": "https://golocker-e5fba.firebaseio.com",
+    "project_id": "golocker-e5fba",
+    "storage_bucket": "golocker-e5fba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:883497519155:android:f44f0ec544d418d8",
+        "android_client_info": {
+          "package_name": "com.golocker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "883497519155-ul04ta7fo635tq15o27lc60690k84hfc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBI84L4bnZEE_f1glPH6cFGe5qZf4gvk2g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -5,10 +5,10 @@ import Locker from './Locker'
 export default class Dashboard {
   constructor (data) {
     this.status = data.status
-    this.homeShippingAddress = new Address(data.homeShippingAddress)
     this.usernameQR = data.usernameQR
     this.type = data.type
     this.username = data.username
+    this.homeShippingAddress = new Address(data.homeShippingAddress)
     this.accountNumber = data.accountNumber
     this.apartmentNumber = data.apartmentNumber
     this.disability = data.disability

@@ -37,7 +37,7 @@ export default class LoginView extends Component {
     const password = this.state.password
 
     if(!username || !password) {
-      AlertView.showConfirmation("Hi there", "Please enter your username and password")
+      Alert.alert("Hi there", "Please enter your username and password",[{text: 'OK', onPress: () => {}}],{ cancelable: true })
       return;
     }
 
@@ -49,7 +49,7 @@ export default class LoginView extends Component {
     })
     .catch(err => {
       this.showRegularState()
-      AlertView.showConfirmation("Whoops! This username and password combination doesn't exist")
+      Alert.alert("Whoops!", "This username and password combination doesn't exist",[{text: 'OK', onPress: () => {}}],{ cancelable: true })
     })
   }
 

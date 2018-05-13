@@ -445,8 +445,7 @@ export default class HomeView extends Component {
     }
 
     const dashboardData = this.state.data || {}
-
-    const homeShippingAddress = dashboardData.homeShippingAddress || Address.headquarters()
+    const homeShippingAddress = dashboardData.homeShippingAddress && dashboardData.homeShippingAddress.isValid() ? dashboardData.homeShippingAddress : Address.headquarters()
     const firstName = Utils.capitalize(dashboardData.firstName || "")
     const lastName = Utils.capitalize(dashboardData.lastName || "")
     const accountNumber = dashboardData.accountNumber || ""

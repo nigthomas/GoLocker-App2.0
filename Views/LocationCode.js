@@ -5,6 +5,7 @@ import Colors from '../Common/Colors'
 import FlatButton  from '../Elements/FlatButton'
 import PropertyService from '../Services/PropertyService'
 import { Container, Header, Content, Form, Item, Input, Label, Root } from 'native-base';
+import ThreeHeaderView from '../Elements/ThreeHeaderView'
 
 export default class LocationCodeView extends Component {
   constructor(props) {
@@ -42,6 +43,10 @@ export default class LocationCodeView extends Component {
     })
   }
 
+  onBackPress() {
+    this.props.navigation.goBack()
+  }
+
   onLoginPress = () => {
     const { navigation } = this.props;
     navigation.popToTop()
@@ -61,11 +66,9 @@ export default class LocationCodeView extends Component {
     return (
         <Container>
           <Content style={{backgroundColor: Colors.white}}>
-            <TouchableHighlight onPress={() => {this.onLoginPress()}} underlayColor={'transparent'}>
-              <SafeAreaView style={{marginTop: 35, marginRight: 20}}>
-                <Text style={{textAlign: 'right', color: Colors.gray_85, fontSize: 16, zIndex: 1}}>Sign in</Text>
+              <SafeAreaView style={{marginTop: 35}}>
+                <ThreeHeaderView title={""} leftButtonTitle={"Back"} rightButtonTitle={"Sign in"} onLeftPress={() => {this.onBackPress()}} onRightPress={() => {this.onLoginPress()}}/>
               </SafeAreaView>
-            </TouchableHighlight>
             <View style={{marginTop: 30}}>
               <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>Enter your </Text>
               <Text style={{marginLeft: 21, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>location code</Text>

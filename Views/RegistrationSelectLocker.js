@@ -6,6 +6,7 @@ import FlatButton  from '../Elements/FlatButton'
 import PropertyService from '../Services/PropertyService'
 import { Container, Header, Content, Form, Item, Input, Label, Root } from 'native-base';
 import MapView from 'react-native-maps';
+import ThreeHeaderView from '../Elements/ThreeHeaderView'
 
 export default class RegistrationSelectLocker extends Component {
   constructor(props) {
@@ -22,6 +23,10 @@ export default class RegistrationSelectLocker extends Component {
   onPropertyPress(property) {
     const { navigation } = this.props;
     navigation.navigate('RegistrationForm', {property: property})
+  }
+
+  onBackPress() {
+    this.props.navigation.goBack()
   }
 
   renderItem(property) {
@@ -83,11 +88,9 @@ export default class RegistrationSelectLocker extends Component {
     return (
         <Container>
           <Content style={{backgroundColor: Colors.white}}>
-            <TouchableHighlight onPress={() => {this.onLoginPress()}} underlayColor={'transparent'}>
-              <SafeAreaView style={{marginTop: 35, marginRight: 20}}>
-                <Text style={{textAlign: 'right', color: Colors.gray_85, fontSize: 16, zIndex: 1}}>Sign in</Text>
+              <SafeAreaView style={{marginTop: 35}}>
+                <ThreeHeaderView title={""} leftButtonTitle={"Back"} rightButtonTitle={"Sign in"} onLeftPress={() => {this.onBackPress()}} onRightPress={() => {this.onLoginPress()}}/>
               </SafeAreaView>
-            </TouchableHighlight>
               <View style={{marginTop: 30}}>
               <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>{headerText}</Text>
               {errorText}

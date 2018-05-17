@@ -9,6 +9,7 @@ import MapView from 'react-native-maps';
 import LoginService from '../Services/LoginService'
 import Utils from '../Common/Utils'
 import PhoneInput from 'react-native-phone-input'
+import ThreeHeaderView from '../Elements/ThreeHeaderView'
 
 export default class RegistrationSelectLocker extends Component {
   static navigationOptions = { header: null };
@@ -165,6 +166,10 @@ export default class RegistrationSelectLocker extends Component {
       )
   }
 
+  onBackPress() {
+    this.props.navigation.goBack()
+  }
+
   onSwitchChange(value) {
     this.setState({handicap: value})
   }
@@ -184,11 +189,9 @@ export default class RegistrationSelectLocker extends Component {
       <Root>
         <Container>
           <Content style={{backgroundColor: Colors.white}} ref={c => (this.component = c)}>
-            <TouchableHighlight onPress={() => {this.onLoginPress()}} underlayColor={'transparent'}>
-              <SafeAreaView style={{marginTop: 35, marginRight: 20}}>
-                <Text style={{textAlign: 'right', color: Colors.gray_85, fontSize: 16, zIndex: 1}}>Sign in</Text>
+              <SafeAreaView style={{marginTop: 35}}>
+                <ThreeHeaderView title={""} leftButtonTitle={"Back"} rightButtonTitle={"Sign in"} onLeftPress={() => {this.onBackPress()}} onRightPress={() => {this.onLoginPress()}}/>
               </SafeAreaView>
-            </TouchableHighlight>
               <View style={{marginTop: 30}}>
                 <Text style={{marginLeft: 21, marginTop: 20, fontSize: 36, color: Colors.dark_gray, fontWeight: 'bold'}}>{headerText}</Text>
                 <Text style={{marginLeft: 21, fontSize: 36, color: Colors.dark_gray, fontWeight: 'bold'}}>{text}</Text>

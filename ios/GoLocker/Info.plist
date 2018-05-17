@@ -23,7 +23,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>3</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -55,6 +55,8 @@
 	</dict>
 	<key>NSHumanReadableCopyright</key>
 	<string></string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>We use your location to verify if you're next to a locker</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We use your location to verify if you're next to a locker</string>
 	<key>UIAppFonts</key>

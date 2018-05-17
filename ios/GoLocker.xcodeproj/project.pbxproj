@@ -421,12 +421,10 @@
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F06E06C20A7796400E17C96 /* libPods-GoLocker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libPods-GoLocker.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F06E0C620A77A1000E17C96 /* GoLocker Development.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GoLocker Development.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2F06E0C720A77A1100E17C96 /* GoLocker copy2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoLocker copy2-Info.plist"; path = "/Users/Command/GoLocker/ios/GoLocker copy2-Info.plist"; sourceTree = "<absolute>"; };
 		2F8FC92620A8DD380050E115 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2F8FC92820A8DE1A0050E115 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "development/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2FE1CDE320A7631100410B47 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		2FE1CDE420A7631100410B47 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
-		2FE1CE5920A7692800410B47 /* GoLocker copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoLocker copy-Info.plist"; path = "/Users/Command/GoLocker/ios/GoLocker copy-Info.plist"; sourceTree = "<absolute>"; };
 		3D808AA46D94E0A0065A0EC4 /* libPods-GoLocker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GoLocker.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CD43CB57DF64726BA5778CF /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
@@ -787,8 +785,6 @@
 				2F460CC62058D3D0000AE82B /* Recovered References */,
 				71A601A4D1484038BA20FD85 /* Resources */,
 				8F59F721AC7CC785375AFDAE /* Pods */,
-				2FE1CE5920A7692800410B47 /* GoLocker copy-Info.plist */,
-				2F06E0C720A77A1100E17C96 /* GoLocker copy2-Info.plist */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";

@@ -56,7 +56,9 @@
 	<key>NSHumanReadableCopyright</key>
 	<string></string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>We use your location to verify if you're next to a locker</string>
+	<string>We use your location to verify if you&apos;re next to a locker</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>We use your location to verify if you&apos;re next to a locker</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>

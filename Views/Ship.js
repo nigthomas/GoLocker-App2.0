@@ -146,7 +146,6 @@ export default class Ship extends Component {
 
   onReserveLocker() {
     Keyboard.dismiss()
-    this.refs.trackingNumberField.blur();
 
     const locker = this.state.sendToLocker
     const selectedLockerCompartment = this.state.selectedLockerCompartment
@@ -168,12 +167,16 @@ export default class Ship extends Component {
 
     this.showProcessingState()
 
-    console.log(selectedLockerCompartment)
-
     ReservationService.getInstance().createReservation(selectedLockerCompartment, accountNumber, 1, this.state.number, lockerId)
     .then(() => {
       this.setState({choosePackageError: false, enterTrackingNumberError: false, number: null, selectedLockerCompartment: null})
       this.showRegularState()
+      return new Promise((resolve, reject) => {
+        Keyboard.dismiss();
+        setTimeout(() => { resolve(); }, 100);
+      });
+    })
+    .then(() => {
       const { navigate } = this.props.navigation;
       setTimeout(() => {
         navigate('Home', {})

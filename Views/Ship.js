@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, StatusBar, Image, Platform, TouchableHighlight, Modal, ScrollView, TextInput, findNodeHandle, Keyboard} from 'react-native';
+import { StyleSheet, Text, View, StatusBar, Image, Platform, TouchableHighlight, Modal, ScrollView, TextInput, findNodeHandle, Keyboard, FlatList} from 'react-native';
 import { Container, Header, Content, Card, CardItem, Left, Thumbnail, Body, Button, Icon, Title, Footer, FooterTab, Right, ActionSheet, Root} from 'native-base';
 import FooterTabWithNavigation from './FooterTabWithNavigation'
 import ClearButton from '../Elements/ClearButton'
@@ -32,9 +32,7 @@ export default class Ship extends Component {
      account: null,
      sendToLocker: null,
      number: null,
-     smallParcelSelected: false,
-     mediumParcelSelected: false,
-     largeParcelSelected: false,
+     selectedLockerCompartment: null,
      choosePackageError: false,
      enterTrackingNumberError: false,
      buttonText: "Reserve a locker",
@@ -86,19 +84,23 @@ export default class Ship extends Component {
 
   selectedLocker(locker) {
     this.props.navigation.goBack()
-    this.setState({sendToLocker: locker})
+    this.setState({selectedLockerCompartment: null, sendToLocker: locker})
   }
 
   onSmallParcelPress() {
-    this.setState({smallParcelSelected: true, mediumParcelSelected: false, largeParcelSelected: false})
+    this.setState({smallParcelSelected: true, mediumParcelSelected: false, largeParcelSelected: false, extraLargeParcelSelected: false})
   }
 
   onMediumParcelPress() {
-    this.setState({smallParcelSelected: false, mediumParcelSelected: true, largeParcelSelected: false})
+    this.setState({smallParcelSelected: false, mediumParcelSelected: true, largeParcelSelected: false, extraLargeParcelSelected: false})
   }
 
   onLargeParcelPress() {
-    this.setState({smallParcelSelected: false, mediumParcelSelected: false, largeParcelSelected: true})
+    this.setState({smallParcelSelected: false, mediumParcelSelected: false, largeParcelSelected: true, extraLargeParcelSelected: false})
+  }
+
+  onExtraLargeParcelPress() {
+    this.setState({smallParcelSelected: false, mediumParcelSelected: false, largeParcelSelected: false, extraLargeParcelSelected: true})
   }
 
   showProcessingState() {
@@ -118,16 +120,37 @@ export default class Ship extends Component {
     navigate('SelectLockerView', {lockers: lockers, onLockerSelected: this.selectedLocker.bind(this)})
   }
 
+  onCompartmentSelect(compartment) {
+    this.setState({selectedLockerCompartment: compartment})
+  }
+
+  renderCompartment(compartment) {
+    const selectedCompartment = this.state.selectedLockerCompartment || {}
+    const button = compartment.code == selectedCompartment.code ? <View style={styles.activeCircle}/> : <View style={styles.circle}/>
+    return (
+      <View style={{justifyContent: 'center', borderTopColor: Colors.gray_ef, borderTopWidth: 1, marginTop: 20, paddingTop: 15, height: 40, flex: 1}}>
+        <TouchableHighlight onPress={() => {this.onCompartmentSelect(compartment)}} underlayColor={'transparent'}>
+          <View>
+            <Text style={{fontSize: 14, color: Colors.gray_85, marginLeft: 21}}>
+              {compartment.name} Parcel
+            </Text>
+            <Text style={{fontSize: 10, color: Colors.gray_85, marginLeft: 21, marginTop: 3}}>
+              No bigger than {compartment.height} H x {compartment.width} W x {compartment.length} L
+            </Text>
+            {button}
+          </View>
+        </TouchableHighlight>
+      </View>
+    )
+  }
+
   onReserveLocker() {
     Keyboard.dismiss()
-
     this.refs.trackingNumberField.blur();
 
-    const smallParcelSelected = this.state.smallParcelSelected
-    const mediumParcelSelected = this.state.mediumParcelSelected
-    const largeParcelSelected = this.state.largeParcelSelected
     const locker = this.state.sendToLocker
-    const choosePackageError =  !(smallParcelSelected || mediumParcelSelected || largeParcelSelected)
+    const selectedLockerCompartment = this.state.selectedLockerCompartment
+    const choosePackageError =  !selectedLockerCompartment
     const enterTrackingNumberError = this.state.number === null
 
     if(choosePackageError || enterTrackingNumberError) {
@@ -139,39 +162,17 @@ export default class Ship extends Component {
     const accountNumber = null
     const lockerId = this.state.sendToLocker.id
 
-    var parcelSizeCode = null
-
-    if(smallParcelSelected) {
-      parcelSizeCode = "S"
-    }
-    else if (mediumParcelSelected) {
-      parcelSizeCode = "M"
-    }
-    else if (largeParcelSelected) {
-      parcelSizeCode = "L"
-    }
-
-    if(!parcelSizeCode) {
-      return;
-    }
-
-    const compartment = _.find(locker.compartmentSizes, (compartment) => {
-      return compartment.code === parcelSizeCode
-    })
-
-    if(!compartment) {
-      return
-    }
-
     if(this.state.reserving) {
       return;
     }
 
     this.showProcessingState()
 
-    ReservationService.getInstance().createReservation(compartment, accountNumber, 1, this.state.number, lockerId)
+    console.log(selectedLockerCompartment)
+
+    ReservationService.getInstance().createReservation(selectedLockerCompartment, accountNumber, 1, this.state.number, lockerId)
     .then(() => {
-      this.setState({choosePackageError: false, enterTrackingNumberError: false, number: null, smallParcelSelected: false, mediumParcelSelected:false, largeParcelSelected:false})
+      this.setState({choosePackageError: false, enterTrackingNumberError: false, number: null, selectedLockerCompartment: null})
       this.showRegularState()
       const { navigate } = this.props.navigation;
       setTimeout(() => {
@@ -195,11 +196,9 @@ export default class Ship extends Component {
     const data = this.state.data || {}
     const firstName = data.firstName
     const lastName = data.lastName
+    const locker = this.state.sendToLocker
+    const compartmentSizes = locker ? locker.compartmentSizes : []
     const lockerName = (this.state.sendToLocker && this.state.sendToLocker.property) ? this.state.sendToLocker.property.name: ""
-
-    const smallParcelButton = this.state.smallParcelSelected ? <View style={styles.activeCircle}/> : <View style={styles.circle}/>
-    const mediumParcelButton = this.state.mediumParcelSelected ? <View style={styles.activeCircle}/> : <View style={styles.circle}/>
-    const largeParcelButton = this.state.largeParcelSelected ? <View style={styles.activeCircle}/> : <View style={styles.circle}/>
 
     const errorText = this.state.error ? <Text style={{marginLeft: 21, color: Colors.red, marginTop: 5}}>Something is wrong. Please try again</Text> : null
     const homeShippingAddress = data.homeShippingAddress && data.homeShippingAddress.isValid() ? data.homeShippingAddress : Address.headquarters()
@@ -229,7 +228,7 @@ export default class Ship extends Component {
               </View>
 
               <Text style={{marginLeft: 21, marginTop: 20, fontSize: 16, color: Colors.gray_85, fontWeight: 'bold'}}>Deliver to:</Text>
-              <View style={{justifyContent: 'center', borderTopColor: Colors.gray_ef, borderTopWidth: 1, borderBottomColor: Colors.gray_ef, borderBottomWidth: 1, marginTop: 15, height: 50, flex: 1}}>
+              <View style={{justifyContent: 'center', borderTopColor: Colors.gray_ef, borderTopWidth: 1, borderBottomColor: Colors.gray_ef, borderBottomWidth: 1, marginTop: 15, height: 50}}>
                 <TouchableHighlight onPress={() => {this.onChangeLocker()}} underlayColor={'transparent'}>
                   <Text style={{fontSize: 14, color: Colors.gray_85, marginLeft: 21}}>
                   {lockerName}
@@ -239,48 +238,7 @@ export default class Ship extends Component {
               </View>
 
               <Text style={{marginLeft: 21, marginTop: 20, fontSize: 16, color: this.state.choosePackageError ? Colors.red : Colors.gray_85, fontWeight: 'bold'}}>Please choose a package size</Text>
-
-              <View style={{justifyContent: 'center', borderTopColor: Colors.gray_ef, borderTopWidth: 1, borderBottomColor: Colors.gray_ef, borderBottomWidth: 1, marginTop: 15, height: 50, flex: 1}}>
-                <TouchableHighlight onPress={() => {this.onSmallParcelPress()}} underlayColor={'transparent'}>
-                  <View>
-                    <Text style={{fontSize: 14, color: Colors.gray_85, marginLeft: 21}}>
-                      Small Parcel
-                    </Text>
-                    <Text style={{fontSize: 10, color: Colors.gray_85, marginLeft: 21, marginTop: 3}}>
-                      No bigger than 4 H x 15 W x 24 L
-                    </Text>
-                    {smallParcelButton}
-                  </View>
-                </TouchableHighlight>
-              </View>
-
-              <View style={{justifyContent: 'center', borderBottomColor: Colors.gray_ef, borderBottomWidth: 1, height: 50, flex: 1}}>
-                <TouchableHighlight onPress={() => {this.onMediumParcelPress()}} underlayColor={'transparent'}>
-                  <View>
-                    <Text style={{fontSize: Utils.normalize(14), color: Colors.gray_85, marginLeft: 21}}>
-                      Medium Parcel
-                    </Text>
-                    <Text style={{fontSize: Utils.normalize(10), color: Colors.gray_85, marginLeft: 21, marginTop: 3}}>
-                      No bigger than 8 H x 15 W x 24 L
-                    </Text>
-                    {mediumParcelButton}
-                  </View>
-                </TouchableHighlight>
-              </View>
-
-              <View style={{justifyContent: 'center', borderBottomColor: Colors.gray_ef, borderBottomWidth: 1, height: 50, flex: 1}}>
-                <TouchableHighlight onPress={() => {this.onLargeParcelPress()}} underlayColor={'transparent'}>
-                  <View>
-                    <Text style={{fontSize: Utils.normalize(14), color: Colors.gray_85, marginLeft: 21}}>
-                      Large Parcel
-                    </Text>
-                    <Text style={{fontSize: Utils.normalize(10), color: Colors.gray_85, marginLeft: 21, marginTop: 3}}>
-                      No bigger than 17 H x 15 W x 25 L
-                    </Text>
-                    {largeParcelButton}
-                  </View>
-                </TouchableHighlight>
-              </View>
+              <FlatList data={compartmentSizes} style={{height: 320}} keyExtractor={(item, index) => item.code} renderItem={({ item }) => {return this.renderCompartment(item)}} backgroundColor={'white'}/>
 
               <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(16), color:  this.state.enterTrackingNumberError ? Colors.red : Colors.gray_85, fontWeight: 'bold'}}>Destination Shipping Info</Text>
               <View style={{marginLeft: 21, marginTop: 15, marginRight: 21}}>

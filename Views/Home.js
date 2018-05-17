@@ -217,7 +217,7 @@ export default class HomeView extends Component {
     const lockers = this.lockers()
     const coords = position.coords
     var closerLocker;
-    var closerLockerDistance;
+    var closerLockerDistance = 0
 
     for(var i in lockers) {
       var locker = lockers[i]
@@ -226,7 +226,7 @@ export default class HomeView extends Component {
         var longitude = locker.property.location.longitude
         var distance = Utils.haversineDistance([latitude, longitude], [coords.latitude, coords.longitude] , true)
 
-        if(!closerLockerDistance || distance < closerLockerDistance) {
+        if(distance <= closerLockerDistance) {
           closerLockerDistance = distance
           closerLocker = locker
         }
@@ -321,7 +321,7 @@ export default class HomeView extends Component {
     const lockers = this.lockers()
 
     for(var i in lockers) {
-      let locker = lockers[i];
+      var locker = lockers[i];
       if(!locker || !locker.property) {
         continue;
       }
@@ -486,19 +486,19 @@ export default class HomeView extends Component {
             </View>
 
             <Text style={{marginLeft: 21, fontSize: 16, marginTop:21, color: Colors.gray_85, fontWeight: 'bold'}}>Send packages to:</Text>
+            <View style={{height: 80}}>
+              <View>
+              <Text style={{marginLeft: 21, paddingTop:9, fontSize: 14, color: Colors.gray_85}}>{homeShippingAddressName}</Text>
+              <Text style={{fontSize: 14, color: Colors.gray_85, marginLeft: 21, marginTop: 3}}>
+                {homeShippingAddress.address}
+              </Text>
+              <Text style={{fontSize: 14, color: Colors.gray_85, marginLeft: 21, marginTop: 3}}>
+                {homeShippingAddress.city}, {homeShippingAddress.stateProvince} {homeShippingAddress.postalCode}
+              </Text>
+              </View>
+            </View>
             {homeShippingAddressView}
 
-            <View style={{height: 80}}>
-                <View>
-                <Text style={{marginLeft: 21, paddingTop:9, fontSize: 14, color: Colors.gray_85}}>{homeShippingAddressName}</Text>
-                <Text style={{fontSize: 14, color: Colors.gray_85, marginLeft: 21, marginTop: 3}}>
-                  {homeShippingAddress.address}
-                </Text>
-                <Text style={{fontSize: 14, color: Colors.gray_85, marginLeft: 21, marginTop: 3}}>
-                  {homeShippingAddress.city}, {homeShippingAddress.stateProvince} {homeShippingAddress.postalCode}
-                </Text>
-                </View>
-            </View>
 
             {doorOpenActionView}
             <Text style={{marginLeft: 21, fontSize: 16, marginTop:21, color: Colors.gray_85, fontWeight: 'bold'}}>Packages:</Text>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, StatusBar, FlatList, TextInput, TouchableHighlight} from 'react-native';
+import { StyleSheet, Text, View, StatusBar, FlatList, TextInput, TouchableHighlight, Switch} from 'react-native';
 import Theme from '../Common/Theme'
 import FooterTabWithNavigation from './FooterTabWithNavigation'
 import { Container, Header, Content, Card, CardItem, Left, Thumbnail, Body, Button, Icon, Title, Footer, FooterTab, Root, Right} from 'native-base';
@@ -26,7 +26,8 @@ export default class ChangePassword extends Component {
      passwordConfirmation: null,
      passwordNoMatchError: false,
      passwordComplexityError: false,
-     error: null
+     error: null,
+     showPassword: true
    };
   }
 
@@ -77,8 +78,13 @@ export default class ChangePassword extends Component {
               <ThreeHeaderView title={"Change Password"} leftButtonTitle={"Back"} rightButtonTitle={"Save"} onLeftPress={() => {this.onBackPress()}} onRightPress={() => {this.onSavePress()}}/>
             </View>
             <View style={{marginLeft: 21, marginRight: 21, marginTop: 30}}>
-              <TextInput underlineColorAndroid='transparent' ref="passwordField" placeholderTextColor={Colors.tapable_blue} style={{paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Password"} onChangeText={(password) => this.setState({password})} value={this.state.password}/>
-              <TextInput underlineColorAndroid='transparent' ref="passwordConfirmationField" placeholderTextColor={Colors.tapable_blue} style={{marginTop: 10, paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Password Confirmation"} onChangeText={(passwordConfirmation) => this.setState({passwordConfirmation})} value={this.state.passwordConfirmation}/>
+              <TextInput secureTextEntry={this.state.showPassword} underlineColorAndroid='transparent' ref="passwordField" placeholderTextColor={Colors.tapable_blue} style={{paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Password"} onChangeText={(password) => this.setState({password})} value={this.state.password}/>
+              <TextInput secureTextEntry={this.state.showPassword} underlineColorAndroid='transparent' ref="passwordConfirmationField" placeholderTextColor={Colors.tapable_blue} style={{marginTop: 10, paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Password Confirmation"} onChangeText={(passwordConfirmation) => this.setState({passwordConfirmation})} value={this.state.passwordConfirmation}/>
+            </View>
+
+            <View style={{marginTop: 10, marginLeft: 21, flexDirection: 'row', alignItems: 'center'}}>
+              <Switch onValueChange={(value) => {this.setState({showPassword: !value})}} value={!this.state.showPassword}/>
+              <Text style={{marginLeft: 5}}>Show Password</Text>
             </View>
             {passwordDoesntMatchText}
             {complexityText}

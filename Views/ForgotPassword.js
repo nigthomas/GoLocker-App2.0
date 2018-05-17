@@ -9,6 +9,7 @@ import FlatButton from '../Elements/FlatButton'
 import AlertView from '../Elements/AlertView'
 import AccountService from '../Services/AccountService'
 import Utils from '../Common/Utils'
+import ThreeHeaderView from '../Elements/ThreeHeaderView'
 
 export default class ForgotPassword extends Component {
 
@@ -48,6 +49,10 @@ export default class ForgotPassword extends Component {
     })
   }
 
+  onBackPress() {
+    this.props.navigation.goBack()
+  }
+
   render() {
     const style = this.props.style || {}
     style.justifyContent = 'center'
@@ -61,12 +66,12 @@ export default class ForgotPassword extends Component {
 
     return (
       <Root>
+        <Container>
+        <Content style={{backgroundColor: Colors.white}} ref={c => (this.component = c)}>
         <View style={styles.background}>
-          <TouchableHighlight onPress={() => {this.goToSignIn()}} underlayColor={'transparent'}>
-            <SafeAreaView style={{marginTop: 35, marginRight: 20}}>
-              <Text style={{textAlign: 'right', color: Colors.gray_85, fontSize: 16, zIndex: 1}}>Sign in</Text>
-            </SafeAreaView>
-          </TouchableHighlight>
+          <SafeAreaView style={{marginTop: 35}}>
+            <ThreeHeaderView title={""} leftButtonTitle={"Back"} rightButtonTitle={"Sign in"} onLeftPress={() => {this.onBackPress()}} onRightPress={() => {this.goToSignIn()}}/>
+          </SafeAreaView>
          <View style={{marginTop: 75, marginLeft: 21, marginRight: 21}}>
           <Text style={{marginTop: 20, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>Forgot</Text>
           <Text style={{fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>your password?</Text>
@@ -83,6 +88,8 @@ export default class ForgotPassword extends Component {
            </TouchableHighlight>
          </View>
         </View>
+        </Content>
+      </Container>
       </Root>
     );
   }

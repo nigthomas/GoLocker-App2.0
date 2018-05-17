@@ -27,6 +27,7 @@ export default class NewUpdateMailingAddress extends Component {
 
    this.state = {
      address: address.address,
+     address2: address.address2,
      city: address.city,
      state: address.stateProvince,
      zip: address.postalCode
@@ -35,11 +36,12 @@ export default class NewUpdateMailingAddress extends Component {
 
   onSavePress() {
     const address = this.state.address
+    const address2 = this.state.address2
     const city = this.state.city
     const state = this.state.state
     const zip = this.state.zip
 
-    const updatedAddress = new Address({address: address, city: city, stateProvince: state, postalCode:zip})
+    const updatedAddress = new Address({address: address, address2: address2, city: city, stateProvince: state, postalCode:zip})
     AccountService.getInstance().updateMailingAddress(updatedAddress)
     .then(() => {
       this.props.navigation.goBack()
@@ -65,7 +67,8 @@ export default class NewUpdateMailingAddress extends Component {
           </View>
           {errorText}
           <View style={{marginLeft: 21, marginRight: 21, marginTop: 30}}>
-            <TextInput underlineColorAndroid='transparent' ref="usernameField" placeholderTextColor={Colors.tapable_blue} style={{paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Address"} onChangeText={(address) => this.setState({address})} value={this.state.address}/>
+            <TextInput underlineColorAndroid='transparent' ref="usernameField" placeholderTextColor={Colors.tapable_blue} style={{paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Address line one"} onChangeText={(address) => this.setState({address})} value={this.state.address}/>
+            <TextInput underlineColorAndroid='transparent' ref="usernameField" placeholderTextColor={Colors.tapable_blue} style={{marginTop: 10, paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Address line two"} onChangeText={(address2) => this.setState({address2})} value={this.state.address2}/>
             <TextInput underlineColorAndroid='transparent' ref="usernameField" placeholderTextColor={Colors.tapable_blue} style={{marginTop: 10, paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"City"} onChangeText={(city) => this.setState({city})} value={this.state.city}/>
             <View style={{flex: 1, flexDirection:'row'}}>
               <TextInput underlineColorAndroid='transparent' ref="usernameField" placeholderTextColor={Colors.tapable_blue} style={{flex: 1, marginTop: 10, marginRight: 5,paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"State"} onChangeText={(state) => this.setState({state})} value={this.state.state}/>

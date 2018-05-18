@@ -18,6 +18,7 @@ import MapView, { Marker } from 'react-native-maps';
 import FontAwesome from 'react-native-vector-icons/dist/FontAwesome'
 import ActionService from '../Services/ActionService'
 import firebase from 'react-native-firebase'
+import _ from 'underscore'
 
 export default class HomeView extends Component {
   static navigationOptions = { header: null, tabBarVisible: false };
@@ -118,6 +119,7 @@ export default class HomeView extends Component {
     const trackingNumber = item.trackingNumber
     const pin = item.pin
     const direction = (item.barcode && item.barcode.includes("CNTI")) ? "Outgoing" : "Incoming"
+    const status = item.statusString()
 
     return (
       <Swipeout right={swipeBtns}
@@ -129,6 +131,8 @@ export default class HomeView extends Component {
             <Text style={{ color: Colors.gray_85, marginTop: 2}}>Pin: {pin}</Text>
             <Text style={{ color: Colors.gray_85, marginTop: 2}}>Created: {expiration}</Text>
             <Text style={{ color: Colors.gray_85, marginTop: 2}}>Direction: {direction}</Text>
+            <Text style={{ color: Colors.gray_85, marginTop: 2}}>Status: {status}</Text>
+
           </View>
         </View>
       </Swipeout>
@@ -214,10 +218,10 @@ export default class HomeView extends Component {
   }
 
   findClosestLocker(position) {
-    const lockers = this.lockers()
+    const lockers = _.filter(this.lockers(), (locker) => (locker.property && locker.property.hasOpenDoorAction()))
     const coords = position.coords
     var closerLocker;
-    var closerLockerDistance = 0
+    var closerLockerDistance
 
     for(var i in lockers) {
       var locker = lockers[i]
@@ -226,7 +230,7 @@ export default class HomeView extends Component {
         var longitude = locker.property.location.longitude
         var distance = Utils.haversineDistance([latitude, longitude], [coords.latitude, coords.longitude] , true)
 
-        if(distance <= closerLockerDistance) {
+        if((!closerLockerDistance && closerLockerDistance != 0) || distance <= closerLockerDistance) {
           closerLockerDistance = distance
           closerLocker = locker
         }

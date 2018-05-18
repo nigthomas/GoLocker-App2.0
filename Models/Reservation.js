@@ -27,6 +27,19 @@ export default class Reservation {
     this.user = new Member(data.user)
   }
 
+  statusString() {
+    if(this.delivered) {
+      return "Completed"
+    }
+
+    if(this.expirationDate && Date.now() > new Date(this.expirationDate)) {
+      return "Expired"
+    }
+
+    return "Active"
+  }
+
+
   toJSON() {
     return {}
   }

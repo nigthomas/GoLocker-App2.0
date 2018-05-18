@@ -9,6 +9,7 @@ import FlatButton from '../Elements/FlatButton'
 import AlertView from '../Elements/AlertView'
 import AccountService from '../Services/AccountService'
 import Utils from '../Common/Utils'
+import ThreeHeaderView from '../Elements/ThreeHeaderView'
 
 export default class ForgotPasswordValidation extends Component {
   constructor(props) {
@@ -52,6 +53,10 @@ export default class ForgotPasswordValidation extends Component {
     })
   }
 
+  onBackPress() {
+    this.props.navigation.goBack()
+  }
+
   render() {
     const style = this.props.style || {}
     style.justifyContent = 'center'
@@ -65,12 +70,12 @@ export default class ForgotPasswordValidation extends Component {
 
     return (
       <Root>
+      <Container>
+        <Content style={{backgroundColor: Colors.white}} ref={c => (this.component = c)}>
         <View style={styles.background}>
-          <TouchableHighlight onPress={() => {this.goToSignIn()}} underlayColor={'transparent'}>
-            <SafeAreaView style={{marginTop: 35, marginRight: 20}}>
-              <Text style={{textAlign: 'right', color: Colors.gray_85, fontSize: 16, zIndex: 1}}>Sign in</Text>
-            </SafeAreaView>
-          </TouchableHighlight>
+          <SafeAreaView style={{marginTop: 35}}>
+            <ThreeHeaderView title={""} leftButtonTitle={"Back"} rightButtonTitle={"Sign in"} onLeftPress={() => {this.onBackPress()}} onRightPress={() => {this.goToSignIn()}}/>
+          </SafeAreaView>
          <View style={{marginTop: 75, marginLeft: 21, marginRight: 21}}>
           <Text style={{marginTop: 20, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>Reset</Text>
           <Text style={{fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>your password?</Text>
@@ -78,7 +83,7 @@ export default class ForgotPasswordValidation extends Component {
           <View style={{marginTop: 20}}>
             <Text style={{marginTop: 20, fontSize: Utils.normalize(16), color: Colors.gray_85, fontWeight: 'bold'}}>Provide that verification code sent to your email</Text>
           </View>
-           <TextInput placeholderTextColor={Colors.tapable_blue} style={{color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, paddingLeft: 21, fontFamily: Theme.primaryFont, marginTop: 25}} placeholder={"Verification Code"} onChangeText={(code) => this.setState({code})} value={this.state.code}/>
+           <TextInput  underlineColorAndroid='transparent' placeholderTextColor={Colors.tapable_blue} style={{color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, paddingLeft: 21, fontFamily: Theme.primaryFont, marginTop: 25}} placeholder={"Verification Code"} onChangeText={(code) => this.setState({code})} value={this.state.code}/>
            <TouchableHighlight onPress={() => {this.onVerify()}} underlayColor={'transparent'}>
              <View style={{height: 50, borderRadius: 4, backgroundColor: '#7ED321', marginTop: 10}}>
                <Text style={{textAlign: 'center', color: Colors.white, marginTop: 17}}>Verify</Text>
@@ -86,6 +91,8 @@ export default class ForgotPasswordValidation extends Component {
            </TouchableHighlight>
          </View>
         </View>
+        </Content>
+      </Container>
       </Root>
     );
   }

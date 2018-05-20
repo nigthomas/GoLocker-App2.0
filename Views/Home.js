@@ -19,6 +19,7 @@ import FontAwesome from 'react-native-vector-icons/dist/FontAwesome'
 import ActionService from '../Services/ActionService'
 import firebase from 'react-native-firebase'
 import _ from 'underscore'
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 
 export default class HomeView extends Component {
   static navigationOptions = { header: null, tabBarVisible: false };
@@ -120,6 +121,20 @@ export default class HomeView extends Component {
     const pin = item.pin
     const direction = (item.barcode && item.barcode.includes("CNTI")) ? "Outgoing" : "Incoming"
     const status = item.statusString()
+    var type;
+
+    switch(item.type) {
+      case 1:
+        type = "Receiving"
+        break;
+      case 2:
+        type = "Sending"
+        break;
+    }
+
+    if(type) {
+      type = (<Text style={{ color: Colors.gray_85, marginTop: 2}}>Type: {type}</Text>)
+    }
 
     return (
       <Swipeout right={swipeBtns}
@@ -132,7 +147,7 @@ export default class HomeView extends Component {
             <Text style={{ color: Colors.gray_85, marginTop: 2}}>Created: {expiration}</Text>
             <Text style={{ color: Colors.gray_85, marginTop: 2}}>Direction: {direction}</Text>
             <Text style={{ color: Colors.gray_85, marginTop: 2}}>Status: {status}</Text>
-
+            {type}
           </View>
         </View>
       </Swipeout>
@@ -360,12 +375,17 @@ export default class HomeView extends Component {
     const data = this.state.data || {}
 
     if (data.accountNumber) {
-      firebase.analytics().logEvent("open_door_pressed", {propertyID: propertyID, accountNumber: accountNumber})
+      firebase.analytics().logEvent("open_door_pressed", {propertyID: propertyID, accountNumber: data.accountNumber})
     }
 
     ActionService.openDoor(propertyID)
     .then(data => {
       this.showRegularState()
+      this.setState({doorButtonText: "Door opened"})
+      ReactNativeHapticFeedback.trigger('notificationSuccess');
+      setTimeout(() => {
+        this.setState({doorButtonText: "Hold to open door", doorButtonColor: Colors.light_green})
+      }, 1500)
     })
     .catch(err => {
       Alert.alert(locker.propertyName(), "An error occurred while opening the door. Try again later",[{text: 'OK', onPress: () => {}}],{ cancelable: true })

@@ -75,6 +75,8 @@
 		2F06E0BF20A77A1000E17C96 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7723798061E845BE9782CC47 /* MaterialCommunityIcons.ttf */; };
 		2F8FC92720A8DD380050E115 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F8FC92620A8DD380050E115 /* GoogleService-Info.plist */; };
 		2F8FC92920A8DE1B0050E115 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F8FC92820A8DE1A0050E115 /* GoogleService-Info.plist */; };
+		2FA7566020B0E9AF00795896 /* libRNReactNativeHapticFeedback.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FA7565F20B0E99D00795896 /* libRNReactNativeHapticFeedback.a */; };
+		2FA7566120B0E9B700795896 /* libRNReactNativeHapticFeedback.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FA7565F20B0E99D00795896 /* libRNReactNativeHapticFeedback.a */; };
 		2FBB387D20AD320200446110 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2FE1CDE520A7631100410B47 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FE1CDE320A7631100410B47 /* Fabric.framework */; };
 		2FE1CDE620A7631100410B47 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FE1CDE420A7631100410B47 /* Crashlytics.framework */; };
@@ -260,6 +262,13 @@
 			remoteGlobalIDString = 3D7682761D8E76B80014119E;
 			remoteInfo = SplashScreen;
 		};
+		2FA7565E20B0E99D00795896 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2FA7565A20B0E99D00795896 /* RNReactNativeHapticFeedback.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNReactNativeHapticFeedback;
+		};
 		2FF517F5205CBE7A00DBA8B3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5CD43CB57DF64726BA5778CF /* RNVectorIcons.xcodeproj */;
@@ -424,6 +433,7 @@
 		2F06E0C620A77A1000E17C96 /* GoLocker Development.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GoLocker Development.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F8FC92620A8DD380050E115 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2F8FC92820A8DE1A0050E115 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "development/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2FA7565A20B0E99D00795896 /* RNReactNativeHapticFeedback.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNReactNativeHapticFeedback.xcodeproj; path = "../node_modules/react-native-haptic-feedback/ios/RNReactNativeHapticFeedback.xcodeproj"; sourceTree = "<group>"; };
 		2FE1CDE320A7631100410B47 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		2FE1CDE420A7631100410B47 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		3D808AA46D94E0A0065A0EC4 /* libPods-GoLocker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GoLocker.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -466,6 +476,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FA7566020B0E9AF00795896 /* libRNReactNativeHapticFeedback.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -515,6 +526,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FA7566120B0E9B700795896 /* libRNReactNativeHapticFeedback.a in Frameworks */,
 				2F06E09B20A77A1000E17C96 /* libRCTBlob.a in Frameworks */,
 				2F06E09C20A77A1000E17C96 /* libRCTAnimation.a in Frameworks */,
 				2F06E09D20A77A1000E17C96 /* libReact.a in Frameworks */,
@@ -695,6 +707,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		2FA7565B20B0E99D00795896 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2FA7565F20B0E99D00795896 /* libRNReactNativeHapticFeedback.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		2FF517F2205CBE7900DBA8B3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -776,6 +796,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				2FA7565A20B0E99D00795896 /* RNReactNativeHapticFeedback.xcodeproj */,
 				2FE1CDE420A7631100410B47 /* Crashlytics.framework */,
 				2FE1CDE320A7631100410B47 /* Fabric.framework */,
 				13B07FAE1A68108700A75B9A /* GoLocker */,
@@ -1025,6 +1046,10 @@
 					ProjectRef = 8454B4A2E2174B5380758155 /* RNFirebase.xcodeproj */;
 				},
 				{
+					ProductGroup = 2FA7565B20B0E99D00795896 /* Products */;
+					ProjectRef = 2FA7565A20B0E99D00795896 /* RNReactNativeHapticFeedback.xcodeproj */;
+				},
+				{
 					ProductGroup = 2FF517F2205CBE7900DBA8B3 /* Products */;
 					ProjectRef = 5CD43CB57DF64726BA5778CF /* RNVectorIcons.xcodeproj */;
 				},
@@ -1190,6 +1215,13 @@
 			fileType = archive.ar;
 			path = libSplashScreen.a;
 			remoteRef = 2F460CFF2058D3D4000AE82B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2FA7565F20B0E99D00795896 /* libRNReactNativeHapticFeedback.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNReactNativeHapticFeedback.a;
+			remoteRef = 2FA7565E20B0E99D00795896 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		2FF517F6205CBE7A00DBA8B3 /* libRNVectorIcons.a */ = {
@@ -1696,6 +1728,35 @@
 				INFOPLIST_FILE = GoLocker/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/DoubleConversion\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Folly\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Google-Maps-iOS-Utils\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleToolboxForMac\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNFirebase\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/glog\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/react-native-google-maps\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/react-native-maps\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/yoga\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/react-native-haptic-feedback\"",
+				);
+				"LIBRARY_SEARCH_PATHS[arch=*]" = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/DoubleConversion\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Folly\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Google-Maps-iOS-Utils\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleToolboxForMac\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNFirebase\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/glog\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/react-native-google-maps\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/react-native-maps\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/yoga\"",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1733,6 +1794,21 @@
 				INFOPLIST_FILE = GoLocker/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/DoubleConversion\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Folly\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Google-Maps-iOS-Utils\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleToolboxForMac\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNFirebase\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/glog\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/react-native-haptic-feedback\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/react-native-google-maps\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/react-native-maps\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/yoga\"",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

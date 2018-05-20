@@ -279,7 +279,7 @@ export default class HomeView extends Component {
   requestLocationPermission(locker) {
     this.clearLocationWatch()
 
-    if (Platform.OS === 'ios') {
+    if (Utils.isIOS()) {
       this.watchLocation(locker)
       return;
     }
@@ -307,6 +307,8 @@ export default class HomeView extends Component {
   }
 
   watchLocation(locker) {
+    const POSITION_UNAVAILABLE = 3;
+
     this.watchId = navigator.geolocation.watchPosition((position) => {
       this.findClosestLocker(position)
     },
@@ -315,7 +317,7 @@ export default class HomeView extends Component {
         this.setState({locationMsg: "We need your location to open the door", selectedLocker: locker, showOpenDoorButton: false})
         this.clearLocationWatch()
         return;
-      } else if (error.code == error.POSITION_UNAVAILABLE || error.code == error.code == error.TIMEOUT) {
+      } else if (error.code == POSITION_UNAVAILABLE || error.code == error.POSITION_UNAVAILABLE || error.code == error.code == error.TIMEOUT) {
         this.setState({locationMsg: "We couldn't find your location", selectedLocker: locker, showOpenDoorButton: false})
         this.clearLocationWatch()
         return;
@@ -332,7 +334,7 @@ export default class HomeView extends Component {
         return
       }
     },
-    { enableHighAccuracy: true, timeout: 60000, maximumAge: 1000, distanceFilter: 5 },
+    { enableHighAccuracy: true, timeout: 60000, maximumAge: 5000, distanceFilter: 5 },
     );
   }
 
@@ -498,7 +500,7 @@ export default class HomeView extends Component {
             <View style={{backgroundColor: Theme.primaryColor}}>
             <TouchableHighlight onPress={() => {this.onRefresh()}} underlayColor={'transparent'}>
               <SafeAreaView>
-                <FontAwesome name="refresh" size={22} style={{alignSelf: 'flex-end', color: Colors.white, marginRight: 21, marginTop: Platform.OS === 'ios' ? 0 : 25}}/>
+                <FontAwesome name="refresh" size={22} style={{alignSelf: 'flex-end', color: Colors.white, marginRight: 21, marginTop: Utils.isIOS() ? 0 : 25}}/>
               </SafeAreaView>
             </TouchableHighlight>
             <View style={{marginTop: 30}}>

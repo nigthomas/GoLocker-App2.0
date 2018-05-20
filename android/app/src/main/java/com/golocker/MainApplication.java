@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import io.invertase.firebase.RNFirebasePackage;
+import io.invertase.firebase.analytics.RNFirebaseAnalyticsPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -30,9 +31,10 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new RNReactNativeHapticFeedbackPackage(),
-              new VectorIconsPackage(),
               new RNFirebasePackage(),
+              new RNFirebaseAnalyticsPackage(),
+              new RNReactNativeHapticFeedbackPackage(),
+              new VectorIconsPackage(),
               new SplashScreenReactPackage(),
               new MapsPackage()
       );

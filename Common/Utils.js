@@ -4,6 +4,9 @@ export default Utils = {
  ifDefNN: (variable) => {
   return !( typeof variable === 'undefined' || variable === null )
   },
+  isIOS: () => {
+    return Platform.OS === 'ios'
+  },
   haversineDistance: (coords1, coords2, isMiles) => {
     function toRad(x) {
       return x * Math.PI / 180;

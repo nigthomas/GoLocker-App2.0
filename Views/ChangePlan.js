@@ -62,6 +62,26 @@ export default class ChangePlan extends Component {
     this.props.navigation.goBack()
   }
 
+  renderUnlimited(unlimitedStyle, unlimitedCircleStyle) {
+    return (
+        <TouchableHighlight onPress={() => { this.setState({selectedPlan: "Unlimited"})}} underlayColor={'transparent'}>
+          <View style={unlimitedStyle}>
+            <View style={{flex: 1}}>
+              <Text style={styles.headerText}>Unlimited</Text>
+              <Text style={styles.text}>Unlimited Deliveries!</Text>
+              <Text style={styles.text}>Pickup within 48 hours</Text>
+              <Text style={styles.text}>Secure and Convenient</Text>
+              <Text style={styles.text}>Free First Delivery</Text>
+            </View>
+            <View style={{flex: 1}}>
+              <View style={unlimitedCircleStyle}></View>
+              <Text style={styles.price}>$14.99</Text>
+              <Text style={styles.cycle}>/per month</Text>
+            </View>
+          </View>
+        </TouchableHighlight>)
+  }
+
   render() {
     if(this.state.loading) {
       return <View style={{flex: 1, backgroundColor: Colors.white}}>
@@ -73,16 +93,21 @@ export default class ChangePlan extends Component {
     const payPerPackageSelected = this.state.selectedPlan === "Pay-Per-Package"
     const premiumSelected = this.state.selectedPlan === "Premium"
     const unlimitedSelected = this.state.selectedPlan === "Unlimited"
+    const premierSelected = this.state.selectedPlan === "Premier"
 
     const payPerPackageStyle = payPerPackageSelected ? styles.activePlan : styles.plan
     const premiumStyle = premiumSelected ? styles.activePlan : styles.plan
     const unlimitedStyle = unlimitedSelected ? styles.activePlan : styles.plan
+    const premierStyle = premierSelected ? styles.activePlan : styles.plan
 
     const payPerPackageCircleStyle = payPerPackageSelected ? styles.activeCircle : styles.circle
     const premiumCircleStyle = premiumSelected ? styles.activeCircle : styles.circle
     const unlimitedCircleStyle = unlimitedSelected ? styles.activeCircle : styles.circle
+    const premierCircleStyle = premierSelected ? styles.activeCircle : styles.circle
+
     const error = "Something is wrong or you're missing a payment method"
     const errorText = this.state.error ? <Text style={{marginLeft: 21, color: Colors.red, marginTop: 5}}>{error}</Text> : null
+    const unlimitedPlanView = unlimitedSelected ? this.renderUnlimited(unlimitedStyle, unlimitedCircleStyle) : null
 
     return (
       <Root>
@@ -103,7 +128,7 @@ export default class ChangePlan extends Component {
                 </View>
                 <View style={{flex: 1}}>
                     <View style={payPerPackageCircleStyle}></View>
-                    <Text style={styles.price}>$1.99</Text>
+                    <Text style={styles.price}>$3</Text>
                     <Text style={styles.cycle}>/per delivery*</Text>
                   </View>
               </View>
@@ -120,30 +145,33 @@ export default class ChangePlan extends Component {
                 </View>
                 <View style={{flex: 1}}>
                   <View style={premiumCircleStyle}></View>
-                  <Text style={styles.price}>$7.99</Text>
-                  <Text style={styles.cycle}>/per month</Text>
+                  <Text style={styles.price}>$20</Text>
+                  <Text style={styles.cycle}>/per month**</Text>
                 </View>
               </View>
             </TouchableHighlight>
 
-            <TouchableHighlight onPress={() => { this.setState({selectedPlan: "Unlimited"})}} underlayColor={'transparent'}>
-              <View style={unlimitedStyle}>
+            <TouchableHighlight onPress={() => { this.setState({selectedPlan: "Premier"})}} underlayColor={'transparent'}>
+              <View style={premierStyle}>
                 <View style={{flex: 1}}>
-                  <Text style={styles.headerText}>UNLIMITED</Text>
-                  <Text style={styles.text}>Unlimited Deliveries!</Text>
+                  <Text style={styles.headerText}>PREMIER</Text>
+                  <Text style={styles.text}>20 Deliveries Per Month</Text>
                   <Text style={styles.text}>Pickup within 48 hours</Text>
                   <Text style={styles.text}>Secure and Convenient</Text>
                   <Text style={styles.text}>Free First Delivery</Text>
                 </View>
                 <View style={{flex: 1}}>
-                  <View style={unlimitedCircleStyle}></View>
-                  <Text style={styles.price}>$14.99</Text>
-                  <Text style={styles.cycle}>/per month</Text>
+                  <View style={premierCircleStyle}></View>
+                  <Text style={styles.price}>$30</Text>
+                  <Text style={styles.cycle}>/per month**</Text>
                 </View>
               </View>
             </TouchableHighlight>
 
+            {unlimitedPlanView}
+
             <Text style={styles.disclaimer}>* A $0.31 processing fee will be applied to each pay per package delivery</Text>
+            <Text style={styles.disclaimer}>** $1 overage fee</Text>
             <Text style={styles.disclaimer}>Please note when downgrading your account, the current plan will remain effective through the end of the billing period. Plan upgrades take effect immediately.</Text>
 
           </View>

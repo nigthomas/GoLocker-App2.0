@@ -119,7 +119,6 @@ export default class HomeView extends Component {
     const expiration = (item.expirationDate) ? new Moment(item.expirationDate).format('MM/DD') : ""
     const trackingNumber = item.trackingNumber
     const pin = item.pin
-    const direction = (item.barcode && item.barcode.includes("CNTI")) ? "Outgoing" : "Incoming"
     const status = item.statusString()
     var type;
 
@@ -145,7 +144,6 @@ export default class HomeView extends Component {
             <Text style={{ color: Colors.gray_85, marginTop: 2}}>Tracking: {trackingNumber}</Text>
             <Text style={{ color: Colors.gray_85, marginTop: 2}}>Pin: {pin}</Text>
             <Text style={{ color: Colors.gray_85, marginTop: 2}}>Created: {expiration}</Text>
-            <Text style={{ color: Colors.gray_85, marginTop: 2}}>Direction: {direction}</Text>
             <Text style={{ color: Colors.gray_85, marginTop: 2}}>Status: {status}</Text>
             {type}
           </View>

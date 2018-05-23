@@ -7,9 +7,9 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>883497519155-0oucs8caiakbns52j5und659stb5c5jc.apps.googleusercontent.com</string>
+	<string>883497519155-prn7ipbohmgmb1rla1sprvq52ngfer4j.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.883497519155-0oucs8caiakbns52j5und659stb5c5jc</string>
+	<string>com.googleusercontent.apps.883497519155-prn7ipbohmgmb1rla1sprvq52ngfer4j</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDV5y4_rgNmv0EI1U0B86AdWrGoxnfeI9U</string>
 	<key>GCM_SENDER_ID</key>
@@ -17,7 +17,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.golocker.cus.dev</string>
+	<string>com.beastlyinc.golocker.dev</string>
 	<key>PROJECT_ID</key>
 	<string>golocker-e5fba</string>
 	<key>STORAGE_BUCKET</key>
@@ -33,7 +33,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:883497519155:ios:22728e41003ce36e</string>
+	<string>1:883497519155:ios:844deed50321abcd</string>
 	<key>DATABASE_URL</key>
 	<string>https://golocker-e5fba.firebaseio.com</string>
 </dict>

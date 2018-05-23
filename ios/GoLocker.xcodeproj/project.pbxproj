@@ -1764,9 +1764,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.beastlyinc.golocker;
 				PRODUCT_NAME = GoLocker;
-				PROVISIONING_PROFILE = "427e5bf8-57e3-4870-b810-d3819e44dff5";
-				PROVISIONING_PROFILE_SPECIFIER = "GoLocker Dev";
-				TARGETED_DEVICE_FAMILY = 1;
+				PROVISIONING_PROFILE = "e2f17862-d792-4877-a4c7-3f90ec7a206f";
+				PROVISIONING_PROFILE_SPECIFIER = Development;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1816,9 +1816,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.beastlyinc.golocker;
 				PRODUCT_NAME = GoLocker;
-				PROVISIONING_PROFILE = "fc2009ef-6a5d-48be-8fa5-7a789fa5c468";
-				PROVISIONING_PROFILE_SPECIFIER = "GoLocker Distribution";
-				TARGETED_DEVICE_FAMILY = 1;
+				PROVISIONING_PROFILE = "294c9798-ec3f-4db0-b5a4-9649457377c7";
+				PROVISIONING_PROFILE_SPECIFIER = Distribution;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -1977,7 +1977,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.beastlyinc.golocker.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -2009,7 +2009,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.beastlyinc.golocker.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

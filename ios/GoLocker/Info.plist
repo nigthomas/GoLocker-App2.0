@@ -61,6 +61,10 @@
 	<string>We use your location to verify if you're next to a locker</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We use your location to verify if you're next to a locker</string>
+	<key>NSMainNibFile</key>
+	<string>LaunchScreen</string>
+	<key>NSMainNibFile~ipad</key>
+	<string>LaunchScreen</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>
@@ -84,11 +88,12 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIRequiresFullScreen</key>
+	<true/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>

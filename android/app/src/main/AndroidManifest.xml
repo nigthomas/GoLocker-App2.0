@@ -10,7 +10,7 @@
     <application
       android:name=".MainApplication"
       android:label="@string/app_name"
-      android:icon="@mipmap/golockerbrand"
+      android:icon="@mipmap/golockerlogo"
       android:allowBackup="true"
       android:theme="@style/SplashTheme"
         >

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, StatusBar, FlatList, TextInput, TouchableHighlight} from 'react-native';
+import { StyleSheet, Text, View, StatusBar, FlatList, TextInput, TouchableHighlight, SafeAreaView} from 'react-native';
 import Theme from '../Common/Theme'
 import FooterTabWithNavigation from './FooterTabWithNavigation'
 import { Container, Header, Content, Card, CardItem, Left, Thumbnail, Body, Button, Icon, Title, Footer, FooterTab, Root, Right} from 'native-base';
@@ -15,6 +15,7 @@ import Swipeout from 'react-native-swipeout';
 import ThreeHeaderView from '../Elements/ThreeHeaderView'
 import Address from '../Models/Address'
 import AccountService from '../Services/AccountService'
+import NativeStatusBar from '../Elements/NativeStatusBar'
 
 export default class NewUpdateMailingAddress extends Component {
   static navigationOptions = { header: null, tabBarVisible: false };
@@ -61,10 +62,11 @@ export default class NewUpdateMailingAddress extends Component {
     return (
       <Root>
         <Container>
+          <NativeStatusBar/>
           <Content style={{backgroundColor: Colors.white}}>
-          <View style={{marginTop: 40}}>
+          <SafeAreaView style={{marginTop: 20}}>
             <ThreeHeaderView title={"Mailing Address"} leftButtonTitle={"Back"} rightButtonTitle={"Save"} onLeftPress={() => {this.onBackPress()}} onRightPress={() => {this.onSavePress()}}/>
-          </View>
+          </SafeAreaView>
           {errorText}
           <View style={{marginLeft: 21, marginRight: 21, marginTop: 30}}>
             <TextInput underlineColorAndroid='transparent' ref="usernameField" placeholderTextColor={Colors.tapable_blue} style={{paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Address line one"} onChangeText={(address) => this.setState({address})} value={this.state.address}/>

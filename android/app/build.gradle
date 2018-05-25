@@ -101,10 +101,10 @@ android {
 
     defaultConfig {
         applicationId "com.golocker"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 26
-        versionCode 3
-        versionName "1.0"
+        versionCode 4
+        versionName "1.1"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }

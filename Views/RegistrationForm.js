@@ -10,6 +10,7 @@ import LoginService from '../Services/LoginService'
 import Utils from '../Common/Utils'
 import PhoneInput from 'react-native-phone-input'
 import ThreeHeaderView from '../Elements/ThreeHeaderView'
+import NativeStatusBar from '../Elements/NativeStatusBar'
 
 export default class RegistrationSelectLocker extends Component {
   static navigationOptions = { header: null };
@@ -188,8 +189,9 @@ export default class RegistrationSelectLocker extends Component {
     return (
       <Root>
         <Container>
+        <NativeStatusBar/>
           <Content style={{backgroundColor: Colors.white}} ref={c => (this.component = c)}>
-              <SafeAreaView style={{marginTop: 35}}>
+              <SafeAreaView style={{marginTop: 20}}>
                 <ThreeHeaderView title={""} leftButtonTitle={"Back"} rightButtonTitle={"Sign in"} onLeftPress={() => {this.onBackPress()}} onRightPress={() => {this.onLoginPress()}}/>
               </SafeAreaView>
               <View style={{marginTop: 30}}>

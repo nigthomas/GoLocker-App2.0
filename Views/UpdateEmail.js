@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, StatusBar, FlatList, TextInput, TouchableHighlight} from 'react-native';
+import { StyleSheet, Text, View, StatusBar, FlatList, TextInput, TouchableHighlight, SafeAreaView} from 'react-native';
 import Theme from '../Common/Theme'
 import FooterTabWithNavigation from './FooterTabWithNavigation'
 import { Container, Header, Content, Card, CardItem, Left, Thumbnail, Body, Button, Icon, Title, Footer, FooterTab, Root, Right} from 'native-base';
@@ -15,6 +15,7 @@ import Swipeout from 'react-native-swipeout';
 import Entypo from 'react-native-vector-icons/dist/Entypo'
 import ThreeHeaderView from '../Elements/ThreeHeaderView'
 import AccountService from '../Services/AccountService'
+import NativeStatusBar from '../Elements/NativeStatusBar'
 
 export default class UpdateEmail extends Component {
   static navigationOptions = { header: null, tabBarVisible: false };
@@ -51,10 +52,11 @@ export default class UpdateEmail extends Component {
     return (
       <Root>
         <Container>
+        <NativeStatusBar/>
           <Content style={{backgroundColor: Colors.white}}>
-          <View style={{marginTop: 40}}>
+          <SafeAreaView style={{marginTop: 20}}>
             <ThreeHeaderView title={"Email"} leftButtonTitle={"Back"} rightButtonTitle={"Save"} onLeftPress={() => {this.onBackPress()}} onRightPress={() => {this.onSavePress()}}/>
-          </View>
+          </SafeAreaView>
           <View style={{justifyContent: 'center', height: 50, flex: 1}}>
             <View style={{flexDirection:'row', flexWrap:'wrap'}}>
               <TextInput underlineColorAndroid='transparent' placeholderTextColor={Colors.dark_gray} keyboardType='email-address' style={{borderTopColor: Colors.gray_ef, borderTopWidth: 1, borderBottomColor: Colors.gray_ef, borderBottomWidth: 1, flex: 1, paddingLeft: 21, color: Colors.dark_gray, backgroundColor: Colors.white, height: 50, fontFamily: Theme.primaryFont}} placeholder={"Email"} onChangeText={(email) => this.setState({email})} value={this.state.email}/>

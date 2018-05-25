@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, StatusBar, FlatList, TextInput, TouchableHighlight} from 'react-native';
+import { StyleSheet, Text, View, StatusBar, FlatList, TextInput, TouchableHighlight, SafeAreaView} from 'react-native';
 import Theme from '../Common/Theme'
 import FooterTabWithNavigation from './FooterTabWithNavigation'
 import { Container, Header, Content, Card, CardItem, Left, Thumbnail, Body, Button, Icon, Title, Footer, FooterTab, Root, Right} from 'native-base';
@@ -18,6 +18,7 @@ import AccountService from '../Services/AccountService'
 import PhoneInput from 'react-native-phone-input'
 import MapView, { Marker } from 'react-native-maps';
 import ActionService from '../Services/ActionService'
+import NativeStatusBar from '../Elements/NativeStatusBar'
 
 export default class LockerDetail extends Component {
   static navigationOptions = { header: null, tabBarVisible: false };
@@ -95,10 +96,11 @@ export default class LockerDetail extends Component {
     return (
       <Root>
         <Container>
+        <NativeStatusBar/>
           <Content style={{backgroundColor: Colors.white}}>
-          <View style={{marginTop: 40}}>
+          <SafeAreaView style={{marginTop: 20}}>
             <ThreeHeaderView title={"My Lockers"} leftButtonTitle={"Back"} rightButtonTitle={""} onLeftPress={() => {this.onBackPress()}}/>
-          </View>
+          </SafeAreaView>
           {lockerViews}
           </Content>
           <FooterTabWithNavigation navigation={this.props.navigation} active={"details"}/>

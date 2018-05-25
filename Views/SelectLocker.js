@@ -13,6 +13,7 @@ import Moment from 'moment'
 import Utils from '../Common/Utils'
 import Swipeout from 'react-native-swipeout';
 import Entypo from 'react-native-vector-icons/dist/Entypo'
+import NativeStatusBar from '../Elements/NativeStatusBar'
 
 export default class SelectLocker extends Component {
   static navigationOptions = { title: 'Packages', header: null, tabBarVisible: false };
@@ -85,9 +86,10 @@ export default class SelectLocker extends Component {
     return (
       <Root>
         <Container>
+        <NativeStatusBar/>
           <Content style={{backgroundColor: Colors.white}}>
             <TouchableHighlight onPress={() => {this.onCancel()}} underlayColor={'transparent'}>
-              <SafeAreaView style={{marginRight: 21, marginTop: 30}}>
+              <SafeAreaView style={{marginRight: 21, marginTop: 20}}>
                 <Text style={{textAlign: 'right', color: Colors.gray_85, fontSize: 16, zIndex: 1}}>Cancel</Text>
               </SafeAreaView>
             </TouchableHighlight>

@@ -14,6 +14,7 @@ import Moment from 'moment'
 import Utils from '../Common/Utils'
 import Swipeout from 'react-native-swipeout';
 import FontAwesome from 'react-native-vector-icons/dist/FontAwesome'
+import NativeStatusBar from '../Elements/NativeStatusBar'
 
 export default class IncomingView extends Component {
   static navigationOptions = { title: 'Packages', header: null, tabBarVisible: false };
@@ -103,6 +104,7 @@ export default class IncomingView extends Component {
     return (
       <Root>
         <Container>
+        <NativeStatusBar/>
           <Content style={{backgroundColor: Colors.white, flex: 1}}>
             <TouchableHighlight onPress={() => {this.onRefresh()}} underlayColor={'transparent'}>
               <SafeAreaView style={{height: 30, width: 50, marginTop: 40, marginRight: 21, alignSelf: 'flex-end'}}>
@@ -143,11 +145,12 @@ export default class IncomingView extends Component {
     return (
       <Root>
         <Container>
+        <NativeStatusBar/>
           <Content style={{backgroundColor: Colors.white, flex: 1}}>
           <TouchableHighlight onPress={() => {this.onRefresh()}} underlayColor={'transparent'}>
-            <View style={{position: 'absolute', right: 21, top: 40, height: 50, width: 50}}>
+            <SafeAreaView style={{position: 'absolute', right: 21, top: 40, height: 50, width: 50}}>
               <FontAwesome name="refresh" size={22} style={{alignSelf: 'flex-end'}}/>
-            </View>
+            </SafeAreaView>
           </TouchableHighlight>
           <View style={{marginTop: 70, flex: 1}}>
             <Text style={{marginLeft: 21, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>Tracking</Text>

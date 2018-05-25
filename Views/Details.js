@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableHighlight, StatusBar, ScrollView, Linking, Platform} from 'react-native';
+import { StyleSheet, Text, View, TouchableHighlight, StatusBar, ScrollView, Linking, Platform, SafeAreaView} from 'react-native';
 import Theme from '../Common/Theme'
 import Colors from '../Common/Colors'
 import FooterTabWithNavigation from './FooterTabWithNavigation'
@@ -10,6 +10,7 @@ import Entypo from 'react-native-vector-icons/dist/Entypo'
 import LoginService from '../Services/LoginService'
 import AccountService from '../Services/AccountService'
 import LockerService from '../Services/LockerService'
+import NativeStatusBar from '../Elements/NativeStatusBar'
 
 export default class DetailsView extends Component {
   static navigationOptions = { title: 'Account', header: null, tabBarVisible: false };
@@ -162,11 +163,12 @@ export default class DetailsView extends Component {
     return (
       <Root>
         <Container>
+        <NativeStatusBar/>
           <Content style={{backgroundColor: Colors.white}}>
-            <View style={{marginTop: 70}}>
+            <SafeAreaView style={{marginTop: 40}}>
               <Text style={{marginLeft: 21, fontSize: 36, color: Colors.dark_gray, fontWeight: 'bold'}}>Membership</Text>
               <Text style={{marginLeft: 21, fontSize: 36, color: Colors.dark_gray, fontWeight: 'bold'}}>Details</Text>
-            </View>
+            </SafeAreaView>
             <View style={{marginTop: 20}}>
               <Text style={{marginLeft: 21, marginTop: 20, fontSize: 16, color: Colors.gray_85, fontWeight: 'bold'}}>Current Plan</Text>
             </View>

@@ -3,10 +3,4 @@
 
     <item
         android:drawable="@color/white"/>
-
-    <item
-        android:width="99dp"
-        android:height="75dp"
-        android:drawable="@mipmap/golockerlogo"
-        android:gravity="center" />
 </layer-list>

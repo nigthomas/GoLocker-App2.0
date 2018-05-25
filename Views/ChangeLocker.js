@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, StatusBar, FlatList, TextInput, TouchableHighlight, Alert} from 'react-native';
+import { StyleSheet, Text, View, StatusBar, FlatList, TextInput, TouchableHighlight, Alert, SafeAreaView} from 'react-native';
 import Theme from '../Common/Theme'
 import FooterTabWithNavigation from './FooterTabWithNavigation'
 import { Container, Header, Content, Card, CardItem, Left, Thumbnail, Body, Button, Icon, Title, Footer, FooterTab, Root, Right} from 'native-base';
@@ -18,6 +18,7 @@ import AccountService from '../Services/AccountService'
 import PhoneInput from 'react-native-phone-input'
 import MapView, { Marker } from 'react-native-maps';
 import LockerService from '../Services/LockerService'
+import NativeStatusBar from '../Elements/NativeStatusBar'
 
 export default class ChangeLocker extends Component {
   static navigationOptions = { header: null, tabBarVisible: false };
@@ -161,10 +162,11 @@ export default class ChangeLocker extends Component {
     return (
       <Root>
         <Container>
+        <NativeStatusBar/>
           <Content style={{backgroundColor: Colors.white}}>
-            <View style={{marginTop: 40}}>
+            <SafeAreaView style={{marginTop: 20}}>
               <ThreeHeaderView title={"Change Locker"} leftButtonTitle={"Back"} rightButtonTitle={"Set as"} onLeftPress={() => {this.onBackPress()}} onRightPress={() => {this.onChangePosition(this.state.selectedLocker)}}/>
-            </View>
+            </SafeAreaView>
             {errorText}
             <FlatList
               style={{flex: 1}}

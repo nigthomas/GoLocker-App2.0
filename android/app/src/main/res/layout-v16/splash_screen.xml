@@ -10,6 +10,6 @@
         android:layout_width="99dp"
         android:layout_height="99dp"
         android:layout_marginTop="24dp"
-        android:src="@mipmap/golockerlogo"
+        android:src="@drawable/golockerlogolarge"
         />
 </LinearLayout>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, StatusBar, Image, Platform, TouchableHighlight, Modal, ScrollView, TextInput, findNodeHandle, Keyboard, FlatList} from 'react-native';
+import { StyleSheet, Text, View, StatusBar, Image, Platform, TouchableHighlight, Modal, ScrollView, TextInput, findNodeHandle, Keyboard, FlatList, SafeAreaView} from 'react-native';
 import { Container, Header, Content, Card, CardItem, Left, Thumbnail, Body, Button, Icon, Title, Footer, FooterTab, Right, ActionSheet, Root} from 'native-base';
 import FooterTabWithNavigation from './FooterTabWithNavigation'
 import ClearButton from '../Elements/ClearButton'
@@ -18,6 +18,7 @@ import Utils from '../Common/Utils'
 import MaterialIcons from 'react-native-vector-icons/dist/MaterialIcons'
 import HeaderView from '../Elements/HeaderView'
 import LockerService from '../Services/LockerService'
+import NativeStatusBar from '../Elements/NativeStatusBar'
 
 export default class Ship extends Component {
   static navigationOptions = { title: '', header: null, tabBarVisible: false};
@@ -209,10 +210,11 @@ export default class Ship extends Component {
     return (
       <Root>
           <Container>
+          <NativeStatusBar/>
             <Content style={{backgroundColor: Colors.white}} ref={c => (this.component = c)}>
-              <View style={{marginTop: 70}}>
+              <SafeAreaView style={{marginTop: 40}}>
                 <Text style={{marginLeft: 21, fontSize: 36, color: Colors.dark_gray, fontWeight: 'bold'}}>Send a package</Text>
-              </View>
+              </SafeAreaView>
               {errorText}
 
               <Text style={{marginLeft: 21, marginTop: 20, fontSize: 16, color: Colors.gray_85, fontWeight: 'bold'}}>Location:</Text>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, StatusBar, FlatList, TextInput, TouchableHighlight, Platform} from 'react-native';
+import { StyleSheet, Text, View, StatusBar, FlatList, TextInput, TouchableHighlight, Platform, SafeAreaView} from 'react-native';
 import Theme from '../Common/Theme'
 import FooterTabWithNavigation from './FooterTabWithNavigation'
 import { Container, Header, Content, Card, CardItem, Left, Thumbnail, Body, Button, Icon, Title, Footer, FooterTab, Root, Right} from 'native-base';
@@ -14,6 +14,7 @@ import Utils from '../Common/Utils'
 import Swipeout from 'react-native-swipeout';
 import ThreeHeaderView from '../Elements/ThreeHeaderView'
 import AccountService from '../Services/AccountService'
+import NativeStatusBar from '../Elements/NativeStatusBar'
 
 export default class ChangePlan extends Component {
   static navigationOptions = { header: null, tabBarVisible: false };
@@ -112,10 +113,11 @@ export default class ChangePlan extends Component {
     return (
       <Root>
         <Container>
+        <NativeStatusBar/>
           <Content style={{backgroundColor: Colors.white}}>
-          <View style={{marginTop: 40}}>
+          <SafeAreaView style={{marginTop: 20}}>
             <ThreeHeaderView title={"Update Plan"} leftButtonTitle={"Back"} rightButtonTitle={"Save"} onLeftPress={() => {this.onBackPress()}} onRightPress={() => {this.onSavePress()}}/>
-          </View>
+          </SafeAreaView>
           {errorText}
           <View style={{marginLeft: 21, marginRight: 21}}>
             <TouchableHighlight onPress={() => { this.setState({selectedPlan: "Pay-Per-Package"})}} underlayColor={'transparent'}>

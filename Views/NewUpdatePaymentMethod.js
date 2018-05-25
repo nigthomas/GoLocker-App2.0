@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, StatusBar, FlatList, TextInput, TouchableHighlight} from 'react-native';
+import { StyleSheet, Text, View, StatusBar, FlatList, TextInput, TouchableHighlight, SafeAreaView} from 'react-native';
 import Theme from '../Common/Theme'
 import FooterTabWithNavigation from './FooterTabWithNavigation'
 import { Container, Header, Content, Card, CardItem, Left, Thumbnail, Body, Button, Icon, Title, Footer, FooterTab, Root, Right} from 'native-base';
@@ -15,6 +15,7 @@ import Swipeout from 'react-native-swipeout';
 import ThreeHeaderView from '../Elements/ThreeHeaderView'
 import AccountService from '../Services/AccountService'
 import CreditCard from '../Models/CreditCard'
+import NativeStatusBar from '../Elements/NativeStatusBar'
 
 export default class NewUpdatePaymentMethod extends Component {
   static navigationOptions = { header: null, tabBarVisible: false };
@@ -140,10 +141,11 @@ export default class NewUpdatePaymentMethod extends Component {
     return (
       <Root>
         <Container>
+        <NativeStatusBar/>
           <Content style={{backgroundColor: Colors.white}}>
-          <View style={{marginTop: 40}}>
+          <SafeAreaView style={{marginTop: 20}}>
             <ThreeHeaderView title={"Payment Info"} leftButtonTitle={"Back"} rightButtonTitle={"Save"} onLeftPress={() => {this.onBackPress()}} onRightPress={() => {this.onSavePress()}}/>
-          </View>
+          </SafeAreaView>
           {errorText}
           <View style={styles.card}>
             <Text style={{color: Colors.white, flex: 1, fontSize: 34, marginTop: 50, marginLeft: 21, marginRight: 21, textAlign: 'center'}}  numberOfLines={1} adjustsFontSizeToFit={true}>{this.state.cardNumber}</Text>

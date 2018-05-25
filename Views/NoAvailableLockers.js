@@ -7,6 +7,8 @@ import FlatButton  from '../Elements/FlatButton'
 import PropertyService from '../Services/PropertyService'
 import NewsletterService from '../Services/NewsletterService'
 import { Container, Header, Content, Form, Item, Input, Label, Root } from 'native-base';
+import NativeStatusBar from '../Elements/NativeStatusBar'
+import ThreeHeaderView from '../Elements/ThreeHeaderView'
 
 export default class NoAvailableLockers extends Component {
   constructor(props) {
@@ -25,6 +27,10 @@ export default class NoAvailableLockers extends Component {
   onTryAgain = () => {
     const { navigation } = this.props;
     navigation.goBack()
+  }
+
+  onBackPress() {
+    this.props.navigation.goBack()
   }
 
   onSavePress() {
@@ -58,12 +64,11 @@ export default class NoAvailableLockers extends Component {
 
     return (
         <Container>
+        <NativeStatusBar/>
           <Content style={{backgroundColor: Colors.white}}>
-            <TouchableHighlight onPress={() => {this.onLoginPress()}} underlayColor={'transparent'}>
-              <SafeAreaView style={{marginTop: 35, marginRight: 20}}>
-                <Text style={{textAlign: 'right', color: Colors.gray_85, fontSize: 16, zIndex: 1}}>Sign in</Text>
+              <SafeAreaView style={{marginTop: 20}}>
+                <ThreeHeaderView title={""} leftButtonTitle={"Back"} rightButtonTitle={"Sign in"} onLeftPress={() => {this.onBackPress()}} onRightPress={() => {this.onLoginPress()}}/>
               </SafeAreaView>
-            </TouchableHighlight>
               <View style={{marginTop: 30}}>
               <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>Sorry</Text>
               {errorText}

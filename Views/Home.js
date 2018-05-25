@@ -9,6 +9,7 @@ import DashboardService from '../Services/DashboardService'
 import ReservationService from '../Services/ReservationService'
 import MaterialIcons from 'react-native-vector-icons/dist/MaterialIcons'
 import ClearButton from '../Elements/ClearButton'
+import NativeStatusBar from '../Elements/NativeStatusBar'
 import HeaderView from '../Elements/HeaderView'
 import MaterialCommunityIcons from 'react-native-vector-icons/dist/MaterialCommunityIcons'
 import Moment from 'moment'
@@ -69,7 +70,7 @@ export default class HomeView extends Component {
   }
 
   fetch() {
-    this.setState({loading: true})
+    this.setState({loading: true, showOpenDoorButton: false})
     Promise.all([DashboardService.getInfo(), ReservationService.getInstance().getReservations()])
     .then(results => {
       this.setState({data: results[0], reservationData: results[1], loading: false, error: null})
@@ -461,10 +462,7 @@ export default class HomeView extends Component {
   render() {
     if(this.state.loading) {
       return <View style={{flex: 1, backgroundColor: Colors.white}}>
-              <StatusBar
-                backgroundColor={Colors.white}
-                barStyle="dark-content"
-              />
+              <NativeStatusBar/>
               <LoadingView />
               <FooterTabWithNavigation navigation={this.props.navigation} active={"home"}/>
             </View>
@@ -490,10 +488,7 @@ export default class HomeView extends Component {
     return (
       <Root>
         <Container>
-        <StatusBar
-          backgroundColor={Colors.white}
-          barStyle="dark-content"
-        />
+        <NativeStatusBar/>
           <Content style={{backgroundColor: Colors.white}}>
             <View style={{backgroundColor: Theme.primaryColor}}>
             <TouchableHighlight onPress={() => {this.onRefresh()}} underlayColor={'transparent'}>

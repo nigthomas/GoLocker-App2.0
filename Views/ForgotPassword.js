@@ -10,6 +10,7 @@ import AlertView from '../Elements/AlertView'
 import AccountService from '../Services/AccountService'
 import Utils from '../Common/Utils'
 import ThreeHeaderView from '../Elements/ThreeHeaderView'
+import NativeStatusBar from '../Elements/NativeStatusBar'
 
 export default class ForgotPassword extends Component {
 
@@ -67,9 +68,10 @@ export default class ForgotPassword extends Component {
     return (
       <Root>
         <Container>
+        <NativeStatusBar/>
         <Content style={{backgroundColor: Colors.white}} ref={c => (this.component = c)}>
         <View style={styles.background}>
-          <SafeAreaView style={{marginTop: 35}}>
+          <SafeAreaView style={{marginTop: 20}}>
             <ThreeHeaderView title={""} leftButtonTitle={"Back"} rightButtonTitle={"Sign in"} onLeftPress={() => {this.onBackPress()}} onRightPress={() => {this.goToSignIn()}}/>
           </SafeAreaView>
          <View style={{marginTop: 75, marginLeft: 21, marginRight: 21}}>

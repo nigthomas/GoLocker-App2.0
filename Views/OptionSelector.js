@@ -13,6 +13,8 @@ import Moment from 'moment'
 import Utils from '../Common/Utils'
 import Swipeout from 'react-native-swipeout';
 import Entypo from 'react-native-vector-icons/dist/Entypo'
+import ThreeHeaderView from '../Elements/ThreeHeaderView'
+import NativeStatusBar from '../Elements/NativeStatusBar'
 
 export default class OptionSelector extends Component {
   static navigationOptions = { title: 'Packages', header: null, tabBarVisible: false };
@@ -72,16 +74,14 @@ export default class OptionSelector extends Component {
     return (
       <Root>
         <Container>
+        <NativeStatusBar/>
           <Content style={{backgroundColor: Colors.white}}>
-            <View style={{marginTop: 50}}>
-              <TouchableHighlight onPress={() => {this.onBackPress()}} underlayColor={'transparent'}>
-                <SafeAreaView style={{width: 50, height: 50, position: 'absolute', left: 21}}>
-                  <Text style={{color: Colors.gray_85}}>Back</Text>
-                </SafeAreaView>
-              </TouchableHighlight>
-              <Text style={{textAlign: 'center', fontWeight: 'bold', color: Colors.dark_gray}}>{title}</Text>
+            <View>
+              <SafeAreaView style={{marginTop: 20}}>
+                <ThreeHeaderView title={""} leftButtonTitle={"Back"} rightButtonTitle={""} onLeftPress={() => {this.onBackPress()}}/>
+              </SafeAreaView>
+              <Text style={{textAlign: 'center', fontWeight: 'bold', color: Colors.dark_gray, marginTop: 20}}>{title}</Text>
             </View>
-
             <View style={{borderTopColor: Colors.gray_ef, borderTopWidth: 1, marginTop: 10}}>
               <FlatList data={data} keyExtractor={(item, index) => item.id} renderItem={({ item }) => {return this.renderItem(item)}} backgroundColor={'white'}/>
             </View>

@@ -1,5 +1,6 @@
 export default Colors = {
   white: "#ffffff",
+  white_f8: "#f8f8f8",
   black: "#000000",
   black_3c: "#3c3c3c",
   gray: 'gray',

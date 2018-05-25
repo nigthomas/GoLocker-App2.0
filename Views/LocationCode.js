@@ -6,6 +6,7 @@ import FlatButton  from '../Elements/FlatButton'
 import PropertyService from '../Services/PropertyService'
 import { Container, Header, Content, Form, Item, Input, Label, Root } from 'native-base';
 import ThreeHeaderView from '../Elements/ThreeHeaderView'
+import NativeStatusBar from '../Elements/NativeStatusBar'
 
 export default class LocationCodeView extends Component {
   constructor(props) {
@@ -65,8 +66,9 @@ export default class LocationCodeView extends Component {
 
     return (
         <Container>
+        <NativeStatusBar/>
           <Content style={{backgroundColor: Colors.white}}>
-              <SafeAreaView style={{marginTop: 35}}>
+              <SafeAreaView style={{marginTop: 20}}>
                 <ThreeHeaderView title={""} leftButtonTitle={"Back"} rightButtonTitle={"Sign in"} onLeftPress={() => {this.onBackPress()}} onRightPress={() => {this.onLoginPress()}}/>
               </SafeAreaView>
             <View style={{marginTop: 30}}>

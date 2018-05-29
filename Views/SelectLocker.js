@@ -93,7 +93,7 @@ export default class SelectLocker extends Component {
                 <Text style={{textAlign: 'right', color: Colors.gray_85, fontSize: 16, zIndex: 1}}>Cancel</Text>
               </SafeAreaView>
             </TouchableHighlight>
-            <Text style={{marginLeft:21, marginTop: 20, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>Deliver to</Text>
+            <Text style={{marginLeft:21, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>Deliver to</Text>
             <View style={{marginTop: 20, marginLeft:21}}>
               <Text style={{fontSize: Utils.normalize(16), color: Colors.gray_85, fontWeight: 'bold'}}>Select a locker</Text>
             </View>

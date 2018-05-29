@@ -121,16 +121,7 @@ export default class HomeView extends Component {
     const trackingNumber = item.trackingNumber
     const pin = item.pin
     const status = item.statusString()
-    var type;
-
-    switch(item.type) {
-      case 1:
-        type = "Receiving"
-        break;
-      case 2:
-        type = "Sending"
-        break;
-    }
+    var type = item.typeString()
 
     if(type) {
       type = (<Text style={{ color: Colors.gray_85, marginTop: 2}}>Type: {type}</Text>)
@@ -263,7 +254,7 @@ export default class HomeView extends Component {
       return;
     }
 
-    if (closerLockerDistance <= 500) {
+    if (closerLockerDistance <= 250) {
       this.clearLocationWatch()
       this.setState({showOpenDoorButton: true, selectedLocker: closerLocker})
     }

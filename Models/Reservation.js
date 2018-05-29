@@ -27,16 +27,48 @@ export default class Reservation {
     this.user = new Member(data.user)
   }
 
+  typeString() {
+    switch(this.type) {
+      case 1:
+        return "Receiving"
+      case 2:
+        return "Sending"
+    }
+
+    return null
+  }
+
   statusString() {
-    if(this.delivered) {
-      return "Completed"
+    if(!this.status) {
+      return null
     }
 
-    if(this.expirationDate && Date.now() > new Date(this.expirationDate)) {
-      return "Expired"
+    var s = this.status;
+
+    s = parseInt(s, 10)
+
+    switch(s) {
+      case 1:
+        return "Active"
+      case 2:
+        return "Inactive"
+      case 3:
+        return "Deleted"
+      case 4:
+        return "Banned"
+      case 5:
+        return "Received"
+      case 6:
+        return "Reserved"
+      case 7:
+        return "Completed"
+      case 8:
+        return "Suspended"
+      case 9:
+        return "Expired"
     }
 
-    return "Active"
+    return null
   }
 
 

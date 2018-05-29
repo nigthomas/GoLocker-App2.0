@@ -173,7 +173,7 @@ export default class ChangePlan extends Component {
             {unlimitedPlanView}
 
             <Text style={styles.disclaimer}>* A $0.31 processing fee will be applied to each pay per package delivery</Text>
-            <Text style={styles.disclaimer}>** $1 overage fee</Text>
+            <Text style={styles.disclaimer}>** $2 overage fee</Text>
             <Text style={styles.disclaimer}>Please note when downgrading your account, the current plan will remain effective through the end of the billing period. Plan upgrades take effect immediately.</Text>
 
           </View>

@@ -205,7 +205,6 @@ export default class Ship extends Component {
     const lockerName = (this.state.sendToLocker && this.state.sendToLocker.property) ? this.state.sendToLocker.property.name: ""
 
     const errorText = this.state.error ? <Text style={{marginLeft: 21, color: Colors.red, marginTop: 5}}>Something is wrong. Please try again</Text> : null
-    const homeShippingAddress = data.homeShippingAddress && data.homeShippingAddress.isValid() ? data.homeShippingAddress : Address.headquarters()
 
     return (
       <Root>
@@ -214,25 +213,11 @@ export default class Ship extends Component {
             <Content style={{backgroundColor: Colors.white}} ref={c => (this.component = c)}>
               <SafeAreaView style={{marginTop: 40}}>
                 <Text style={{marginLeft: 21, fontSize: 36, color: Colors.dark_gray, fontWeight: 'bold'}}>Send a package</Text>
+                <Text style={{marginLeft: 21, marginTop: 5, fontSize: 12, color: Colors.gray_85}}>Schedule fast and easy returns for packages with pre-paid shipping labels</Text>
               </SafeAreaView>
               {errorText}
 
-              <Text style={{marginLeft: 21, marginTop: 20, fontSize: 16, color: Colors.gray_85, fontWeight: 'bold'}}>Location:</Text>
-              <View style={{borderTopColor: Colors.gray_ef, borderTopWidth: 1, borderBottomColor: Colors.gray_ef, borderBottomWidth: 1, marginTop: 15, height: 80}}>
-                <TouchableHighlight onPress={this.onLoginPress} underlayColor={'transparent'}>
-                  <View>
-                  <Text style={{marginLeft: 21, paddingTop:9, fontSize: 14, color: Colors.gray_85}}>{homeShippingAddress.name}</Text>
-                  <Text style={{fontSize: 14, color: Colors.gray_85, marginLeft: 21, marginTop: 3}}>
-                    {homeShippingAddress.address}
-                  </Text>
-                  <Text style={{fontSize: 14, color: Colors.gray_85, marginLeft: 21, marginTop: 3}}>
-                    {homeShippingAddress.city}, {homeShippingAddress.stateProvince} {homeShippingAddress.postalCode}
-                  </Text>
-                  </View>
-                </TouchableHighlight>
-              </View>
-
-              <Text style={{marginLeft: 21, marginTop: 20, fontSize: 16, color: Colors.gray_85, fontWeight: 'bold'}}>Deliver to:</Text>
+              <Text style={{marginLeft: 21, marginTop: 30, fontSize: 16, color: Colors.gray_85, fontWeight: 'bold'}}>Drop off package to:</Text>
               <View style={{justifyContent: 'center', borderTopColor: Colors.gray_ef, borderTopWidth: 1, borderBottomColor: Colors.gray_ef, borderBottomWidth: 1, marginTop: 15, height: 50}}>
                 <TouchableHighlight onPress={() => {this.onChangeLocker()}} underlayColor={'transparent'}>
                   <Text style={{fontSize: 14, color: Colors.gray_85, marginLeft: 21}}>

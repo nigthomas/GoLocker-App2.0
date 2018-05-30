@@ -21,7 +21,7 @@ export default class HeaderView extends Component {
     const rightButtonTitle = this.props.rightButtonTitle || ""
 
     return (
-      <SafeAreaView style={{flex: 1, flexDirection:'row'}}>
+      <SafeAreaView style={{flex: 1, flexDirection:'row', marginTop: 20}}>
         <TouchableHighlight onPress={() => {onLeftPress()}} underlayColor={'transparent'}>
           <View style={{width: 50, height: 50, marginLeft: 21}}>
             <Text style={{color: Colors.gray_85}}>{leftButtonTitle}</Text>

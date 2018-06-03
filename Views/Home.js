@@ -52,6 +52,10 @@ export default class HomeView extends Component {
     })
 
     this.fetch()
+
+    setInterval(() => {
+      this.fetch()
+    }, 90000)
   }
 
   onRefresh() {
@@ -70,11 +74,11 @@ export default class HomeView extends Component {
   }
 
   fetch() {
-    this.setState({loading: true, showOpenDoorButton: false})
+    this.setState({loading: true, showOpenDoorButton: false, locationMsg: null, selectedLocker: null, doorButtonColor: Colors.light_green, doorButtonText: "Hold to open door", requestedLocation: false})
     Promise.all([DashboardService.getInfo(), ReservationService.getInstance().getReservations()])
     .then(results => {
       this.setState({data: results[0], reservationData: results[1], loading: false, error: null})
-      this.requestPermissionForLocationIfNeeded()
+      this.showOpenDoorButtonIfNeeded()
 
       if(!this.state.setupAnalytics) {
         this.setupAnalytics()
@@ -235,7 +239,7 @@ export default class HomeView extends Component {
         var longitude = locker.property.location.longitude
         var distance = Utils.haversineDistance([latitude, longitude], [coords.latitude, coords.longitude] , true)
 
-        if((!closerLockerDistance && closerLockerDistance != 0) || distance <= closerLockerDistance) {
+        if(!closerLocker || distance <= closerLockerDistance) {
           closerLockerDistance = distance
           closerLocker = locker
         }
@@ -244,6 +248,7 @@ export default class HomeView extends Component {
 
     if (!closerLocker) {
       this.clearLocationWatch()
+      this.setState({locationMsg: "You need to be closer to open the front door", showOpenDoorButton: false})
       return;
     }
 
@@ -251,17 +256,18 @@ export default class HomeView extends Component {
 
     if (closerLockerDistance > 1200) { //If you are more than 1200 feet turn off
       this.clearLocationWatch()
+      this.setState({locationMsg: "You need to be closer to open the front door", selectedLocker: closerLocker, showOpenDoorButton: false})
       return;
     }
 
-    if (closerLockerDistance <= 250) {
+    if (closerLockerDistance <= 500) {
       this.clearLocationWatch()
-      this.setState({showOpenDoorButton: true, selectedLocker: closerLocker})
+      this.openDoor()
     }
   }
 
   clearLocationWatch() {
-    if (this.watchId) {
+    if (Utils.ifDefNN(this.watchId)) {
       navigator.geolocation.clearWatch(this.watchId);
     }
   }
@@ -299,8 +305,12 @@ export default class HomeView extends Component {
   watchLocation(locker) {
     const POSITION_UNAVAILABLE = 3;
 
-    this.watchId = navigator.geolocation.watchPosition((position) => {
+    const throttledFindClosest = _.throttle((position) => {
       this.findClosestLocker(position)
+    }, 5000)
+
+    this.watchId = navigator.geolocation.watchPosition((position) => {
+      throttledFindClosest(position);
     },
     (error) => {
       if (error.code == error.PERMISSION_DENIED) {
@@ -317,18 +327,18 @@ export default class HomeView extends Component {
         navigator.geolocation.requestAuthorization();
         this.setState({requestedLocation: true})
 
-        //Request location in 5 seconds
+        //Request location in 7.5 seconds
         setTimeout(()=> {
           this.watchLocation(locker)
         }, 7500)
         return
       }
     },
-    { enableHighAccuracy: true, timeout: 60000, maximumAge: 5000, distanceFilter: 5 },
+    { enableHighAccuracy: true, timeout: 60000, maximumAge: 1000, distanceFilter: 5},
     );
   }
 
-  requestPermissionForLocationIfNeeded() {
+  showOpenDoorButtonIfNeeded() {
     const lockers = this.lockers()
 
     for(var i in lockers) {
@@ -339,7 +349,7 @@ export default class HomeView extends Component {
 
       let property = locker.property
       if (property.hasOpenDoorAction()) {
-        this.requestLocationPermission(locker)
+        this.setState({selectedLocker: locker, doorButtonText: "Hold to open door", doorButtonColor: Colors.light_green, showOpenDoorButton: true})
         break;
       }
     }
@@ -385,9 +395,27 @@ export default class HomeView extends Component {
     })
   }
 
+  openDoorButtonTapped() {
+    const lockers = this.lockers()
+
+    for(var i in lockers) {
+      var locker = lockers[i];
+      if(!locker || !locker.property) {
+        continue;
+      }
+
+      let property = locker.property
+      if (property.hasOpenDoorAction()) {
+        this.setState({doorButtonText: "Getting your location", doorButtonColor: Colors.gray_85})
+        this.requestLocationPermission(locker)
+        break;
+      }
+    }
+  }
+
   renderOpenDoorButton() {
     return (
-      <TouchableWithoutFeedback onLongPress={() => {this.openDoor()}} underlayColor={'transparent'}>
+      <TouchableWithoutFeedback onLongPress={() => {this.openDoorButtonTapped()}} underlayColor={'transparent'}>
         <View style={{height: 50, borderRadius: 4, backgroundColor: this.state.doorButtonColor, marginLeft: 21, marginTop: 25, marginRight: 21}}>
           <Text style={{textAlign: 'center', color: Colors.white, marginTop: 17}}>{this.state.doorButtonText}</Text>
         </View>
@@ -406,13 +434,11 @@ export default class HomeView extends Component {
   renderDoorOpenActionView() {
     const selectedLocker = this.state.selectedLocker
     const detailView = this.state.showOpenDoorButton ? this.renderOpenDoorButton() : this.renderLocationViewMessage()
-    if (!selectedLocker) {
-      return null
-    }
+    const headerView = (selectedLocker) ? (<Text style={{marginLeft: 21, fontSize: 16, marginTop:21, color: Colors.gray_85, fontWeight: 'bold'}}>{selectedLocker.propertyName()}</Text>) : null
 
     return (
       <View>
-        <Text style={{marginLeft: 21, fontSize: 16, marginTop:21, color: Colors.gray_85, fontWeight: 'bold'}}>{selectedLocker.propertyName()}</Text>
+        {headerView}
         {detailView}
       </View>
     )

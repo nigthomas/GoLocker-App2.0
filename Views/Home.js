@@ -55,7 +55,7 @@ export default class HomeView extends Component {
 
     setInterval(() => {
       this.fetch()
-    }, 90000)
+    }, 45000)
   }
 
   onRefresh() {
@@ -432,6 +432,10 @@ export default class HomeView extends Component {
   }
 
   renderDoorOpenActionView() {
+    if(!this.state.locationMsg && !this.state.showOpenDoorButton) {
+      return null
+    }
+
     const selectedLocker = this.state.selectedLocker
     const detailView = this.state.showOpenDoorButton ? this.renderOpenDoorButton() : this.renderLocationViewMessage()
     const headerView = (selectedLocker) ? (<Text style={{marginLeft: 21, fontSize: 16, marginTop:21, color: Colors.gray_85, fontWeight: 'bold'}}>{selectedLocker.propertyName()}</Text>) : null

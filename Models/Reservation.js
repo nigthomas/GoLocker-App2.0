@@ -59,7 +59,7 @@ export default class Reservation {
       case 5:
         return "Received"
       case 6:
-        return (this.delivered) ? "Waiting" : "To Locker"
+        return (this.delivered) ? "Waiting" : "Out for delivery"
       case 7:
         return "Completed"
       case 8:

@@ -272,7 +272,7 @@ export default class HomeView extends Component {
     }
   }
 
-  requestLocationPermission(locker) {
+  async requestLocationPermission(locker) {
     this.clearLocationWatch()
 
     if (Utils.isIOS()) {
@@ -280,25 +280,28 @@ export default class HomeView extends Component {
       return;
     }
 
-    try {
-      PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-        {
-          'title': locker.propertyName(),
-          'message': "Your location is needed to open the door"
-        }
-      )
-      .then(granted => {
+    if (Platform.Version < 23) {
+      this.watchLocation(locker)
+    } else {
+      try {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+          {
+            'title': locker.propertyName(),
+            'message': "We need your location to open the front entrance. Please enable location permissions"
+          }
+        )
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
           this.watchLocation(locker)
-        } else {
-          this.setState({locationMsg: "We need your location to open the door", selectedLocker: locker, showOpenDoorButton: false})
+        }
+        else {
+          this.setState({locationMsg: "We need your location to open the front entrance. Please enable location permissions", selectedLocker: locker, showOpenDoorButton: false})
           this.clearLocationWatch()
         }
-      })
-    } catch (err) {
-      this.setState({locationMsg: "We couldn't find your location", selectedLocker: locker, showOpenDoorButton: false})
-      this.clearLocationWatch()
+      } catch (err) {
+        this.setState({locationMsg: "We couldn't find your location", selectedLocker: locker, showOpenDoorButton: false})
+        this.clearLocationWatch()
+      }
     }
   }
 
@@ -314,7 +317,7 @@ export default class HomeView extends Component {
     },
     (error) => {
       if (error.code == error.PERMISSION_DENIED) {
-        this.setState({locationMsg: "We need your location to open the door", selectedLocker: locker, showOpenDoorButton: false})
+        this.setState({locationMsg: "We need your location to open the front entrance. Please enable location permissions", selectedLocker: locker, showOpenDoorButton: false})
         this.clearLocationWatch()
         return;
       } else if (error.code == POSITION_UNAVAILABLE || error.code == error.POSITION_UNAVAILABLE || error.code == error.code == error.TIMEOUT) {

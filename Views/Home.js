@@ -260,10 +260,13 @@ export default class HomeView extends Component {
       return;
     }
 
-    if (closerLockerDistance <= 500) {
+    if (closerLockerDistance <= 1000) {
       this.clearLocationWatch()
       this.openDoor()
+      return;
     }
+
+    this.setState({doorButtonText: "Please move closer to the front entrance \nor walk around the vicinity"})
   }
 
   clearLocationWatch() {
@@ -419,8 +422,8 @@ export default class HomeView extends Component {
   renderOpenDoorButton() {
     return (
       <TouchableWithoutFeedback onLongPress={() => {this.openDoorButtonTapped()}} underlayColor={'transparent'}>
-        <View style={{height: 50, borderRadius: 4, backgroundColor: this.state.doorButtonColor, marginLeft: 21, marginTop: 25, marginRight: 21}}>
-          <Text style={{textAlign: 'center', color: Colors.white, marginTop: 17}}>{this.state.doorButtonText}</Text>
+        <View style={{height: 60, borderRadius: 4, backgroundColor: this.state.doorButtonColor, marginLeft: 21, marginRight: 21, marginTop: 10, justifyContent: 'center', alignItems: 'center'}}>
+          <Text style={{textAlign: 'center', color: Colors.white}}>{this.state.doorButtonText}</Text>
         </View>
       </TouchableWithoutFeedback>
     )

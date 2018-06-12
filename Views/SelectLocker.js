@@ -14,6 +14,7 @@ import Utils from '../Common/Utils'
 import Swipeout from 'react-native-swipeout';
 import Entypo from 'react-native-vector-icons/dist/Entypo'
 import NativeStatusBar from '../Elements/NativeStatusBar'
+import ThreeHeaderView from '../Elements/ThreeHeaderView'
 
 export default class SelectLocker extends Component {
   static navigationOptions = { title: 'Packages', header: null, tabBarVisible: false };
@@ -88,11 +89,9 @@ export default class SelectLocker extends Component {
         <Container>
         <NativeStatusBar/>
           <Content style={{backgroundColor: Colors.white}}>
-            <TouchableHighlight onPress={() => {this.onCancel()}} underlayColor={'transparent'}>
-              <SafeAreaView style={{marginRight: 21, marginTop: 20}}>
-                <Text style={{textAlign: 'right', color: Colors.gray_85, fontSize: 16, zIndex: 1}}>Cancel</Text>
-              </SafeAreaView>
-            </TouchableHighlight>
+            <SafeAreaView style={{marginTop: 20}}>
+              <ThreeHeaderView title={""} leftButtonTitle={"Back"} rightButtonTitle={""} onLeftPress={() => {this.onCancel()}}/>
+            </SafeAreaView>
             <Text style={{marginLeft:21, fontSize: Utils.normalize(36), color: Colors.dark_gray, fontWeight: 'bold'}}>Deliver to</Text>
             <View style={{marginTop: 20, marginLeft:21}}>
               <Text style={{fontSize: Utils.normalize(16), color: Colors.gray_85, fontWeight: 'bold'}}>Select a locker</Text>

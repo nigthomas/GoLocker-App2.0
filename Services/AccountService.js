@@ -50,6 +50,14 @@ export default class AccountService {
      })
    }
 
+   applyPromoCode(code) {
+     if(!code) {
+       return new Promise((resolve, reject) => { reject(new Error('Missing code'))})
+     }
+
+     return AccountNetworkManager.applyPromoCode(code)
+   }
+
    updateBillingAddress(address) {
      if(!address) {
        return new Promise((resolve, reject) => { reject(new Error('Missing address'))})

@@ -14,7 +14,8 @@ const URL = {
   resetPassword: `${BASE_URL}/v1/resetPassword`,
   action: `${BASE_URL}/v1/properties`,
   lockers: `${BASE_URL}/v1/lockers`,
-  newsletter: `${BASE_URL}/v1/newsletter`
+  newsletter: `${BASE_URL}/v1/newsletter`,
+  promoCode: `${BASE_URL}/v1/applyPromo`
 }
 
 const STATUS_CODE = {
@@ -288,6 +289,26 @@ export const PropertiesNetworkManager = {
 }
 
 export const AccountNetworkManager = {
+  applyPromoCode: (code) => {
+    return LoginService.getInstance().account()
+    .then(account => {
+      return fetch(URL.promoCode, {
+        method: 'POST',
+        headers: {
+          Accept: HEADERS.Accept,
+          authorization: `${account.token_type} ${account.access_token}`,
+        },
+        body: JSON.stringify({code: code})
+      })
+    })
+    .then((response) => {
+      if(response.status === STATUS_CODE.OK) {
+        return response.json()
+      }
+
+      return new Promise((resolve, reject) => { reject(new Error('Error has occurred'))})
+    })
+  },
   setNewPassword: (password, code, email) => {
     return fetch(URL.resetPassword, {
       method: 'PUT',

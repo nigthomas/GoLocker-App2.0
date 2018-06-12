@@ -94,6 +94,11 @@ export default class DetailsView extends Component {
     navigate('NewUpdatePaymentMethod', {creditCard: billing.creditCard, address: billing})
   }
 
+  showApplyCode() {
+    const { navigate }  = this.props.navigation;
+    navigate('ApplyPromo', {})
+  }
+
   showLockers() {
     const primaryLocker = this.state.data.primaryLocker
     const secondaryLocker = this.state.data.secondaryLocker
@@ -295,6 +300,17 @@ export default class DetailsView extends Component {
                 <View style={{flexDirection:'row', flexWrap:'wrap'}}>
                   <Text style={{fontSize: Utils.normalize(14), color: Colors.gray_85, marginLeft: 21}}>
                     Lockers
+                  </Text>
+                </View>
+              </TouchableHighlight>
+              <Entypo name="chevron-small-right" size={25} style={{color: Colors.gray_85, position: 'absolute', right: 21}}/>
+            </View>
+
+            <View style={{justifyContent: 'center', borderTopColor: Colors.gray_ef, borderTopWidth: 1, height: 50, flex: 1}}>
+              <TouchableHighlight onPress={() => {this.showApplyCode()}} underlayColor={'transparent'}>
+                <View style={{flexDirection:'row', flexWrap:'wrap'}}>
+                  <Text style={{fontSize: Utils.normalize(14), color: Colors.gray_85, marginLeft: 21}}>
+                    Apply Code
                   </Text>
                 </View>
               </TouchableHighlight>

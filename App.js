@@ -34,6 +34,7 @@ import Verification from './Views/RegistrationVerification'
 import ForgotPasswordValidation from './Views/ForgotPasswordValidation'
 import NewPassword from './Views/NewPassword'
 import LocationCode from './Views/LocationCode'
+import ApplyPromo from './Views/ApplyPromo'
 import { NetworkStatusListener } from './Common/NetworkManager'
 
 const HomeNavigationController = StackNavigator({
@@ -58,7 +59,8 @@ const DetailsNavigationController = StackNavigator({
   UpdatePhone: {screen: UpdatePhone},
   LockerList: {screen: LockerList},
   LockerDetailView: {screen: LockerDetail},
-  ChangeLocker: {screen: ChangeLocker}
+  ChangeLocker: {screen: ChangeLocker},
+  ApplyPromo: {screen: ApplyPromo}
 });
 
 const TabController = TabNavigator({

@@ -47,9 +47,8 @@ export default class ApplyPromo extends Component {
       }, 750)
     })
     .catch(err => {
-      console.log(err)
       this.showRegularState()
-      this.setState({errorText: "Error occurred while applying code. Try again later.", applying: false})
+      this.setState({errorText: err.message, applying: false})
     })
   }
 

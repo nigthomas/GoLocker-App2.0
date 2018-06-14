@@ -302,11 +302,18 @@ export const AccountNetworkManager = {
       })
     })
     .then((response) => {
-      if(response.status === STATUS_CODE.OK) {
-        return response.json()
+      return Promise.all([response.json(), new Promise((resolve, reject) => { resolve(response.status)}) ])
+    })
+    .then(results => {
+      const json = results[0]
+      const status = results[1]
+      const message = json.message || 'Error occurred while applying code. Try again later.'
+
+      if(status === STATUS_CODE.OK) {
+        return new Promise((resolve, reject) => { resolve(json)})
       }
 
-      return new Promise((resolve, reject) => { reject(new Error('Error has occurred'))})
+      return new Promise((resolve, reject) => { reject(new Error(message))})
     })
   },
   setNewPassword: (password, code, email) => {

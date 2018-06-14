@@ -310,7 +310,7 @@ export default class DetailsView extends Component {
               <TouchableHighlight onPress={() => {this.showApplyCode()}} underlayColor={'transparent'}>
                 <View style={{flexDirection:'row', flexWrap:'wrap'}}>
                   <Text style={{fontSize: Utils.normalize(14), color: Colors.gray_85, marginLeft: 21}}>
-                    Apply Code
+                    Promo Code
                   </Text>
                 </View>
               </TouchableHighlight>

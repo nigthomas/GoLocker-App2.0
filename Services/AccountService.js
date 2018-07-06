@@ -26,12 +26,12 @@ export default class AccountService {
      return this.state.listener
    }
 
-   updatePlan(plan) {
+   updatePlan(plan, promoCode) {
      if(!plan) {
        return new Promise((resolve, reject) => { reject(new Error('Missing plan'))})
      }
 
-     return AccountNetworkManager.updatePlan(plan)
+     return AccountNetworkManager.updatePlan(plan, promoCode)
      .then(data => {
        this.state.listener.emit('UPDATED');
        return new Promise((resolve, reject) => { resolve()})

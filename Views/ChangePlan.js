@@ -26,13 +26,16 @@ export default class ChangePlan extends Component {
      selectedPlan: null,
      loading: false,
      data: {},
-     error: null
+     error: null,
+     code: null
    };
   }
 
   onSavePress() {
     const plan = this.state.selectedPlan
-    AccountService.getInstance().updatePlan(plan)
+    const code = plan == "Pay-Per-Package" ? null : this.state.code
+
+    AccountService.getInstance().updatePlan(plan, code)
     .then(() => {
       this.props.navigation.goBack()
       this.setState({error: null})
@@ -83,6 +86,14 @@ export default class ChangePlan extends Component {
         </TouchableHighlight>)
   }
 
+  renderPromoCodeField() {
+    return (
+      <View style={{marginTop: 5}}>
+        <TextInput underlineColorAndroid='transparent' placeholderTextColor={Colors.gray_85} style={{color: Colors.dark_gray, backgroundColor: Colors.white, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont, paddingLeft: 10}} placeholder={"Enter Promo Code"} onChangeText={(code) => this.setState({code})} value={this.state.code}/>
+      </View>
+    )
+  }
+
   render() {
     if(this.state.loading) {
       return <View style={{flex: 1, backgroundColor: Colors.white}}>
@@ -106,9 +117,12 @@ export default class ChangePlan extends Component {
     const unlimitedCircleStyle = unlimitedSelected ? styles.activeCircle : styles.circle
     const premierCircleStyle = premierSelected ? styles.activeCircle : styles.circle
 
-    const error = "Something is wrong or you're missing a payment method"
+    const error = "Something is wrong. Make sure you have a payment method and valid billing address. If you entered a promo code, make sure the code is valid."
     const errorText = this.state.error ? <Text style={{marginLeft: 21, color: Colors.red, marginTop: 5}}>{error}</Text> : null
     const unlimitedPlanView = unlimitedSelected ? this.renderUnlimited(unlimitedStyle, unlimitedCircleStyle) : null
+
+    const premiumPromoField = premiumSelected ? this.renderPromoCodeField() : null
+    const premierPromoField = premierSelected ? this.renderPromoCodeField() : null
 
     return (
       <Root>
@@ -116,57 +130,66 @@ export default class ChangePlan extends Component {
         <NativeStatusBar/>
           <Content style={{backgroundColor: Colors.white}}>
           <SafeAreaView style={{marginTop: 20}}>
-            <ThreeHeaderView title={"Update Plan"} leftButtonTitle={"Back"} rightButtonTitle={"Save"} onLeftPress={() => {this.onBackPress()}} onRightPress={() => {this.onSavePress()}}/>
+            <ThreeHeaderView title={"Update Plan"} leftButtonTitle={"Back"} rightButtonTitle={"Update"} onLeftPress={() => {this.onBackPress()}} onRightPress={() => {this.onSavePress()}}/>
           </SafeAreaView>
           {errorText}
           <View style={{marginLeft: 21, marginRight: 21}}>
+
             <TouchableHighlight onPress={() => { this.setState({selectedPlan: "Pay-Per-Package"})}} underlayColor={'transparent'}>
               <View style={payPerPackageStyle}>
-                <View style={{flex: 1}}>
-                  <Text style={styles.headerText}>PAY PER PACKAGE</Text>
-                  <Text style={styles.text}>Pickup within 48 hours</Text>
-                  <Text style={styles.text}>Secure and Convenient</Text>
-                  <Text style={styles.text}>Free First Delivery</Text>
-                </View>
-                <View style={{flex: 1}}>
-                    <View style={payPerPackageCircleStyle}></View>
-                    <Text style={styles.price}>$3</Text>
-                    <Text style={styles.cycle}>/per delivery*</Text>
+                <View style={{flexDirection:'row'}}>
+                  <View style={{flex: 1}}>
+                    <Text style={styles.headerText}>PAY PER PACKAGE</Text>
+                    <Text style={styles.text}>Pickup within 48 hours</Text>
+                    <Text style={styles.text}>Secure and Convenient</Text>
+                    <Text style={styles.text}>Free First Delivery</Text>
                   </View>
+                  <View style={{flex: 1}}>
+                      <View style={payPerPackageCircleStyle}></View>
+                      <Text style={styles.price}>$3</Text>
+                      <Text style={styles.cycle}>/per delivery*</Text>
+                    </View>
+                </View>
               </View>
             </TouchableHighlight>
 
             <TouchableHighlight onPress={() => { this.setState({selectedPlan: "Premium"})}} underlayColor={'transparent'}>
               <View style={premiumStyle}>
-                <View style={{flex: 1}}>
-                  <Text style={styles.headerText}>PREMIUM</Text>
-                  <Text style={styles.text}>10 Deliveries Per Month</Text>
-                  <Text style={styles.text}>Pickup within 48 hours</Text>
-                  <Text style={styles.text}>Secure and Convenient</Text>
-                  <Text style={styles.text}>Free First Delivery</Text>
+                <View style={{flexDirection:'row'}}>
+                  <View style={{flex: 1}}>
+                    <Text style={styles.headerText}>PREMIUM</Text>
+                    <Text style={styles.text}>10 Deliveries Per Month</Text>
+                    <Text style={styles.text}>Pickup within 48 hours</Text>
+                    <Text style={styles.text}>Secure and Convenient</Text>
+                    <Text style={styles.text}>Free First Delivery</Text>
+                  </View>
+                  <View style={{flex: 1}}>
+                    <View style={premiumCircleStyle}></View>
+                    <Text style={styles.price}>$20</Text>
+                    <Text style={styles.cycle}>/per month**</Text>
+                  </View>
                 </View>
-                <View style={{flex: 1}}>
-                  <View style={premiumCircleStyle}></View>
-                  <Text style={styles.price}>$20</Text>
-                  <Text style={styles.cycle}>/per month**</Text>
-                </View>
+                {premiumPromoField}
               </View>
             </TouchableHighlight>
 
             <TouchableHighlight onPress={() => { this.setState({selectedPlan: "Premier"})}} underlayColor={'transparent'}>
               <View style={premierStyle}>
-                <View style={{flex: 1}}>
-                  <Text style={styles.headerText}>PREMIER</Text>
-                  <Text style={styles.text}>20 Deliveries Per Month</Text>
-                  <Text style={styles.text}>Pickup within 48 hours</Text>
-                  <Text style={styles.text}>Secure and Convenient</Text>
-                  <Text style={styles.text}>Free First Delivery</Text>
+                <View style={{flexDirection:'row'}}>
+                  <View style={{flex: 1}}>
+                    <Text style={styles.headerText}>PREMIER</Text>
+                    <Text style={styles.text}>20 Deliveries Per Month</Text>
+                    <Text style={styles.text}>Pickup within 48 hours</Text>
+                    <Text style={styles.text}>Secure and Convenient</Text>
+                    <Text style={styles.text}>Free First Delivery</Text>
+                  </View>
+                  <View style={{flex: 1}}>
+                    <View style={premierCircleStyle}></View>
+                    <Text style={styles.price}>$30</Text>
+                    <Text style={styles.cycle}>/per month**</Text>
+                  </View>
                 </View>
-                <View style={{flex: 1}}>
-                  <View style={premierCircleStyle}></View>
-                  <Text style={styles.price}>$30</Text>
-                  <Text style={styles.cycle}>/per month**</Text>
-                </View>
+                {premierPromoField}
               </View>
             </TouchableHighlight>
 
@@ -218,22 +241,18 @@ const styles = StyleSheet.create({
   },
   activePlan: {
     padding: 10,
-    height: Platform.OS === 'ios' ? 120 : 140,
     borderRadius: 4,
     borderColor: Colors.dark_gray,
     borderWidth: 1,
     marginTop: 20,
     backgroundColor: Colors.gray_f3,
-    flexDirection:'row'
   },
   plan: {
     padding: 10,
-    height: Platform.OS === 'ios' ? 120 : 140,
     borderRadius: 4,
     borderColor: Colors.gray_d8,
     borderWidth: 1,
     marginTop: 20,
-    flexDirection:'row'
   },
   circle: {
     width: 25,

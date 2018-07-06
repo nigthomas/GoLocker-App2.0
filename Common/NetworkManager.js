@@ -15,7 +15,8 @@ const URL = {
   action: `${BASE_URL}/v1/properties`,
   lockers: `${BASE_URL}/v1/lockers`,
   newsletter: `${BASE_URL}/v1/newsletter`,
-  promoCode: `${BASE_URL}/v1/applyPromo`
+  promoCode: `${BASE_URL}/v1/applyPromo`,
+  changePlan: `${BASE_URL}/v1/account/changePlan`
 }
 
 const STATUS_CODE = {
@@ -370,16 +371,16 @@ export const AccountNetworkManager = {
       return new Promise((resolve, reject) => { reject(new Error('Error has occurred'))})
     })
   },
-  updatePlan: (plan) => {
+  updatePlan: (plan, promoCode) => {
     return LoginService.getInstance().account()
     .then(account => {
-      return fetch(URL.account, {
+      return fetch(URL.changePlan, {
         method: 'PUT',
         headers: {
           Accept: HEADERS.Accept,
           authorization: `${account.token_type} ${account.access_token}`,
         },
-        body: JSON.stringify({plan: plan})
+        body: JSON.stringify({plan: plan, code: promoCode})
       })
     })
     .then((response) => {

@@ -113,6 +113,7 @@ export default class RegistrationSelectLocker extends Component {
 
     LoginService.getInstance().registerUser(firstName, lastName, email.trim(), completePhoneNumber, password, locker.id, handicap)
     .then(() => {
+      this.setState({errorMessage: null})
       navigation.navigate('Verification', {email: email.trim(), firstName: firstName})
     })
     .catch(err => {

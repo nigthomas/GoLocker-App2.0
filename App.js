@@ -30,6 +30,8 @@ import Theme from './Common/Theme'
 import NoAvailableLockers from './Views/NoAvailableLockers'
 import RegistrationSelectLocker from './Views/RegistrationSelectLocker'
 import RegistrationForm from './Views/RegistrationForm'
+import RegistrationCreditForm from './Views/RegistrationCreditForm'
+import SelectPlan from './Views/SelectPlan'
 import Verification from './Views/RegistrationVerification'
 import ForgotPasswordValidation from './Views/ForgotPasswordValidation'
 import NewPassword from './Views/NewPassword'
@@ -86,6 +88,8 @@ const LoginNavigationController = StackNavigator({
   NoAvailableLockers: {screen: NoAvailableLockers},
   RegistrationSelectLocker: {screen: RegistrationSelectLocker},
   RegistrationForm: {screen: RegistrationForm},
+  RegistrationCreditForm: {screen: RegistrationCreditForm},
+  SelectPlan: {screen: SelectPlan},
   Verification: {screen: Verification},
   Login: {screen: LoginView},
   ForgotPasswordValidation: {screen: ForgotPasswordValidation},

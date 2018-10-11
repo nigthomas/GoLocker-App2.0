@@ -24,65 +24,36 @@ export default class ChangePlan extends Component {
 
    this.state = {
      selectedPlan: null,
-     loading: false,
-     data: {},
-     error: null,
      code: null
    };
-  }
 
-  onSavePress() {
-    const plan = this.state.selectedPlan
-    const code = plan == "Pay-Per-Package" ? null : this.state.code
-
-    AccountService.getInstance().updatePlan(plan, code)
-    .then(() => {
-      this.props.navigation.goBack()
-      this.setState({error: null})
-    })
-    .catch(err => {
-      this.setState({error: err})
-    })
   }
 
   componentDidMount() {
-    this.setState({loading: true})
-    this.fetch()
-  }
+    const { params } = this.props.navigation.state;
+    const selectedPlan = params.selectedPlan || "Pay-Per-Package"
+    const onSelect = params.onSelect || this.onSelect
 
-  fetch() {
-    Promise.all([DashboardService.getInfo()])
-    .then(results => {
-      const dashboardData = results[0] || {}
-      const membership = dashboardData.membership
-      this.setState({data: dashboardData, selectedPlan: membership.plan,loading: false, error: null})
-    })
-    .catch(err => {
-      this.setState({error: err, loading: false})
-    })
+    this.setState({selectedPlan: selectedPlan, onSelect: onSelect})
   }
 
   onBackPress() {
     this.props.navigation.goBack()
   }
 
-  renderUnlimited(unlimitedStyle, unlimitedCircleStyle) {
-    return (
-        <TouchableHighlight onPress={() => { this.setState({selectedPlan: "Unlimited"})}} underlayColor={'transparent'}>
-          <View style={unlimitedStyle}>
-            <View style={{flex: 1}}>
-              <Text style={styles.headerText}>Unlimited</Text>
-              <Text style={styles.text}>Unlimited Deliveries!</Text>
-              <Text style={styles.text}>Pickup within 48 hours</Text>
-              <Text style={styles.text}>Secure and Convenient</Text>
-            </View>
-            <View style={{flex: 1}}>
-              <View style={unlimitedCircleStyle}></View>
-              <Text style={styles.price}>$14.99</Text>
-              <Text style={styles.cycle}>/per month</Text>
-            </View>
-          </View>
-        </TouchableHighlight>)
+  onSelect() {
+    //Empty
+  }
+
+  onRightPress(options) {
+    const code = this.state.code
+    const selectedPlan = this.state.selectedPlan
+
+    this.state.onSelect({
+      code: code,
+      selectedPlan: selectedPlan
+    })
+    this.props.navigation.goBack()
   }
 
   renderPromoCodeField() {
@@ -94,31 +65,17 @@ export default class ChangePlan extends Component {
   }
 
   render() {
-    if(this.state.loading) {
-      return <View style={{flex: 1, backgroundColor: Colors.white}}>
-              <LoadingView />
-              <FooterTabWithNavigation navigation={this.props.navigation} active={"details"}/>
-            </View>
-    }
-
     const payPerPackageSelected = this.state.selectedPlan === "Pay-Per-Package"
     const premiumSelected = this.state.selectedPlan === "Premium"
-    const unlimitedSelected = this.state.selectedPlan === "Unlimited"
     const premierSelected = this.state.selectedPlan === "Premier"
 
     const payPerPackageStyle = payPerPackageSelected ? styles.activePlan : styles.plan
     const premiumStyle = premiumSelected ? styles.activePlan : styles.plan
-    const unlimitedStyle = unlimitedSelected ? styles.activePlan : styles.plan
     const premierStyle = premierSelected ? styles.activePlan : styles.plan
 
     const payPerPackageCircleStyle = payPerPackageSelected ? styles.activeCircle : styles.circle
     const premiumCircleStyle = premiumSelected ? styles.activeCircle : styles.circle
-    const unlimitedCircleStyle = unlimitedSelected ? styles.activeCircle : styles.circle
     const premierCircleStyle = premierSelected ? styles.activeCircle : styles.circle
-
-    const error = "Something is wrong. Make sure you have a payment method and valid billing address. If you entered a promo code, make sure the code is valid."
-    const errorText = this.state.error ? <Text style={{marginLeft: 21, color: Colors.red, marginTop: 5}}>{error}</Text> : null
-    const unlimitedPlanView = unlimitedSelected ? this.renderUnlimited(unlimitedStyle, unlimitedCircleStyle) : null
 
     const premiumPromoField = premiumSelected ? this.renderPromoCodeField() : null
     const premierPromoField = premierSelected ? this.renderPromoCodeField() : null
@@ -129,9 +86,8 @@ export default class ChangePlan extends Component {
         <NativeStatusBar/>
           <Content style={{backgroundColor: Colors.white}}>
           <SafeAreaView style={{marginTop: 20}}>
-            <ThreeHeaderView title={"Update Plan"} leftButtonTitle={"Back"} rightButtonTitle={"Update"} onLeftPress={() => {this.onBackPress()}} onRightPress={() => {this.onSavePress()}}/>
+            <ThreeHeaderView title={"Select Plan"} leftButtonTitle={"Back"} rightButtonTitle={"Done"} onLeftPress={() => {this.onBackPress()}} onRightPress={() => {this.onRightPress()}} />
           </SafeAreaView>
-          {errorText}
           <View style={{marginLeft: 21, marginRight: 21}}>
 
             <TouchableHighlight onPress={() => { this.setState({selectedPlan: "Pay-Per-Package"})}} underlayColor={'transparent'}>
@@ -189,8 +145,6 @@ export default class ChangePlan extends Component {
               </View>
             </TouchableHighlight>
 
-            {unlimitedPlanView}
-
             <Text style={styles.disclaimer}>* A $0.31 processing fee will be applied to each pay per package delivery</Text>
             <Text style={styles.disclaimer}>** $2 overage fee</Text>
             <Text style={styles.disclaimer}>Please note when downgrading your account, the current plan will remain effective through the end of the billing period. Plan upgrades take effect immediately.</Text>
@@ -198,7 +152,6 @@ export default class ChangePlan extends Component {
           </View>
 
           </Content>
-          <FooterTabWithNavigation navigation={this.props.navigation} active={"details"}/>
         </Container>
       </Root>
     );

@@ -23,7 +23,7 @@ export default class RegistrationSelectLocker extends Component {
 
   onPropertyPress(property) {
     const { navigation } = this.props;
-    navigation.navigate('RegistrationForm', {property: property})
+    navigation.navigate('RegistrationCreditForm', {property: property})
   }
 
   onBackPress() {

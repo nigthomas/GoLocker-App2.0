@@ -202,16 +202,21 @@ export const AuthenticationNetworkManager = {
       return new Promise((resolve, reject) => { reject(new Error('Error has occurred'))})
     })
   },
-  registerUser: (firstName, lastName, email, phone, password, lockerIdentifier, disability) => {
+  registerUser: (firstName, lastName, email, phone, password, lockerIdentifier, disability, apartmentNumber, plan, card, postalCode, promoCode) => {
     const data = JSON.stringify({
      firstname: firstName,
      lastname: lastName,
      email: email,
      mobilePhone: phone,
      phoneNumber: phone,
+     postalCode: postalCode,
      password: password,
      primaryPropertyID: lockerIdentifier,
-     disability: disability
+     disability: disability,
+     apartmentNumber: apartmentNumber,
+     card: card,
+     promoCode: promoCode,
+     plan: plan
     })
 
     return fetch(URL.register, {

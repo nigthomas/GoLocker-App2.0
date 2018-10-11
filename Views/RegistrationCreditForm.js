@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, StatusBar, TextInput, Alert, Image, TouchableHighlight, FlatList, Switch, SafeAreaView} from 'react-native';
+import { StyleSheet, Text, View, StatusBar, TextInput, Alert, Image, TouchableHighlight, FlatList, Switch, SafeAreaView, Platform} from 'react-native';
 import Theme from '../Common/Theme'
 import Colors from '../Common/Colors'
 import FlatButton  from '../Elements/FlatButton'
@@ -11,8 +11,9 @@ import Utils from '../Common/Utils'
 import PhoneInput from 'react-native-phone-input'
 import ThreeHeaderView from '../Elements/ThreeHeaderView'
 import NativeStatusBar from '../Elements/NativeStatusBar'
+import Entypo from 'react-native-vector-icons/dist/Entypo'
 
-export default class RegistrationForm extends Component {
+export default class RegistrationCreditForm extends Component {
   static navigationOptions = { header: null };
 
   constructor(props) {
@@ -27,7 +28,14 @@ export default class RegistrationForm extends Component {
      passwordConfirmation: null,
      handicap: false,
      errorMessage: null,
-     apartmentNumber: null,
+     creditCardNumber: null,
+
+     creditCardMonth: null,
+     creditCardYear: null,
+     creditCardCVV: null,
+     creditCardZipCode: null,
+     selectedPlan: "Pay-Per-Package",
+     promoCode: null,
      sending: false
    }
   }
@@ -53,7 +61,6 @@ export default class RegistrationForm extends Component {
   onCreateAccountPress() {
     const firstName = this.state.firstName
     const lastName = this.state.lastName
-    const apartmentNumber = this.state.apartmentNumber
     const number = this.state.phone
     const email = this.state.email
     const password = this.state.password
@@ -65,6 +72,16 @@ export default class RegistrationForm extends Component {
     const isComplexPassword = Utils.isPasswordComplex(password)
     const countryCode = this.countryCode.getValue().replace("+", "")
     const completePhoneNumber = countryCode + number
+    const creditCardNumber = this.state.creditCardNumber
+
+    const creditCardMonth = this.state.creditCardMonth
+    const creditCardYear = this.state.creditCardYear
+    const creditCardCVV = this.state.creditCardCVV
+    const postalCode = this.state.creditCardZipCode
+    const card = {number: creditCardNumber, month: creditCardMonth, year: creditCardYear, cvc: creditCardCVV}
+
+    const promoCode = this.state.promoCode
+    const plan = this.state.selectedPlan
 
     if(this.state.sending) {
       return;
@@ -78,12 +95,6 @@ export default class RegistrationForm extends Component {
 
     if(!lastName) {
       this.setState({errorMessage: "Please enter your last name"})
-      this.component._root.scrollToPosition(0, 0)
-      return
-    }
-
-    if(!apartmentNumber) {
-      this.setState({errorMessage: "Please enter your apartment or unit number"})
       this.component._root.scrollToPosition(0, 0)
       return
     }
@@ -124,17 +135,57 @@ export default class RegistrationForm extends Component {
       return
     }
 
+    if(!creditCardNumber || !creditCardNumber.length >= 14) {
+      this.setState({errorMessage: "Please enter valid credit card number"})
+      this.component._root.scrollToPosition(0, 0)
+      return
+    }
+
+    if(!creditCardMonth) {
+      this.setState({errorMessage: "Please enter valid credit card month"})
+      this.component._root.scrollToPosition(0, 0)
+      return
+    }
+
+    if(!creditCardYear) {
+      this.setState({errorMessage: "Please enter valid credit card year"})
+      this.component._root.scrollToPosition(0, 0)
+      return
+    }
+
+    if(!creditCardYear) {
+      this.setState({errorMessage: "Please enter valid credit card cvv"})
+      this.component._root.scrollToPosition(0, 0)
+      return
+    }
+
+    if(!postalCode) {
+      this.setState({errorMessage: "Please enter valid billing zip code"})
+      this.component._root.scrollToPosition(0, 0)
+      return
+    }
+
     this.setState({sending: true})
 
-    LoginService.getInstance().registerUser(firstName, lastName, email.trim(), completePhoneNumber, password, locker.id, handicap, apartmentNumber, "Pay-Per-Package", null, null, null)
+    LoginService.getInstance().registerUser(firstName, lastName, email.trim(), completePhoneNumber, password, locker.id, handicap, null, plan, card, postalCode, promoCode)
     .then(() => {
       this.setState({errorMessage: null, sending: false})
       navigation.navigate('Verification', {email: email.trim(), firstName: firstName})
     })
     .catch(err => {
-      this.setState({errorMessage: "Something is wrong or your phone number or email is in use", sending: false})
+      this.setState({errorMessage: "Something is wrong. Please verify the information below.", sending: false})
       this.component._root.scrollToPosition(0, 0)
     })
+  }
+
+  showChangePlan(currentPlan) {
+    const { navigation } = this.props;
+    navigation.navigate('SelectPlan', {selectedPlan: currentPlan, onSelect: (options) => {this.onPlanSelect(options)}})
+  }
+
+  onPlanSelect(options) {
+    this.setState({selectedPlan: options.selectedPlan, promoCode: options.code})
+    this.component._root.scrollToEnd()
   }
 
   renderItem(property) {
@@ -227,9 +278,6 @@ export default class RegistrationForm extends Component {
                  <TextInput underlineColorAndroid='transparent' ref="firstNameField" placeholderTextColor={Colors.tapable_blue} style={{flex: 1, paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, marginRight: 5, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"First Name"} onChangeText={(firstName) => this.setState({firstName})} value={this.state.firstName}/>
                  <TextInput underlineColorAndroid='transparent' ref="lastNameField" placeholderTextColor={Colors.tapable_blue} style={{flex: 1, paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, marginLeft: 5, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Last Name"} onChangeText={(lastName) => this.setState({lastName})} value={this.state.lastName}/>
                </View>
-               <View style={{flex: 1, flexDirection:'row', marginTop: 10}}>
-                 <TextInput underlineColorAndroid='transparent' ref="lastNameField" placeholderTextColor={Colors.tapable_blue} style={{flex: 1, paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, marginLeft: 5, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Apartment No."} onChangeText={(apartmentNumber) => this.setState({apartmentNumber})} value={this.state.apartmentNumber}/>
-               </View>
                <View style={{flexDirection:'row', flexWrap:'wrap'}}>
                   <View style={{flex: 2, paddingTop: 23}}>
                     <PhoneInput ref={(ref) => { this.countryCode = ref; }} value={this.state.countryCode}/>
@@ -241,11 +289,42 @@ export default class RegistrationForm extends Component {
                <TextInput underlineColorAndroid='transparent' ref="passwordField" placeholderTextColor={Colors.tapable_blue} style={{flex: 1, marginTop: 10, paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Password"} onChangeText={(password) => this.setState({password})} value={this.state.password}/>
                <TextInput underlineColorAndroid='transparent' ref="passwordConfirmationField" placeholderTextColor={Colors.tapable_blue} style={{flex: 1, marginTop: 10, paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Password Confirmation"} onChangeText={(passwordConfirmation) => this.setState({passwordConfirmation})} value={this.state.passwordConfirmation}/>
                <Text style={{textAlign: 'left', color: Colors.dark_gray, fontSize: 10, marginTop: 5}}>*Password must be at least 8 characters, have 1 number and 1 uppercase character.</Text>
+
+               <View style={{flex: 1, flexDirection:'row',  marginTop: 10}}>
+                 <TextInput underlineColorAndroid='transparent' ref="creditCardNumberField" placeholderTextColor={Colors.tapable_blue} style={{flex: 1, paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, marginRight: 5, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Credit Card No."} onChangeText={(creditCardNumber) => this.setState({creditCardNumber})} value={this.state.creditCardNumber}/>
+               </View>
+
+               <View style={{flex: 1, flexDirection:'row',  marginTop: 10}}>
+                 <TextInput underlineColorAndroid='transparent' ref="creditCardMonthField" placeholderTextColor={Colors.tapable_blue} style={{flex: 1, paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, marginRight: 5, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"MM"} onChangeText={(creditCardMonth) => this.setState({creditCardMonth})} value={this.state.creditCardMonth}/>
+                 <TextInput underlineColorAndroid='transparent' ref="creditCardYearField" placeholderTextColor={Colors.tapable_blue} style={{flex: 1, paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, marginRight: 5, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"YYYY"} onChangeText={(creditCardYear) => this.setState({creditCardYear})} value={this.state.creditCardYear}/>
+               </View>
+
+               <View style={{flex: 1, flexDirection:'row',  marginTop: 10}}>
+                 <TextInput underlineColorAndroid='transparent' ref="creditCardCVVField" placeholderTextColor={Colors.tapable_blue} style={{flex: 1, paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, marginRight: 5, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"CVV"} onChangeText={(creditCardCVV) => this.setState({creditCardCVV})} value={this.state.creditCardCVV}/>
+                 <TextInput underlineColorAndroid='transparent' ref="creditCardBillingZipField" placeholderTextColor={Colors.tapable_blue} style={{flex: 1, paddingLeft: 21, color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, marginRight: 5, borderRadius: 4, fontFamily: Theme.primaryFont}} placeholder={"Billing Zip Code"} onChangeText={(creditCardZipCode) => this.setState({creditCardZipCode})} value={this.state.creditCardZipCode}/>
+               </View>
+
+               <View style={{marginTop: 15, height: 50, flex: 1}}>
+                <TouchableHighlight onPress={() => {this.showChangePlan(this.state.selectedPlan)}} underlayColor={'transparent'}>
+                  <View>
+                    <Text style={{fontSize: 14, color: Colors.gray_85, fontWeight: '600', marginTop: Platform.OS === 'ios' ? 10 : 7}}>
+                      Choose a plan
+                    </Text>
+
+                    <View style={{position: 'absolute', right: 0, flex: 1, flexDirection:'row', zIndex: -1}}>
+                      <Text style={{color: Theme.primaryColor, marginTop: Platform.OS === 'ios' ? 10 : 7}}>{this.state.selectedPlan}</Text>
+                      <Entypo name="chevron-small-right" size={25} style={{color: Colors.gray_85, marginTop: 5}}/>
+                    </View>
+                  </View>
+                </TouchableHighlight>
+              </View>
+
                <View style={{marginTop: 10, flex: 1, flexDirection: 'row', alignItems: 'center'}}>
                  <Switch onValueChange={(value) => {this.onSwitchChange(value)}} value={this.state.handicap}/>
                  <Text style={{marginLeft: 5, textAlign: 'left', color: Colors.dark_gray, fontWeight: 'bold'}}>Disability</Text>
                </View>
                <Text style={{textAlign: 'left', color: Colors.dark_gray, fontSize: 10, marginTop: 5}}>*Packages for users with physical disabilities will be placed in lower compartments</Text>
+
                <TouchableHighlight onPress={() => {this.onCreateAccountPress()}} underlayColor={'transparent'}>
                  <View style={{height: 50, borderRadius: 4, backgroundColor: Colors.light_green, marginTop: 20, marginBottom: 30}}>
                    <Text style={{textAlign: 'center', color: Colors.white, marginTop: 17}}>Create Account</Text>

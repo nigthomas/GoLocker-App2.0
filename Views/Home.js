@@ -55,7 +55,7 @@ export default class HomeView extends Component {
 
     setInterval(() => {
       this.fetch()
-    }, 70000)
+    }, 120000)
   }
 
   onRefresh() {

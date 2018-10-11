@@ -27,12 +27,12 @@ export default class LoginService {
      return this.state.listener
    }
 
-  registerUser(firstName, lastName, email, phone, password, lockerIdentifier, disability) {
+  registerUser(firstName, lastName, email, phone, password, lockerIdentifier, disability, apartmentNumber, plan, card, postalCode, promoCode) {
     if(!firstName || !lastName || !email || !phone || !password || !lockerIdentifier) {
       return new Promise((resolve, reject) => { reject(new Error('Missing parameters'))})
     }
 
-    return AuthenticationNetworkManager.registerUser(firstName, lastName, email, phone, password, lockerIdentifier, disability)
+    return AuthenticationNetworkManager.registerUser(firstName, lastName, email, phone, password, lockerIdentifier, disability, apartmentNumber, plan, card, postalCode, promoCode)
   }
 
   verifyUser(email, code) {

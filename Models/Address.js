@@ -24,8 +24,8 @@ export default class Address {
   static headquarters() {
       const data = {
         name: "GoLocker HQ",
-        address: "209A Morgan Avenue - Ste F",
-        city: "Brooklyn",
+        address: "209A MORGAN AVENUE - STE F",
+        city: "BROOKLYN",
         stateProvince: "NY",
         postalCode: "11237",
         location: [40.711545, -73.934188]

@@ -26,6 +26,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		2562EA597843DDF43D367272 /* libPods-GoLocker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F06E06C20A7796400E17C96 /* libPods-GoLocker.a */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2D02E4C21E0B4AEC006451C7 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157351DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
@@ -54,8 +55,6 @@
 		2F06E0A820A77A1000E17C96 /* libSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9217ACD693B34F28B0187C03 /* libSplashScreen.a */; };
 		2F06E0A920A77A1000E17C96 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15EE3AEF1A82403CB2C6078B /* libRNVectorIcons.a */; };
 		2F06E0AA20A77A1000E17C96 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FE1CDE320A7631100410B47 /* Fabric.framework */; };
-		2F06E0AB20A77A1000E17C96 /* libPods-GoLocker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D808AA46D94E0A0065A0EC4 /* libPods-GoLocker.a */; };
-		2F06E0AC20A77A1000E17C96 /* libPods-GoLocker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D808AA46D94E0A0065A0EC4 /* libPods-GoLocker.a */; };
 		2F06E0AD20A77A1000E17C96 /* libRNFirebase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D291554EFE84020AEA589C3 /* libRNFirebase.a */; };
 		2F06E0AF20A77A1000E17C96 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2F06E0B020A77A1000E17C96 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
@@ -425,7 +424,6 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = GoLocker/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		15EE3AEF1A82403CB2C6078B /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
-		2B8E89E3D02215CF029500F1 /* Pods-GoLocker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoLocker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GoLocker/Pods-GoLocker.debug.xcconfig"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* GoLocker-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GoLocker-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* GoLocker-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GoLocker-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -443,8 +441,10 @@
 		6B7457CFDFAE476A8C2F35EB /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/native-base/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		7723798061E845BE9782CC47 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
+		81C9F8956BCC1FC76D72835B /* Pods-GoLocker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoLocker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GoLocker/Pods-GoLocker.debug.xcconfig"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		8454B4A2E2174B5380758155 /* RNFirebase.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFirebase.xcodeproj; path = "../node_modules/react-native-firebase/ios/RNFirebase.xcodeproj"; sourceTree = "<group>"; };
+		894E5C0089739C42ECBB9623 /* Pods-GoLocker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoLocker.release.xcconfig"; path = "Pods/Target Support Files/Pods-GoLocker/Pods-GoLocker.release.xcconfig"; sourceTree = "<group>"; };
 		8D291554EFE84020AEA589C3 /* libRNFirebase.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFirebase.a; sourceTree = "<group>"; };
 		9217ACD693B34F28B0187C03 /* libSplashScreen.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libSplashScreen.a; sourceTree = "<group>"; };
 		97352734404C4C4D845EA618 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/native-base/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
@@ -459,7 +459,6 @@
 		CF7E8C53D11E428696791073 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		D35B0E10529C48259FF66EEB /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/native-base/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		EA63645A73F34DB599C45D08 /* Roboto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto.ttf; path = "../node_modules/native-base/Fonts/Roboto.ttf"; sourceTree = "<group>"; };
-		EE39F4B4B3F68F4005A43BBB /* Pods-GoLocker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoLocker.release.xcconfig"; path = "Pods/Target Support Files/Pods-GoLocker/Pods-GoLocker.release.xcconfig"; sourceTree = "<group>"; };
 		EFD928D4D85B4B9493608734 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/native-base/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -497,6 +496,7 @@
 				F519AE40279DB329F0E46FA4 /* libPods-GoLocker.a in Frameworks */,
 				E02B58A8DA791CA0A6B38D31 /* libPods-GoLocker.a in Frameworks */,
 				9A8D943561C04095992A4F1B /* libRNFirebase.a in Frameworks */,
+				2562EA597843DDF43D367272 /* libPods-GoLocker.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -544,8 +544,6 @@
 				2F06E0A820A77A1000E17C96 /* libSplashScreen.a in Frameworks */,
 				2F06E0A920A77A1000E17C96 /* libRNVectorIcons.a in Frameworks */,
 				2F06E0AA20A77A1000E17C96 /* Fabric.framework in Frameworks */,
-				2F06E0AB20A77A1000E17C96 /* libPods-GoLocker.a in Frameworks */,
-				2F06E0AC20A77A1000E17C96 /* libPods-GoLocker.a in Frameworks */,
 				2F06E0AD20A77A1000E17C96 /* libRNFirebase.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -828,8 +826,8 @@
 		8F59F721AC7CC785375AFDAE /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2B8E89E3D02215CF029500F1 /* Pods-GoLocker.debug.xcconfig */,
-				EE39F4B4B3F68F4005A43BBB /* Pods-GoLocker.release.xcconfig */,
+				81C9F8956BCC1FC76D72835B /* Pods-GoLocker.debug.xcconfig */,
+				894E5C0089739C42ECBB9623 /* Pods-GoLocker.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -925,12 +923,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2F06E0C320A77A1000E17C96 /* Build configuration list for PBXNativeTarget "GoLocker Development" */;
 			buildPhases = (
-				2F06E09620A77A1000E17C96 /* [CP] Check Pods Manifest.lock */,
 				2F06E09720A77A1000E17C96 /* Sources */,
 				2F06E09A20A77A1000E17C96 /* Frameworks */,
 				2F06E0AE20A77A1000E17C96 /* Resources */,
 				2F06E0C020A77A1000E17C96 /* Bundle React Native code and images */,
-				2F06E0C120A77A1000E17C96 /* [CP] Copy Pods Resources */,
 				2F06E0C220A77A1000E17C96 /* ShellScript */,
 			);
 			buildRules = (
@@ -1461,24 +1457,6 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
-		2F06E09620A77A1000E17C96 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-GoLocker-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		2F06E0C020A77A1000E17C96 /* Bundle React Native code and images */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1492,24 +1470,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
-		};
-		2F06E0C120A77A1000E17C96 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-GoLocker/Pods-GoLocker-resources.sh",
-				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GoLocker/Pods-GoLocker-resources.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 		2F06E0C220A77A1000E17C96 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1707,7 +1667,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2B8E89E3D02215CF029500F1 /* Pods-GoLocker.debug.xcconfig */;
+			baseConfigurationReference = 81C9F8956BCC1FC76D72835B /* Pods-GoLocker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1743,20 +1703,7 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/yoga\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/react-native-haptic-feedback\"",
 				);
-				"LIBRARY_SEARCH_PATHS[arch=*]" = (
-					"$(inherited)",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/DoubleConversion\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Folly\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Google-Maps-iOS-Utils\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleToolboxForMac\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNFirebase\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/React\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/glog\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/react-native-google-maps\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/react-native-maps\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/yoga\"",
-				);
+				"LIBRARY_SEARCH_PATHS[arch=*]" = "$(inherited) \"${PODS_CONFIGURATION_BUILD_DIR}/DoubleConversion\" \"${PODS_CONFIGURATION_BUILD_DIR}/Folly\" \"${PODS_CONFIGURATION_BUILD_DIR}/Google-Maps-iOS-Utils\" \"${PODS_CONFIGURATION_BUILD_DIR}/GoogleToolboxForMac\" \"${PODS_CONFIGURATION_BUILD_DIR}/RNFirebase\" \"${PODS_CONFIGURATION_BUILD_DIR}/React\" \"${PODS_CONFIGURATION_BUILD_DIR}/glog\" \"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\" \"${PODS_CONFIGURATION_BUILD_DIR}/react-native-google-maps\" \"${PODS_CONFIGURATION_BUILD_DIR}/react-native-maps\" \"${PODS_CONFIGURATION_BUILD_DIR}/yoga\"";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1773,7 +1720,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EE39F4B4B3F68F4005A43BBB /* Pods-GoLocker.release.xcconfig */;
+			baseConfigurationReference = 894E5C0089739C42ECBB9623 /* Pods-GoLocker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
@@ -1951,7 +1898,6 @@
 		};
 		2F06E0C420A77A1000E17C96 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2B8E89E3D02215CF029500F1 /* Pods-GoLocker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1984,7 +1930,6 @@
 		};
 		2F06E0C520A77A1000E17C96 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EE39F4B4B3F68F4005A43BBB /* Pods-GoLocker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;

@@ -71,7 +71,7 @@ export default class RegistrationCreditForm extends Component {
     const passwordsMatch = password && password.length > 0 && passwordConfirmation === password
     const isComplexPassword = Utils.isPasswordComplex(password)
     const countryCode = this.countryCode.getValue().replace("+", "")
-    const completePhoneNumber = countryCode + number
+    const completePhoneNumber = countryCode == "1" ? number : (countryCode + number)
     const creditCardNumber = this.state.creditCardNumber
 
     const creditCardMonth = this.state.creditCardMonth

@@ -64,7 +64,7 @@ export default class RegistrationForm extends Component {
     const passwordsMatch = password && password.length > 0 && passwordConfirmation === password
     const isComplexPassword = Utils.isPasswordComplex(password)
     const countryCode = this.countryCode.getValue().replace("+", "")
-    const completePhoneNumber = countryCode + number
+    const completePhoneNumber = countryCode == "1" ? number : (countryCode + number)
 
     if(this.state.sending) {
       return;

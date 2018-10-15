@@ -227,11 +227,14 @@ export const AuthenticationNetworkManager = {
         body: data,
       })
     .then((response) => {
-      if(response.status === STATUS_CODE.OK) {
-        return response.json()
+      if (response.status === 200) {
+        return response.json();
       }
 
-      return new Promise((resolve, reject) => { reject(new Error('Error has occurred'))})
+      return response.json()
+      .then(function(object) {
+       return new Promise((resolve, reject) => { reject(object)})
+      })
     })
   },
   verifyUser: (email, code) => {

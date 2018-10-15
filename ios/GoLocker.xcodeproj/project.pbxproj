@@ -1703,7 +1703,20 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/yoga\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/react-native-haptic-feedback\"",
 				);
-				"LIBRARY_SEARCH_PATHS[arch=*]" = "$(inherited) \"${PODS_CONFIGURATION_BUILD_DIR}/DoubleConversion\" \"${PODS_CONFIGURATION_BUILD_DIR}/Folly\" \"${PODS_CONFIGURATION_BUILD_DIR}/Google-Maps-iOS-Utils\" \"${PODS_CONFIGURATION_BUILD_DIR}/GoogleToolboxForMac\" \"${PODS_CONFIGURATION_BUILD_DIR}/RNFirebase\" \"${PODS_CONFIGURATION_BUILD_DIR}/React\" \"${PODS_CONFIGURATION_BUILD_DIR}/glog\" \"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\" \"${PODS_CONFIGURATION_BUILD_DIR}/react-native-google-maps\" \"${PODS_CONFIGURATION_BUILD_DIR}/react-native-maps\" \"${PODS_CONFIGURATION_BUILD_DIR}/yoga\"";
+				"LIBRARY_SEARCH_PATHS[arch=*]" = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/DoubleConversion\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Folly\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Google-Maps-iOS-Utils\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleToolboxForMac\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNFirebase\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/glog\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/react-native-google-maps\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/react-native-maps\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/yoga\"",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

@@ -132,7 +132,16 @@ export default class RegistrationForm extends Component {
       navigation.navigate('Verification', {email: email.trim(), firstName: firstName})
     })
     .catch(err => {
-      this.setState({errorMessage: "Something is wrong or your phone number or email is in use", sending: false})
+      var title = err.title || "Something is wrong. Try again later.";
+      title = title.endsWith(".") ? title : title + "."
+
+      var details = err.details || []
+      details.forEach((detail) => {
+        detail = detail.endsWith(".") ? detail : detail + ".";
+      })
+
+      const errorMessage = title + " " + details.join(" ");
+      this.setState({errorMessage: errorMessage, sending: false})
       this.component._root.scrollToPosition(0, 0)
     })
   }

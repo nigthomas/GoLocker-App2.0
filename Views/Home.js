@@ -174,7 +174,7 @@ export default class HomeView extends Component {
           </TouchableHighlight>
           </SafeAreaView>
           <View style={{flex: 1, marginTop: 100, marginLeft: 21, alignItems: 'center'}}>
-              <Image style={{width: 164, height: 164}} source={{uri: base64Icon}}/>
+              <Image style={{width: 275, height: 275}} source={{uri: base64Icon}}/>
           </View>
         </SafeAreaView>
       </Modal>

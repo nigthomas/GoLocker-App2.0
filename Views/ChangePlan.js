@@ -88,7 +88,7 @@ export default class ChangePlan extends Component {
   renderPromoCodeField() {
     return (
       <View style={{marginTop: 5}}>
-        <TextInput underlineColorAndroid='transparent' placeholderTextColor={Colors.gray_85} style={{color: Colors.dark_gray, backgroundColor: Colors.white, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont, paddingLeft: 10}} placeholder={"Enter Promo Code"} onChangeText={(code) => this.setState({code})} value={this.state.code}/>
+        <TextInput underlineColorAndroid='transparent' placeholderTextColor={Colors.gray_85} style={{color: Colors.dark_gray, backgroundColor: Colors.white, height: 50, borderRadius: 4, fontFamily: Theme.primaryFont, paddingLeft: 10}} placeholder={"Enter Promo Code"} onChangeText={(code) => this.setState({code: code.toUpperCase()})} value={this.state.code}/>
       </View>
     )
   }

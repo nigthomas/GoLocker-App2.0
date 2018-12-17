@@ -48,13 +48,20 @@ export default class LockerDetail extends Component {
       return null
     }
 
-    const name = locker.property.name
     const address = locker.property.address
     const fullAddress = locker.property.fullAddress(2)
     const location = (locker.property.location) ? locker.property.location : null
     const coordinate = {latitude: location.latitude, longitude: location.longitude}
     const isPrimaryLocker = locker.isPrimaryLocker()
     const positionText = isPrimaryLocker ? "Primary" : "Secondary"
+
+    var name = locker.property.name
+    
+    if(locker.externalID == "glkr00005") {
+      name = name + " (Station 1)"
+    } else if(locker.externalID == "glkr00014") {
+      name = name + " (Station 2)"
+    }
 
     if(isPrimaryLocker) {
       return (

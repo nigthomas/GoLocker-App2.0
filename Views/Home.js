@@ -120,7 +120,7 @@ export default class HomeView extends Component {
       onPress: () => { this.cancelReservation(item) }
     }];
 
-    const lockerName = (item.locker && item.locker.property) ? item.locker.property.name : ""
+    var lockerName = (item.locker && item.locker.property) ? item.locker.property.name : ""
     const expiration = (item.expirationDate) ? new Moment(item.expirationDate).format('MM/DD') : ""
     const trackingNumber = item.trackingNumber
     const pin = item.pin
@@ -129,6 +129,14 @@ export default class HomeView extends Component {
 
     if(type) {
       type = (<Text style={{ color: Colors.gray_85, marginTop: 2}}>Type: {type}</Text>)
+    }
+
+    if(item.locker) {
+      if(item.locker.externalID == "glkr00005") {
+        lockerName = lockerName + " (Station 1)"
+      } else if(item.locker.externalID == "glkr00014") {
+        lockerName = lockerName + " (Station 2)"
+      }
     }
 
     return (

@@ -204,8 +204,17 @@ export default class Ship extends Component {
     const compartmentSizes = _.filter(locker ? locker.compartmentSizes : [], (size) => {
       return !(size.code.toLowerCase() == "es" || size.code.toLowerCase() == "el" || size.code.toLowerCase() == "x" || size.code.toLowerCase() == "xl");
     })
-    const lockerName = (this.state.sendToLocker && this.state.sendToLocker.property) ? this.state.sendToLocker.property.name: ""
+
     const errorText = this.state.error ? <Text style={{marginLeft: 21, color: Colors.red, marginTop: 5}}>Something is wrong. Please try again</Text> : null
+    var lockerName = (this.state.sendToLocker && this.state.sendToLocker.property) ? this.state.sendToLocker.property.name: ""
+
+    if(this.state.sendToLocker && this.state.sendToLocker.property) {
+      if(this.state.sendToLocker.externalID == "glkr00005") {
+        lockerName = lockerName + " (Station 1)"
+      } else if(this.state.sendToLocker.externalID == "glkr00014") {
+        lockerName = lockerName + " (Station 2)"
+      }
+    }
 
     return (
       <Root>

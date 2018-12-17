@@ -9,10 +9,10 @@ PODS:
   - FirebaseAnalytics (4.0.3):
     - FirebaseCore (~> 4.0)
     - FirebaseInstanceID (~> 2.0)
-    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
     - nanopb (~> 0.3)
   - FirebaseCore (4.0.7):
-    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
     - nanopb (~> 0.3)
   - FirebaseInstanceID (2.0.10):
     - FirebaseCore (~> 4.0)
@@ -43,7 +43,7 @@ PODS:
   - GoogleMaps/Maps (2.5.0):
     - GoogleMaps/Base
   - GoogleToolboxForMac/Defines (2.1.4)
-  - "GoogleToolboxForMac/NSData+zlib (2.1.4)":
+  - GoogleToolboxForMac/NSData+zlib (2.1.4):
     - GoogleToolboxForMac/Defines (= 2.1.4)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
@@ -136,37 +136,25 @@ DEPENDENCIES:
   - RNReactNativeHapticFeedback (from `../node_modules/react-native-haptic-feedback`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga/yoga.podspec`)
 
-SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
-    - boost-for-react-native
-    - Firebase
-    - FirebaseAnalytics
-    - FirebaseCore
-    - FirebaseInstanceID
-    - Google-Maps-iOS-Utils
-    - GoogleMaps
-    - GoogleToolboxForMac
-    - nanopb
-
 EXTERNAL SOURCES:
   DoubleConversion:
-    :podspec: "../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
+    :podspec: ../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec
   Folly:
-    :podspec: "../node_modules/react-native/third-party-podspecs/Folly.podspec"
+    :podspec: ../node_modules/react-native/third-party-podspecs/Folly.podspec
   glog:
-    :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
+    :podspec: ../node_modules/react-native/third-party-podspecs/glog.podspec
   React:
-    :path: "../node_modules/react-native"
+    :path: ../node_modules/react-native
   react-native-google-maps:
-    :path: "../node_modules/react-native-maps"
+    :path: ../node_modules/react-native-maps
   react-native-maps:
-    :path: "../node_modules/react-native-maps"
+    :path: ../node_modules/react-native-maps
   RNFirebase:
-    :path: "../node_modules/react-native-firebase/ios"
+    :path: ../node_modules/react-native-firebase/ios
   RNReactNativeHapticFeedback:
-    :path: "../node_modules/react-native-haptic-feedback"
+    :path: ../node_modules/react-native-haptic-feedback
   yoga:
-    :path: "../node_modules/react-native/ReactCommon/yoga/yoga.podspec"
+    :path: ../node_modules/react-native/ReactCommon/yoga/yoga.podspec
 
 SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
@@ -190,4 +178,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 74da0161e51bc03496657d643a29a73df4aae408
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.4.0

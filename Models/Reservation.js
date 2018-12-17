@@ -47,6 +47,10 @@ export default class Reservation {
 
     s = parseInt(s, 10)
 
+    if(this.delivered) {
+      return "Delivered"
+    }
+
     switch(s) {
       case 1:
         return "Active"
@@ -59,7 +63,7 @@ export default class Reservation {
       case 5:
         return "Received"
       case 6:
-        return (this.delivered) ? "Waiting" : "Out for delivery"
+        return "Reserved"
       case 7:
         return "Completed"
       case 8:

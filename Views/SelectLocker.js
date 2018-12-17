@@ -52,8 +52,14 @@ export default class SelectLocker extends Component {
   }
 
   renderItem(item) {
-    const name = item.property.name
+    var name = item.property.name
     const address= item.property.fullAddress()
+
+    if(item.externalID == "glkr00005") {
+      name = name + " (Station 1)"
+    } else if(item.externalID == "glkr00014") {
+      name = name + " (Station 2)"
+    }
 
     return (
       <TouchableHighlight onPress={() => {this.selectLocker(item)}} underlayColor={'transparent'}>

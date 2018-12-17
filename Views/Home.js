@@ -40,7 +40,7 @@ export default class HomeView extends Component {
      locationMsg: null,
      showOpenDoorButton: false,
      doorButtonColor: Colors.light_green,
-     doorButtonText: "Hold to open front entrance",
+     doorButtonText: "Tap to open front entrance",
      setupAnalytics: false
    };
   }
@@ -74,7 +74,7 @@ export default class HomeView extends Component {
   }
 
   fetch() {
-    this.setState({loading: true, showOpenDoorButton: false, locationMsg: null, selectedLocker: null, doorButtonColor: Colors.light_green, doorButtonText: "Hold to open front entrance", requestedLocation: false})
+    this.setState({loading: true, showOpenDoorButton: false, locationMsg: null, selectedLocker: null, doorButtonColor: Colors.light_green, doorButtonText: "Tap to open front entrance", requestedLocation: false})
     Promise.all([DashboardService.getInfo(), ReservationService.getInstance().getReservations()])
     .then(results => {
       this.setState({data: results[0], reservationData: results[1], loading: false, error: null})
@@ -355,7 +355,7 @@ export default class HomeView extends Component {
 
       let property = locker.property
       if (property.hasOpenDoorAction()) {
-        this.setState({selectedLocker: locker, doorButtonText: "Hold to open front entrance", doorButtonColor: Colors.light_green, showOpenDoorButton: true})
+        this.setState({selectedLocker: locker, doorButtonText: "Tap to open front entrance", doorButtonColor: Colors.light_green, showOpenDoorButton: true})
         break;
       }
     }
@@ -373,7 +373,7 @@ export default class HomeView extends Component {
   }
 
   showRegularState() {
-    this.setState({doorButtonText: "Hold to open front entrance", doorButtonColor: Colors.light_green})
+    this.setState({doorButtonText: "Tap to open front entrance", doorButtonColor: Colors.light_green})
   }
 
   openDoor() {
@@ -392,7 +392,7 @@ export default class HomeView extends Component {
       this.setState({doorButtonText: "Door opened"})
       ReactNativeHapticFeedback.trigger('notificationSuccess');
       setTimeout(() => {
-        this.setState({doorButtonText: "Hold to open front entrance", doorButtonColor: Colors.light_green})
+        this.setState({doorButtonText: "Tap to open front entrance", doorButtonColor: Colors.light_green})
       }, 1500)
     })
     .catch(err => {
@@ -421,7 +421,7 @@ export default class HomeView extends Component {
 
   renderOpenDoorButton() {
     return (
-      <TouchableWithoutFeedback onLongPress={() => {this.openDoorButtonTapped()}} underlayColor={'transparent'}>
+      <TouchableWithoutFeedback onPress={() => {this.openDoorButtonTapped()}} underlayColor={'transparent'}>
         <View style={{height: 60, borderRadius: 4, backgroundColor: this.state.doorButtonColor, marginLeft: 21, marginRight: 21, marginTop: 10, justifyContent: 'center', alignItems: 'center'}}>
           <Text style={{textAlign: 'center', color: Colors.white}}>{this.state.doorButtonText}</Text>
         </View>

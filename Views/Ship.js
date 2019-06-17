@@ -202,7 +202,7 @@ export default class Ship extends Component {
     const lastName = data.lastName
     const locker = this.state.sendToLocker
     const compartmentSizes = _.filter(locker ? locker.compartmentSizes : [], (size) => {
-      return !(size.code.toLowerCase() == "es" || size.code.toLowerCase() == "el" || size.code.toLowerCase() == "x" || size.code.toLowerCase() == "xl");
+      return !(size.code.toLowerCase() == "es" || size.code.toLowerCase() == "el" || size.code.toLowerCase() == "x" || size.code.toLowerCase() == "xl" || size.code.toLowerCase() == "e");
     })
 
     const errorText = this.state.error ? <Text style={{marginLeft: 21, color: Colors.red, marginTop: 5}}>Something is wrong. Please try again</Text> : null

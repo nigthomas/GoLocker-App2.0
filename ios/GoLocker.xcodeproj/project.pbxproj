@@ -74,9 +74,9 @@
 		2F06E0BF20A77A1000E17C96 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7723798061E845BE9782CC47 /* MaterialCommunityIcons.ttf */; };
 		2F50629F20B4F317004A6B49 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F50629E20B4F317004A6B49 /* GoogleService-Info.plist */; };
 		2F5062A120B4F3C4004A6B49 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F5062A020B4F3C4004A6B49 /* GoogleService-Info.plist */; };
-		2FA7566020B0E9AF00795896 /* libRNReactNativeHapticFeedback.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FA7565F20B0E99D00795896 /* libRNReactNativeHapticFeedback.a */; };
 		2FA7566120B0E9B700795896 /* libRNReactNativeHapticFeedback.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FA7565F20B0E99D00795896 /* libRNReactNativeHapticFeedback.a */; };
 		2FBB387D20AD320200446110 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
+		2FD8F6D821C7F65D00A74E35 /* libRNReactNativeHapticFeedback.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FD8F6D721C7F65D00A74E35 /* libRNReactNativeHapticFeedback.a */; };
 		2FE1CDE520A7631100410B47 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FE1CDE320A7631100410B47 /* Fabric.framework */; };
 		2FE1CDE620A7631100410B47 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FE1CDE420A7631100410B47 /* Crashlytics.framework */; };
 		3AE81C13E7D34D09999B95A1 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7723798061E845BE9782CC47 /* MaterialCommunityIcons.ttf */; };
@@ -432,6 +432,8 @@
 		2F50629E20B4F317004A6B49 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2F5062A020B4F3C4004A6B49 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "development/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2FA7565A20B0E99D00795896 /* RNReactNativeHapticFeedback.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNReactNativeHapticFeedback.xcodeproj; path = "../node_modules/react-native-haptic-feedback/ios/RNReactNativeHapticFeedback.xcodeproj"; sourceTree = "<group>"; };
+		2FD8F6D521C7F63800A74E35 /* libRNReactNativeHapticFeedback.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libRNReactNativeHapticFeedback.a; path = "build/Build/Products/Debug-iphonesimulator/RNReactNativeHapticFeedback/libRNReactNativeHapticFeedback.a"; sourceTree = "<group>"; };
+		2FD8F6D721C7F65D00A74E35 /* libRNReactNativeHapticFeedback.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libRNReactNativeHapticFeedback.a; sourceTree = "<group>"; };
 		2FE1CDE320A7631100410B47 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		2FE1CDE420A7631100410B47 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		3D808AA46D94E0A0065A0EC4 /* libPods-GoLocker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GoLocker.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -475,7 +477,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2FA7566020B0E9AF00795896 /* libRNReactNativeHapticFeedback.a in Frameworks */,
+				2FD8F6D821C7F65D00A74E35 /* libRNReactNativeHapticFeedback.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -672,6 +674,8 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2FD8F6D521C7F63800A74E35 /* libRNReactNativeHapticFeedback.a */,
+				2FD8F6D721C7F65D00A74E35 /* libRNReactNativeHapticFeedback.a */,
 				2F06E06C20A7796400E17C96 /* libPods-GoLocker.a */,
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
 				3D808AA46D94E0A0065A0EC4 /* libPods-GoLocker.a */,
@@ -1702,6 +1706,8 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/react-native-maps\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/yoga\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/react-native-haptic-feedback\"",
+					"$(PROJECT_DIR)/build/Build/Products/Debug-iphonesimulator/RNReactNativeHapticFeedback",
+					"$(PROJECT_DIR)",
 				);
 				"LIBRARY_SEARCH_PATHS[arch=*]" = (
 					"$(inherited)",
@@ -1768,6 +1774,8 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/react-native-google-maps\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/react-native-maps\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/yoga\"",
+					"$(PROJECT_DIR)/build/Build/Products/Debug-iphonesimulator/RNReactNativeHapticFeedback",
+					"$(PROJECT_DIR)",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",

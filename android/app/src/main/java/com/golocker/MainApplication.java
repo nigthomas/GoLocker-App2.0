@@ -3,6 +3,8 @@ package com.golocker;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.oblador.keychain.KeychainPackage;
+import com.rnfingerprint.FingerprintAuthPackage;
 import com.reactlibrary.RNReactNativeHapticFeedbackPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
@@ -17,6 +19,7 @@ import java.util.List;
 
 import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.analytics.RNFirebaseAnalyticsPackage;
+import io.invertase.firebase.firestore.RNFirebaseFirestorePackage; // <-- Add this line
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -31,8 +34,11 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new KeychainPackage(),
+            new FingerprintAuthPackage(),
               new RNFirebasePackage(),
               new RNFirebaseAnalyticsPackage(),
+              new RNFirebaseFirestorePackage(),
               new RNReactNativeHapticFeedbackPackage(),
               new VectorIconsPackage(),
               new SplashScreenReactPackage(),

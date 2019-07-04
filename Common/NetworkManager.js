@@ -16,7 +16,8 @@ const URL = {
   lockers: `${BASE_URL}/v1/lockers`,
   newsletter: `${BASE_URL}/v1/newsletter`,
   promoCode: `${BASE_URL}/v1/applyPromo`,
-  changePlan: `${BASE_URL}/v1/account/changePlan`
+  changePlan: `${BASE_URL}/v1/account/changePlan`,
+  ads: `https://glockerads.s3-us-west-2.amazonaws.com/display_a3.json`
 }
 
 const STATUS_CODE = {
@@ -54,6 +55,24 @@ export class NetworkStatusListener {
    forceLogout() {
      this.state.listener.emit('FORCE_LOGOUT');
    }
+}
+
+export const AdNetworkManager = {
+  getAds: () => {
+    return fetch(URL.ads, {
+      method: 'GET',
+      headers: {
+        Accept: HEADERS.Accept,
+        }
+      })
+    .then((response) => {
+      if(response.status === STATUS_CODE.OK) {
+        return response.json()
+      }
+
+      return new Promise((resolve, reject) => { reject(new Error('Error has occurred'))})
+    })
+  }
 }
 
 export const NewsletterNetworkManager = {

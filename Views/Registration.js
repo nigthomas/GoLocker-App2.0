@@ -31,7 +31,7 @@ export default class RegistrationView extends Component {
     PropertyService.getProperties(this.state.zip_code)
     .then(properties => {
       if(properties.length == 0) {
-        navigation.navigate('NoAvailableLockers', {})
+        navigation.navigate('NoAvailableLockers', {zip_code: this.state.zip_code})
         return;
       }
 

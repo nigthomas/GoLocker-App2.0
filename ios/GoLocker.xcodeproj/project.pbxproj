@@ -77,6 +77,8 @@
 		2FA7566120B0E9B700795896 /* libRNReactNativeHapticFeedback.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FA7565F20B0E99D00795896 /* libRNReactNativeHapticFeedback.a */; };
 		2FBB387D20AD320200446110 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2FD8F6D821C7F65D00A74E35 /* libRNReactNativeHapticFeedback.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FD8F6D721C7F65D00A74E35 /* libRNReactNativeHapticFeedback.a */; };
+		2FDE414D22B9D4ED00EF8EB6 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FDE414C22B9D4ED00EF8EB6 /* GameKit.framework */; };
+		2FDE414F22B9D4F300EF8EB6 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FDE414E22B9D4F300EF8EB6 /* StoreKit.framework */; };
 		2FE1CDE520A7631100410B47 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FE1CDE320A7631100410B47 /* Fabric.framework */; };
 		2FE1CDE620A7631100410B47 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FE1CDE420A7631100410B47 /* Crashlytics.framework */; };
 		3AE81C13E7D34D09999B95A1 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7723798061E845BE9782CC47 /* MaterialCommunityIcons.ttf */; };
@@ -240,20 +242,6 @@
 			remoteGlobalIDString = 3D383D621EBD27B9005632C8;
 			remoteInfo = "double-conversion-tvOS";
 		};
-		2F460CF82058D3D2000AE82B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 9936F3131F5F2E4B0010BF04;
-			remoteInfo = privatedata;
-		};
-		2F460CFA2058D3D2000AE82B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 9936F32F1F5F2E5B0010BF04;
-			remoteInfo = "privatedata-tvOS";
-		};
 		2F460CFF2058D3D4000AE82B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AECAB036A1334951AF69A61D /* SplashScreen.xcodeproj */;
@@ -267,6 +255,34 @@
 			proxyType = 2;
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = RNReactNativeHapticFeedback;
+		};
+		2FDE414022B9CCBA00EF8EB6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EDEBC6D6214B3E7000DD5AC8;
+			remoteInfo = jsi;
+		};
+		2FDE414222B9CCBA00EF8EB6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EDEBC73B214B45A300DD5AC8;
+			remoteInfo = jsiexecutor;
+		};
+		2FDE414422B9CCBA00EF8EB6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = ED296FB6214C9A0900B7C4FE;
+			remoteInfo = "jsi-tvOS";
+		};
+		2FDE414622B9CCBA00EF8EB6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = ED296FEE214C9CF800B7C4FE;
+			remoteInfo = "jsiexecutor-tvOS";
 		};
 		2FF517F5205CBE7A00DBA8B3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -352,20 +368,6 @@
 			remoteGlobalIDString = 3D3CD9321DE5FBEE00167DC4;
 			remoteInfo = "cxxreact-tvOS";
 		};
-		3DAD3EAC1DF850E9000B6D8A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3D3CD90B1DE5FBD600167DC4;
-			remoteInfo = jschelpers;
-		};
-		3DAD3EAE1DF850E9000B6D8A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3D3CD9181DE5FBD800167DC4;
-			remoteInfo = "jschelpers-tvOS";
-		};
 		5E9157321DD0AC6500FF2AA8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */;
@@ -434,6 +436,9 @@
 		2FA7565A20B0E99D00795896 /* RNReactNativeHapticFeedback.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNReactNativeHapticFeedback.xcodeproj; path = "../node_modules/react-native-haptic-feedback/ios/RNReactNativeHapticFeedback.xcodeproj"; sourceTree = "<group>"; };
 		2FD8F6D521C7F63800A74E35 /* libRNReactNativeHapticFeedback.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libRNReactNativeHapticFeedback.a; path = "build/Build/Products/Debug-iphonesimulator/RNReactNativeHapticFeedback/libRNReactNativeHapticFeedback.a"; sourceTree = "<group>"; };
 		2FD8F6D721C7F65D00A74E35 /* libRNReactNativeHapticFeedback.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libRNReactNativeHapticFeedback.a; sourceTree = "<group>"; };
+		2FDE414C22B9D4ED00EF8EB6 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		2FDE414E22B9D4F300EF8EB6 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		2FDE415022B9D5B000EF8EB6 /* GoLocker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = GoLocker.entitlements; path = GoLocker/GoLocker.entitlements; sourceTree = "<group>"; };
 		2FE1CDE320A7631100410B47 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		2FE1CDE420A7631100410B47 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		3D808AA46D94E0A0065A0EC4 /* libPods-GoLocker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GoLocker.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -480,6 +485,7 @@
 				2FD8F6D821C7F65D00A74E35 /* libRNReactNativeHapticFeedback.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
+				2FDE414F22B9D4F300EF8EB6 /* StoreKit.framework in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
@@ -494,6 +500,7 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				7B5753CFA48642D5935F19F3 /* libSplashScreen.a in Frameworks */,
 				EE139C78B9C04C82B348E7BB /* libRNVectorIcons.a in Frameworks */,
+				2FDE414D22B9D4ED00EF8EB6 /* GameKit.framework in Frameworks */,
 				2FE1CDE520A7631100410B47 /* Fabric.framework in Frameworks */,
 				F519AE40279DB329F0E46FA4 /* libPods-GoLocker.a in Frameworks */,
 				E02B58A8DA791CA0A6B38D31 /* libPods-GoLocker.a in Frameworks */,
@@ -635,6 +642,7 @@
 		13B07FAE1A68108700A75B9A /* GoLocker */ = {
 			isa = PBXGroup;
 			children = (
+				2FDE415022B9D5B000EF8EB6 /* GoLocker.entitlements */,
 				2F50629E20B4F317004A6B49 /* GoogleService-Info.plist */,
 				2F5062A020B4F3C4004A6B49 /* GoogleService-Info.plist */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -657,16 +665,16 @@
 				3DAD3EA71DF850E9000B6D8A /* libyoga.a */,
 				3DAD3EA91DF850E9000B6D8A /* libcxxreact.a */,
 				3DAD3EAB1DF850E9000B6D8A /* libcxxreact.a */,
-				3DAD3EAD1DF850E9000B6D8A /* libjschelpers.a */,
-				3DAD3EAF1DF850E9000B6D8A /* libjschelpers.a */,
 				2F460CED2058D3D2000AE82B /* libjsinspector.a */,
 				2F460CEF2058D3D2000AE82B /* libjsinspector-tvOS.a */,
 				2F460CF12058D3D2000AE82B /* libthird-party.a */,
 				2F460CF32058D3D2000AE82B /* libthird-party.a */,
 				2F460CF52058D3D2000AE82B /* libdouble-conversion.a */,
 				2F460CF72058D3D2000AE82B /* libdouble-conversion.a */,
-				2F460CF92058D3D2000AE82B /* libprivatedata.a */,
-				2F460CFB2058D3D2000AE82B /* libprivatedata-tvOS.a */,
+				2FDE414122B9CCBA00EF8EB6 /* libjsi.a */,
+				2FDE414322B9CCBA00EF8EB6 /* libjsiexecutor.a */,
+				2FDE414522B9CCBA00EF8EB6 /* libjsi-tvOS.a */,
+				2FDE414722B9CCBA00EF8EB6 /* libjsiexecutor-tvOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -674,6 +682,8 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2FDE414E22B9D4F300EF8EB6 /* StoreKit.framework */,
+				2FDE414C22B9D4ED00EF8EB6 /* GameKit.framework */,
 				2FD8F6D521C7F63800A74E35 /* libRNReactNativeHapticFeedback.a */,
 				2FD8F6D721C7F65D00A74E35 /* libRNReactNativeHapticFeedback.a */,
 				2F06E06C20A7796400E17C96 /* libPods-GoLocker.a */,
@@ -963,6 +973,15 @@
 							com.apple.BackgroundModes = {
 								enabled = 0;
 							};
+							com.apple.GameCenter.iOS = {
+								enabled = 1;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+							com.apple.SafariKeychain = {
+								enabled = 0;
+							};
 						};
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -977,7 +996,7 @@
 						TestTargetID = 2D02E47A1E0B4A5D006451C7;
 					};
 					2F06E09520A77A1000E17C96 = {
-						DevelopmentTeam = 5HSHP48M6L;
+						DevelopmentTeam = 73X8Q4HS6H;
 					};
 				};
 			};
@@ -986,6 +1005,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -1196,20 +1216,6 @@
 			remoteRef = 2F460CF62058D3D2000AE82B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		2F460CF92058D3D2000AE82B /* libprivatedata.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libprivatedata.a;
-			remoteRef = 2F460CF82058D3D2000AE82B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		2F460CFB2058D3D2000AE82B /* libprivatedata-tvOS.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libprivatedata-tvOS.a";
-			remoteRef = 2F460CFA2058D3D2000AE82B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		2F460D002058D3D4000AE82B /* libSplashScreen.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1222,6 +1228,34 @@
 			fileType = archive.ar;
 			path = libRNReactNativeHapticFeedback.a;
 			remoteRef = 2FA7565E20B0E99D00795896 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2FDE414122B9CCBA00EF8EB6 /* libjsi.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libjsi.a;
+			remoteRef = 2FDE414022B9CCBA00EF8EB6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2FDE414322B9CCBA00EF8EB6 /* libjsiexecutor.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libjsiexecutor.a;
+			remoteRef = 2FDE414222B9CCBA00EF8EB6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2FDE414522B9CCBA00EF8EB6 /* libjsi-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libjsi-tvOS.a";
+			remoteRef = 2FDE414422B9CCBA00EF8EB6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2FDE414722B9CCBA00EF8EB6 /* libjsiexecutor-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libjsiexecutor-tvOS.a";
+			remoteRef = 2FDE414622B9CCBA00EF8EB6 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		2FF517F6205CBE7A00DBA8B3 /* libRNVectorIcons.a */ = {
@@ -1306,20 +1340,6 @@
 			fileType = archive.ar;
 			path = libcxxreact.a;
 			remoteRef = 3DAD3EAA1DF850E9000B6D8A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3DAD3EAD1DF850E9000B6D8A /* libjschelpers.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libjschelpers.a;
-			remoteRef = 3DAD3EAC1DF850E9000B6D8A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3DAD3EAF1DF850E9000B6D8A /* libjschelpers.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libjschelpers.a;
-			remoteRef = 3DAD3EAE1DF850E9000B6D8A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */ = {
@@ -1527,10 +1547,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-GoLocker/Pods-GoLocker-resources.sh",
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-C++/gRPCCertificates-Cpp.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/gRPCCertificates-Cpp.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1709,20 +1731,7 @@
 					"$(PROJECT_DIR)/build/Build/Products/Debug-iphonesimulator/RNReactNativeHapticFeedback",
 					"$(PROJECT_DIR)",
 				);
-				"LIBRARY_SEARCH_PATHS[arch=*]" = (
-					"$(inherited)",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/DoubleConversion\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Folly\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Google-Maps-iOS-Utils\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleToolboxForMac\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNFirebase\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/React\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/glog\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/react-native-google-maps\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/react-native-maps\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/yoga\"",
-				);
+				"LIBRARY_SEARCH_PATHS[arch=*]" = "$(inherited) \"${PODS_CONFIGURATION_BUILD_DIR}/DoubleConversion\" \"${PODS_CONFIGURATION_BUILD_DIR}/Folly\" \"${PODS_CONFIGURATION_BUILD_DIR}/Google-Maps-iOS-Utils\" \"${PODS_CONFIGURATION_BUILD_DIR}/GoogleToolboxForMac\" \"${PODS_CONFIGURATION_BUILD_DIR}/RNFirebase\" \"${PODS_CONFIGURATION_BUILD_DIR}/React\" \"${PODS_CONFIGURATION_BUILD_DIR}/glog\" \"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\" \"${PODS_CONFIGURATION_BUILD_DIR}/react-native-google-maps\" \"${PODS_CONFIGURATION_BUILD_DIR}/react-native-maps\" \"${PODS_CONFIGURATION_BUILD_DIR}/yoga\"";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1730,8 +1739,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.beastlyinc.golocker;
 				PRODUCT_NAME = GoLocker;
-				PROVISIONING_PROFILE = "e2f17862-d792-4877-a4c7-3f90ec7a206f";
-				PROVISIONING_PROFILE_SPECIFIER = Development;
+				PROVISIONING_PROFILE_SPECIFIER = PP;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1746,7 +1754,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 73X8Q4HS6H;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1784,8 +1792,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.beastlyinc.golocker;
 				PRODUCT_NAME = GoLocker;
-				PROVISIONING_PROFILE = "294c9798-ec3f-4db0-b5a4-9649457377c7";
-				PROVISIONING_PROFILE_SPECIFIER = Distribution;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1921,9 +1928,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = 5HSHP48M6L;
+				DEVELOPMENT_TEAM = 73X8Q4HS6H;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1953,8 +1961,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5HSHP48M6L;
+				DEVELOPMENT_TEAM = 73X8Q4HS6H;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

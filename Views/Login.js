@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, StyleSheet, Text, View, Button, FlatList, Dimensions, StatusBar, Image, TextInput, Alert, TouchableHighlight, Platform, ScrollView, findNodeHandle} from 'react-native';
+import { Modal, StyleSheet, Text, View, Button, FlatList, Dimensions, StatusBar, Image, TextInput, Alert, TouchableHighlight, Platform, ScrollView, findNodeHandle, Switch} from 'react-native';
 import { Container, Header, Content, Form, Item, Input, Label, Root } from 'native-base';
 import Theme from '../Common/Theme'
 import Colors from '../Common/Colors'
@@ -10,6 +10,8 @@ import AlertView from '../Elements/AlertView'
 import OnboardingService from '../Services/OnboardingService'
 import OnboardingView from '../Views/Onboarding'
 import { NetworkStatusListener } from '../Common/NetworkManager'
+import TouchID from 'react-native-touch-id'
+import * as Keychain from 'react-native-keychain';
 
 export default class LoginView extends Component {
   static navigationOptions = { title: 'Login', header: null };
@@ -28,7 +30,9 @@ export default class LoginView extends Component {
      headerText: headerText,
      firstName: firstName,
      signInText: "Sign In",
-     signInColor: Colors.light_green
+     signInColor: Colors.light_green,
+     showTouchIdSwitch: false,
+     touchIDSwitchEnabled: true
    };
   }
 
@@ -43,11 +47,33 @@ export default class LoginView extends Component {
 
     this.showProcessingState()
     LoginService.getInstance().login(username, password)
-    .then(account => {
-      //Login event will update route
-      this.showRegularState()
+    .then(finishLoginFunction => {
+      if(!this.state.showTouchIdSwitch) {
+          this.showRegularState()
+          finishLoginFunction()
+          return;
+      }
+
+      return TouchID.authenticate()
+      .then(success => {
+        if(success) {
+          return Keychain.setGenericPassword(username, password)
+        }
+
+        return new Promise((resolve, reject) => { resolve()})
+      })
+      .then(() => {
+        finishLoginFunction()
+        this.showRegularState()
+      })
+      .catch(error => {
+        console.log(error)
+        finishLoginFunction()
+      });
+
     })
     .catch(err => {
+      console.log(err)
       this.showRegularState()
       Alert.alert("Whoops!", "This username and password combination doesn't exist",[{text: 'OK', onPress: () => {}}],{ cancelable: true })
     })
@@ -55,6 +81,35 @@ export default class LoginView extends Component {
 
   componentDidMount() {
     this.fetch()
+
+    TouchID.isSupported()
+    .then(biometryType => {
+      const showTouchIdSwitch = (biometryType === 'FaceID' || biometryType === 'TouchID' || biometryType === true)
+      this.setState({showTouchIdSwitch: showTouchIdSwitch})
+      return Promise.all([Keychain.getGenericPassword(), new Promise((resolve, reject) => { resolve(showTouchIdSwitch)})])
+    })
+    .then(results => {
+      const credentials = results[0]
+      , showTouchIdSwitch = results[1]
+      ;
+
+      if(!showTouchIdSwitch || !credentials) {
+        return new Promise((resolve, reject) => { resolve()})
+      }
+
+      return TouchID.authenticate()
+      .then(success => {
+        if(success) {
+          this.setState({username: credentials.username, password: credentials.password})
+        }
+      })
+    })
+    .then(() => {
+
+    })
+    .catch(error => {
+      console.log(error);
+    });
 
     NetworkStatusListener.getInstance()
     .getListener()
@@ -129,6 +184,9 @@ export default class LoginView extends Component {
     }
 
     const headerText = `${this.state.headerText} ${this.state.firstName || ""}`
+    , touchIDSwitchEnabled = this.state.touchIDSwitchEnabled
+    , showTouchIdSwitch = this.state.showTouchIdSwitch
+    ;
 
     return (
       <Root>
@@ -150,6 +208,26 @@ export default class LoginView extends Component {
                     <Text style={{textAlign: 'center', color: Colors.white, marginTop: 17}}>{this.state.signInText}</Text>
                   </View>
                 </TouchableHighlight>
+                {showTouchIdSwitch &&
+                <View style={{marginBottom: 20, flex: 1, flexDirection: 'row', marginTop: 15}}>
+                  <Text style={{flex: 2, fontSize: 20, color: Colors.gray_85}}>Enable Touch/Face ID</Text>
+                  <View style={{flex: 1, alignItems: 'flex-end'}}>
+                    <Switch trackColor={Colors.light_green} value={touchIDSwitchEnabled} onValueChange={(value) => {
+                      if(!value) {
+                        Keychain.resetGenericPassword()
+                        .then(() => {
+
+                        })
+                        .catch(err => {
+
+                        })
+                      }
+
+                      this.setState({touchIDSwitchEnabled: value})
+                    }}/>
+                  </View>
+                </View>
+                }
                 <TouchableHighlight onPress={() => {this.goToForgotPassword()} } underlayColor={'transparent'}>
                   <View>
                     <Text style={{textAlign: 'center', color: Colors.tapable_blue, marginTop: 20}}>Forgot your password?</Text>

@@ -1,21 +1,54 @@
 PODS:
   - boost-for-react-native (1.63.0)
+  - BoringSSL-GRPC (0.0.3):
+    - BoringSSL-GRPC/Implementation (= 0.0.3)
+    - BoringSSL-GRPC/Interface (= 0.0.3)
+  - BoringSSL-GRPC/Implementation (0.0.3):
+    - BoringSSL-GRPC/Interface (= 0.0.3)
+  - BoringSSL-GRPC/Interface (0.0.3)
   - DoubleConversion (1.1.6)
-  - Firebase/Analytics (4.2.0):
+  - Firebase/Analytics (6.3.0):
     - Firebase/Core
-  - Firebase/Core (4.2.0):
-    - FirebaseAnalytics (= 4.0.3)
-    - FirebaseCore (= 4.0.7)
-  - FirebaseAnalytics (4.0.3):
-    - FirebaseCore (~> 4.0)
-    - FirebaseInstanceID (~> 2.0)
-    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
+  - Firebase/Core (6.3.0):
+    - Firebase/CoreOnly
+    - FirebaseAnalytics (= 6.0.2)
+  - Firebase/CoreOnly (6.3.0):
+    - FirebaseCore (= 6.0.3)
+  - Firebase/Firestore (6.3.0):
+    - Firebase/CoreOnly
+    - FirebaseFirestore (~> 1.4.0)
+  - FirebaseAnalytics (6.0.2):
+    - FirebaseCore (~> 6.0)
+    - FirebaseInstanceID (~> 4.2)
+    - GoogleAppMeasurement (= 6.0.2)
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
+    - GoogleUtilities/MethodSwizzler (~> 6.0)
+    - GoogleUtilities/Network (~> 6.0)
+    - "GoogleUtilities/NSData+zlib (~> 6.0)"
     - nanopb (~> 0.3)
-  - FirebaseCore (4.0.7):
-    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
-    - nanopb (~> 0.3)
-  - FirebaseInstanceID (2.0.10):
-    - FirebaseCore (~> 4.0)
+  - FirebaseAuthInterop (1.0.0)
+  - FirebaseCore (6.0.3):
+    - GoogleUtilities/Environment (~> 6.0)
+    - GoogleUtilities/Logger (~> 6.0)
+  - FirebaseFirestore (1.4.0):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 6.0)
+    - FirebaseFirestore/abseil-cpp (= 1.4.0)
+    - "gRPC-C++ (= 0.0.9)"
+    - leveldb-library (~> 1.20)
+    - nanopb (~> 0.3.901)
+    - Protobuf (~> 3.1)
+  - FirebaseFirestore/abseil-cpp (1.4.0):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 6.0)
+    - "gRPC-C++ (= 0.0.9)"
+    - leveldb-library (~> 1.20)
+    - nanopb (~> 0.3.901)
+    - Protobuf (~> 3.1)
+  - FirebaseInstanceID (4.2.0):
+    - FirebaseCore (~> 6.0)
+    - GoogleUtilities/Environment (~> 6.0)
+    - GoogleUtilities/UserDefaults (~> 6.0)
   - Folly (2018.10.22.00):
     - boost-for-react-native
     - DoubleConversion
@@ -37,19 +70,58 @@ PODS:
     - GoogleMaps
   - Google-Maps-iOS-Utils/QuadTree (2.1.0):
     - GoogleMaps
+  - GoogleAppMeasurement (6.0.2):
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
+    - GoogleUtilities/MethodSwizzler (~> 6.0)
+    - GoogleUtilities/Network (~> 6.0)
+    - "GoogleUtilities/NSData+zlib (~> 6.0)"
+    - nanopb (~> 0.3)
   - GoogleMaps (2.5.0):
     - GoogleMaps/Maps (= 2.5.0)
   - GoogleMaps/Base (2.5.0)
   - GoogleMaps/Maps (2.5.0):
     - GoogleMaps/Base
-  - GoogleToolboxForMac/Defines (2.2.1)
-  - "GoogleToolboxForMac/NSData+zlib (2.2.1)":
-    - GoogleToolboxForMac/Defines (= 2.2.1)
+  - GoogleUtilities/AppDelegateSwizzler (6.2.1):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+  - GoogleUtilities/Environment (6.2.1)
+  - GoogleUtilities/Logger (6.2.1):
+    - GoogleUtilities/Environment
+  - GoogleUtilities/MethodSwizzler (6.2.1):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/Network (6.2.1):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (6.2.1)"
+  - GoogleUtilities/Reachability (6.2.1):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/UserDefaults (6.2.1):
+    - GoogleUtilities/Logger
+  - "gRPC-C++ (0.0.9)":
+    - "gRPC-C++/Implementation (= 0.0.9)"
+    - "gRPC-C++/Interface (= 0.0.9)"
+  - "gRPC-C++/Implementation (0.0.9)":
+    - "gRPC-C++/Interface (= 0.0.9)"
+    - gRPC-Core (= 1.21.0)
+    - nanopb (~> 0.3)
+  - "gRPC-C++/Interface (0.0.9)"
+  - gRPC-Core (1.21.0):
+    - gRPC-Core/Implementation (= 1.21.0)
+    - gRPC-Core/Interface (= 1.21.0)
+  - gRPC-Core/Implementation (1.21.0):
+    - BoringSSL-GRPC (= 0.0.3)
+    - gRPC-Core/Interface (= 1.21.0)
+    - nanopb (~> 0.3)
+  - gRPC-Core/Interface (1.21.0)
+  - leveldb-library (1.20)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
+  - Protobuf (3.8.0)
   - React (0.59.3):
     - React/Core (= 0.59.3)
   - react-native-google-maps (0.24.2):
@@ -114,13 +186,18 @@ PODS:
   - RNFirebase (4.3.8):
     - Firebase/Core
     - React
+  - RNKeychain (3.1.3):
+    - React
   - RNReactNativeHapticFeedback (1.3.0):
+    - React
+  - TouchID (4.4.1):
     - React
   - yoga (0.59.3.React)
 
 DEPENDENCIES:
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
-  - Firebase/Analytics (= 4.2.0)
+  - Firebase/Analytics
+  - Firebase/Firestore (~> 6.3.0)
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - Google-Maps-iOS-Utils
@@ -141,20 +218,30 @@ DEPENDENCIES:
   - React/RCTVibration (from `../node_modules/react-native`)
   - React/RCTWebSocket (from `../node_modules/react-native`)
   - RNFirebase (from `../node_modules/react-native-firebase/ios`)
+  - RNKeychain (from `../node_modules/react-native-keychain`)
   - RNReactNativeHapticFeedback (from `../node_modules/react-native-haptic-feedback`)
+  - TouchID (from `../node_modules/react-native-touch-id`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga/yoga.podspec`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - boost-for-react-native
+    - BoringSSL-GRPC
     - Firebase
     - FirebaseAnalytics
+    - FirebaseAuthInterop
     - FirebaseCore
+    - FirebaseFirestore
     - FirebaseInstanceID
     - Google-Maps-iOS-Utils
+    - GoogleAppMeasurement
     - GoogleMaps
-    - GoogleToolboxForMac
+    - GoogleUtilities
+    - "gRPC-C++"
+    - gRPC-Core
+    - leveldb-library
     - nanopb
+    - Protobuf
 
 EXTERNAL SOURCES:
   DoubleConversion:
@@ -171,31 +258,45 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-maps"
   RNFirebase:
     :path: "../node_modules/react-native-firebase/ios"
+  RNKeychain:
+    :path: "../node_modules/react-native-keychain"
   RNReactNativeHapticFeedback:
     :path: "../node_modules/react-native-haptic-feedback"
+  TouchID:
+    :path: "../node_modules/react-native-touch-id"
   yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga/yoga.podspec"
 
 SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
+  BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
   DoubleConversion: bb338842f62ab1d708ceb63ec3d999f0f3d98ecd
-  Firebase: 9548cae14d69718add12d75a5b312893f7ef89c7
-  FirebaseAnalytics: 76f754d37ca5b04f36856729b6af3ca0152d1069
-  FirebaseCore: 9a6cc1e3eaf75905390f9220596ad4fd8f92faee
-  FirebaseInstanceID: 8d20d890d65c917f9f7d9950b6e10a760ad34321
+  Firebase: 8432d732974498afd5987e9001a05f90f1a3d625
+  FirebaseAnalytics: 470ddab7253b21ad5a40bebd4a9903d7ae19386a
+  FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
+  FirebaseCore: 68f8a7f50cdae542715d4e86afa37c4067217dcb
+  FirebaseFirestore: 75768d91aad491eccdc02202b8161cff9872300e
+  FirebaseInstanceID: f20243a1d828e0e9a3798b995174dedc16f1b32a
   Folly: de497beb10f102453a1afa9edbf8cf8a251890de
   glog: aefd1eb5dda2ab95ba0938556f34b98e2da3a60d
   Google-Maps-iOS-Utils: c32891ff472eaaa1fca032beedafa1a013af7875
+  GoogleAppMeasurement: a35a645835bae31b6bdc0576396bc23908f12a22
   GoogleMaps: c087b8e5dfe87ca6ebf59adb9b4894a4146bec4f
-  GoogleToolboxForMac: b3553629623a3b1bff17f555e736cd5a6d95ad55
+  GoogleUtilities: c7a0b08bda3bf808be823ed151f0e28ac6866e71
+  "gRPC-C++": 9dfe7b44821e7b3e44aacad2af29d2c21f7cde83
+  gRPC-Core: c9aef9a261a1247e881b18059b84d597293c9947
+  leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  Protobuf: 3f617b9a6e73605565086864c9bc26b2bf2dd5a3
   React: 1d605e098d69bdf08960787f3446f0a9dc2e2ccf
   react-native-google-maps: 77af0fa3b5325c72c107d054677911f6e6170496
   react-native-maps: bb480348a3fe1e5a811fed1ba3387b329161c5cc
   RNFirebase: 2b25fd2e60269f26bb0a76c71dcc942b35a77df0
+  RNKeychain: 5381e340056c23de103d73ae59cbddc6ffc21d97
   RNReactNativeHapticFeedback: 44299aed31b5e17f7fc74d175a995b7197bf8cf1
+  TouchID: b0640fedb86fa2db2fe1df15b61594ad49e76288
   yoga: 128daf064cacaede0c3bb27424b6b4c71052e6cd
 
-PODFILE CHECKSUM: db7e56fc8f2a2572d353ece9cbc85438096b751c
+PODFILE CHECKSUM: fbbd6710b419a2e150c3c7427c499a22afa5f7f5
 
 COCOAPODS: 1.5.3

@@ -150,6 +150,8 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-keychain')
+    implementation project(':react-native-touch-id')
     compile project(':react-native-haptic-feedback')
       implementation(project(':react-native-maps')){
         exclude group: 'com.google.android.gms', module: 'play-services-base'
@@ -157,6 +159,7 @@ dependencies {
     }
     implementation 'com.google.android.gms:play-services-base:16.0.0'
     implementation 'com.google.android.gms:play-services-maps:16.0.0'
+    implementation "com.google.firebase:firebase-firestore:16.0.0"
     compile project(':react-native-vector-icons')
     compile project(':react-native-splash-screen')
     compile(project(':react-native-firebase')) {

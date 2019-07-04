@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-platform :ios, '9.0'
+platform :ios, '11.0'
 
 target 'GoLocker' do
   rn_path = '../node_modules/react-native'
@@ -37,10 +37,14 @@ target 'GoLocker' do
   pod 'react-native-google-maps', path: rn_maps_path  # Remove this line if you don't want to support GoogleMaps on iOS
   pod 'GoogleMaps'  # Remove this line if you don't want to support GoogleMaps on iOS
   pod 'Google-Maps-iOS-Utils' # Remove this line if you don't want to support GoogleMaps on iOS
-  pod 'Firebase/Analytics', '4.2.0'
+  pod 'Firebase/Analytics'
   pod 'RNFirebase', :path => '../node_modules/react-native-firebase/ios'
 
   pod 'RNReactNativeHapticFeedback', :path => '../node_modules/react-native-haptic-feedback'
+
+  pod 'TouchID', :path => '../node_modules/react-native-touch-id'
+  pod 'Firebase/Firestore', '~> 6.3.0'
+  pod 'RNKeychain', :path => '../node_modules/react-native-keychain'
 
 end
 

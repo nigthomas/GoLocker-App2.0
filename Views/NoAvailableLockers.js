@@ -9,13 +9,18 @@ import NewsletterService from '../Services/NewsletterService'
 import { Container, Header, Content, Form, Item, Input, Label, Root } from 'native-base';
 import NativeStatusBar from '../Elements/NativeStatusBar'
 import ThreeHeaderView from '../Elements/ThreeHeaderView'
+import firebase from 'react-native-firebase';
 
 export default class NoAvailableLockers extends Component {
   constructor(props) {
    super(props);
 
+   const { params } = this.props.navigation.state;
+   const zip_code = params.zip_code
+
    this.state = {
-     email: null
+     email: null,
+     zip_code: zip_code
    }
   }
 
@@ -40,7 +45,14 @@ export default class NoAvailableLockers extends Component {
       return;
     }
 
-    NewsletterService.addEmail(email)
+    const ref = firebase.firestore().collection('crm')
+    , zip_code = this.state.zip_code
+    ;
+
+    ref.doc().set({email: email, zip_code})
+    .then(transaction => {
+      return NewsletterService.addEmail(email)
+    })
     .then(() => {
       Alert.alert("Success", "Email added",[{text: 'OK', onPress: () => {
         const { navigation } = this.props;
@@ -48,6 +60,7 @@ export default class NoAvailableLockers extends Component {
       }}], { cancelable: true })
     })
     .catch(err => {
+      console.log(err)
       this.setState({errorMessage: "An error occurred while saving your email"})
     })
 

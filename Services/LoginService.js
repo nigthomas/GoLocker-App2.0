@@ -52,8 +52,8 @@ export default class LoginService {
     .then(data => {
       const account = new Account(data)
       Storage.set(ACCOUNT_KEY, JSON.stringify(account))
-      this.state.listener.emit('LOGGED_IN');
-      return new Promise((resolve, reject) => { resolve(account)})
+
+      return new Promise((resolve, reject) => { resolve(() => {this.state.listener.emit('LOGGED_IN')})})
     })
   }
 

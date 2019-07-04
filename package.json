@@ -15,16 +15,19 @@
     "react-native": "0.59.3",
     "react-native-firebase": "^4.1.0",
     "react-native-haptic-feedback": "^1.1.0",
+    "react-native-keychain": "^3.1.3",
     "react-native-maps": "^0.24.0",
     "react-native-phone-input": "^0.2.1",
     "react-native-splash-screen": "3.0.6",
     "react-native-swipeable-flat-list": "0.0.5",
     "react-native-swipeout": "^2.3.3",
     "react-native-swiper": "^1.5.13",
+    "react-native-touch-id": "^4.4.1",
     "react-native-vector-icons": "^4.5.0",
     "react-navigation": "^1.5.2",
     "react-timer-mixin": "^0.13.4",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3",
+    "unique-random-array": "^2.0.0"
   },
   "devDependencies": {
     "babel-jest": "23.4.0",

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, StatusBar, FlatList, TouchableHighlight, TouchableWithoutFeedback, Modal, Image, SafeAreaView, ScrollView, Dimensions, Platform, Alert, PermissionsAndroid} from 'react-native';
+import { StyleSheet, Text, View, StatusBar, FlatList, TouchableHighlight, TouchableWithoutFeedback, Modal, Image, SafeAreaView, ScrollView, Dimensions, Platform, Alert, PermissionsAndroid, Linking} from 'react-native';
 import Theme from '../Common/Theme'
 import Address from '../Models/Address'
 import FooterTabWithNavigation from './FooterTabWithNavigation'
@@ -18,6 +18,7 @@ import Swipeout from 'react-native-swipeout'
 import MapView, { Marker } from 'react-native-maps';
 import FontAwesome from 'react-native-vector-icons/dist/FontAwesome'
 import ActionService from '../Services/ActionService'
+import AdService from '../Services/AdService'
 import firebase from 'react-native-firebase'
 import _ from 'underscore'
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
@@ -41,7 +42,8 @@ export default class HomeView extends Component {
      showOpenDoorButton: false,
      doorButtonColor: Colors.light_green,
      doorButtonText: "Tap to open front entrance",
-     setupAnalytics: false
+     setupAnalytics: false,
+     recordedAdImpression: false
    };
   }
 
@@ -75,9 +77,9 @@ export default class HomeView extends Component {
 
   fetch() {
     this.setState({loading: true, showOpenDoorButton: false, locationMsg: null, selectedLocker: null, doorButtonColor: Colors.light_green, doorButtonText: "Tap to open front entrance", requestedLocation: false})
-    Promise.all([DashboardService.getInfo(), ReservationService.getInstance().getReservations()])
+    Promise.all([DashboardService.getInfo(), ReservationService.getInstance().getReservations(), AdService.getAd()])
     .then(results => {
-      this.setState({data: results[0], reservationData: results[1], loading: false, error: null})
+      this.setState({data: results[0], reservationData: results[1], loading: false, error: null, ad: results[2]})
       this.showOpenDoorButtonIfNeeded()
 
       if(!this.state.setupAnalytics) {
@@ -173,7 +175,7 @@ export default class HomeView extends Component {
         onRequestClose={() => {
         }}>
         <SafeAreaView style={{marginTop: 30, flex: 1}}>
-        <SafeAreaView style={{position: 'absolute', right: 21}}>
+        <SafeAreaView style={{position: 'absolute', right: 21, top: 21}}>
           <TouchableHighlight
             onPress={() => {
               this.setState({qrCodeShown: false});
@@ -494,6 +496,49 @@ export default class HomeView extends Component {
       )
   }
 
+  onAdTap(ad) {
+    Linking.openURL(ad.content_url)
+    .then(() => {
+      const ref = firebase.firestore().collection('events')
+      return ref.doc().set({type: 'tap', ad: ad})
+    })
+    .then(() => {
+
+    })
+    .catch((err) => console.error('An error occurred', err));
+  }
+
+  recordAdImpression() {
+    const ad = this.state.ad
+    ;
+
+    if(!ad) {
+      return
+    }
+
+    const ref = firebase.firestore().collection('events')
+    ref.doc().set({type: 'impression', ad: ad})
+    .then(() =>{
+
+    })
+    .catch(err => {
+
+    })
+
+  }
+
+  renderAdView(ad) {
+    return (<View style={{flex: 1}}>
+              <Text style={{marginLeft: 21, fontSize: 16, marginTop:21, color: Colors.gray_85, fontWeight: 'bold'}}>Sponsored Content</Text>
+              <View style={{flex: 1, alignItems: 'center'}}>
+                <TouchableHighlight onPress={() => {this.onAdTap(ad)}} underlayColor={'transparent'}>
+                  <Image style={{width: 300, height: 250, marginTop: 21}} source={{uri: ad.image_url}}/>
+                </TouchableHighlight>
+              </View>
+            </View>
+            )
+  }
+
   render() {
     if(this.state.loading) {
       return <View style={{flex: 1, backgroundColor: Colors.white}}>
@@ -516,15 +561,26 @@ export default class HomeView extends Component {
     const qrCodeButtonView = this.renderQRCodeButton()
     const data = this.state.reservationData || []
     const packagesView = (data.length == 0) ? this.renderEmptyList() : this.renderList()
+    const ad = this.state.ad
+    const adView = ad ? this.renderAdView(ad) : null
     const doorOpenActionView = this.renderDoorOpenActionView()
     const homeShippingAddressView =  this.renderShippingAddress(homeShippingAddress)
     const homeShippingAddressName = homeShippingAddress.name
+
+    isCloseToBottom = ({ layoutMeasurement, contentOffset, contentSize }) => {
+      return layoutMeasurement.height + contentOffset.y >= contentSize.height - 1;
+    };
 
     return (
       <Root>
         <Container>
         <NativeStatusBar/>
-          <Content style={{backgroundColor: Colors.white}}>
+          <Content style={{backgroundColor: Colors.white}}  onScroll={({ nativeEvent }) => {
+            if (isCloseToBottom(nativeEvent) && !this.state.recordedAdImpression) {
+              this.setState({recordedAdImpression: true})
+              this.recordAdImpression()
+            }
+          }}>
             <View style={{backgroundColor: Theme.primaryColor}}>
             <TouchableHighlight onPress={() => {this.onRefresh()}} underlayColor={'transparent'}>
               <SafeAreaView>
@@ -557,6 +613,8 @@ export default class HomeView extends Component {
             {doorOpenActionView}
             <Text style={{marginLeft: 21, fontSize: 16, marginTop:21, color: Colors.gray_85, fontWeight: 'bold'}}>Packages:</Text>
             {packagesView}
+
+            {adView}
 
           </Content>
           <FooterTabWithNavigation navigation={this.props.navigation} active={"home"}/>

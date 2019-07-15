@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, StatusBar, FlatList, TouchableHighlight, TouchableWithoutFeedback, Modal, Image, SafeAreaView, ScrollView, Dimensions, Platform, Alert, PermissionsAndroid, Linking} from 'react-native';
+import { StyleSheet, Text, View, StatusBar, FlatList, TouchableHighlight, TouchableWithoutFeedback, Modal, Image, SafeAreaView, ScrollView, Dimensions, Platform, Alert, PermissionsAndroid, Linking, SectionList} from 'react-native';
 import Theme from '../Common/Theme'
 import Address from '../Models/Address'
 import FooterTabWithNavigation from './FooterTabWithNavigation'
@@ -32,6 +32,8 @@ export default class HomeView extends Component {
    this.state = {
      data: {},
      reservationData: [],
+     completedReservations: [],
+     completedCollapsed: true,
      loading: false,
      error: null,
      qrCodeShown: false,
@@ -77,9 +79,16 @@ export default class HomeView extends Component {
 
   fetch() {
     this.setState({loading: true, showOpenDoorButton: false, locationMsg: null, selectedLocker: null, doorButtonColor: Colors.light_green, doorButtonText: "Tap to open front entrance", requestedLocation: false})
-    Promise.all([DashboardService.getInfo(), ReservationService.getInstance().getReservations(), AdService.getAd()])
+    Promise.all([DashboardService.getInfo(), ReservationService.getInstance().getReservations()])
     .then(results => {
-      this.setState({data: results[0], reservationData: results[1], loading: false, error: null, ad: results[2]})
+      const reservations = results[1]
+      ;
+
+      this.setState({data: results[0],
+                     reservationData: reservations.filter((res) => res.status != 7),
+                     completedReservations: reservations.filter((res) => res.status == 7),
+                     loading: false,
+                     error: null})
       this.showOpenDoorButtonIfNeeded()
 
       if(!this.state.setupAnalytics) {
@@ -90,6 +99,12 @@ export default class HomeView extends Component {
     .catch(err => {
       this.setState({error: err, loading: false, cancelling: false})
     })
+
+    Promise.all([AdService.getAd()])
+    .then(results => {
+      this.setState({ad: results[0]})
+    })
+    .catch(err => {})
   }
 
   showLockerDetails(locker) {
@@ -115,7 +130,8 @@ export default class HomeView extends Component {
     return Utils.ifDefNN(this.state.data.usernameQR)
   }
 
-  renderItem(item) {
+  renderItem(data) {
+    const item = data.item
     const swipeBtns = [{
       text: 'Cancel',
       backgroundColor: Colors.red,
@@ -144,7 +160,7 @@ export default class HomeView extends Component {
     return (
       <Swipeout right={swipeBtns}
         backgroundColor= 'transparent'>
-        <View style={{paddingTop:5, paddingBottom: 5, paddingLeft: 21, paddingRight: 21, flexDirection: 'row', alignSelf: 'flex-start', borderBottomWidth: 1, borderBottomColor: Colors.gray_ef}}>
+        <View style={{paddingTop:5, paddingBottom: 5, paddingLeft: 21, paddingRight: 21, flexDirection: 'row', alignSelf: 'flex-start'}}>
           <View style={{flex: 1}}>
             <Text style={{ color: Colors.gray_85}}>Name: <Text style={{ color: Colors.dark_gray, fontWeight: '600'}}>{lockerName}</Text></Text>
             <Text style={{ color: Colors.gray_85, marginTop: 2}}>Tracking: {trackingNumber}</Text>
@@ -371,10 +387,52 @@ export default class HomeView extends Component {
     }
   }
 
+  toggleCompletedSection() {
+    const completedCollapsed = this.state.completedCollapsed
+
+    this.setState({completedCollapsed: !completedCollapsed})
+  }
+
+  renderSectionHeader(key) {
+    const collapsed = this.state.completedCollapsed
+    ;
+
+    if(key == "Completed Packages") {
+        const icon_name = collapsed ? "caret-up" : "caret-down"
+
+        return (<TouchableHighlight onPress={() => {this.toggleCompletedSection()}} underlayColor={'transparent'}>
+                  <View style={{flex: 1, flexDirection: 'row', marginTop: 21, marginBottom:21,}}>
+                    <View style={{flex: 1}}>
+                      <Text style={{fontSize: 16, color: Colors.gray_85, fontWeight: 'bold', marginLeft: 21}}>
+                        {key}
+                      </Text>
+                    </View>
+                    <View style={{flex: 1}}>
+                      <FontAwesome name={icon_name} size={22} style={{alignSelf: 'flex-end', color: Colors.gray_85, marginTop: -5, marginRight: 21}}/>
+                    </View>
+                  </View>
+                </TouchableHighlight>)
+
+    }
+
+    return (<Text style={{fontSize: 16, marginTop:21, marginBottom:21, color: Colors.gray_85, fontWeight: 'bold', marginLeft: 21}}>{key}</Text>)
+  }
+
   renderList() {
-    const data = this.state.reservationData
-    return (<View style={{marginTop: 20, borderTopColor: Colors.gray_ef, borderTopWidth: 1}}>
-              <FlatList data={data} keyExtractor={(item, index) => item.trackingNumber} renderItem={({ item }) => {return this.renderItem(item)}} backgroundColor={'white'}/>
+    const reservationData = this.state.reservationData
+    , completedReservationsData = this.state.completedReservations
+    , completedReservations = this.state.completedCollapsed ? [] : this.state.completedReservations
+    ;
+
+    var sections = [{data: reservationData, renderItem: (item) => this.renderItem(item), key: "Packages"}];
+
+    if (completedReservationsData.length > 0) {
+      sections.push({data: completedReservations, renderItem: (item) => this.renderItem(item), key: "Completed Packages"})
+    }
+
+    return (<View style={{marginTop: 20}}>
+              <SectionList renderSectionHeader={({section}) => this.renderSectionHeader(section.key)}
+              sections={sections} keyExtractor={(item, index) => item.trackingNumber} backgroundColor={'white'}/>
             </View>)
   }
 
@@ -611,7 +669,6 @@ export default class HomeView extends Component {
 
 
             {doorOpenActionView}
-            <Text style={{marginLeft: 21, fontSize: 16, marginTop:21, color: Colors.gray_85, fontWeight: 'bold'}}>Packages:</Text>
             {packagesView}
 
             {adView}

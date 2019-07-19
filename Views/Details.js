@@ -11,6 +11,7 @@ import LoginService from '../Services/LoginService'
 import AccountService from '../Services/AccountService'
 import LockerService from '../Services/LockerService'
 import NativeStatusBar from '../Elements/NativeStatusBar'
+import * as Keychain from 'react-native-keychain';
 
 export default class DetailsView extends Component {
   static navigationOptions = { title: 'Account', header: null, tabBarVisible: false };

@@ -197,6 +197,7 @@ PODS:
 DEPENDENCIES:
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - Firebase/Analytics
+  - Firebase/Core
   - Firebase/Firestore (~> 6.3.0)
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
@@ -297,6 +298,6 @@ SPEC CHECKSUMS:
   TouchID: b0640fedb86fa2db2fe1df15b61594ad49e76288
   yoga: 128daf064cacaede0c3bb27424b6b4c71052e6cd
 
-PODFILE CHECKSUM: fbbd6710b419a2e150c3c7427c499a22afa5f7f5
+PODFILE CHECKSUM: dbf4d84a6721bc8c25eea7b2753310a2ad29414d
 
 COCOAPODS: 1.5.3

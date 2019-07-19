@@ -32,13 +32,15 @@ export default class LoginView extends Component {
      signInText: "Sign In",
      signInColor: Colors.light_green,
      showTouchIdSwitch: false,
-     touchIDSwitchEnabled: true
+     touchIDSwitchEnabled: true,
+     showedTouchIdFlow: false
    };
   }
 
   onLoginPress = () => {
     const username = this.state.username
-    const password = this.state.password
+    , password = this.state.password
+    , touchIDSwitchEnabled = this.state.touchIDSwitchEnabled
 
     if(!username || !password) {
       Alert.alert("Hi there", "Please enter your username and password",[{text: 'OK', onPress: () => {}}],{ cancelable: true })
@@ -48,13 +50,13 @@ export default class LoginView extends Component {
     this.showProcessingState()
     LoginService.getInstance().login(username, password)
     .then(finishLoginFunction => {
-      if(!this.state.showTouchIdSwitch) {
+      if(!this.state.showTouchIdSwitch || !touchIDSwitchEnabled) {
           this.showRegularState()
           finishLoginFunction()
           return;
       }
 
-      return TouchID.authenticate()
+      return TouchID.authenticate("Authenticate with TouchID/FaceID to securely save your credentials.")
       .then(success => {
         if(success) {
           return Keychain.setGenericPassword(username, password)
@@ -82,7 +84,23 @@ export default class LoginView extends Component {
   componentDidMount() {
     this.fetch()
 
-    TouchID.isSupported()
+    NetworkStatusListener.getInstance()
+    .getListener()
+    .on("FORCE_LOGOUT", () => {
+      this.setState({headerText: "Your session has expired"})
+    })
+  }
+
+  startTouchIdFlow() {
+    const showedTouchIdFlow = this.state.showedTouchIdFlow;
+
+    if(showedTouchIdFlow) {
+      return new Promise((resolve, reject) => { resolve()})
+    }
+
+    this.setState({showedTouchIdFlow: true})
+
+    return TouchID.isSupported()
     .then(biometryType => {
       const showTouchIdSwitch = (biometryType === 'FaceID' || biometryType === 'TouchID' || biometryType === true)
       this.setState({showTouchIdSwitch: showTouchIdSwitch})
@@ -93,38 +111,47 @@ export default class LoginView extends Component {
       , showTouchIdSwitch = results[1]
       ;
 
-      if(!showTouchIdSwitch || !credentials) {
+      if(!showTouchIdSwitch || !(credentials.username && credentials.password)) {
         return new Promise((resolve, reject) => { resolve()})
       }
 
-      return TouchID.authenticate()
+      return TouchID.authenticate("Authenticate with TouchID/FaceID to log in.")
       .then(success => {
         if(success) {
-          this.setState({username: credentials.username, password: credentials.password})
+         this.showProcessingState()
+         return LoginService.getInstance().login(credentials.username, credentials.password)
+         .then(finishLoginFunction => {
+           this.showRegularState()
+           finishLoginFunction()
+         })
+         .catch(err => {
+           this.showRegularState()
+           Alert.alert("Whoops!", "This username and password combination doesn't exist",[{text: 'OK', onPress: () => {}}],{ cancelable: true })
+
+           Keychain.resetGenericPassword()
+           .then(() => {})
+           .catch(err => {})
+
+         })
         }
       })
     })
-    .then(() => {
-
-    })
-    .catch(error => {
-      console.log(error);
-    });
-
-    NetworkStatusListener.getInstance()
-    .getListener()
-    .on("FORCE_LOGOUT", () => {
-      this.setState({headerText: "Your session has expired"})
+    .catch(err => {
     })
   }
 
   fetch() {
     Promise.all([OnboardingService.getInstance().shouldShowOnboarding()])
     .then(results => {
-      this.setState({shouldShowOnboarding: results[0], loading: false})
+      const shouldShowOnboarding = results[0]
+      this.setState({shouldShowOnboarding: shouldShowOnboarding, loading: false})
+
+      if(!shouldShowOnboarding) {
+        return this.startTouchIdFlow()
+      }
     })
     .catch(err => {
-
+      console.log(err)
     })
   }
 
@@ -172,6 +199,14 @@ export default class LoginView extends Component {
 
   onOnboardingSkip() {
     this.setState({shouldShowOnboarding: false})
+
+    this.startTouchIdFlow()
+    .then(() => {
+
+    })
+    .catch(err => {
+
+    })
   }
 
   render() {
@@ -201,7 +236,7 @@ export default class LoginView extends Component {
              <Text style={{textAlign: 'center', fontSize: 28, color: Colors.dark_gray, marginTop: 30}}>{headerText}</Text>
            </View>
             <View style={styles.container}>
-                <TextInput underlineColorAndroid='transparent' ref="usernameField"  placeholderTextColor={Colors.tapable_blue} style={{color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, textAlign: 'center', fontFamily: Theme.primaryFont}} placeholder={"Your Email"} onChangeText={(username) => this.setState({username})} value={this.state.username}/>
+                <TextInput underlineColorAndroid='transparent' ref="usernameField"  placeholderTextColor={Colors.tapable_blue} style={{color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, textAlign: 'center', fontFamily: Theme.primaryFont}} placeholder={"Email / Mobile Number"} onChangeText={(username) => this.setState({username})} value={this.state.username}/>
                 <TextInput underlineColorAndroid='transparent' ref="passwordField" secureTextEntry={true} placeholderTextColor={Colors.tapable_blue} style={{color: Colors.tapable_blue, backgroundColor: Colors.gray_ef, height: 50, borderRadius: 4, textAlign: 'center', fontFamily: Theme.primaryFont, marginTop: 5}} placeholder={"Password"} onChangeText={(password) => this.setState({password})} value={this.state.password}/>
                 <TouchableHighlight onPress={this.onLoginPress} underlayColor={'transparent'}>
                   <View style={{height: 50, borderRadius: 4, backgroundColor: this.state.signInColor, marginTop: 10}}>

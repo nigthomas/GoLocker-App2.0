@@ -512,11 +512,9 @@ export default class HomeView extends Component {
 
     const selectedLocker = this.state.selectedLocker
     const detailView = this.state.showOpenDoorButton ? this.renderOpenDoorButton() : this.renderLocationViewMessage()
-    const headerView = (selectedLocker) ? (<Text style={{marginLeft: 21, fontSize: 16, marginTop:21, color: Colors.gray_85, fontWeight: 'bold'}}>{selectedLocker.propertyName()}</Text>) : null
 
     return (
-      <View>
-        {headerView}
+      <View style={{marginTop: 21}}>
         {detailView}
       </View>
     )
@@ -558,7 +556,7 @@ export default class HomeView extends Component {
     Linking.openURL(ad.content_url)
     .then(() => {
       const ref = firebase.firestore().collection('events')
-      return ref.doc().set({type: 'tap', ad: ad})
+      return ref.doc().set({type: 'tap', ad: ad, createdAt: new Date()})
     })
     .then(() => {
 
@@ -575,7 +573,7 @@ export default class HomeView extends Component {
     }
 
     const ref = firebase.firestore().collection('events')
-    ref.doc().set({type: 'impression', ad: ad})
+    ref.doc().set({type: 'impression', ad: ad, createdAt: new Date()})
     .then(() =>{
 
     })
@@ -611,6 +609,7 @@ export default class HomeView extends Component {
     const firstName = Utils.capitalize(dashboardData.firstName || "")
     const lastName = Utils.capitalize(dashboardData.lastName || "")
     const accountNumber = dashboardData.accountNumber || ""
+    const title = `${firstName} ${lastName} / ${accountNumber}`
 
     const primaryLocker = dashboardData && dashboardData.hasPrimaryLocker && dashboardData.hasPrimaryLocker() ? dashboardData.primaryLocker : null
     const secondaryLocker = dashboardData && dashboardData.hasSecondaryLocker && dashboardData.hasSecondaryLocker() ? dashboardData.secondaryLocker : null
@@ -656,7 +655,9 @@ export default class HomeView extends Component {
             <Text style={{marginLeft: 21, fontSize: 16, marginTop:21, color: Colors.gray_85, fontWeight: 'bold'}}>Send packages to:</Text>
             <View style={{height: 80}}>
               <View>
-              <Text style={{marginLeft: 21, paddingTop:9, fontSize: 14, color: Colors.gray_85}}>{homeShippingAddressName}</Text>
+              <Text style={{marginLeft: 21, paddingTop:9, fontSize: 14, color: Colors.gray_85}}>{title}</Text>
+              <Text style={{marginLeft: 21, fontSize: 14, color: Colors.gray_85, marginTop: 3}}>{homeShippingAddressName}</Text>
+
               <Text style={{fontSize: 14, color: Colors.gray_85, marginLeft: 21, marginTop: 3}}>
                 {homeShippingAddress.address}
               </Text>
@@ -665,9 +666,6 @@ export default class HomeView extends Component {
               </Text>
               </View>
             </View>
-            {homeShippingAddressView}
-
-
             {doorOpenActionView}
             {packagesView}
 

@@ -17,7 +17,7 @@ const URL = {
   newsletter: `${BASE_URL}/v1/newsletter`,
   promoCode: `${BASE_URL}/v1/applyPromo`,
   changePlan: `${BASE_URL}/v1/account/changePlan`,
-  ads: `https://glockerads.s3-us-west-2.amazonaws.com/display_a3.json`
+  ads: `https://golockerad.s3.amazonaws.com/display_a4.json`
 }
 
 const STATUS_CODE = {

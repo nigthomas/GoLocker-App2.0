@@ -216,12 +216,14 @@ export default class Ship extends Component {
       }
     }
 
+    const marginTop = Utils.isIOS() ? 90 : 40
+
     return (
       <Root>
           <Container>
           <NativeStatusBar/>
             <Content style={{backgroundColor: Colors.white}} ref={c => (this.component = c)}>
-              <SafeAreaView style={{marginTop: 40}}>
+              <SafeAreaView style={{marginTop: marginTop}}>
                 <Text style={{marginLeft: 21, fontSize: 36, color: Colors.dark_gray, fontWeight: 'bold'}}>Send a package</Text>
                 <Text style={{marginLeft: 21, marginTop: 5, fontSize: 12, color: Colors.gray_85}}>Schedule fast and easy returns for packages with pre-paid shipping labels</Text>
               </SafeAreaView>
@@ -238,7 +240,7 @@ export default class Ship extends Component {
               </View>
 
               <Text style={{marginLeft: 21, marginTop: 20, fontSize: 16, color: this.state.choosePackageError ? Colors.red : Colors.gray_85, fontWeight: 'bold'}}>Please choose a package size</Text>
-              <FlatList data={compartmentSizes} style={{height: 350}} keyExtractor={(item, index) => item.code} renderItem={({ item }) => {return this.renderCompartment(item)}} backgroundColor={'white'}/>
+              <FlatList data={compartmentSizes} keyExtractor={(item, index) => item.code} renderItem={({ item }) => {return this.renderCompartment(item)}} backgroundColor={'white'}/>
 
               <Text style={{marginLeft: 21, marginTop: 20, fontSize: Utils.normalize(16), color:  this.state.enterTrackingNumberError ? Colors.red : Colors.gray_85, fontWeight: 'bold'}}>Destination Shipping Info</Text>
               <View style={{marginLeft: 21, marginTop: 15, marginRight: 21}}>

@@ -144,7 +144,7 @@ export default class ChangePlan extends Component {
                   </View>
                   <View style={{flex: 1}}>
                       <View style={payPerPackageCircleStyle}></View>
-                      <Text style={styles.price}>$3</Text>
+                      <Text style={styles.price}>$5</Text>
                       <Text style={styles.cycle}>/per delivery*</Text>
                     </View>
                 </View>
@@ -159,6 +159,7 @@ export default class ChangePlan extends Component {
                     <Text style={styles.text}>10 Deliveries Per Month</Text>
                     <Text style={styles.text}>Pickup within 48 hours</Text>
                     <Text style={styles.text}>Secure and Convenient</Text>
+                    <Text style={styles.text}>*1.75 Overage Fee</Text>
                   </View>
                   <View style={{flex: 1}}>
                     <View style={premiumCircleStyle}></View>
@@ -178,6 +179,7 @@ export default class ChangePlan extends Component {
                     <Text style={styles.text}>20 Deliveries Per Month</Text>
                     <Text style={styles.text}>Pickup within 48 hours</Text>
                     <Text style={styles.text}>Secure and Convenient</Text>
+                    <Text style={styles.text}>*1.25 Overage Fee</Text>
                   </View>
                   <View style={{flex: 1}}>
                     <View style={premierCircleStyle}></View>
@@ -191,8 +193,6 @@ export default class ChangePlan extends Component {
 
             {unlimitedPlanView}
 
-            <Text style={styles.disclaimer}>* A $0.31 processing fee will be applied to each pay per package delivery</Text>
-            <Text style={styles.disclaimer}>** $2 overage fee</Text>
             <Text style={styles.disclaimer}>Please note when downgrading your account, the current plan will remain effective through the end of the billing period. Plan upgrades take effect immediately.</Text>
 
           </View>

@@ -42,6 +42,7 @@
 		3F3302A064B240D1C9C58055 /* libPods-GoLocker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FF146CD22E1400500B5FF19 /* libPods-GoLocker.a */; };
 		58BB161395EB42BD9F1B74D1 /* Roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA63645A73F34DB599C45D08 /* Roboto.ttf */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
+		643AAF973C5B56DB52C33BBF /* libPods-GoLocker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F7EA4A722E14F99008EEEA9 /* libPods-GoLocker.a */; };
 		71F55BAB2A1A4604BDDD1275 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFD928D4D85B4B9493608734 /* Ionicons.ttf */; };
 		724F066393C44E068FA5AC88 /* Roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC23E6540BAF45F7BA834430 /* Roboto_medium.ttf */; };
 		75C600B2EE9819209C2D1B5F /* libPods-GoLocker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FF146CD22E1400500B5FF19 /* libPods-GoLocker.a */; };
@@ -480,6 +481,7 @@
 				2FE1CDE520A7631100410B47 /* Fabric.framework in Frameworks */,
 				75C600B2EE9819209C2D1B5F /* libPods-GoLocker.a in Frameworks */,
 				3F3302A064B240D1C9C58055 /* libPods-GoLocker.a in Frameworks */,
+				643AAF973C5B56DB52C33BBF /* libPods-GoLocker.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

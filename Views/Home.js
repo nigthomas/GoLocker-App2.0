@@ -22,6 +22,7 @@ import AdService from '../Services/AdService'
 import firebase from 'react-native-firebase'
 import _ from 'underscore'
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
+import DeviceInfo from 'react-native-device-info';
 
 export default class HomeView extends Component {
   static navigationOptions = { header: null, tabBarVisible: false };
@@ -553,10 +554,18 @@ export default class HomeView extends Component {
   }
 
   onAdTap(ad) {
+    const dashboardData = this.state.data || {}
+    , accountNumber = dashboardData.accountNumber || ""
+    ;
+
     Linking.openURL(ad.content_url)
     .then(() => {
       const ref = firebase.firestore().collection('events')
-      return ref.doc().set({type: 'tap', ad: ad, createdAt: new Date()})
+      return ref.doc().set({type: 'tap',
+                            ad: ad,
+                            createdAt: new Date(),
+                            accountNumber: accountNumber,
+                            buildNumber: DeviceInfo.getBuildNumber()})
     })
     .then(() => {
 
@@ -566,6 +575,8 @@ export default class HomeView extends Component {
 
   recordAdImpression() {
     const ad = this.state.ad
+    , dashboardData = this.state.data || {}
+    , accountNumber = dashboardData.accountNumber || ""
     ;
 
     if(!ad) {
@@ -573,7 +584,11 @@ export default class HomeView extends Component {
     }
 
     const ref = firebase.firestore().collection('events')
-    ref.doc().set({type: 'impression', ad: ad, createdAt: new Date()})
+    ref.doc().set({type: 'impression',
+                   ad: ad,
+                   createdAt: new Date(),
+                   accountNumber: accountNumber,
+                   buildNumber: DeviceInfo.getBuildNumber()})
     .then(() =>{
 
     })

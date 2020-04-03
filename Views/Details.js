@@ -165,13 +165,14 @@ export default class DetailsView extends Component {
 
     const firstName = this.state.data.firstName
     const lastName = this.state.data.lastName
+    const marginTop = Utils.isIOS() ? 90 : 40
 
     return (
       <Root>
         <Container>
         <NativeStatusBar/>
           <Content style={{backgroundColor: Colors.white}}>
-            <SafeAreaView style={{marginTop: 40}}>
+            <SafeAreaView style={{marginTop: marginTop}}>
               <Text style={{marginLeft: 21, fontSize: 36, color: Colors.dark_gray, fontWeight: 'bold'}}>Membership</Text>
               <Text style={{marginLeft: 21, fontSize: 36, color: Colors.dark_gray, fontWeight: 'bold'}}>Details</Text>
             </SafeAreaView>

@@ -183,6 +183,8 @@ PODS:
     - React/Core
     - React/fishhook
     - React/RCTBlob
+  - RNDeviceInfo (2.2.2):
+    - React
   - RNFirebase (4.3.8):
     - Firebase/Core
     - React
@@ -218,6 +220,7 @@ DEPENDENCIES:
   - React/RCTText (from `../node_modules/react-native`)
   - React/RCTVibration (from `../node_modules/react-native`)
   - React/RCTWebSocket (from `../node_modules/react-native`)
+  - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNFirebase (from `../node_modules/react-native-firebase/ios`)
   - RNKeychain (from `../node_modules/react-native-keychain`)
   - RNReactNativeHapticFeedback (from `../node_modules/react-native-haptic-feedback`)
@@ -257,6 +260,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-maps"
   react-native-maps:
     :path: "../node_modules/react-native-maps"
+  RNDeviceInfo:
+    :path: "../node_modules/react-native-device-info"
   RNFirebase:
     :path: "../node_modules/react-native-firebase/ios"
   RNKeychain:
@@ -292,12 +297,13 @@ SPEC CHECKSUMS:
   React: 1d605e098d69bdf08960787f3446f0a9dc2e2ccf
   react-native-google-maps: 77af0fa3b5325c72c107d054677911f6e6170496
   react-native-maps: bb480348a3fe1e5a811fed1ba3387b329161c5cc
+  RNDeviceInfo: 5b5b42b12587207b6bd686441ac42d19d8e07933
   RNFirebase: 2b25fd2e60269f26bb0a76c71dcc942b35a77df0
   RNKeychain: 5381e340056c23de103d73ae59cbddc6ffc21d97
   RNReactNativeHapticFeedback: 44299aed31b5e17f7fc74d175a995b7197bf8cf1
   TouchID: b0640fedb86fa2db2fe1df15b61594ad49e76288
   yoga: 128daf064cacaede0c3bb27424b6b4c71052e6cd
 
-PODFILE CHECKSUM: dbf4d84a6721bc8c25eea7b2753310a2ad29414d
+PODFILE CHECKSUM: 115dcaf0d6bccb6f026e8e3eacbd1391cbdcd0c6
 
 COCOAPODS: 1.5.3
